@@ -1,32 +1,22 @@
-FROM node:18-alpine AS base
-
-RUN npm i -g pnpm
-
-FROM base AS dependencies
-
+FROM node:20.11-alpine as dependencies
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
+COPY package*.json ./
+RUN npm run install
 
-FROM base AS build
-
+FROM node:20.11-alpine as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
-RUN pnpm build
-RUN pnpm prune --prod
+RUN npm run build:production
 
-FROM base AS deploy
-
+FROM node:20.11-alpine as runner
 WORKDIR /app
-COPY --from=build /app/.next/standalone ./
-COPY --from=build /app/.next/static ./.next/static
-
+ENV NODE_ENV production
+# If you are using a custom next.config.js file, uncomment this line.
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 EXPOSE 3000
-
-ENV PORT 3000
-# set hostname to localhost
-ENV HOSTNAME "0.0.0.0"
-
-CMD ["node", "server.js"]
-
+CMD ["npm", "start"]
