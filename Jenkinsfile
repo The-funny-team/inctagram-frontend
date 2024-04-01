@@ -4,8 +4,8 @@ pipeline {
     agent any
     environment {
         ENV_TYPE = "production"
-        PORT = 3274
-        NAMESPACE = "inctagram-app"
+        PORT = 3292
+        NAMESPACE = "funny-inctagram-site"
         REGISTRY_HOSTNAME = "funnyteam"
         REGISTRY = "registry.hub.docker.com"
         PROJECT = "ft-inctagram"
@@ -33,7 +33,7 @@ pipeline {
              steps {
                  echo "Push image started..."
                      script {
-                          docker.withRegistry("https://${env.REGISTRY}", 'inctagram-app') {
+                          docker.withRegistry("https://${env.REGISTRY}", 'funny-inctagram-site') {
                             app.push("${env.IMAGE_NAME}")
                         }
                      }
