@@ -2,6 +2,23 @@ import { baseApi } from '@/shared/api/baseApi'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
+    createPost: builder.mutation<PostResponseType, CreatePostDto>({
+      query: body => {
+        return {
+          body,
+          method: 'POST',
+          url: `/post`,
+        }
+      },
+    }),
+    deletePost: builder.mutation<void, { id: string }>({
+      query: ({ id }) => {
+        return {
+          method: 'DELETE',
+          url: `/post/${id}`,
+        }
+      },
+    }),
     getPost: builder.query<PostResponseType, { id: string }>({
       query: ({ id }) => {
         return {
@@ -33,6 +50,24 @@ const postApi = baseApi.injectEndpoints({
           method: 'GET',
           params: args,
           url: `post`,
+        }
+      },
+    }),
+    updatePost: builder.mutation<PostResponseType, UpdatePostArgs>({
+      query: ({ id, ...body }) => {
+        return {
+          body,
+          method: 'PUT',
+          url: `post/${id}`,
+        }
+      },
+    }),
+    uploadPostPhoto: builder.mutation<FileUploadResponse, FormData>({
+      query: file => {
+        return {
+          body: file,
+          method: 'POST',
+          url: `/post/image`,
         }
       },
     }),
