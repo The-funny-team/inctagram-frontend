@@ -3,6 +3,7 @@ import { baseApi } from '@/shared/api/baseApi'
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     createPost: builder.mutation<PostResponseType, CreatePostDto>({
+      invalidatesTags: ['Posts'],
       query: body => {
         return {
           body,
@@ -12,6 +13,7 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     deletePost: builder.mutation<void, { id: string }>({
+      invalidatesTags: ['Posts'],
       query: ({ id }) => {
         return {
           method: 'DELETE',
@@ -45,6 +47,7 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     getUserPosts: builder.query<PostsResponse, GetPostsArgs>({
+      providesTags: ['Posts'],
       query: args => {
         return {
           method: 'GET',
@@ -54,6 +57,7 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     updatePost: builder.mutation<PostResponseType, UpdatePostArgs>({
+      invalidatesTags: ['Posts'],
       query: ({ id, ...body }) => {
         return {
           body,
@@ -73,6 +77,17 @@ const postApi = baseApi.injectEndpoints({
     }),
   }),
 })
+
+export const {
+  useUploadPostPhotoMutation,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+  useGetPublicPostsQuery,
+  useDeletePostMutation,
+  useGetPostQuery,
+  useGetPublicPostQuery,
+  useGetUserPostsQuery,
+} = postApi
 
 export type PostResponseType = {
   authorId: string
