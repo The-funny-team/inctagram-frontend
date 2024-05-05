@@ -31,6 +31,7 @@ import {
   TrashOutlineIcon,
 } from '@/shared/assets'
 import { DeleteIcon } from '@/shared/assets/icons/DeleteIcon'
+import { FollowOutlineIcon } from '@/shared/assets/icons/FollowOutlineIcon'
 
 import { IconsList } from './IconsList'
 
@@ -259,6 +260,16 @@ export const FilledMessenger: Story = {
     children: (
       <>
         <FilledMessengerIcon />
+      </>
+    ),
+  },
+}
+
+export const FollowOutline: Story = {
+  args: {
+    children: (
+      <>
+        <FollowOutlineIcon />
       </>
     ),
   },
