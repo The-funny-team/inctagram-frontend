@@ -8,6 +8,7 @@ import {
   CalendarBtnRightIcon,
   CalendarIcon,
   CheckboxIcon,
+  CopyLinkOutlineIcon,
   CreateIcon,
   DotsHorizontalIcon,
   EditOutlineIcon,
@@ -281,6 +282,16 @@ export const UnfollowOutline: Story = {
     children: (
       <>
         <UnfollowOutlineIcon />
+      </>
+    ),
+  },
+}
+
+export const CopyLinkOutline: Story = {
+  args: {
+    children: (
+      <>
+        <CopyLinkOutlineIcon />
       </>
     ),
   },
