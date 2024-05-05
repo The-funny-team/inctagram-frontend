@@ -10,6 +10,7 @@ import {
   CheckboxIcon,
   CreateIcon,
   DotsHorizontalIcon,
+  EditOutlineIcon,
   EyeOutlineIcon,
   FavoritesIcon,
   FilledCreateIcon,
@@ -77,6 +78,16 @@ export const DotsHorizontal: Story = {
     children: (
       <>
         <DotsHorizontalIcon />
+      </>
+    ),
+  },
+}
+
+export const EditOutline: Story = {
+  args: {
+    children: (
+      <>
+        <EditOutlineIcon />
       </>
     ),
   },
