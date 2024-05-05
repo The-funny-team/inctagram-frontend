@@ -28,6 +28,7 @@ import {
   RecaptchaIcon,
   SearchOutlineIcon,
   StatisticsIcon,
+  TrashOutlineIcon,
 } from '@/shared/assets'
 import { DeleteIcon } from '@/shared/assets/icons/DeleteIcon'
 
@@ -273,6 +274,16 @@ export const Statistics: Story = {
   },
 }
 
+export const TrashOutline: Story = {
+  args: {
+    children: (
+      <>
+        <TrashOutlineIcon />
+      </>
+    ),
+  },
+}
+
 export const Favorites: Story = {
   args: {
     children: (
@@ -302,6 +313,17 @@ export const LogOut: Story = {
     ),
   },
 }
+
+export const Delete: Story = {
+  args: {
+    children: (
+      <>
+        <DeleteIcon />
+      </>
+    ),
+  },
+}
+
 export const PhotoOutline: Story = {
   args: {
     children: (
