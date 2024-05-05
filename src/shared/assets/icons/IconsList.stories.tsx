@@ -9,6 +9,7 @@ import {
   CalendarIcon,
   CheckboxIcon,
   CreateIcon,
+  DotsHorizontalIcon,
   EyeOutlineIcon,
   FavoritesIcon,
   FilledCreateIcon,
@@ -66,6 +67,16 @@ export const Checkbox: Story = {
     children: (
       <>
         <CheckboxIcon />
+      </>
+    ),
+  },
+}
+
+export const DotsHorizontal: Story = {
+  args: {
+    children: (
+      <>
+        <DotsHorizontalIcon />
       </>
     ),
   },
