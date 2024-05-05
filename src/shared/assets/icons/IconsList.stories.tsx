@@ -29,6 +29,7 @@ import {
   SearchOutlineIcon,
   StatisticsIcon,
   TrashOutlineIcon,
+  UnfollowOutlineIcon,
 } from '@/shared/assets'
 import { DeleteIcon } from '@/shared/assets/icons/DeleteIcon'
 import { FollowOutlineIcon } from '@/shared/assets/icons/FollowOutlineIcon'
@@ -270,6 +271,16 @@ export const FollowOutline: Story = {
     children: (
       <>
         <FollowOutlineIcon />
+      </>
+    ),
+  },
+}
+
+export const UnfollowOutline: Story = {
+  args: {
+    children: (
+      <>
+        <UnfollowOutlineIcon />
       </>
     ),
   },
