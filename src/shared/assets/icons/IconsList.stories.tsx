@@ -30,6 +30,7 @@ import {
   ProfileIcon,
   RecaptchaIcon,
   SearchOutlineIcon,
+  ShareIcon,
   StatisticsIcon,
   TrashOutlineIcon,
   UnfollowOutlineIcon,
@@ -304,6 +305,16 @@ export const Statistics: Story = {
     children: (
       <>
         <StatisticsIcon />
+      </>
+    ),
+  },
+}
+
+export const Share: Story = {
+  args: {
+    children: (
+      <>
+        <ShareIcon />
       </>
     ),
   },
