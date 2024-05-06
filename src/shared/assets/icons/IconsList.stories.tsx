@@ -22,6 +22,7 @@ import {
   GithubIcon,
   GoogleIcon,
   HomeIcon,
+  LikeOutlineIcon,
   LogOutIcon,
   MessengerIcon,
   PhotoIcon,
@@ -302,6 +303,16 @@ export const Statistics: Story = {
     children: (
       <>
         <StatisticsIcon />
+      </>
+    ),
+  },
+}
+
+export const LikeOutline: Story = {
+  args: {
+    children: (
+      <>
+        <LikeOutlineIcon />
       </>
     ),
   },
