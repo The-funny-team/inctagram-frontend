@@ -22,6 +22,7 @@ import {
   GithubIcon,
   GoogleIcon,
   HomeIcon,
+  LikeIcon,
   LikeOutlineIcon,
   LogOutIcon,
   MessengerIcon,
@@ -313,6 +314,16 @@ export const LikeOutline: Story = {
     children: (
       <>
         <LikeOutlineIcon />
+      </>
+    ),
+  },
+}
+
+export const Like: Story = {
+  args: {
+    children: (
+      <>
+        <LikeIcon />
       </>
     ),
   },
