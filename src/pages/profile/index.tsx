@@ -18,7 +18,7 @@ const ProfilePage = () => {
                     <Avatar className={s.avatarPhoto} size={204} src={avatar} userName={'my profile'}/>
                     <div className={s.infoAboutMe}>
                         <div className={s.nameAndBtn}>
-                            <Typography  variant={'h1'}> URLProfiele</Typography>
+                            <Typography  variant={'h1'}> URLProfiel</Typography>
                             <Button as={Link} href={ROUTES_URL.GENERAL_INFO} variant={'secondary'}>Profile Settings</Button>
                         </div>
                         <div className={s.counting}>
@@ -41,6 +41,7 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 </div>
+                <div className={s.postsList}></div>
 
             </main>
         </>
