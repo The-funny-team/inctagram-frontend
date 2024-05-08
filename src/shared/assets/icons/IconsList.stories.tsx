@@ -4,6 +4,7 @@ import {
   ArrowDownIcon,
   ArrowLeftIcon,
   ArrowSliderLeftIcon,
+  ArrowSliderRightIcon,
   BellNotifyIcon,
   CalendarBtnLeftIcon,
   CalendarBtnRightIcon,
@@ -76,6 +77,16 @@ export const ArrowSliderLeft: Story = {
     children: (
       <>
         <ArrowSliderLeftIcon />
+      </>
+    ),
+  },
+}
+
+export const ArrowSliderRight: Story = {
+  args: {
+    children: (
+      <>
+        <ArrowSliderRightIcon />
       </>
     ),
   },
