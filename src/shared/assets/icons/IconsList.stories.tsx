@@ -12,6 +12,7 @@ import {
   CheckboxIcon,
   CopyLinkOutlineIcon,
   CreateIcon,
+  DotIcon,
   DotsHorizontalIcon,
   EditOutlineIcon,
   EyeOutlineIcon,
@@ -97,6 +98,16 @@ export const Checkbox: Story = {
     children: (
       <>
         <CheckboxIcon />
+      </>
+    ),
+  },
+}
+
+export const Dot: Story = {
+  args: {
+    children: (
+      <>
+        <DotIcon />
       </>
     ),
   },
