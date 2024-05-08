@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
+  ArrowSliderLeftIcon,
   BellNotifyIcon,
   CalendarBtnLeftIcon,
   CalendarBtnRightIcon,
@@ -65,6 +66,16 @@ export const ArrowLeft: Story = {
     children: (
       <>
         <ArrowLeftIcon />
+      </>
+    ),
+  },
+}
+
+export const ArrowSliderLeft: Story = {
+  args: {
+    children: (
+      <>
+        <ArrowSliderLeftIcon />
       </>
     ),
   },
