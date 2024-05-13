@@ -21,7 +21,6 @@ import s from './Filtering.module.scss'
 export const Filtering = () => {
   const [slideId, setSlideId] = useState<number>(0)
   const croppedPictures = useAppSelector(state => state.createPostSlice.croppedPictures)
-
   const dispatch = useAppDispatch()
 
   const savedImages = async () => {
