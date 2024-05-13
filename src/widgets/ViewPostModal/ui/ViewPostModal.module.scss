@@ -1,0 +1,171 @@
+.modal {
+  display: flex;
+  width: 970px;
+  height: 580px;
+  border-radius: 2px;
+}
+
+.leftSide {
+  width: 50%;
+}
+
+.rightSide {
+  width: 50%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 24px;
+
+  border-bottom: 1px solid var(--color-dark-100);
+}
+
+.userName {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+}
+
+.descriptionAndComments {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 24px 0;
+}
+
+.description {
+  display: flex;
+  column-gap: 12px;
+}
+
+.postCreatedAt {
+  color: var(--color-light-900);
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  margin-top: 15px;
+}
+
+.commentWrapper {
+  display: flex;
+  column-gap: 12px;
+}
+
+.comment {
+  display: flex;
+  column-gap: 12px;
+}
+
+.commentCreatedAt {
+  color: var(--color-light-900);
+}
+
+.answerBtn {
+  all: unset;
+  cursor: pointer;
+  padding-left: 12px;
+  background-color: transparent;
+
+  & span {
+    color: var(--color-light-900);
+  }
+}
+
+.commentLike {
+  cursor: pointer;
+  padding-top: 15px;
+
+  > svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 8px;
+  padding: 12px 24px 0;
+
+  border-top: 1px solid var(--color-dark-100);
+
+   span {
+     cursor: pointer;
+     width: 24px;
+     height: 24px;
+   }
+}
+
+.avatarsLikes {
+  position: relative;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.avatarLikesTwo {
+  position: absolute;
+  z-index: -1;
+  transform: translateX(50%);
+}
+
+.avatarLikesThree {
+  position: absolute;
+  z-index: -2;
+  transform: translateX(100%);
+}
+
+.likeAndShareContainer {
+  display: flex;
+  column-gap: 24px;
+}
+
+.postLikes {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7px;
+  padding: 19px 0 0 24px;
+}
+
+.likesCount {
+  transform: translateX(50%);
+}
+
+.sendCommentContainer {
+  display: flex;
+  column-gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 60px;
+  padding: 18px 24px;
+
+  border-top: 1px solid var(--color-dark-100);
+}
+
+.sendCommentInput {
+  width: 100%;
+
+  input::placeholder {
+    color: var(--color-light-900);
+  }
+
+  input:focus {
+    outline: none !important;
+  }
+
+  input {
+    border: none !important;
+  }
+}
+
+.publishBtn {
+  cursor: pointer;
+  right: 0;
+  color: var(--color-accent-500)
+}
