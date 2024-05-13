@@ -94,6 +94,13 @@ export const ru: LocaleType = {
       title: 'Политика Конфидециальности',
     },
     profile: {
+      main:{
+        profileSettings: 'Настройки профиля',
+        following: 'Подписки',
+        followers: 'Подписчики',
+        publications: 'Публикации',
+      },
+
       addProfilePhoto: {
         addPhoto: 'Добавить фото профиля',
         deletePhoto: 'Удалить фото',
