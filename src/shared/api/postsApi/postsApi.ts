@@ -2,7 +2,7 @@ import { baseApi } from '@/shared/api/baseApi'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    createPost: builder.mutation<PostResponseType, CreatePostDto>({
+    createPost: builder.mutation<GetPostResponse, CreatePostData>({
       invalidatesTags: ['Posts'],
       query: body => {
         return {
@@ -21,7 +21,7 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getPost: builder.query<PostResponseType, { id: string }>({
+    getPost: builder.query<GetPostResponse, { id: string }>({
       query: ({ id }) => {
         return {
           method: 'GET',
@@ -29,7 +29,7 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getPublicPost: builder.query<PostResponseType, { id: string }>({
+    getPublicPost: builder.query<GetPostResponse, { id: string }>({
       query: ({ id }) => {
         return {
           method: 'GET',
@@ -37,7 +37,7 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getPublicPosts: builder.query<PostsResponse, GetPostsArgs>({
+    getPublicPosts: builder.query<GetPostsResponse, GetPostsArgs>({
       query: args => {
         return {
           method: 'GET',
@@ -46,7 +46,7 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getUserPosts: builder.query<PostsResponse, GetPostsArgs>({
+    getUserPosts: builder.query<GetPostsResponse, GetPostsArgs>({
       providesTags: ['Posts'],
       query: args => {
         return {
@@ -56,7 +56,7 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    updatePost: builder.mutation<PostResponseType, UpdatePostArgs>({
+    updatePost: builder.mutation<GetPostResponse, UpdatePostArgs>({
       invalidatesTags: ['Posts'],
       query: ({ id, ...body }) => {
         return {
@@ -89,7 +89,7 @@ export const {
   useGetUserPostsQuery,
 } = postApi
 
-export type PostResponseType = {
+export type GetPostResponse = {
   authorId: string
   createdAt: string
   description: string
@@ -97,18 +97,18 @@ export type PostResponseType = {
   imagesUrl: string
   updatedAt: string
 }
-export type PostsResponse = PostResponseType[]
+export type GetPostsResponse = GetPostResponse[]
 
 export type FileUploadResponse = { fileId: string }
 
-export type CreatePostDto = {
+export type CreatePostData = {
   description: string
   images: string[]
 }
 
-export type UpdatePostDto = { description: string }
+export type UpdatePostData = { description: string }
 
-export type UpdatePostArgs = { id: string } & UpdatePostDto
+export type UpdatePostArgs = { id: string } & UpdatePostData
 
 export type GetPostsArgs = {
   skip?: number
