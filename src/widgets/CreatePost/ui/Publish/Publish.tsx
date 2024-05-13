@@ -12,7 +12,10 @@ import NextImage from 'next/image'
 
 import s from './Publish.module.scss'
 
-export const Publish = () => {
+type PublishProps = {
+  onCloseBtn: () => void
+}
+export const Publish = ({ onCloseBtn }: PublishProps) => {
   const { data } = useMeQuery()
   const filteredImages = useAppSelector(state => state.createPostSlice.filteredPictures)
   const description = useAppSelector(state => state.createPostSlice.description)
@@ -32,6 +35,7 @@ export const Publish = () => {
       if (imagesIds.length) {
         await createPost({ description, images: imagesIds })
         dispatch(resetState())
+        onCloseBtn()
         toast.success('Post is published')
       }
     } catch (error) {
