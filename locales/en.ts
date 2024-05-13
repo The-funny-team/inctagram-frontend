@@ -92,6 +92,12 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
+      main:{
+        profileSettings: 'Profile Settings',
+        following: 'Following',
+        followers: 'Followers',
+        publications: 'Publications',
+      },
       addProfilePhoto: {
         addPhoto: 'Add a Profile Photo',
         deletePhoto: 'Delete Photo',
