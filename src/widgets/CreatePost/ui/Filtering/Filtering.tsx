@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { useUploadPostPhotoMutation } from '@/shared/api/postsApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
 import { FILTERS } from '@/shared/const'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
@@ -21,14 +22,14 @@ import s from './Filtering.module.scss'
 export const Filtering = () => {
   const [slideId, setSlideId] = useState<number>(0)
   const croppedPictures = useAppSelector(state => state.createPostSlice.croppedPictures)
-
   const dispatch = useAppDispatch()
+  const [uploadToServer] = useUploadPostPhotoMutation()
 
   const savedImages = async () => {
     const images: string[] = []
 
     for (let i = 0; i < croppedPictures.length; i++) {
-      images.push(await getFilteredImage(croppedPictures[i]))
+      images.push(await getFilteredImage(croppedPictures[i], dispatch, uploadToServer))
     }
 
     return images

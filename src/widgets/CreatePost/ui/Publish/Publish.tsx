@@ -1,21 +1,27 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 
+import { useCreatePostMutation } from '@/shared/api/postsApi'
 import { useMeQuery } from '@/shared/api/profileApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
-import { setDescription, setPrevStage } from '@/widgets/CreatePost/service'
+import { resetState, setDescription, setPrevStage } from '@/widgets/CreatePost/service'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import NextImage from 'next/image'
 
 import s from './Publish.module.scss'
 
-export const Publish = () => {
+type PublishProps = {
+  onCloseBtn: () => void
+}
+export const Publish = ({ onCloseBtn }: PublishProps) => {
   const { data } = useMeQuery()
   const filteredImages = useAppSelector(state => state.createPostSlice.filteredPictures)
   const description = useAppSelector(state => state.createPostSlice.description)
   const dispatch = useAppDispatch()
-
+  const [createPost] = useCreatePostMutation()
+  const imagesIds = useAppSelector(state => state.createPostSlice.picturesIds)
   const setPerv = () => {
     dispatch(setPrevStage())
   }
@@ -24,8 +30,18 @@ export const Publish = () => {
     dispatch(setDescription({ desc: value }))
   }
 
-  const onPublishHandler = () => {
-    //some logic
+  const onPublishHandler = async () => {
+    try {
+      if (imagesIds.length) {
+        await createPost({ description, images: imagesIds })
+        dispatch(resetState())
+        onCloseBtn()
+        toast.success('Post is published')
+      }
+    } catch (error) {
+      console.error('Ошибка загрузки на сервер:', error)
+      toast.error('Ошибка загрузки')
+    }
   }
 
   return (
