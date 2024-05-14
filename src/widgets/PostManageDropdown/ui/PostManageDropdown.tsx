@@ -17,9 +17,10 @@ import styles from './PostManageDropdown.module.scss'
 
 type Props = {
   isMyPost: boolean
+  onEditMode: () => void
 }
 
-export const PostManageDropdown = ({ isMyPost }: Props) => {
+export const PostManageDropdown = ({ isMyPost, onEditMode }: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={styles.trigger}>
@@ -30,7 +31,7 @@ export const PostManageDropdown = ({ isMyPost }: Props) => {
           <>
             <DropdownMenuItem className={styles.menuItem}>
               <EditOutlineIcon />
-              <Typography as={'span'} variant={'regularText14'}>
+              <Typography as={'span'} onClick={onEditMode} variant={'regularText14'}>
                 Edit Post
               </Typography>
             </DropdownMenuItem>
