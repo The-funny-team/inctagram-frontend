@@ -21,13 +21,13 @@ const comments = [
   {
     avatar: 'https://picsum.photos/id/100/36',
     comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, laboriosam.',
-    createdAt: '2 hours ago',
+    createdAt: '14 minutes ago',
     userName: 'SpiderMan',
   },
   {
     avatar: 'https://picsum.photos/id/101/36',
     comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, laboriosam.',
-    createdAt: '14 minutes ago',
+    createdAt: '2 hours ago',
     userName: 'IronMan',
   },
   {
@@ -35,6 +35,13 @@ const comments = [
     comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, laboriosam.',
     createdAt: '5 days ago',
     userName: 'CapitanAmerica',
+  },
+  {
+    avatar: 'https://picsum.photos/id/103/36',
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, laboriosam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, laboriosam.s',
+    createdAt: '1 year ago',
+    userName: 'Hulk',
   },
 ]
 
