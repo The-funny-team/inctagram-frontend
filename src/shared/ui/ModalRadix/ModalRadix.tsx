@@ -9,7 +9,7 @@ import styles from './ModalRadix.module.scss'
 type Props = {
   className?: string
   title?: string
-  trigger: ReactNode
+  trigger?: ReactNode
   triggerClassName?: string
 } & ComponentPropsWithoutRef<typeof DialogPrimitive.Root>
 
