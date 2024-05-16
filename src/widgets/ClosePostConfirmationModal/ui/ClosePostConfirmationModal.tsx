@@ -6,12 +6,12 @@ import styles from './ClosePostConfirmationModal.module.scss'
 
 type Props = {
   onCancelChanges: () => void
-  onOpenModal: () => void
-} & ComponentPropsWithoutRef<typeof ModalRadix>
+  onOpenChange: () => void
+} & Omit<ComponentPropsWithoutRef<typeof ModalRadix>, 'onOpenChange'>
 
-export const ClosePostConfirmationModal = ({ onCancelChanges, onOpenModal, ...rest }: Props) => {
+export const ClosePostConfirmationModal = ({ onCancelChanges, onOpenChange, ...rest }: Props) => {
   return (
-    <ModalRadix {...rest} className={styles.modal} onOpenChange={onOpenModal} title={'Close Post'}>
+    <ModalRadix {...rest} className={styles.modal} onOpenChange={onOpenChange} title={'Close Post'}>
       <div className={styles.content}>
         <Typography as={'span'} variant={'regularText16'}>
           Do you really want to close the edition of the publication? If you close changes won’t be
@@ -21,7 +21,7 @@ export const ClosePostConfirmationModal = ({ onCancelChanges, onOpenModal, ...re
           <Button onClick={onCancelChanges} variant={'tertiary'}>
             Yes
           </Button>
-          <Button onClick={onOpenModal}>No</Button>
+          <Button onClick={onOpenChange}>No</Button>
         </div>
       </div>
     </ModalRadix>
