@@ -3,12 +3,18 @@ import type { Meta, StoryObj } from '@storybook/react'
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
+  ArrowSliderLeftIcon,
+  ArrowSliderRightIcon,
   BellNotifyIcon,
   CalendarBtnLeftIcon,
   CalendarBtnRightIcon,
   CalendarIcon,
   CheckboxIcon,
+  CopyLinkOutlineIcon,
   CreateIcon,
+  DotIcon,
+  DotsHorizontalIcon,
+  EditOutlineIcon,
   EyeOutlineIcon,
   FavoritesIcon,
   FilledCreateIcon,
@@ -19,15 +25,21 @@ import {
   GithubIcon,
   GoogleIcon,
   HomeIcon,
+  LikeIcon,
+  LikeOutlineIcon,
   LogOutIcon,
   MessengerIcon,
   PhotoIcon,
   ProfileIcon,
   RecaptchaIcon,
   SearchOutlineIcon,
+  ShareIcon,
   StatisticsIcon,
+  TrashOutlineIcon,
+  UnfollowOutlineIcon,
 } from '@/shared/assets'
 import { DeleteIcon } from '@/shared/assets/icons/DeleteIcon'
+import { FollowOutlineIcon } from '@/shared/assets/icons/FollowOutlineIcon'
 
 import { IconsList } from './IconsList'
 
@@ -61,11 +73,61 @@ export const ArrowLeft: Story = {
   },
 }
 
+export const ArrowSliderLeft: Story = {
+  args: {
+    children: (
+      <>
+        <ArrowSliderLeftIcon />
+      </>
+    ),
+  },
+}
+
+export const ArrowSliderRight: Story = {
+  args: {
+    children: (
+      <>
+        <ArrowSliderRightIcon />
+      </>
+    ),
+  },
+}
+
 export const Checkbox: Story = {
   args: {
     children: (
       <>
         <CheckboxIcon />
+      </>
+    ),
+  },
+}
+
+export const Dot: Story = {
+  args: {
+    children: (
+      <>
+        <DotIcon />
+      </>
+    ),
+  },
+}
+
+export const DotsHorizontal: Story = {
+  args: {
+    children: (
+      <>
+        <DotsHorizontalIcon />
+      </>
+    ),
+  },
+}
+
+export const EditOutline: Story = {
+  args: {
+    children: (
+      <>
+        <EditOutlineIcon />
       </>
     ),
   },
@@ -241,11 +303,81 @@ export const FilledMessenger: Story = {
   },
 }
 
+export const FollowOutline: Story = {
+  args: {
+    children: (
+      <>
+        <FollowOutlineIcon />
+      </>
+    ),
+  },
+}
+
+export const UnfollowOutline: Story = {
+  args: {
+    children: (
+      <>
+        <UnfollowOutlineIcon />
+      </>
+    ),
+  },
+}
+
+export const CopyLinkOutline: Story = {
+  args: {
+    children: (
+      <>
+        <CopyLinkOutlineIcon />
+      </>
+    ),
+  },
+}
+
 export const Statistics: Story = {
   args: {
     children: (
       <>
         <StatisticsIcon />
+      </>
+    ),
+  },
+}
+
+export const Share: Story = {
+  args: {
+    children: (
+      <>
+        <ShareIcon />
+      </>
+    ),
+  },
+}
+
+export const LikeOutline: Story = {
+  args: {
+    children: (
+      <>
+        <LikeOutlineIcon />
+      </>
+    ),
+  },
+}
+
+export const Like: Story = {
+  args: {
+    children: (
+      <>
+        <LikeIcon />
+      </>
+    ),
+  },
+}
+
+export const TrashOutline: Story = {
+  args: {
+    children: (
+      <>
+        <TrashOutlineIcon />
       </>
     ),
   },
@@ -280,6 +412,17 @@ export const LogOut: Story = {
     ),
   },
 }
+
+export const Delete: Story = {
+  args: {
+    children: (
+      <>
+        <DeleteIcon />
+      </>
+    ),
+  },
+}
+
 export const PhotoOutline: Story = {
   args: {
     children: (
