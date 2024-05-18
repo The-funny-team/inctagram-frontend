@@ -94,7 +94,7 @@ export type GetPostResponse = {
   createdAt: string
   description: string
   id: string
-  imagesUrl: string
+  imagesUrl: string[]
   updatedAt: string
 }
 export type GetPostsResponse = GetPostResponse[]
