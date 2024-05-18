@@ -15,7 +15,6 @@ import { useRouter } from 'next/router'
 import styles from './ViewPostModal.module.scss'
 
 type Props = {
-  authorId: string
   avatar: string
   comments?: any
   createdAt: string
@@ -24,13 +23,12 @@ type Props = {
   imageUrls: string[]
   isMyPost: boolean
   likesCount?: number
-  loggedInUserId: string
   userName: string
 }
 
 export const ViewPostModal = ({
   avatar,
-  comments,
+  comments = [],
   createdAt,
   description,
   id,
