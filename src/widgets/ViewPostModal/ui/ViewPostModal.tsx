@@ -249,24 +249,13 @@ export const ViewPostModal = ({
             </div>
             <div className={styles.postLikes}>
               <div className={styles.avatarsLikes}>
-                <Avatar
-                  className={styles.avatarLikesOne}
-                  size={24}
-                  src={comments[0].avatar}
-                  userName={comments[0].userName}
-                />
-                <Avatar
-                  className={styles.avatarLikesTwo}
-                  size={24}
-                  src={comments[1].avatar}
-                  userName={comments[1].userName}
-                />
-                <Avatar
-                  className={styles.avatarLikesThree}
-                  size={24}
-                  src={comments[2].avatar}
-                  userName={comments[2].userName}
-                />
+                {likesCount && (
+                  <>
+                    <Avatar className={styles.avatarLikesOne} size={24} userName={'test'} />
+                    <Avatar className={styles.avatarLikesTwo} size={24} userName={'test'} />
+                    <Avatar className={styles.avatarLikesThree} size={24} userName={'test'} />
+                  </>
+                )}
                 <div className={styles.likesCount}>
                   <Typography as={'span'} variant={'regularText14'}>
                     {`${likesCount} `}

@@ -93,9 +93,10 @@
 .descriptionAndComments {
   overflow: auto;
   display: flex;
+  flex: 1;
   flex-direction: column;
 
-  height: 363px;
+  min-height: 363px;
   padding: 15px 24px 0;
 }
 
