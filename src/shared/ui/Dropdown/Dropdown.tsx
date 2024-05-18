@@ -2,8 +2,11 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
+import { Inter } from 'next/font/google'
 
 import styles from './Dropdown.module.scss'
+
+const inter = Inter({ subsets: ['latin'] })
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 
@@ -16,7 +19,7 @@ const DropdownMenuContent = forwardRef<
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.Content
       align={align}
-      className={clsx(styles.content, className)}
+      className={clsx(styles.content, inter.className, className)}
       ref={ref}
       sideOffset={sideOffset}
       {...props}

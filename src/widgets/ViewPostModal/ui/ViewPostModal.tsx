@@ -15,7 +15,6 @@ import { useRouter } from 'next/router'
 import styles from './ViewPostModal.module.scss'
 
 type Props = {
-  authorId: string
   avatar: string
   comments?: any
   createdAt: string
@@ -24,20 +23,18 @@ type Props = {
   imageUrls: string[]
   isMyPost: boolean
   likesCount?: number
-  loggedInUserId: string
   userName: string
 }
 
 export const ViewPostModal = ({
-  authorId,
   avatar,
-  comments,
+  comments = [],
   createdAt,
   description,
   id,
   imageUrls,
+  isMyPost,
   likesCount,
-  loggedInUserId,
   userName,
 }: Props) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
@@ -92,8 +89,6 @@ export const ViewPostModal = ({
       .unwrap()
       .then(() => router.push(ROUTES_URL.HOME))
   }
-
-  const isMyPost = authorId === loggedInUserId
 
   return (
     <ModalRadix
@@ -254,24 +249,13 @@ export const ViewPostModal = ({
             </div>
             <div className={styles.postLikes}>
               <div className={styles.avatarsLikes}>
-                <Avatar
-                  className={styles.avatarLikesOne}
-                  size={24}
-                  src={comments[0].avatar}
-                  userName={comments[0].userName}
-                />
-                <Avatar
-                  className={styles.avatarLikesTwo}
-                  size={24}
-                  src={comments[1].avatar}
-                  userName={comments[1].userName}
-                />
-                <Avatar
-                  className={styles.avatarLikesThree}
-                  size={24}
-                  src={comments[2].avatar}
-                  userName={comments[2].userName}
-                />
+                {likesCount && (
+                  <>
+                    <Avatar className={styles.avatarLikesOne} size={24} userName={'test'} />
+                    <Avatar className={styles.avatarLikesTwo} size={24} userName={'test'} />
+                    <Avatar className={styles.avatarLikesThree} size={24} userName={'test'} />
+                  </>
+                )}
                 <div className={styles.likesCount}>
                   <Typography as={'span'} variant={'regularText14'}>
                     {`${likesCount} `}

@@ -3,8 +3,12 @@ import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'rea
 import { Cross2Icon } from '@/shared/assets/icons'
 import { Typography } from '@/shared/ui'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { clsx } from 'clsx'
+import { Inter } from 'next/font/google'
 
 import styles from './ModalRadix.module.scss'
+
+const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
   className?: string
@@ -24,7 +28,10 @@ export const ModalRadix = forwardRef<ElementRef<typeof DialogPrimitive.Content>,
         </DialogPrimitive.Trigger>
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay className={styles.dialogPrimitiveOverlay} />
-          <DialogPrimitive.Content className={styles.dialogPrimitiveContent} ref={ref}>
+          <DialogPrimitive.Content
+            className={clsx(styles.dialogPrimitiveContent, inter.className)}
+            ref={ref}
+          >
             <div className={className}>
               {title && (
                 <div className={styles.title}>
