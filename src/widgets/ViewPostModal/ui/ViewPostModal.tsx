@@ -29,15 +29,14 @@ type Props = {
 }
 
 export const ViewPostModal = ({
-  authorId,
   avatar,
   comments,
   createdAt,
   description,
   id,
   imageUrls,
+  isMyPost,
   likesCount,
-  loggedInUserId,
   userName,
 }: Props) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
@@ -92,8 +91,6 @@ export const ViewPostModal = ({
       .unwrap()
       .then(() => router.push(ROUTES_URL.HOME))
   }
-
-  const isMyPost = authorId === loggedInUserId
 
   return (
     <ModalRadix
