@@ -8,7 +8,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'funny-team.s3.eu-north-1.amazonaws.com',
+        hostname: 'ft-bucket.storage.yandexcloud.net',
         pathname: '**',
         protocol: 'https',
       },
