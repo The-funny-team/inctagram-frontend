@@ -11,7 +11,6 @@ import Link from 'next/link'
 import s from './ProfilePage.module.scss'
 import {useGetUserPostsQuery} from "@/shared/api/postsApi";
 import {ViewPostModal} from "@/widgets/ViewPostModal";
-import Image from "next/image";
 
 const ProfilePage = () => {
     const {text} = useTranslation()
