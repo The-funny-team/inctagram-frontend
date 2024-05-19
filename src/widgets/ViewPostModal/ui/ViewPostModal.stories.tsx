@@ -55,6 +55,7 @@ export const WithManyImages: Story = {
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
+    id: '3',
     imageUrls: fewImages,
     isMyPost: true,
     likesCount: 2394,
@@ -69,6 +70,7 @@ export const WithOneImage: Story = {
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
+    id: '1',
     imageUrls: oneImage,
     isMyPost: true,
     likesCount: 2394,
@@ -83,6 +85,7 @@ export const StrangerPost: Story = {
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
+    id: '2',
     imageUrls: oneImage,
     isMyPost: false,
     likesCount: 2394,
