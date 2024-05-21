@@ -101,7 +101,7 @@ export const ViewPostModal = ({
           alt={'post image'}
           height={228}
           src={imageUrls[0]}
-          style={{ borderRadius: '2px', objectFit: 'cover'}}
+          style={{ borderRadius: '2px', objectFit: 'cover' }}
           width={234}
         />
       }
@@ -135,9 +135,15 @@ export const ViewPostModal = ({
               </Link>
               <TextField
                 className={styles.editInput}
+                label={'Add publication descriptions'}
                 onValueChange={handleChangeDescription}
                 value={postDescription}
               />
+              <Typography
+                as={'div'}
+                className={styles.editCounter}
+                variant={'smallText'}
+              >{`${postDescription.length}/500`}</Typography>
             </div>
             <Button className={styles.saveChangesBtn} onClick={handleSaveChanges}>
               Save Changes
