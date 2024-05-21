@@ -262,25 +262,28 @@ export const ViewPostModal = ({
               </span>
             </div>
             <div className={styles.postLikes}>
-              <div className={styles.avatarsLikes}>
-                {likesCount && (
-                  <>
-                    <Avatar className={styles.avatarLikesOne} size={24} userName={'test'} />
-                    <Avatar className={styles.avatarLikesTwo} size={24} userName={'test'} />
-                    <Avatar className={styles.avatarLikesThree} size={24} userName={'test'} />
-                  </>
-                )}
-                <div className={styles.likesCount}>
-                  <Typography as={'span'} variant={'regularText14'}>
-                    {`${likesCount} `}
-                    <Typography as={'span'} variant={'boldText14'}>
-                      &quot;Like&quot;
+              {likesCount && (
+                <div className={styles.avatarsLikes}>
+                  <Avatar className={styles.avatarLikesOne} size={24} userName={'test'} />
+                  <Avatar className={styles.avatarLikesTwo} size={24} userName={'test'} />
+                  <Avatar className={styles.avatarLikesThree} size={24} userName={'test'} />
+
+                  <div className={styles.likesCount}>
+                    <Typography as={'span'} variant={'regularText14'}>
+                      {`${likesCount} `}
+                      <Typography as={'span'} variant={'boldText14'}>
+                        &quot;Like&quot;
+                      </Typography>
                     </Typography>
-                  </Typography>
+                  </div>
                 </div>
-              </div>
+              )}
               <Typography as={'time'} className={styles.postCreatedAt} variant={'smallText'}>
-                {`"${createdAt}"`}
+                {`"${new Date(createdAt).toLocaleDateString('en-US', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })}"`}
               </Typography>
             </div>
             <div className={styles.sendCommentContainer}>
