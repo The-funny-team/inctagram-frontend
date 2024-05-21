@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useDeletePostMutation } from '@/shared/api/postsApi'
+import { useDeletePostMutation, useUpdatePostMutation } from '@/shared/api/postsApi'
 import { FavoritesIcon, LikeOutlineIcon, ShareIcon } from '@/shared/assets'
 import { ROUTES_URL } from '@/shared/const'
 import { Avatar, Button, Input, ModalRadix, TextField, Typography } from '@/shared/ui'
@@ -46,6 +46,8 @@ export const ViewPostModal = ({
 
   const [deletePost, {}] = useDeletePostMutation()
 
+  const [updadePost, {}] = useUpdatePostMutation()
+
   const handleChangeEditMode = () => {
     setIsEditMode(true)
   }
@@ -79,7 +81,11 @@ export const ViewPostModal = ({
   }
 
   const handleSaveChanges = async () => {
-    setIsEditMode(prev => !prev)
+    updadePost({ description: postDescription, id })
+      .unwrap()
+      .then(() => {
+        setIsEditMode(prev => !prev)
+      })
   }
 
   const handleOpenConfirmationDeletePostModal = () => {
