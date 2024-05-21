@@ -52,7 +52,7 @@ const ProfilePage = () => {
                 </div>
                 <div className={s.postsList}>
                     {userPosts && userPosts.map(post =>(
-                        <ViewPostModal avatar={avatar || ""} createdAt={post.createdAt} description={post.description} id={post.id} imageUrls={post.imagesUrl} isMyPost={myId === post.authorId} userName={userName || ''}/>
+                        <ViewPostModal key={post.id} avatar={avatar || ""} createdAt={post.createdAt} description={post.description} id={post.id} imageUrls={post.imagesUrl} isMyPost={myId === post.authorId} userName={userName || ''}/>
                     ))}
 
                 </div>
