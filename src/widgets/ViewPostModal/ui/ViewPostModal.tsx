@@ -67,8 +67,10 @@ export const ViewPostModal = ({
     if (isOpenPost && !isEditMode) {
       setIsOpenPost(false)
     }
-    if (isEditMode) {
+    if (isEditMode && description !== postDescription) {
       setIsOpenConfirmCloseModal(true)
+    } else {
+      setIsEditMode(false)
     }
   }
 
