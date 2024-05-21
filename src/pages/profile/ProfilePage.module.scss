@@ -1,15 +1,13 @@
 .rootPage{
+  padding-top: 35px ;
+  padding-left: 24px;
   .mainInfo{
 
     display: flex;
     gap:38px;
-    padding: 35px 24px;
     .avatarPhoto{
       min-width: 204px;
-
-
     }
-
     .infoAboutMe{
       width: 100%;
 
@@ -29,7 +27,13 @@
         gap:88px;
 
       }
-
     }
+  }
+  .postsList{
+    margin-top: 53px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
   }
 }

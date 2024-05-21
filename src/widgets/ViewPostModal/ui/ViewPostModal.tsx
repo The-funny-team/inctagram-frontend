@@ -87,7 +87,7 @@ export const ViewPostModal = ({
   const handleDeletePost = async () => {
     deletePost({ id })
       .unwrap()
-      .then(() => router.push(ROUTES_URL.HOME))
+      .then(() => router.push(ROUTES_URL.PROFILE))
   }
 
   return (
@@ -101,7 +101,7 @@ export const ViewPostModal = ({
           alt={'post image'}
           height={228}
           src={imageUrls[0]}
-          style={{ borderRadius: '2px' }}
+          style={{ borderRadius: '2px', objectFit: 'cover'}}
           width={234}
         />
       }
