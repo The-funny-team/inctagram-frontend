@@ -97,7 +97,8 @@ export type GetPostResponse = {
   imagesUrl: string[]
   updatedAt: string
 }
-export type GetPostsResponse = GetPostResponse[]
+
+export type GetPostsResponse = [] | GetPostResponse[]
 
 export type FileUploadResponse = { fileId: string }
 
