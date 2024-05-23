@@ -94,13 +94,6 @@ export const ru: LocaleType = {
       title: 'Политика Конфидециальности',
     },
     profile: {
-      main:{
-        profileSettings: 'Настройки профиля',
-        following: 'Подписки',
-        followers: 'Подписчики',
-        publications: 'Публикации',
-      },
-
       addProfilePhoto: {
         addPhoto: 'Добавить фото профиля',
         deletePhoto: 'Удалить фото',
@@ -115,12 +108,22 @@ export const ru: LocaleType = {
         selectPhoto: 'Выберите фото',
         yesButton: 'Да',
       },
+
       devices: {
         activeSessions: 'Активные сессии',
         currentDevice: 'Текущее устройство',
         lastVisit: 'Последнее посещение: ',
         logOut: 'Выйти',
         terminateButton: 'Прервать все остальные сессии',
+      },
+      main: {
+        follow: 'Подписаться',
+        followers: 'Подписчики',
+        following: 'Подписки',
+        profileSettings: 'Настройки профиля',
+        publications: 'Публикации',
+        sendMessage: 'Отправить сообщение',
+        unFollow: 'Отписаться',
       },
       profileInfoForm: {
         citySelectLabel: 'Выберете Ваш город',
