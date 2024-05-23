@@ -25,7 +25,7 @@ const postApi = baseApi.injectEndpoints({
       query: ({ id }) => {
         return {
           method: 'GET',
-          url: `post/${id}`,
+          url: `/post/${id}`,
         }
       },
     }),
@@ -33,7 +33,7 @@ const postApi = baseApi.injectEndpoints({
       query: ({ id }) => {
         return {
           method: 'GET',
-          url: `post/${id}`,
+          url: `/post/${id}`,
         }
       },
     }),
@@ -52,7 +52,7 @@ const postApi = baseApi.injectEndpoints({
         return {
           method: 'GET',
           params: args,
-          url: `post`,
+          url: `/post`,
         }
       },
     }),
@@ -62,7 +62,7 @@ const postApi = baseApi.injectEndpoints({
         return {
           body,
           method: 'PUT',
-          url: `post/${id}`,
+          url: `/post/${id}`,
         }
       },
     }),
