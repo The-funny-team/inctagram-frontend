@@ -39,7 +39,37 @@ export const ru: LocaleType = {
       payments: 'Мои платежи',
     },
   },
-
+  modals: {
+    closePostConfirmationModal: {
+      confirmQuestion:
+        'Вы действительно хотите отменить редактирование поста? Если отмените, изменения не сохранятся',
+      header: 'Отменить изменения',
+      noBtn: 'Нет',
+      yesBtn: 'Да',
+    },
+    deletePostConfirmationModal: {
+      confirmQuestion: 'Вы действительно хотите удалить этот пост?',
+      header: 'Удалить Пост',
+      noBtn: 'Нет',
+      yesBtn: 'Да',
+    },
+    viewPostModal: {
+      answer: 'Ответить',
+      editDescriptionLabel: 'Изменить описание',
+      editHeader: 'Редактировать Пост',
+      like: 'Нравится',
+      managePostDropdown: {
+        copy: 'Копировать Адрес',
+        delete: 'Удалить',
+        edit: 'Редактировать',
+        follow: 'Подписаться',
+        unfollow: 'Отписаться',
+      },
+      publishCommentBtn: 'Опубликовать',
+      publishCommentPlaceholder: 'Добавить комментарий...',
+      saveChangesBtn: 'Сохранить изменения',
+    },
+  },
   pages: {
     confirmedEmail: {
       description: 'Ваш адрес электронной почты подтвержден',
@@ -94,13 +124,6 @@ export const ru: LocaleType = {
       title: 'Политика Конфидециальности',
     },
     profile: {
-      main:{
-        profileSettings: 'Настройки профиля',
-        following: 'Подписки',
-        followers: 'Подписчики',
-        publications: 'Публикации',
-      },
-
       addProfilePhoto: {
         addPhoto: 'Добавить фото профиля',
         deletePhoto: 'Удалить фото',
@@ -115,12 +138,19 @@ export const ru: LocaleType = {
         selectPhoto: 'Выберите фото',
         yesButton: 'Да',
       },
+
       devices: {
         activeSessions: 'Активные сессии',
         currentDevice: 'Текущее устройство',
         lastVisit: 'Последнее посещение: ',
         logOut: 'Выйти',
         terminateButton: 'Прервать все остальные сессии',
+      },
+      main: {
+        followers: 'Подписчики',
+        following: 'Подписки',
+        profileSettings: 'Настройки профиля',
+        publications: 'Публикации',
       },
       profileInfoForm: {
         citySelectLabel: 'Выберете Ваш город',
@@ -209,6 +239,14 @@ export const ru: LocaleType = {
         'Eu mi bibendum neque egestas congue quisque egestas diam in. Neque viverra justo nec ultrices dui sapien. Congue mauris rhoncus aenean vel elit. Vitae aliquet nec ullamcorper sit. Tempus imperdiet nulla malesuada pellentesque. Sed lectus vestibulum mattis ullamcorper velit. Commodo odio aenean sed adipiscing diam. Viverra nam libero justo laoreet. Id neque aliquam vestibulum morbi blandit cursus. Vel facilisis volutpat est velit egestas dui id ornare. Feugiat nibh sed pulvinar proin.',
       title: 'Условия использования',
     },
+  },
+
+  timeIntervals: {
+    days: 'дн.',
+    hours: 'ч.',
+    minutes: 'мин.',
+    seconds: 'сек.',
+    weeks: 'нед.',
   },
   validation: {
     emailVerification: 'Электронная почта должна соответствовать формату example@example.com',

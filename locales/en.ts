@@ -37,7 +37,37 @@ export const en = {
       payments: 'My payments',
     },
   },
-
+  modals: {
+    closePostConfirmationModal: {
+      confirmQuestion:
+        'Do you really want to close the edition of the publication? If you close changes won’t be saved',
+      header: 'Cancel Changes',
+      noBtn: 'No',
+      yesBtn: 'Yes',
+    },
+    deletePostConfirmationModal: {
+      confirmQuestion: 'Are you sure you want to delete this post?',
+      header: 'Delete Post',
+      noBtn: 'No',
+      yesBtn: 'Yes',
+    },
+    viewPostModal: {
+      answer: 'Answer',
+      editDescriptionLabel: 'Change publication description',
+      editHeader: 'Edit Post',
+      like: 'like',
+      managePostDropdown: {
+        copy: 'Copy Link',
+        delete: 'Delete Post',
+        edit: 'Edit Post',
+        follow: 'Follow',
+        unfollow: 'Unfollow',
+      },
+      publishCommentBtn: 'Publish',
+      publishCommentPlaceholder: 'Add a Comment...',
+      saveChangesBtn: 'Save Changes',
+    },
+  },
   pages: {
     confirmedEmail: {
       description: 'Your email has been confirmed',
@@ -92,12 +122,6 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
-      main:{
-        profileSettings: 'Profile Settings',
-        following: 'Following',
-        followers: 'Followers',
-        publications: 'Publications',
-      },
       addProfilePhoto: {
         addPhoto: 'Add a Profile Photo',
         deletePhoto: 'Delete Photo',
@@ -118,6 +142,12 @@ export const en = {
         lastVisit: 'Last visit: ',
         logOut: 'Log Out',
         terminateButton: 'Terminate all other session',
+      },
+      main: {
+        followers: 'Followers',
+        following: 'Following',
+        profileSettings: 'Profile Settings',
+        publications: 'Publications',
       },
       profileInfoForm: {
         citySelectLabel: 'Select your city',
@@ -205,6 +235,13 @@ export const en = {
         'Eu mi bibendum neque egestas congue quisque egestas diam in. Neque viverra justo nec ultrices dui sapien. Congue mauris rhoncus aenean vel elit. Vitae aliquet nec ullamcorper sit. Tempus imperdiet nulla malesuada pellentesque. Sed lectus vestibulum mattis ullamcorper velit. Commodo odio aenean sed adipiscing diam. Viverra nam libero justo laoreet. Id neque aliquam vestibulum morbi blandit cursus. Vel facilisis volutpat est velit egestas dui id ornare. Feugiat nibh sed pulvinar proin.',
       title: 'Terms of Service',
     },
+  },
+  timeIntervals: {
+    days: 'd',
+    hours: 'h',
+    minutes: 'min',
+    seconds: 'sec',
+    weeks: 'w',
   },
   validation: {
     emailVerification: 'The email must match the format example@example.com',
