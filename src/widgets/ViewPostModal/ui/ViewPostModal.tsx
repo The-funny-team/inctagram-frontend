@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 
 import { useDeletePostMutation, useUpdatePostMutation } from '@/shared/api/postsApi'
-import { FavoritesIcon, LikeOutlineIcon, ShareIcon } from '@/shared/assets'
-import { ROUTES_URL } from '@/shared/const'
-import { Avatar, Button, Input, ModalRadix, TextField, Typography } from '@/shared/ui'
+import { useTranslation } from '@/shared/lib/hooks'
+import { ModalRadix } from '@/shared/ui'
 import { ClosePostConfirmationModal } from '@/widgets/ClosePostConfirmationModal'
-import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import { DeletePostConfirmationModal } from '@/widgets/DeletePostConfirmationModal'
-import { PostManageDropdown } from '@/widgets/PostManageDropdown'
+import { EditContainer } from '@/widgets/ViewPostModal/ui/EditContainer/EditContainer'
+import { PostInfoContainer } from '@/widgets/ViewPostModal/ui/PostInfoContainer/PostInfoContainer'
+import { SliderContainer } from '@/widgets/ViewPostModal/ui/SliderContainer/SliderContainer'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import styles from './ViewPostModal.module.scss'
 
@@ -22,7 +20,8 @@ type Props = {
   id: string
   imageUrls: string[]
   isMyPost: boolean
-  likesCount?: number
+  likesCount: number
+  updatedAt: string
   userName: string
 }
 
@@ -34,7 +33,8 @@ export const ViewPostModal = ({
   id,
   imageUrls,
   isMyPost,
-  likesCount,
+  likesCount = 0,
+  updatedAt,
   userName,
 }: Props) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
@@ -42,11 +42,13 @@ export const ViewPostModal = ({
   const [isOpenConfirmDeletePostModal, setIsOpenConfirmDeletePostModal] = useState<boolean>(false)
   const [isOpenConfirmCloseModal, setIsOpenConfirmCloseModal] = useState<boolean>(false)
   const [postDescription, setPostDescription] = useState<string>(description ?? '')
-  const router = useRouter()
+
+  const { text } = useTranslation()
+  const t = text.modals.viewPostModal
 
   const [deletePost, {}] = useDeletePostMutation()
 
-  const [updadePost, {}] = useUpdatePostMutation()
+  const [updatePost, {}] = useUpdatePostMutation()
 
   const handleChangeEditMode = () => {
     setIsEditMode(true)
@@ -81,7 +83,7 @@ export const ViewPostModal = ({
   }
 
   const handleSaveChanges = async () => {
-    updadePost({ description: postDescription, id })
+    updatePost({ description: postDescription, id })
       .unwrap()
       .then(() => {
         setIsEditMode(prev => !prev)
@@ -94,8 +96,6 @@ export const ViewPostModal = ({
 
   const handleDeletePost = async () => {
     deletePost({ id })
-      .unwrap()
-      .then(() => router.push(ROUTES_URL.PROFILE))
   }
 
   return (
@@ -103,7 +103,7 @@ export const ViewPostModal = ({
       className={styles.modal}
       onOpenChange={handlePostModalState}
       open={isOpenPost}
-      title={isEditMode ? 'Edit Post' : undefined}
+      title={isEditMode ? t.editHeader : undefined}
       trigger={
         <Image
           alt={'post image'}
@@ -116,47 +116,16 @@ export const ViewPostModal = ({
       triggerClassName={styles.triggerClassName}
     >
       {isEditMode ? (
-        <div className={styles.postContent}>
-          <div className={styles.sliderContainerEdit}>
-            <Slider sliderLength={imageUrls.length}>
-              {imageUrls.map(url => (
-                <div className={styles.imageContainerEdit} key={url}>
-                  <Image
-                    alt={'post image'}
-                    fill
-                    key={url}
-                    sizes={'490px'}
-                    src={url}
-                    style={{ objectFit: 'contain' }}
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
-          <div className={styles.editContainer}>
-            <div>
-              <Link className={styles.postAuthorName} href={'/'}>
-                <Avatar size={36} src={avatar} userName={userName} />
-                <Typography as={'h3'} variant={'h3'}>
-                  {userName}
-                </Typography>
-              </Link>
-              <TextField
-                className={styles.editInput}
-                label={'Add publication descriptions'}
-                onValueChange={handleChangeDescription}
-                value={postDescription}
-              />
-              <Typography
-                as={'div'}
-                className={styles.editCounter}
-                variant={'smallText'}
-              >{`${postDescription.length}/500`}</Typography>
-            </div>
-            <Button className={styles.saveChangesBtn} onClick={handleSaveChanges}>
-              Save Changes
-            </Button>
-          </div>
+        <div className={styles.main}>
+          <SliderContainer imageUrls={imageUrls} />
+          <EditContainer
+            avatar={avatar}
+            description={description}
+            onChangeDescription={handleChangeDescription}
+            onSaveChanges={handleSaveChanges}
+            postDescription={postDescription}
+            userName={userName}
+          />
           <ClosePostConfirmationModal
             onCancelChanges={handleCancelChanges}
             onOpenChange={handleCloseConfirmation}
@@ -164,139 +133,20 @@ export const ViewPostModal = ({
           />
         </div>
       ) : (
-        <div className={styles.postContent}>
-          <div className={styles.sliderContainer}>
-            <Slider sliderLength={imageUrls.length}>
-              {imageUrls.map(url => (
-                <div className={styles.imageContainer} key={url}>
-                  <Image
-                    alt={'post image'}
-                    fill
-                    sizes={'490px'}
-                    src={url}
-                    style={{ objectFit: 'contain' }}
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
-          <div className={styles.postInfoContainer}>
-            <div className={styles.header}>
-              <Link className={styles.postAuthorName} href={'/'}>
-                <Avatar size={36} src={avatar} userName={userName} />
-                <Typography as={'h3'} variant={'h3'}>
-                  {userName}
-                </Typography>
-              </Link>
-              <PostManageDropdown
-                isMyPost={isMyPost}
-                onDeleteMode={handleOpenConfirmationDeletePostModal}
-                onEditMode={handleChangeEditMode}
-              />
-            </div>
-            <div className={styles.descriptionAndComments}>
-              <div className={styles.description}>
-                <div>
-                  <Avatar size={36} src={avatar} userName={userName} />
-                </div>
-                <div>
-                  <Typography as={'p'} variant={'regularText14'}>
-                    <Typography as={'span'} variant={'boldText14'}>
-                      {`${userName} `}
-                    </Typography>
-                    {postDescription}
-                  </Typography>
-                  <Typography as={'time'} className={styles.postCreatedAt} variant={'smallText'}>
-                    2 hours ago
-                  </Typography>
-                </div>
-              </div>
-              <ul className={styles.comments}>
-                {comments.map((comment, index) => (
-                  <li className={styles.commentWrapper} key={index}>
-                    <div className={styles.comment}>
-                      <div>
-                        <Avatar size={36} src={comment.avatar} userName={comment.userName} />
-                      </div>
-                      <div>
-                        <Typography as={'p'} variant={'regularText14'}>
-                          <Typography as={'span'} variant={'boldText14'}>
-                            {`${comment.userName} `}
-                          </Typography>
-                          {comment.comment}
-                        </Typography>
-                        <div>
-                          <Typography
-                            as={'time'}
-                            className={styles.commentCreatedAt}
-                            variant={'smallText'}
-                          >
-                            {comment.createdAt}
-                          </Typography>
-                          <button className={styles.answerBtn}>
-                            <Typography as={'span'} variant={'semiBoldSmallText'}>
-                              Answer
-                            </Typography>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <span className={styles.commentLike}>
-                      <LikeOutlineIcon />
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={styles.actions}>
-              <div className={styles.likeAndShareContainer}>
-                <span className={styles.likePostIcon}>
-                  <LikeOutlineIcon />
-                </span>
-                <span className={styles.sharePostIcon}>
-                  <ShareIcon />
-                </span>
-              </div>
-              <span className={styles.favoritesIcon}>
-                <FavoritesIcon />
-              </span>
-            </div>
-            <div className={styles.postLikes}>
-              {likesCount && (
-                <div className={styles.avatarsLikes}>
-                  <Avatar className={styles.avatarLikesOne} size={24} userName={'test'} />
-                  <Avatar className={styles.avatarLikesTwo} size={24} userName={'test'} />
-                  <Avatar className={styles.avatarLikesThree} size={24} userName={'test'} />
-
-                  <div className={styles.likesCount}>
-                    <Typography as={'span'} variant={'regularText14'}>
-                      {`${likesCount} `}
-                      <Typography as={'span'} variant={'boldText14'}>
-                        &quot;Like&quot;
-                      </Typography>
-                    </Typography>
-                  </div>
-                </div>
-              )}
-              <Typography as={'time'} className={styles.postCreatedAt} variant={'smallText'}>
-                {`"${new Date(createdAt).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}"`}
-              </Typography>
-            </div>
-            <div className={styles.sendCommentContainer}>
-              <Input
-                className={styles.sendCommentInput}
-                placeholder={'Add a Comment...'}
-                type={'text'}
-              />
-              <Typography as={'h3'} className={styles.publishBtn}>
-                Publish
-              </Typography>
-            </div>
-          </div>
+        <div className={styles.main}>
+          <SliderContainer imageUrls={imageUrls} />
+          <PostInfoContainer
+            avatar={avatar}
+            comments={comments}
+            createdAt={createdAt}
+            isMyPost={isMyPost}
+            likesCount={likesCount}
+            onChangeEditMode={handleChangeEditMode}
+            onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
+            postDescription={postDescription}
+            updatedAt={updatedAt}
+            userName={userName}
+          />
           <DeletePostConfirmationModal
             onDeletePost={handleDeletePost}
             onOpenChange={handleOpenConfirmationDeletePostModal}
