@@ -1,0 +1,88 @@
+.postInfoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-left: 1px solid var(--color-dark-100);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 24px;
+
+  border-bottom: 1px solid var(--color-dark-100);
+}
+
+.postAuthorName {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+
+  width: fit-content;
+
+  text-decoration: none;
+}
+
+.descriptionAndComments {
+  overflow: auto;
+  display: flex;
+  flex: 1 1 300px;
+  flex-direction: column;
+
+  padding: 15px 24px 0;
+}
+
+.description {
+  display: flex;
+  column-gap: 12px;
+}
+
+.postCreatedAt {
+  color: var(--color-light-900);
+}
+
+.postLikes {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7px;
+  padding: 19px 0 0 24px;
+}
+
+.sendCommentContainer {
+  display: flex;
+  column-gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 24px;
+
+  border-top: 1px solid var(--color-dark-100);
+}
+
+.sendCommentInput {
+  width: 100%;
+
+  textarea {
+    height: 24px;
+    max-height: 80px;
+    padding: 0;
+
+    background-color: transparent;
+    border: none !important;
+  }
+
+  textarea::placeholder {
+    color: var(--color-light-900);
+  }
+
+  textarea:focus {
+    outline: none !important;
+  }
+
+  textarea:active {
+    background-color: transparent !important;
+  }
+}
+
