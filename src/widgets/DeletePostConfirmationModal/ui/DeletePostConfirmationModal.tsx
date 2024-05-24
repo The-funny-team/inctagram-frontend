@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { useTranslation } from '@/shared/lib/hooks'
 import { Button, ModalRadix, Typography } from '@/shared/ui'
 
 import styles from './DeletePostConfirmationModal.module.scss'
@@ -10,22 +11,20 @@ type Props = {
 } & Omit<ComponentPropsWithoutRef<typeof ModalRadix>, 'onOpenChange'>
 
 export const DeletePostConfirmationModal = ({ onDeletePost, onOpenChange, ...rest }: Props) => {
+  const { text } = useTranslation()
+  const t = text.modals.deletePostConfirmationModal
+
   return (
-    <ModalRadix
-      title={'Delete Post'}
-      {...rest}
-      className={styles.modal}
-      onOpenChange={onOpenChange}
-    >
+    <ModalRadix title={t.header} {...rest} className={styles.modal} onOpenChange={onOpenChange}>
       <div className={styles.content}>
         <Typography as={'span'} variant={'regularText16'}>
-          Are you sure you want to delete this post?
+          {t.confirmQuestion}
         </Typography>
         <div className={styles.buttons}>
           <Button onClick={onDeletePost} variant={'tertiary'}>
-            Yes
+            {t.yesBtn}
           </Button>
-          <Button onClick={onOpenChange}>No</Button>
+          <Button onClick={onOpenChange}>{t.noBtn}</Button>
         </div>
       </div>
     </ModalRadix>

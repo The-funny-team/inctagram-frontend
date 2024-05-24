@@ -5,6 +5,7 @@ import {
   TrashOutlineIcon,
 } from '@/shared/assets'
 import { EditOutlineIcon } from '@/shared/assets/icons'
+import { useTranslation } from '@/shared/lib/hooks'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +23,9 @@ type Props = {
 }
 
 export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props) => {
+  const { text } = useTranslation()
+  const t = text.modals.viewPostModal
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={styles.trigger}>
@@ -33,13 +37,13 @@ export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props
             <DropdownMenuItem className={styles.menuItem}>
               <EditOutlineIcon />
               <Typography as={'span'} onClick={onEditMode} variant={'regularText14'}>
-                Edit Post
+                {t.managePostDropdown.edit}
               </Typography>
             </DropdownMenuItem>
             <DropdownMenuItem className={styles.menuItem}>
               <TrashOutlineIcon />
               <Typography as={'span'} onClick={onDeleteMode} variant={'regularText14'}>
-                Delete Post
+                {t.managePostDropdown.delete}
               </Typography>
             </DropdownMenuItem>
           </>
@@ -48,13 +52,13 @@ export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props
             <DropdownMenuItem className={styles.menuItem}>
               <FollowOutlineIcon />
               <Typography as={'span'} variant={'regularText14'}>
-                Follow
+                {t.managePostDropdown.follow}
               </Typography>
             </DropdownMenuItem>
             <DropdownMenuItem className={styles.menuItem}>
               <CopyLinkOutlineIcon />
               <Typography as={'span'} variant={'regularText14'}>
-                Copy Link
+                {t.managePostDropdown.copy}
               </Typography>
             </DropdownMenuItem>
           </>

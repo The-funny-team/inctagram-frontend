@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { useTranslation } from '@/shared/lib/hooks'
 import { Button, ModalRadix, Typography } from '@/shared/ui'
 
 import styles from './ClosePostConfirmationModal.module.scss'
@@ -10,18 +11,20 @@ type Props = {
 } & Omit<ComponentPropsWithoutRef<typeof ModalRadix>, 'onOpenChange'>
 
 export const ClosePostConfirmationModal = ({ onCancelChanges, onOpenChange, ...rest }: Props) => {
+  const { text } = useTranslation()
+  const t = text.modals.closePostConfirmationModal
+
   return (
-    <ModalRadix {...rest} className={styles.modal} onOpenChange={onOpenChange} title={'Close Post'}>
+    <ModalRadix {...rest} className={styles.modal} onOpenChange={onOpenChange} title={t.header}>
       <div className={styles.content}>
         <Typography as={'span'} variant={'regularText16'}>
-          Do you really want to close the edition of the publication? If you close changes won’t be
-          saved
+          {t.confirmQuestion}
         </Typography>
         <div className={styles.buttons}>
           <Button onClick={onCancelChanges} variant={'tertiary'}>
-            Yes
+            {t.yesBtn}
           </Button>
-          <Button onClick={onOpenChange}>No</Button>
+          <Button onClick={onOpenChange}>{t.noBtn}</Button>
         </div>
       </div>
     </ModalRadix>
