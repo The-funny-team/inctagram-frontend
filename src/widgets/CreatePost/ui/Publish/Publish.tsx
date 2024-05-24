@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { useCreatePostMutation } from '@/shared/api/postsApi'
 import { useMeQuery } from '@/shared/api/profileApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
+import { MAX_DESCRIPTION_LENGTH } from '@/shared/const'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
 import { resetState, setDescription, setPrevStage } from '@/widgets/CreatePost/service'
@@ -81,15 +82,14 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
           </div>
           <TextField
             label={'Add publication description'}
+            maxLength={MAX_DESCRIPTION_LENGTH}
             onValueChange={changeDescHandler}
             placeholder={"What's new?"}
             value={description}
           />
-          <Typography
-            as={'div'}
-            className={s.counter}
-            variant={'smallText'}
-          >{`${description.length}/500`}</Typography>
+          <Typography as={'div'} className={s.counter} variant={'smallText'}>
+            {`${description.length}/${MAX_DESCRIPTION_LENGTH}`}
+          </Typography>
         </div>
       </div>
     </div>
