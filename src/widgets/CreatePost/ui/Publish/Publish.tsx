@@ -54,7 +54,12 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
         <Typography as={'h1'} variant={'h1'}>
           Publication
         </Typography>
-        <Button onClick={onPublishHandler} style={{ padding: 'unset' }} variant={'link'}>
+        <Button
+          disabled={!imagesIds.length}
+          onClick={onPublishHandler}
+          style={{ padding: 'unset' }}
+          variant={'link'}
+        >
           Publish
         </Button>
       </div>
