@@ -1,0 +1,44 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+
+  height: 100%;
+  margin-top: 15px;
+  padding: 0;
+}
+
+.commentWrapper {
+  display: flex;
+  column-gap: 12px;
+}
+
+.comment {
+  display: flex;
+  column-gap: 12px;
+}
+
+.commentCreatedAt {
+  color: var(--color-light-900);
+}
+
+.answerBtn {
+  all: unset;
+  cursor: pointer;
+  padding-left: 12px;
+  background-color: transparent;
+
+  & span {
+    color: var(--color-light-900);
+  }
+}
+
+.commentLike {
+  cursor: pointer;
+  padding-top: 15px;
+
+  > svg {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -1,0 +1,27 @@
+.likesContainer {
+  position: relative;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.avatarsLikesFirst {
+  position: relative;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.avatarLikesSecond {
+  position: absolute;
+  z-index: -1;
+  transform: translateX(50%);
+}
+
+.avatarLikesThird {
+  position: absolute;
+  z-index: -2;
+  transform: translateX(100%);
+}
+
+.likesCount {
+  transform: translateX(50%);
+}

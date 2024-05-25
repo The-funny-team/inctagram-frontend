@@ -4,7 +4,7 @@ import { ArrowSliderLeftIcon, ArrowSliderRightIcon, DotIcon } from '@/shared/ass
 import { clsx } from 'clsx'
 import Image from 'next/image'
 
-import styles from './ImageSlider.module.scss'
+import s from './ImageSlider.module.scss'
 
 type Props = {
   imageUrls: string[]
@@ -33,12 +33,12 @@ export const ImageSlider = ({ imageUrls }: Props) => {
   }
 
   return (
-    <div className={styles.container}>
-      {imageUrls.map((url, index) => {
+    <div className={s.container}>
+      {imageUrls.map(url => {
         return (
           <Image
             alt={'post image'}
-            className={styles.image}
+            className={s.image}
             height={562}
             key={url}
             src={url}
@@ -49,19 +49,16 @@ export const ImageSlider = ({ imageUrls }: Props) => {
       })}
       {imageUrls.length > 1 && (
         <>
-          <button className={clsx(styles.imgBtn, styles.imgBtnLeft)} onClick={showPrevImage}>
+          <button className={clsx(s.imgBtn, s.imgBtnLeft)} onClick={showPrevImage}>
             <ArrowSliderLeftIcon />
           </button>
-          <button className={clsx(styles.imgBtn, styles.imgBtnRight)} onClick={showNextImage}>
+          <button className={clsx(s.imgBtn, s.imgBtnRight)} onClick={showNextImage}>
             <ArrowSliderRightIcon />
           </button>
 
-          <div className={styles.dotWrapper}>
+          <div className={s.dotWrapper}>
             {imageUrls.map((_, index) => (
-              <span
-                className={clsx(styles.dot, index === imageIndex && styles.checkedDot)}
-                key={index}
-              >
+              <span className={clsx(s.dot, index === imageIndex && s.checkedDot)} key={index}>
                 <DotIcon />
               </span>
             ))}
