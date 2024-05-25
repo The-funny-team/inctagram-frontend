@@ -4,7 +4,7 @@ import { LikeOutlineIcon } from '@/shared/assets'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 
-import styles from './Comments.module.scss'
+import s from './Comments.module.scss'
 
 type Props = {
   comments: any
@@ -15,10 +15,10 @@ export const Comments = ({ comments }: Props) => {
   const t = text.modals.viewPostModal
 
   return (
-    <ul className={styles.comments}>
+    <ul className={s.comments}>
       {comments.map(comment => (
-        <li className={styles.commentWrapper} key={comment.id}>
-          <div className={styles.comment}>
+        <li className={s.commentWrapper} key={comment.id}>
+          <div className={s.comment}>
             <div>
               <Avatar size={36} src={comment.avatar} userName={comment.userName} />
             </div>
@@ -30,10 +30,10 @@ export const Comments = ({ comments }: Props) => {
                 {comment.comment}
               </Typography>
               <div>
-                <Typography as={'time'} className={styles.commentCreatedAt} variant={'smallText'}>
+                <Typography as={'time'} className={s.commentCreatedAt} variant={'smallText'}>
                   {comment.createdAt}
                 </Typography>
-                <button className={styles.answerBtn}>
+                <button className={s.answerBtn}>
                   <Typography as={'span'} variant={'semiBoldSmallText'}>
                     {t.answer}
                   </Typography>
@@ -41,7 +41,7 @@ export const Comments = ({ comments }: Props) => {
               </div>
             </div>
           </div>
-          <span className={styles.commentLike}>
+          <span className={s.commentLike}>
             <LikeOutlineIcon />
           </span>
         </li>

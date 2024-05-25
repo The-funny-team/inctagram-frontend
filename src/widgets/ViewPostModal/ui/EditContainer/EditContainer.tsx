@@ -4,7 +4,7 @@ import { useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
 import Link from 'next/link'
 
-import styles from './EditContainer.module.scss'
+import s from './EditContainer.module.scss'
 
 type Props = {
   avatar: string
@@ -27,28 +27,28 @@ export const EditContainer = ({
   const t = text.modals.viewPostModal
 
   return (
-    <div className={styles.editContainer}>
+    <div className={s.editContainer}>
       <div>
-        <Link className={styles.postAuthorName} href={'/'}>
+        <Link className={s.postAuthorName} href={'/'}>
           <Avatar size={36} src={avatar} userName={userName} />
           <Typography as={'h3'} variant={'h3'}>
             {userName}
           </Typography>
         </Link>
         <TextField
-          className={styles.editInput}
+          className={s.editInput}
           label={t.editDescriptionLabel}
           onValueChange={onChangeDescription}
           value={postDescription}
         />
         <Typography
           as={'div'}
-          className={styles.editCounter}
+          className={s.editCounter}
           variant={'smallText'}
         >{`${postDescription.length}/500`}</Typography>
       </div>
       <Button
-        className={styles.saveChangesBtn}
+        className={s.saveChangesBtn}
         disabled={postDescription === description}
         onClick={onSaveChanges}
       >

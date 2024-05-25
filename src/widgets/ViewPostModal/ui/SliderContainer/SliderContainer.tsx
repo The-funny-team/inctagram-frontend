@@ -3,7 +3,7 @@ import React from 'react'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import Image from 'next/image'
 
-import styles from './SliderContainer.module.scss'
+import s from './SliderContainer.module.scss'
 
 type Props = {
   imageUrls: string[]
@@ -11,10 +11,10 @@ type Props = {
 
 export const SliderContainer = ({ imageUrls }: Props) => {
   return (
-    <div className={styles.sliderContainer}>
+    <div className={s.sliderContainer}>
       <Slider sliderLength={imageUrls.length}>
         {imageUrls.map(url => (
-          <div className={styles.imageContainer} key={url}>
+          <div className={s.imageContainer} key={url}>
             <Image
               alt={'post image'}
               fill

@@ -2,20 +2,20 @@ import React from 'react'
 
 import { FavoritesIcon, LikeOutlineIcon, ShareIcon } from '@/shared/assets'
 
-import styles from './Actions.module.scss'
+import s from './Actions.module.scss'
 
 export const Actions = () => {
   return (
-    <div className={styles.actions}>
-      <div className={styles.likeAndShareContainer}>
-        <span className={styles.likePostIcon}>
+    <div className={s.actions}>
+      <div className={s.likeAndShareContainer}>
+        <span className={s.likePostIcon}>
           <LikeOutlineIcon />
         </span>
-        <span className={styles.sharePostIcon}>
+        <span className={s.sharePostIcon}>
           <ShareIcon />
         </span>
       </div>
-      <span className={styles.favoritesIcon}>
+      <span className={s.favoritesIcon}>
         <FavoritesIcon />
       </span>
     </div>

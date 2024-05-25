@@ -9,7 +9,7 @@ import { Comments } from '@/widgets/ViewPostModal/ui/Comments/Comments'
 import { LikesInfo } from '@/widgets/ViewPostModal/ui/LikesInfo/LikesInfo'
 import Link from 'next/link'
 
-import styles from './PostInfoContainer.module.scss'
+import s from './PostInfoContainer.module.scss'
 
 type Props = {
   avatar: string
@@ -47,9 +47,9 @@ export const PostInfoContainer = ({
   const timeIntervalSinceUpdated = useCalculateUpdatedInterval(updatedAt ?? createdAt)
 
   return (
-    <div className={styles.postInfoContainer}>
-      <div className={styles.header}>
-        <Link className={styles.postAuthorName} href={'/'}>
+    <div className={s.postInfoContainer}>
+      <div className={s.header}>
+        <Link className={s.postAuthorName} href={'/'}>
           <Avatar size={36} src={avatar} userName={userName} />
           <Typography as={'h3'} variant={'h3'}>
             {userName}
@@ -61,8 +61,8 @@ export const PostInfoContainer = ({
           onEditMode={onChangeEditMode}
         />
       </div>
-      <div className={styles.descriptionAndComments}>
-        <div className={styles.description}>
+      <div className={s.descriptionAndComments}>
+        <div className={s.description}>
           <div>
             <Avatar size={36} src={avatar} userName={userName} />
           </div>
@@ -73,7 +73,7 @@ export const PostInfoContainer = ({
               </Typography>
               {postDescription}
             </Typography>
-            <Typography as={'time'} className={styles.postCreatedAt} variant={'smallText'}>
+            <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
               {timeIntervalSinceUpdated}
             </Typography>
           </div>
@@ -81,9 +81,9 @@ export const PostInfoContainer = ({
         <Comments comments={comments} />
       </div>
       <Actions />
-      <div className={styles.postLikes}>
+      <div className={s.postLikes}>
         {likesCount > 0 && <LikesInfo likesCount={likesCount} />}
-        <Typography as={'time'} className={styles.postCreatedAt} variant={'smallText'}>
+        <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
           {`${new Date(createdAt).toLocaleDateString(router.locale === 'en' ? 'en-US' : 'ru-RU', {
             day: 'numeric',
             month: 'long',
@@ -91,9 +91,9 @@ export const PostInfoContainer = ({
           })}`}
         </Typography>
       </div>
-      <div className={styles.sendCommentContainer}>
+      <div className={s.sendCommentContainer}>
         <TextField
-          className={styles.sendCommentInput}
+          className={s.sendCommentInput}
           onChange={handleCommentChange}
           placeholder={t.publishCommentPlaceholder}
         />

@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Button, ModalRadix, Typography } from '@/shared/ui'
 
-import styles from './DeletePostConfirmationModal.module.scss'
+import s from './DeletePostConfirmationModal.module.scss'
 
 type Props = {
   onDeletePost: () => void
@@ -15,12 +15,12 @@ export const DeletePostConfirmationModal = ({ onDeletePost, onOpenChange, ...res
   const t = text.modals.deletePostConfirmationModal
 
   return (
-    <ModalRadix title={t.header} {...rest} className={styles.modal} onOpenChange={onOpenChange}>
-      <div className={styles.content}>
+    <ModalRadix title={t.header} {...rest} className={s.modal} onOpenChange={onOpenChange}>
+      <div className={s.content}>
         <Typography as={'span'} variant={'regularText16'}>
           {t.confirmQuestion}
         </Typography>
-        <div className={styles.buttons}>
+        <div className={s.buttons}>
           <Button onClick={onDeletePost} variant={'tertiary'}>
             {t.yesBtn}
           </Button>

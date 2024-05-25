@@ -10,7 +10,7 @@ import { PostInfoContainer } from '@/widgets/ViewPostModal/ui/PostInfoContainer/
 import { SliderContainer } from '@/widgets/ViewPostModal/ui/SliderContainer/SliderContainer'
 import Image from 'next/image'
 
-import styles from './ViewPostModal.module.scss'
+import s from './ViewPostModal.module.scss'
 
 type Props = {
   avatar: string
@@ -100,7 +100,7 @@ export const ViewPostModal = ({
 
   return (
     <ModalRadix
-      className={styles.modal}
+      className={s.modal}
       onOpenChange={handlePostModalState}
       open={isOpenPost}
       title={isEditMode ? t.editHeader : undefined}
@@ -113,10 +113,10 @@ export const ViewPostModal = ({
           width={234}
         />
       }
-      triggerClassName={styles.triggerClassName}
+      triggerClassName={s.triggerClassName}
     >
       {isEditMode ? (
-        <div className={styles.main}>
+        <div className={s.main}>
           <SliderContainer imageUrls={imageUrls} />
           <EditContainer
             avatar={avatar}
@@ -133,7 +133,7 @@ export const ViewPostModal = ({
           />
         </div>
       ) : (
-        <div className={styles.main}>
+        <div className={s.main}>
           <SliderContainer imageUrls={imageUrls} />
           <PostInfoContainer
             avatar={avatar}

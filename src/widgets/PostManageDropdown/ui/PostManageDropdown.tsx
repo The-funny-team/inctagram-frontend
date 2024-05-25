@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@/shared/ui'
 
-import styles from './PostManageDropdown.module.scss'
+import s from './PostManageDropdown.module.scss'
 
 type Props = {
   isMyPost: boolean
@@ -28,19 +28,19 @@ export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className={styles.trigger}>
+      <DropdownMenuTrigger asChild className={s.trigger}>
         <DotsHorizontalIcon />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className={styles.content}>
+      <DropdownMenuContent className={s.content}>
         {isMyPost ? (
           <>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <EditOutlineIcon />
               <Typography as={'span'} onClick={onEditMode} variant={'regularText14'}>
                 {t.managePostDropdown.edit}
               </Typography>
             </DropdownMenuItem>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <TrashOutlineIcon />
               <Typography as={'span'} onClick={onDeleteMode} variant={'regularText14'}>
                 {t.managePostDropdown.delete}
@@ -49,13 +49,13 @@ export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props
           </>
         ) : (
           <>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <FollowOutlineIcon />
               <Typography as={'span'} variant={'regularText14'}>
                 {t.managePostDropdown.follow}
               </Typography>
             </DropdownMenuItem>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <CopyLinkOutlineIcon />
               <Typography as={'span'} variant={'regularText14'}>
                 {t.managePostDropdown.copy}
