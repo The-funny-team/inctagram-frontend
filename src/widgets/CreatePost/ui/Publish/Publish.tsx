@@ -6,7 +6,7 @@ import { useMeQuery } from '@/shared/api/profileApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
 import { MAX_DESCRIPTION_LENGTH } from '@/shared/const'
 import { isFetchBaseQueryError } from '@/shared/lib/helpers'
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
 import { resetState, setDescription, setPrevStage } from '@/widgets/CreatePost/service'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
@@ -18,6 +18,8 @@ type PublishProps = {
   onCloseBtn: () => void
 }
 export const Publish = ({ onCloseBtn }: PublishProps) => {
+  const { text } = useTranslation()
+  const t = text.modals.createPostModal
   const { data } = useMeQuery()
   const filteredImages = useAppSelector(state => state.createPostSlice.filteredPictures)
   const description = useAppSelector(state => state.createPostSlice.description)
@@ -56,7 +58,7 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
           <ArrowLeftShortIcon />
         </button>
         <Typography as={'h1'} variant={'h1'}>
-          Publication
+          {t.public}
         </Typography>
         <Button
           disabled={!imagesIds.length}
@@ -64,7 +66,7 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
           style={{ padding: 'unset' }}
           variant={'link'}
         >
-          Publish
+          {t.publicBtn}
         </Button>
       </div>
 
@@ -90,10 +92,10 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
             <Typography as={'span'}>{data?.username ?? 'URL Profile'}</Typography>
           </div>
           <TextField
-            label={'Add publication description'}
+            label={t.description.label}
             maxLength={MAX_DESCRIPTION_LENGTH}
             onValueChange={changeDescHandler}
-            placeholder={"What's new?"}
+            placeholder={t.description.placeholder}
             value={description}
           />
           <Typography as={'div'} className={s.counter} variant={'smallText'}>

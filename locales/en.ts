@@ -45,11 +45,32 @@ export const en = {
       noBtn: 'No',
       yesBtn: 'Yes',
     },
+    createPostModal: {
+      crop: 'Cropping',
+      description: {
+        label: 'Add publication description',
+        placeholder: "What's new?",
+      },
+      filter: 'Filtering',
+      nextBtn: 'Next',
+      public: 'Publication',
+      publicBtn: 'Publish',
+      selectImage: {
+        openDraft: 'Open Draft',
+        selectPhoto: 'Select from Computer',
+        title: 'Add photo',
+      },
+    },
     deletePostConfirmationModal: {
       confirmQuestion: 'Are you sure you want to delete this post?',
       header: 'Delete Post',
       noBtn: 'No',
       yesBtn: 'Yes',
+    },
+    notificationModal: {
+      discardBtn: 'Discard',
+      draftBtn: 'Save draft',
+      text: 'Do you really want to close the creation of a publication? If you close everything will be deleted',
     },
     viewPostModal: {
       answer: 'Answer',

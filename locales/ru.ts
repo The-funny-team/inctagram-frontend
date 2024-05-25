@@ -47,11 +47,32 @@ export const ru: LocaleType = {
       noBtn: 'Нет',
       yesBtn: 'Да',
     },
+    createPostModal: {
+      crop: 'Обрезать',
+      description: {
+        label: 'Добавить описание публикации',
+        placeholder: 'Что нового?',
+      },
+      filter: 'Фильтры',
+      nextBtn: 'Дальше',
+      public: 'Публикация',
+      publicBtn: 'Опубликовать',
+      selectImage: {
+        openDraft: 'Открыть черновик',
+        selectPhoto: 'Выберите c Компьютера',
+        title: 'Добавить фото',
+      },
+    },
     deletePostConfirmationModal: {
       confirmQuestion: 'Вы действительно хотите удалить этот пост?',
       header: 'Удалить Пост',
       noBtn: 'Нет',
       yesBtn: 'Да',
+    },
+    notificationModal: {
+      discardBtn: 'Отменить',
+      draftBtn: 'Сохранить Черновик',
+      text: 'Вы действительно хотите закрыть создание публикации? Если закрыть все будет удалено',
     },
     viewPostModal: {
       answer: 'Ответить',

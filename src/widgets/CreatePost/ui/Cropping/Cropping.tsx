@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ArrowLeftShortIcon } from '@/shared/assets'
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/lib/hooks'
 import { Button, Typography } from '@/shared/ui'
 import {
   getCroppedImage,
@@ -16,6 +16,8 @@ import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import s from './Cropping.module.scss'
 
 export const Cropping = () => {
+  const { text } = useTranslation()
+  const t = text.modals.createPostModal
   const photos = useAppSelector(state => state.createPostSlice.pictures)
   const dispatch = useAppDispatch()
 
@@ -45,10 +47,10 @@ export const Cropping = () => {
           <ArrowLeftShortIcon />
         </button>
         <Typography as={'h1'} variant={'h1'}>
-          Cropping
+          {t.crop}
         </Typography>
         <Button onClick={setNext} style={{ padding: 'unset' }} variant={'link'}>
-          Next
+          {t.nextBtn}
         </Button>
       </div>
       <div className={s.body}>
