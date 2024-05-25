@@ -22,7 +22,7 @@ const ProfilePage = () => {
   const myId = userInfo?.id
 
   const { data: userPosts, isLoading } = useGetUserPostsQuery({})
-  const authorId = userPosts ? userPosts[0].authorId : ''
+  const authorId = userPosts && userPosts.length !== 0 ? userPosts[0].authorId : ''
   const isMyPost = myId === authorId
   const myPublications = userPosts ? userPosts.length : 0
   const myFollowing = 2281
