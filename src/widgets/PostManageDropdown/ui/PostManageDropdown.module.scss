@@ -1,4 +1,6 @@
 .trigger {
+  cursor: pointer;
+
   &[data-state='open'] {
     fill: var(--color-accent-500);
   }

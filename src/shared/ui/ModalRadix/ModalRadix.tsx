@@ -6,7 +6,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { clsx } from 'clsx'
 import { Inter } from 'next/font/google'
 
-import styles from './ModalRadix.module.scss'
+import s from './ModalRadix.module.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,18 +27,18 @@ export const ModalRadix = forwardRef<ElementRef<typeof DialogPrimitive.Content>,
           {trigger}
         </DialogPrimitive.Trigger>
         <DialogPrimitive.Portal>
-          <DialogPrimitive.Overlay className={styles.dialogPrimitiveOverlay} />
+          <DialogPrimitive.Overlay className={s.dialogPrimitiveOverlay} />
           <DialogPrimitive.Content
-            className={clsx(styles.dialogPrimitiveContent, inter.className)}
+            className={clsx(s.dialogPrimitiveContent, inter.className)}
             ref={ref}
           >
             <div className={className}>
               {title && (
-                <div className={styles.title}>
+                <div className={s.title}>
                   <Typography as={'h1'} variant={'h1'}>
                     {title}
                   </Typography>
-                  <DialogPrimitive.Close className={styles.dialogPrimitiveClose}>
+                  <DialogPrimitive.Close className={s.dialogPrimitiveClose}>
                     <Cross2Icon />
                   </DialogPrimitive.Close>
                 </div>

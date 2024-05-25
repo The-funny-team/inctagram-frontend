@@ -5,6 +5,7 @@ import {
   TrashOutlineIcon,
 } from '@/shared/assets'
 import { EditOutlineIcon } from '@/shared/assets/icons'
+import { useTranslation } from '@/shared/lib/hooks'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +14,7 @@ import {
   Typography,
 } from '@/shared/ui'
 
-import styles from './PostManageDropdown.module.scss'
+import s from './PostManageDropdown.module.scss'
 
 type Props = {
   isMyPost: boolean
@@ -22,39 +23,42 @@ type Props = {
 }
 
 export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props) => {
+  const { text } = useTranslation()
+  const t = text.modals.viewPostModal
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className={styles.trigger}>
+      <DropdownMenuTrigger asChild className={s.trigger}>
         <DotsHorizontalIcon />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className={styles.content}>
+      <DropdownMenuContent className={s.content}>
         {isMyPost ? (
           <>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <EditOutlineIcon />
               <Typography as={'span'} onClick={onEditMode} variant={'regularText14'}>
-                Edit Post
+                {t.managePostDropdown.edit}
               </Typography>
             </DropdownMenuItem>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <TrashOutlineIcon />
               <Typography as={'span'} onClick={onDeleteMode} variant={'regularText14'}>
-                Delete Post
+                {t.managePostDropdown.delete}
               </Typography>
             </DropdownMenuItem>
           </>
         ) : (
           <>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <FollowOutlineIcon />
               <Typography as={'span'} variant={'regularText14'}>
-                Follow
+                {t.managePostDropdown.follow}
               </Typography>
             </DropdownMenuItem>
-            <DropdownMenuItem className={styles.menuItem}>
+            <DropdownMenuItem className={s.menuItem}>
               <CopyLinkOutlineIcon />
               <Typography as={'span'} variant={'regularText14'}>
-                Copy Link
+                {t.managePostDropdown.copy}
               </Typography>
             </DropdownMenuItem>
           </>

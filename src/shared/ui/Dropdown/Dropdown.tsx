@@ -4,7 +4,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
 import { Inter } from 'next/font/google'
 
-import styles from './Dropdown.module.scss'
+import s from './Dropdown.module.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,12 +19,12 @@ const DropdownMenuContent = forwardRef<
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.Content
       align={align}
-      className={clsx(styles.content, inter.className, className)}
+      className={clsx(s.content, inter.className, className)}
       ref={ref}
       sideOffset={sideOffset}
       {...props}
     >
-      <div className={styles.itemsBox}>{children}</div>
+      <div className={s.itemsBox}>{children}</div>
     </DropdownMenuPrimitive.Content>
   </DropdownMenuPrimitive.Portal>
 ))
@@ -35,7 +35,7 @@ const DropdownMenuItem = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.Item>,
   ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item>
 >(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Item className={clsx(styles.item, className)} ref={ref} {...props} />
+  <DropdownMenuPrimitive.Item className={clsx(s.item, className)} ref={ref} {...props} />
 ))
 
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName
@@ -44,11 +44,7 @@ const DropdownMenuSeparator = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.Separator>,
   ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Separator
-    className={clsx(styles.separator, className)}
-    ref={ref}
-    {...props}
-  />
+  <DropdownMenuPrimitive.Separator className={clsx(s.separator, className)} ref={ref} {...props} />
 ))
 
 DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
@@ -57,7 +53,7 @@ const DropdownMenuLabel = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.Label>,
   ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label>
 >(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Label className={clsx(styles.label, className)} ref={ref} {...props} />
+  <DropdownMenuPrimitive.Label className={clsx(s.label, className)} ref={ref} {...props} />
 ))
 
 DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName
