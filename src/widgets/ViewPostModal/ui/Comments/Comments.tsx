@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { LikeOutlineIcon } from '@/shared/assets'
+import { useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 
 import styles from './Comments.module.scss'
@@ -10,10 +11,13 @@ type Props = {
 }
 
 export const Comments = ({ comments }: Props) => {
+  const { text } = useTranslation()
+  const t = text.modals.viewPostModal
+
   return (
     <ul className={styles.comments}>
-      {comments.map((comment, index) => (
-        <li className={styles.commentWrapper} key={index}>
+      {comments.map(comment => (
+        <li className={styles.commentWrapper} key={comment.id}>
           <div className={styles.comment}>
             <div>
               <Avatar size={36} src={comment.avatar} userName={comment.userName} />
@@ -31,7 +35,7 @@ export const Comments = ({ comments }: Props) => {
                 </Typography>
                 <button className={styles.answerBtn}>
                   <Typography as={'span'} variant={'semiBoldSmallText'}>
-                    Answer
+                    {t.answer}
                   </Typography>
                 </button>
               </div>
