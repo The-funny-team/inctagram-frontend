@@ -92,12 +92,6 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
-      main:{
-        profileSettings: 'Profile Settings',
-        following: 'Following',
-        followers: 'Followers',
-        publications: 'Publications',
-      },
       addProfilePhoto: {
         addPhoto: 'Add a Profile Photo',
         deletePhoto: 'Delete Photo',
@@ -118,6 +112,15 @@ export const en = {
         lastVisit: 'Last visit: ',
         logOut: 'Log Out',
         terminateButton: 'Terminate all other session',
+      },
+      main: {
+        follow: 'Follow',
+        followers: 'Followers',
+        following: 'Following',
+        profileSettings: 'Profile Settings',
+        publications: 'Publications',
+        sendMessage: 'Send Message',
+        unFollow: 'Unfollow',
       },
       profileInfoForm: {
         citySelectLabel: 'Select your city',
