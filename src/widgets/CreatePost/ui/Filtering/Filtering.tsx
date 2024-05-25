@@ -6,7 +6,6 @@ import { FILTERS } from '@/shared/const'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { Button, Typography } from '@/shared/ui'
 import {
-  getCroppedImage,
   getFilteredImage,
   setFilter,
   setFilteredImages,

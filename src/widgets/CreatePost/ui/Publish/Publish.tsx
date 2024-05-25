@@ -5,6 +5,7 @@ import { useCreatePostMutation } from '@/shared/api/postsApi'
 import { useMeQuery } from '@/shared/api/profileApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
 import { MAX_DESCRIPTION_LENGTH } from '@/shared/const'
+import { isFetchBaseQueryError } from '@/shared/lib/helpers'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
 import { resetState, setDescription, setPrevStage } from '@/widgets/CreatePost/service'
@@ -40,8 +41,11 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
         toast.success('Post is published')
       }
     } catch (error) {
-      console.error('Ошибка загрузки на сервер:', error)
-      toast.error('Ошибка загрузки')
+      if (isFetchBaseQueryError(error)) {
+        if (!Array.isArray(error.data.message)) {
+          toast.error(error.data.message)
+        }
+      }
     }
   }
 
