@@ -144,10 +144,13 @@ export const en = {
         terminateButton: 'Terminate all other session',
       },
       main: {
+        follow: 'Follow',
         followers: 'Followers',
         following: 'Following',
         profileSettings: 'Profile Settings',
         publications: 'Publications',
+        sendMessage: 'Send Message',
+        unFollow: 'Unfollow',
       },
       profileInfoForm: {
         citySelectLabel: 'Select your city',

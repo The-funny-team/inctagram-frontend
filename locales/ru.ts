@@ -138,7 +138,6 @@ export const ru: LocaleType = {
         selectPhoto: 'Выберите фото',
         yesButton: 'Да',
       },
-
       devices: {
         activeSessions: 'Активные сессии',
         currentDevice: 'Текущее устройство',
@@ -147,10 +146,13 @@ export const ru: LocaleType = {
         terminateButton: 'Прервать все остальные сессии',
       },
       main: {
+        follow: 'Подписаться',
         followers: 'Подписчики',
         following: 'Подписки',
         profileSettings: 'Настройки профиля',
         publications: 'Публикации',
+        sendMessage: 'Отправить сообщение',
+        unFollow: 'Отписаться',
       },
       profileInfoForm: {
         citySelectLabel: 'Выберете Ваш город',
@@ -240,7 +242,6 @@ export const ru: LocaleType = {
       title: 'Условия использования',
     },
   },
-
   timeIntervals: {
     days: 'дн.',
     hours: 'ч.',
