@@ -59,7 +59,7 @@ export const ru: LocaleType = {
       publicBtn: 'Опубликовать',
       selectImage: {
         openDraft: 'Открыть черновик',
-        selectPhoto: 'Выберите c Компьютера',
+        selectPhoto: 'Выберите файл',
         title: 'Добавить фото',
       },
     },
@@ -71,7 +71,7 @@ export const ru: LocaleType = {
     },
     notificationModal: {
       discardBtn: 'Отменить',
-      draftBtn: 'Сохранить Черновик',
+      draftBtn: 'Сохранить черновик',
       text: 'Вы действительно хотите закрыть создание публикации? Если закрыть все будет удалено',
     },
     viewPostModal: {
