@@ -20,7 +20,7 @@ const PrivacyPolicy = () => {
           {privacyPolicy.title}
         </Typography>
         <Typography className={s.desc} variant={'regularText14'}>
-          {privacyPolicy.descripton}
+          {privacyPolicy.description}
         </Typography>
       </main>
     </>

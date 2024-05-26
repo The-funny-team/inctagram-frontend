@@ -1,12 +1,15 @@
-import { AppDispatch } from '@/application/store'
-import { FileUploadResponse } from '@/shared/api/postsApi'
+import type { AppDispatch } from '@/application/store'
+
+import { toast } from 'react-toastify'
+
+import { isFetchBaseQueryError } from '@/shared/lib/helpers'
 import { createImageElement } from '@/widgets/CreatePost/service/createImageElement'
-import { CroppedPicture, setPicturesIds } from "@/widgets/CreatePost/service/createPost.slice";
+import { CroppedPicture, setPicturesIds } from '@/widgets/CreatePost/service/createPost.slice'
 
 export const getFilteredImage = async (
   croppedPictureObj: CroppedPicture,
   dispatch: AppDispatch,
-  uploadToServer: any // Todo: add type
+  uploadToServer: (file: FormData) => Promise<any>
 ): Promise<string> => {
   const imageObj = await createImageElement(croppedPictureObj.img)
   const canvasObj = document.createElement('canvas')
@@ -41,7 +44,11 @@ export const getFilteredImage = async (
           dispatch(setPicturesIds(imageId))
         }
       } catch (error: unknown) {
-        console.error('Ошибка загрузки на сервер:', error)
+        if (isFetchBaseQueryError(error)) {
+          if (!Array.isArray(error.data.message)) {
+            toast.error(error.data.message)
+          }
+        }
       }
     }
   }, 'image/jpeg')

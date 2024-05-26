@@ -3,10 +3,9 @@ import React, { useState } from 'react'
 import { useUploadPostPhotoMutation } from '@/shared/api/postsApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
 import { FILTERS } from '@/shared/const'
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/lib/hooks'
 import { Button, Typography } from '@/shared/ui'
 import {
-  getCroppedImage,
   getFilteredImage,
   setFilter,
   setFilteredImages,
@@ -20,6 +19,8 @@ import NextImage from 'next/image'
 import s from './Filtering.module.scss'
 
 export const Filtering = () => {
+  const { text } = useTranslation()
+  const t = text.modals.createPostModal
   const [slideId, setSlideId] = useState<number>(0)
   const croppedPictures = useAppSelector(state => state.createPostSlice.croppedPictures)
   const dispatch = useAppDispatch()
@@ -55,10 +56,10 @@ export const Filtering = () => {
           <ArrowLeftShortIcon />
         </button>
         <Typography as={'h1'} variant={'h1'}>
-          Filtering
+          {t.filter}
         </Typography>
         <Button onClick={setNext} style={{ padding: 'unset' }} variant={'link'}>
-          Next
+          {t.nextBtn}
         </Button>
       </div>
       <div className={s.body}>
