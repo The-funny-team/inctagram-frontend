@@ -1,6 +1,7 @@
+import type { AppDispatch } from '@/application/store'
+
 import { toast } from 'react-toastify'
 
-import { AppDispatch } from '@/application/store'
 import { isFetchBaseQueryError } from '@/shared/lib/helpers'
 import { createImageElement } from '@/widgets/CreatePost/service/createImageElement'
 import { CroppedPicture, setPicturesIds } from '@/widgets/CreatePost/service/createPost.slice'
