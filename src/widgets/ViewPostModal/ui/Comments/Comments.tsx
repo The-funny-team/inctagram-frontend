@@ -16,7 +16,7 @@ export const Comments = ({ comments }: Props) => {
 
   return (
     <ul className={s.comments}>
-      {comments.map(comment => (
+      {comments.map((comment: any) => (
         <li className={s.commentWrapper} key={comment.id}>
           <div className={s.comment}>
             <div>
