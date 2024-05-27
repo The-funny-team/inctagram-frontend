@@ -20,7 +20,7 @@ type Props = {
   id: string
   imageUrls: string[]
   isMyPost: boolean
-  likesCount: number
+  likesCount?: number
   updatedAt: string
   userName: string
 }
