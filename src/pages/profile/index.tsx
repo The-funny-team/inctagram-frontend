@@ -67,6 +67,7 @@ const ProfilePage = () => {
                   imageUrls={post.imagesUrl}
                   isMyPost={isMyPost}
                   key={post.id}
+                  updatedAt={post.updatedAt}
                   userName={userName || ''}
                 />
               ))}
