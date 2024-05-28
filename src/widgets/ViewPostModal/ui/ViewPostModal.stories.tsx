@@ -59,6 +59,7 @@ export const WithManyImages: Story = {
     imageUrls: fewImages,
     isMyPost: true,
     likesCount: 2394,
+    updatedAt: '1d ago',
     userName: 'John Galt',
   },
 }
@@ -74,6 +75,7 @@ export const WithOneImage: Story = {
     imageUrls: oneImage,
     isMyPost: true,
     likesCount: 2394,
+    updatedAt: '1d ago',
     userName: 'John Galt',
   },
 }
@@ -89,6 +91,7 @@ export const StrangerPost: Story = {
     imageUrls: oneImage,
     isMyPost: false,
     likesCount: 2394,
+    updatedAt: '1d ago',
     userName: 'Friend',
   },
 }
