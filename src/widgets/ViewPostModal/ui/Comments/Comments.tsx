@@ -6,8 +6,16 @@ import { Avatar, Typography } from '@/shared/ui'
 
 import s from './Comments.module.scss'
 
+type CommentType = {
+  avatar: string
+  createdAt: string
+  id: string
+  text: string
+  userName: string
+}
+
 type Props = {
-  comments: any
+  comments: CommentType[]
 }
 
 export const Comments = ({ comments }: Props) => {
@@ -16,7 +24,7 @@ export const Comments = ({ comments }: Props) => {
 
   return (
     <ul className={s.comments}>
-      {comments.map((comment: any) => (
+      {comments.map((comment: CommentType) => (
         <li className={s.commentWrapper} key={comment.id}>
           <div className={s.comment}>
             <div>
@@ -27,7 +35,7 @@ export const Comments = ({ comments }: Props) => {
                 <Typography as={'span'} variant={'boldText14'}>
                   {`${comment.userName} `}
                 </Typography>
-                {comment.comment}
+                {comment.text}
               </Typography>
               <div>
                 <Typography as={'time'} className={s.commentCreatedAt} variant={'smallText'}>
