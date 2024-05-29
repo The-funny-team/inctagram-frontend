@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { UserButtons } from '@/pages/profile/features/userButtons/userButtons'
-import { UsersCountInfo } from '@/pages/profile/features/usersCountInfo/usersCountInfo'
+import { UserButtons } from '@/features/userButtons/userButtons'
+import { UsersCountInfo } from '@/features/usersCountInfo/usersCountInfo'
 import { useGetUserPostsQuery } from '@/shared/api/postsApi'
 import { useMeQuery } from '@/shared/api/profileApi'
 import { ROUTES_URL } from '@/shared/const'
