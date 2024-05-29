@@ -1,2 +1,2 @@
-export * from './userButtons'
-export * from './usersCountInfo'
+export { UserButtons } from './userButtons'
+export { UsersCountInfo } from './usersCountInfo'
