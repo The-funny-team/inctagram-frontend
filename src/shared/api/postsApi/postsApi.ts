@@ -79,14 +79,14 @@ const postApi = baseApi.injectEndpoints({
 })
 
 export const {
-  useUploadPostPhotoMutation,
   useCreatePostMutation,
-  useUpdatePostMutation,
-  useGetPublicPostsQuery,
   useDeletePostMutation,
   useGetPostQuery,
   useGetPublicPostQuery,
+  useGetPublicPostsQuery,
   useGetUserPostsQuery,
+  useUpdatePostMutation,
+  useUploadPostPhotoMutation,
 } = postApi
 
 export type GetPostResponse = {
