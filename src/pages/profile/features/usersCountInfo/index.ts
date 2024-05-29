@@ -1,1 +1,1 @@
-export { UsersCountInfo } from './usersCountInfo'
+export * from './usersCountInfo'
