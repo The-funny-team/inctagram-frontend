@@ -35,7 +35,7 @@ export const useGetCity = ({ country, setValue }: Props) => {
             toast.error('Failed to load list of cities')
           }
         })
-  }, [country])
+  }, [country, getCitiesByCountry, setValue])
 
   return { citiesLoading, citiesOptions }
 }
