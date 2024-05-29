@@ -1,24 +1,27 @@
 .rootPage {
   padding-top: 35px;
   padding-left: 24px;
+
   .mainInfo {
     display: flex;
     gap: 38px;
+
     .avatarPhoto {
       min-width: 204px;
     }
-    .infoAboutMe {
-      width: 100%;
 
+    .infoAboutMe {
       display: flex;
       flex-direction: column;
       gap: 20px;
+      width: 100%;
 
       .nameAndBtn {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
       }
+
       .counting {
         display: flex;
         flex-direction: row;
@@ -26,10 +29,11 @@
       }
     }
   }
+
   .postsList {
-    margin-top: 53px;
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    margin-top: 53px;
   }
 }

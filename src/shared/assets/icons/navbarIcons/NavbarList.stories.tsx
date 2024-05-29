@@ -1,16 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import {
-  CreateIcon,
-  FilledCreateIcon,
-  FilledHomeIcon,
-  FilledMessengerIcon,
-  FilledProfileIcon,
-  HomeIcon,
-  MessengerIcon,
-  ProfileIcon,
-} from '@/shared/assets'
+import { CreateIcon } from '@/shared/assets/icons/navbarIcons/CreateIcon'
+import { FilledCreateIcon } from '@/shared/assets/icons/navbarIcons/FilledCreateIcon'
+import { FilledHomeIcon } from '@/shared/assets/icons/navbarIcons/FilledHomeIcon'
+import { FilledMessengerIcon } from '@/shared/assets/icons/navbarIcons/FilledMessengerIcon'
+import { FilledProfileIcon } from '@/shared/assets/icons/navbarIcons/FilledProfileIcon'
+import { HomeIcon } from '@/shared/assets/icons/navbarIcons/HomeIcon'
+import { MessengerIcon } from '@/shared/assets/icons/navbarIcons/MessengerIcon'
 import { NavbarList } from '@/shared/assets/icons/navbarIcons/NavbarList'
+import { ProfileIcon } from '@/shared/assets/icons/navbarIcons/ProfileIcon'
 
 const meta = {
   argTypes: {},

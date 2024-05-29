@@ -1,28 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import {
-  CopyLinkOutlineIcon,
-  FavoritesIcon,
-  FilledFavoritesIcon,
-  LikeIcon,
-  LikeOutlineIcon,
-  LogOutIcon,
-  PhotoIcon,
-  ShareIcon,
-  StatisticsIcon,
-  TrashOutlineIcon,
-  UnfollowOutlineIcon,
-} from '@/shared/assets'
-import { DeleteIcon } from '@/shared/assets/icons/DeleteIcon'
-import { FollowOutlineIcon } from '@/shared/assets/icons/FollowOutlineIcon'
-import { ProfilePageList } from '@/shared/assets/icons/profilePageIcons/ProfilePageList'
+import { DeleteIcon, FilledFavoritesIcon, FollowOutlineIcon } from '@/shared/assets'
+import { CopyLinkOutlineIcon } from '@/shared/assets/icons/profilePagesIcons/CopyLinkOutlineIcon'
+import { FavoritesIcon } from '@/shared/assets/icons/profilePagesIcons/FavoritesIcon'
+import { LikeIcon } from '@/shared/assets/icons/profilePagesIcons/LikeIcon'
+import { LikeOutlineIcon } from '@/shared/assets/icons/profilePagesIcons/LikeOutlineIcon'
+import { LogOutIcon } from '@/shared/assets/icons/profilePagesIcons/LogOutIcon'
+import { PhotoIcon } from '@/shared/assets/icons/profilePagesIcons/PhotoIcon'
+import { ProfilePagesList } from '@/shared/assets/icons/profilePagesIcons/ProfilePagesList'
+import { ShareIcon } from '@/shared/assets/icons/profilePagesIcons/ShareIcon'
+import { StatisticsIcon } from '@/shared/assets/icons/profilePagesIcons/StatisticsIcon'
+import { TrashOutlineIcon } from '@/shared/assets/icons/profilePagesIcons/TrashOutlineIcon'
+import { UnfollowOutlineIcon } from '@/shared/assets/icons/profilePagesIcons/UnfollowOutlineIcon'
 
 const meta = {
   argTypes: {},
-  component: ProfilePageList,
+  component: ProfilePagesList,
   tags: ['autodocs'],
   title: 'Icons/Profile list',
-} satisfies Meta<typeof ProfilePageList>
+} satisfies Meta<typeof ProfilePagesList>
 
 export default meta
 type Story = StoryObj<typeof meta>
