@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { UserButtons, UsersCountInfo } from '@/features'
 import { useGetUserPostsQuery } from '@/shared/api/postsApi'
 import { useMeQuery } from '@/shared/api/profileApi'
 import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, Loader, Typography } from '@/shared/ui'
+import { UserButtons, UsersCountInfo } from '@/widgets/ProfileMain/features'
 import { ViewPostModal } from '@/widgets/ViewPostModal'
 import Link from 'next/link'
 
