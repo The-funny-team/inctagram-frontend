@@ -35,7 +35,7 @@ export const ProfileMain = () => {
             <div className={s.infoAboutMe}>
               <div className={s.nameAndBtn}>
                 <Typography variant={'h1'}> {userInfo?.username}</Typography>
-                {isMyPost ? (
+                {userInfo ? (
                   <Button as={Link} href={ROUTES_URL.GENERAL_INFO} variant={'secondary'}>
                     {t.profileSettings}
                   </Button>
@@ -73,7 +73,6 @@ export const ProfileMain = () => {
       ) : (
         <Loader />
       )}
-      \
     </>
   )
 }
