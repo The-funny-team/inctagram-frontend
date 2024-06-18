@@ -10,6 +10,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { LocaleType } from '@locales/en'
 import { z } from 'zod'
 
+const MIN_USER_AGE: number = 13
+
 type ErrorsTextProps = LocaleType['pages']['profile']['profileInfoFormErrors']
 const userProfileSchema = (t: ErrorsTextProps) =>
   z
@@ -51,7 +53,7 @@ const userProfileSchema = (t: ErrorsTextProps) =>
           const differenceInYears: number =
             (currentDay.getTime() - dateOfBirth.getTime()) / SECONDS_PER_YEAR
 
-          return differenceInYears > 13
+          return differenceInYears > MIN_USER_AGE
         }
 
         return true
