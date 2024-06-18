@@ -13,7 +13,7 @@ export const profileApi = baseApi.injectEndpoints({
       providesTags: ['Me'],
       query: () => ({
         method: 'GET',
-        url: '/user/me',
+        url: '/user/profile',
       }),
     }),
     updateAvatar: builder.mutation<void, AvatarDto>({
