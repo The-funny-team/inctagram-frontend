@@ -15,6 +15,12 @@ export const profileApi = baseApi.injectEndpoints({
         url: '/public-user/total',
       }),
     }),
+    getUserByUserName: builder.query<User, { userName: string }>({
+      query: ({ userName }) => ({
+        method: 'GET',
+        url: `/public-user/profile/${userName}`,
+      }),
+    }),
     me: builder.query<MeResponse, void>({
       providesTags: ['Me'],
       query: () => ({
@@ -52,6 +58,7 @@ export const profileApi = baseApi.injectEndpoints({
 export const {
   useDeleteAvatarMutation,
   useGetTotalUsersCountQuery,
+  useGetUserByUserNameQuery,
   useMeQuery,
   useUpdateAvatarMutation,
   useUpdateUserMutation,
