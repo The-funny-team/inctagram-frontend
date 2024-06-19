@@ -9,7 +9,7 @@ export const profileApi = baseApi.injectEndpoints({
         url: '/user/avatar',
       }),
     }),
-    getTotalUsersCount: builder.query<{ totalCount: number }, void>({
+    getTotalUsersCount: builder.query<TotalUsersCount, void>({
       query: () => ({
         method: 'GET',
         url: '/public-user/total',
@@ -94,3 +94,7 @@ type AvatarDto = {
 }
 
 type MeResponse = User | null
+
+type TotalUsersCount = {
+  totalCount: number
+}
