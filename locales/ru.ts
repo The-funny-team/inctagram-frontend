@@ -127,7 +127,9 @@ export const ru: LocaleType = {
       signInBtn: 'Страница входа',
       title: 'Восстановить пароль',
     },
-    home: 'Главная страница',
+    home: {
+      registeredUsers: 'Зарегистрированные пользователи:',
+    },
     notFound: {
       captionBtn: 'Вернуться на главную',
       title: 'Извините! Эта страница недоступна',

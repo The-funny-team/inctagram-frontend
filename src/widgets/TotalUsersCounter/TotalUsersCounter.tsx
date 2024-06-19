@@ -1,12 +1,17 @@
 import { Typography } from '@/shared/ui'
 
 import s from './TotalUsersCounter.module.scss'
+import { useRouter } from 'next/router'
+import { useTranslation } from '@/shared/lib/hooks'
 
 type PropsType = {
   totalUsersCount: number
 }
 
 export const TotalUsersCounter = ({ totalUsersCount }: PropsType) => {
+  const { text } = useTranslation()
+  const t = text.pages.home
+
   if (!totalUsersCount) {
     return null
   }
@@ -15,7 +20,7 @@ export const TotalUsersCounter = ({ totalUsersCount }: PropsType) => {
   return (
     <div className={s.wrapper}>
       <Typography as={'p'} variant={'h1'}>
-        Registered users:
+        {t.registeredUsers}
       </Typography>
       <div className={s.counter}>
         {arrayNumbers.map((num, idx) => (

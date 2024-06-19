@@ -125,7 +125,9 @@ export const en = {
       signInBtn: 'Back to Sign In',
       title: 'Forgot Password',
     },
-    home: 'Home page',
+    home: {
+      registeredUsers: 'Registered users:',
+    },
     notFound: {
       captionBtn: 'Back to home page',
       title: 'Sorry! Page not found!',
