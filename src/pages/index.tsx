@@ -1,11 +1,16 @@
-import { getNavbarLayout } from '@/shared/layouts'
+import { getRootLayout } from '@/shared/layouts'
 import { useTranslation } from '@/shared/lib/hooks'
+import { TotalUsersCounter } from '@/widgets/TotalUsersCounter'
 
 const Home = () => {
   const { text } = useTranslation()
 
-  return <main>{text.pages.home}</main>
+  return (
+    <main>
+      <TotalUsersCounter />
+    </main>
+  )
 }
 
-Home.getLayout = getNavbarLayout
+Home.getLayout = getRootLayout
 export default Home
