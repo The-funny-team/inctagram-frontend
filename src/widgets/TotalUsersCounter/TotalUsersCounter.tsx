@@ -1,14 +1,12 @@
+import { useGetTotalUsersCountQuery } from '@/shared/api/profileApi'
+import { useTranslation } from '@/shared/lib/hooks'
 import { Typography } from '@/shared/ui'
 
 import s from './TotalUsersCounter.module.scss'
-import { useRouter } from 'next/router'
-import { useTranslation } from '@/shared/lib/hooks'
 
-type PropsType = {
-  totalUsersCount: number
-}
-
-export const TotalUsersCounter = ({ totalUsersCount }: PropsType) => {
+export const TotalUsersCounter = () => {
+  const { data: usersCount } = useGetTotalUsersCountQuery()
+  const totalUsersCount = usersCount?.totalCount
   const { text } = useTranslation()
   const t = text.pages.home
 
