@@ -90,7 +90,11 @@ export const {
 } = postApi
 
 export type GetPostResponse = {
-  authorId: string
+  author: {
+    avatarUrl: string
+    id: string
+    name: string
+  }
   createdAt: string
   description: string
   id: string
@@ -98,7 +102,15 @@ export type GetPostResponse = {
   updatedAt: string
 }
 
-export type GetPostsResponse = [] | GetPostResponse[]
+export type GetPostsResponse = {
+  data: GetPostResponse[]
+  hasNextPage: boolean
+  hasPreviousPage: boolean
+  page: number
+  pageSize: number
+  pagesCount: number
+  totalCount: number
+}
 
 export type FileUploadResponse = { fileId: string }
 
