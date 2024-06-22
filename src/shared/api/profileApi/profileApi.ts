@@ -9,23 +9,23 @@ export const profileApi = baseApi.injectEndpoints({
         url: '/user/avatar',
       }),
     }),
-    getTotalUsersCount: builder.query<TotalUsersCount, void>({
+    getUserInfo: builder.query<User, { userName: string }>({
+      query: userName => ({
+        method: 'GET',
+        url: `public-user/profile/${userName}`,
+      }),
+    }),
+    getUsersCount: builder.query<UsersCount, void>({
       query: () => ({
         method: 'GET',
         url: '/public-user/total',
-      }),
-    }),
-    getUserByUserName: builder.query<User, { userName: string }>({
-      query: ({ userName }) => ({
-        method: 'GET',
-        url: `/public-user/profile/${userName}`,
       }),
     }),
     me: builder.query<MeResponse, void>({
       providesTags: ['Me'],
       query: () => ({
         method: 'GET',
-        url: '/user/profile',
+        url: '/user/me',
       }),
     }),
     updateAvatar: builder.mutation<void, AvatarDto>({
@@ -57,8 +57,8 @@ export const profileApi = baseApi.injectEndpoints({
 
 export const {
   useDeleteAvatarMutation,
-  useGetTotalUsersCountQuery,
-  useGetUserByUserNameQuery,
+  useGetUserInfoQuery,
+  useGetUsersCountQuery,
   useMeQuery,
   useUpdateAvatarMutation,
   useUpdateUserMutation,
@@ -93,8 +93,8 @@ type AvatarDto = {
   file: File
 }
 
-type MeResponse = User | null
-
-type TotalUsersCount = {
+type UsersCount = {
   totalCount: number
 }
+
+type MeResponse = User | null
