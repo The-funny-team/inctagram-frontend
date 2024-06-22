@@ -9,11 +9,23 @@ export const profileApi = baseApi.injectEndpoints({
         url: '/user/avatar',
       }),
     }),
+    getUserInfo: builder.query<User, { userName: string }>({
+      query: userName => ({
+        method: 'GET',
+        url: `public-user/profile/${userName}`,
+      }),
+    }),
+    getUsersCount: builder.query<UsersCount, void>({
+      query: () => ({
+        method: 'GET',
+        url: '/public-user/total',
+      }),
+    }),
     me: builder.query<MeResponse, void>({
       providesTags: ['Me'],
       query: () => ({
         method: 'GET',
-        url: '/user/me',
+        url: '/user/profile',
       }),
     }),
     updateAvatar: builder.mutation<void, AvatarDto>({
@@ -45,6 +57,8 @@ export const profileApi = baseApi.injectEndpoints({
 
 export const {
   useDeleteAvatarMutation,
+  useGetUserInfoQuery,
+  useGetUsersCountQuery,
   useMeQuery,
   useUpdateAvatarMutation,
   useUpdateUserMutation,
@@ -77,6 +91,10 @@ type UpdateUserDto = {
 
 type AvatarDto = {
   file: File
+}
+
+type UsersCount = {
+  totalCount: number
 }
 
 type MeResponse = User | null
