@@ -9,6 +9,7 @@ export const ROUTES_URL = {
   MY_PAYMENTS: '/profile/settings/payments',
   PRIVACY_POLICY: '/privacy-policy',
   PROFILE: '/profile',
+  PUBLIC_PROFILE: '/public-profile',
   SEARCH: '/search',
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
