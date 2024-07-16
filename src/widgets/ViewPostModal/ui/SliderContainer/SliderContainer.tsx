@@ -12,7 +12,7 @@ type Props = {
 export const SliderContainer = ({ imageUrls }: Props) => {
   return (
     <div className={s.sliderContainer}>
-      <Slider sliderLength={imageUrls.length}>
+      <Slider isDots={imageUrls.length > 1} sliderLength={imageUrls.length}>
         {imageUrls.map(url => (
           <div className={s.imageContainer} key={url}>
             <Image

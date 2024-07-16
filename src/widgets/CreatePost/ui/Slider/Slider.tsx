@@ -11,6 +11,7 @@ import s from './Slider.module.scss'
 
 type Props = {
   children: ReactNode
+  isDots: boolean
   setSlideId?: (id: number) => void
   slideId?: number
   sliderLength: number
