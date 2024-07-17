@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 
-import { useDeletePostMutation, useUpdatePostMutation } from '@/shared/api/postsApi'
+import {
+  GetPostResponse,
+  useDeletePostMutation,
+  useUpdatePostMutation,
+} from '@/shared/api/postsApi'
 import { useTranslation } from '@/shared/lib/hooks'
 import { ModalRadix } from '@/shared/ui'
 import { ClosePostConfirmationModal } from '@/widgets/ClosePostConfirmationModal'
@@ -12,31 +16,24 @@ import Image from 'next/image'
 
 import s from './ViewPostModal.module.scss'
 
-type Props = {
-  avatar: string
-  comments?: any
-  createdAt: string
-  description: string
-  id: string
-  imageUrls: string[]
+type AddPropsType = {
+  comments: []
   isMyPost: boolean
   likesCount?: number
-  updatedAt: string
-  userName: string
 }
+type PropsType = GetPostResponse & AddPropsType
 
 export const ViewPostModal = ({
-  avatar,
-  comments = [],
+  author,
+  comments,
   createdAt,
   description,
   id,
-  imageUrls,
+  imagesUrl,
   isMyPost,
-  likesCount = 0,
+  likesCount,
   updatedAt,
-  userName,
-}: Props) => {
+}: PropsType) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
   const [isOpenPost, setIsOpenPost] = useState<boolean>(false)
   const [isOpenConfirmDeletePostModal, setIsOpenConfirmDeletePostModal] = useState<boolean>(false)
@@ -108,7 +105,7 @@ export const ViewPostModal = ({
         <Image
           alt={'post image'}
           height={228}
-          src={imageUrls[0]}
+          src={imagesUrl[0]}
           style={{ borderRadius: '2px', objectFit: 'cover' }}
           width={234}
         />
@@ -117,14 +114,14 @@ export const ViewPostModal = ({
     >
       {isEditMode ? (
         <div className={s.main}>
-          <SliderContainer imageUrls={imageUrls} />
+          <SliderContainer imageUrls={imagesUrl} />
           <EditContainer
-            avatar={avatar}
+            avatar={author.avatarUrl}
             description={description}
             onChangeDescription={handleChangeDescription}
             onSaveChanges={handleSaveChanges}
             postDescription={postDescription}
-            userName={userName}
+            userName={author.name}
           />
           <ClosePostConfirmationModal
             onCancelChanges={handleCancelChanges}
@@ -134,9 +131,9 @@ export const ViewPostModal = ({
         </div>
       ) : (
         <div className={s.main}>
-          <SliderContainer imageUrls={imageUrls} />
+          <SliderContainer imageUrls={imagesUrl} />
           <PostInfoContainer
-            avatar={avatar}
+            avatar={author.avatarUrl}
             comments={comments}
             createdAt={createdAt}
             isMyPost={isMyPost}
@@ -145,7 +142,7 @@ export const ViewPostModal = ({
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
             postDescription={postDescription}
             updatedAt={updatedAt}
-            userName={userName}
+            userName={author.name}
           />
           <DeletePostConfirmationModal
             onDeletePost={handleDeletePost}
