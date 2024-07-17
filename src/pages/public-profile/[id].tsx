@@ -11,14 +11,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const res = await fetch(`${BASE_API_URL}/public/post/user/${id}`)
   const userPosts = await res.json()
 
-  if (!userPosts) {
-    return {
-      notFound: true,
-    }
-  }
-
   return {
     props: {
+      error: 'No posts yet!',
       posts: userPosts?.data,
       postsTotalCount: userPosts?.totalCount,
       userName: userPosts?.data[0]?.author?.name,
@@ -35,14 +30,12 @@ const PublicUser = ({ posts, postsTotalCount, userName }: PropsType) => {
   const { data: myProfile } = useMeQuery()
   const { data: publicUser } = useGetUserInfoQuery({ userName: userName })
 
-  if (!publicUser) {
-    return null
-  }
-
   return (
     <div style={{ margin: '0 auto', maxWidth: '972px', paddingTop: '36px' }}>
-      <ProfileHeader isAuth={!!myProfile} postsTotalCount={postsTotalCount} user={publicUser} />
-      {{ posts } && <ProfilePosts isMyPost={false} profilePosts={posts} />}
+      {publicUser && (
+        <ProfileHeader isAuth={!!myProfile} postsTotalCount={postsTotalCount} user={publicUser} />
+      )}
+      {posts && <ProfilePosts isMyPost={false} profilePosts={posts} />}
     </div>
   )
 }
