@@ -1,7 +1,7 @@
 import { GetPostsResponse } from '@/shared/api/postsApi'
 import { BASE_API_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
-import { HeadMeta, Loader, PublicPosts, RedirectToProfilePage, Typography } from '@/shared/ui'
+import { HeadMeta, PublicPosts, Typography } from '@/shared/ui'
 import { TotalUsersCounter } from '@/widgets/TotalUsersCounter'
 import { GetStaticProps } from 'next'
 
