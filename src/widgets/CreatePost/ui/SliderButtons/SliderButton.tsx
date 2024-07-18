@@ -9,6 +9,7 @@ type SliderButtonProps = {
   className?: string
   disabled?: ComponentProps<'button'>['disabled']
   onClick?: ComponentProps<'button'>['onClick']
+  size: number
 }
 
 export const SliderButton = ({
@@ -16,9 +17,15 @@ export const SliderButton = ({
   className,
   disabled = false,
   onClick,
+  size,
 }: SliderButtonProps) => {
   return (
-    <button className={clsx(s.sliderBtn, className)} disabled={disabled} onClick={onClick}>
+    <button
+      className={clsx(s.sliderBtn, className)}
+      disabled={disabled}
+      onClick={onClick}
+      style={{ height: `${size}px`, width: `${size}px` }}
+    >
       {children}
     </button>
   )

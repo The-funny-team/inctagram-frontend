@@ -43,7 +43,7 @@ export const PublicPost = (props: GetPostResponse) => {
   return (
     <div className={s.post}>
       <div className={s.slider}>
-        <Slider isDots={imagesUrl.length > 1} sliderLength={imagesUrl.length}>
+        <Slider isDots={imagesUrl.length > 1} sizeBtn={24} sliderLength={imagesUrl.length}>
           {imagesUrl.map((photo: string) => (
             <Image
               alt={'post image'}
