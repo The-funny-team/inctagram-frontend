@@ -7,8 +7,6 @@ import s from './ProfileMain.module.scss'
 
 export const ProfileMain = () => {
   const { data: userInfo } = useMeQuery()
-  const avatar = userInfo?.avatarUrl
-  const userName = userInfo?.username
   const myId = userInfo?.id
 
   const { data: userPosts, isLoading } = useGetUserPostsQuery({})
@@ -27,20 +25,24 @@ export const ProfileMain = () => {
     <>
       {!isLoading ? (
         <main className={s.rootPage}>
-          <ProfileHeader totalPostsCount={userPosts.totalCount} user={userInfo} />
+          <ProfileHeader
+            isAuth={!!userInfo}
+            postsTotalCount={userPosts.totalCount}
+            user={userInfo}
+          />
           <div className={s.postsList}>
             {userPosts &&
               userPosts.data.map(post => (
                 <ViewPostModal
-                  avatar={avatar || ''}
+                  author={post.author}
+                  comments={[]}
                   createdAt={post.createdAt}
                   description={post.description}
                   id={post.id}
-                  imageUrls={post.imagesUrl}
+                  imagesUrl={post.imagesUrl}
                   isMyPost={isMyPost}
                   key={post.id}
                   updatedAt={post.updatedAt}
-                  userName={userName || ''}
                 />
               ))}
           </div>
