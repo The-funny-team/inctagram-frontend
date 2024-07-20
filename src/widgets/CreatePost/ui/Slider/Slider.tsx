@@ -32,6 +32,7 @@ export const Slider = ({ children, setSlideId, sizeBtn, slideId, sliderLength }:
   const usedSlideId = slideId ? slideId : slideIdR
 
   const settings: Settings = {
+    arrows: sliderLength > 1,
     beforeChange: beforeChangeHandler,
     customPaging: index => {
       return <SliderDot isActive={usedSlideId === index} />
