@@ -15,7 +15,7 @@ export const PublicPosts = ({ publicPosts }: Props) => {
           author={p.author}
           createdAt={p.createdAt}
           description={p.description}
-          id={p.author.id}
+          id={p.id}
           imagesUrl={p.imagesUrl}
           key={p.id}
           updatedAt={p.updatedAt}
