@@ -59,7 +59,7 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
   return (
     <header className={classNames.header} {...restProps}>
       <div className={classNames.container}>
-        <Typography as={Link} className={classNames.link} href={'/'} variant={'large'}>
+        <Typography as={Link} className={classNames.link} href={ROUTES_URL.HOME} variant={'large'}>
           Inctagram
         </Typography>
         <div className={classNames.headerDashboard}>
