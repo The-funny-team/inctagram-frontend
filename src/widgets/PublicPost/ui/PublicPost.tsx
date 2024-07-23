@@ -43,18 +43,20 @@ export const PublicPost = (props: GetPostResponse) => {
   return (
     <div className={s.post}>
       <div className={s.slider}>
-        <Slider isDots={imagesUrl.length > 1} sizeBtn={24} sliderLength={imagesUrl.length}>
-          {imagesUrl.map((photo: string) => (
-            <Image
-              alt={'post image'}
-              className={s.image}
-              height={240}
-              key={photo}
-              src={photo}
-              width={234}
-            />
-          ))}
-        </Slider>
+        <Link href={`${ROUTES_URL.PUBLIC_PROFILE}/${author.id}/${id}`}>
+          <Slider isDots={imagesUrl.length > 1} sizeBtn={24} sliderLength={imagesUrl.length}>
+            {imagesUrl.map((photo: string) => (
+              <Image
+                alt={'post image'}
+                className={s.image}
+                height={240}
+                key={photo}
+                src={photo}
+                width={234}
+              />
+            ))}
+          </Slider>
+        </Link>
       </div>
       <div className={clsx(s.postInfo, { [s.expanded]: isExpanded })} style={{ top: topStyle }}>
         <Link href={`${ROUTES_URL.PUBLIC_PROFILE}/${author.id}`} style={{ textDecoration: 'none' }}>

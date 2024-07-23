@@ -5,10 +5,11 @@ import s from './ProfilePosts.module.scss'
 
 type PropsType = {
   isMyPost: boolean
+  isShowPostId?: string | undefined
   profilePosts: GetPostResponse[]
 }
 
-export const ProfilePosts = ({ isMyPost, profilePosts }: PropsType) => {
+export const ProfilePosts = ({ isMyPost, isShowPostId, profilePosts }: PropsType) => {
   return (
     <div className={s.postsList}>
       {profilePosts.map(post => (
@@ -20,6 +21,7 @@ export const ProfilePosts = ({ isMyPost, profilePosts }: PropsType) => {
           id={post.id}
           imagesUrl={post.imagesUrl}
           isMyPost={isMyPost}
+          isOpen={post.id === isShowPostId}
           key={post.id}
           updatedAt={post.updatedAt}
         />

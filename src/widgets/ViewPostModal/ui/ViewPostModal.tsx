@@ -19,6 +19,7 @@ import s from './ViewPostModal.module.scss'
 type AddPropsType = {
   comments: []
   isMyPost: boolean
+  isOpen?: boolean
   likesCount?: number
 }
 type PropsType = GetPostResponse & AddPropsType
@@ -31,11 +32,12 @@ export const ViewPostModal = ({
   id,
   imagesUrl,
   isMyPost,
+  isOpen = false,
   likesCount,
   updatedAt,
 }: PropsType) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
-  const [isOpenPost, setIsOpenPost] = useState<boolean>(false)
+  const [isOpenPost, setIsOpenPost] = useState<boolean>(isOpen)
   const [isOpenConfirmDeletePostModal, setIsOpenConfirmDeletePostModal] = useState<boolean>(false)
   const [isOpenConfirmCloseModal, setIsOpenConfirmCloseModal] = useState<boolean>(false)
   const [postDescription, setPostDescription] = useState<string>(description ?? '')
