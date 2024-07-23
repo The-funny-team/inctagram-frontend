@@ -72,7 +72,11 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
 
       <div className={s.body}>
         <div className={s.sliderBlock}>
-          <Slider sliderLength={filteredImages.length}>
+          <Slider
+            isDots={filteredImages.length > 1}
+            sizeBtn={36}
+            sliderLength={filteredImages.length}
+          >
             {filteredImages.map(pic => (
               <div key={pic.id}>
                 <NextImage
