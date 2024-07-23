@@ -50,48 +50,57 @@ type Story = StoryObj<typeof meta>
 
 export const WithManyImages: Story = {
   args: {
-    avatar,
-    comments,
+    author: {
+      avatarUrl: avatar,
+      id: '12',
+      name: 'John Galt',
+    },
+    comments: [],
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
     id: '3',
-    imageUrls: fewImages,
+    imagesUrl: fewImages,
     isMyPost: true,
     likesCount: 2394,
     updatedAt: '1d ago',
-    userName: 'John Galt',
   },
 }
 
 export const WithOneImage: Story = {
   args: {
-    avatar,
-    comments,
+    author: {
+      avatarUrl: avatar,
+      id: '13',
+      name: 'John Galt',
+    },
+    comments: [],
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
     id: '1',
-    imageUrls: oneImage,
+    imagesUrl: oneImage,
     isMyPost: true,
     likesCount: 2394,
     updatedAt: '1d ago',
-    userName: 'John Galt',
   },
 }
 
 export const StrangerPost: Story = {
   args: {
-    avatar,
-    comments,
+    author: {
+      avatarUrl: avatar,
+      id: '12',
+      name: 'John Galt',
+    },
+    comments: [],
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
     id: '2',
-    imageUrls: oneImage,
+    imagesUrl: oneImage,
     isMyPost: false,
     likesCount: 2394,
     updatedAt: '1d ago',
-    userName: 'Friend',
   },
 }
