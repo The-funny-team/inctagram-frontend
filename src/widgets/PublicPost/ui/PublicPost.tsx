@@ -13,12 +13,18 @@ import { useRouter } from 'next/router'
 
 import s from './PublicPost.module.scss'
 
+const DESCRIPTION_SIZES = {
+  length: 80,
+  maxHeight: 240,
+  minHeight: 72,
+}
+
 export const PublicPost = (props: GetPostResponse) => {
   const { author, description, id, imagesUrl, updatedAt } = props
   const { locale } = useRouter()
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
-  const [height, setHeight] = useState(72)
+  const [height, setHeight] = useState(DESCRIPTION_SIZES.minHeight)
 
   const timeAgo = formatDistanceToNowStrict(parseISO(updatedAt as string), {
     addSuffix: true,
@@ -33,12 +39,12 @@ export const PublicPost = (props: GetPostResponse) => {
     if (isExpanded && contentRef.current) {
       setHeight(contentRef.current?.scrollHeight)
     } else {
-      setHeight(72)
+      setHeight(DESCRIPTION_SIZES.minHeight)
     }
   }, [height, isExpanded])
 
-  const top = 240 - (height - 72)
-  const topStyle = !isExpanded ? `240px` : `${top}px`
+  const top = DESCRIPTION_SIZES.maxHeight - (height - DESCRIPTION_SIZES.minHeight)
+  const topStyle = !isExpanded ? `${DESCRIPTION_SIZES.maxHeight}px` : `${top}px`
 
   return (
     <div className={s.post}>
@@ -72,7 +78,7 @@ export const PublicPost = (props: GetPostResponse) => {
         </Typography>
         <div ref={contentRef}>
           <PublicPostDescription
-            descriptionMaxLength={80}
+            descriptionMaxLength={DESCRIPTION_SIZES.length}
             isFullText={isExpanded}
             toggleText={handleToggle}
           >
