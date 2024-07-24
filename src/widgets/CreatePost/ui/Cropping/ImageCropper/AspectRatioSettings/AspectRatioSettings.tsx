@@ -69,6 +69,7 @@ const AspectRatioBtn = (props: {
     <SliderButton
       className={clsx(s.aspectRatioBtn, props.isActive && s.active)}
       onClick={props.onClick}
+      size={36}
     >
       <ExpandIcon />
     </SliderButton>

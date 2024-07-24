@@ -54,7 +54,7 @@ export const Cropping = () => {
         </Button>
       </div>
       <div className={s.body}>
-        <Slider sliderLength={photos.length}>
+        <Slider isDots={photos.length > 1} sizeBtn={36} sliderLength={photos.length}>
           {photos.map(photo => (
             <ImageCropper key={photo.id} photo={photo} />
           ))}

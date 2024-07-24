@@ -64,7 +64,13 @@ export const Filtering = () => {
       </div>
       <div className={s.body}>
         <div className={s.sliderBlock}>
-          <Slider setSlideId={setSlideId} slideId={slideId} sliderLength={croppedPictures.length}>
+          <Slider
+            isDots={croppedPictures.length > 1}
+            setSlideId={setSlideId}
+            sizeBtn={36}
+            slideId={slideId}
+            sliderLength={croppedPictures.length}
+          >
             {croppedPictures.map((pic, i) => (
               <div key={i}>
                 <NextImage

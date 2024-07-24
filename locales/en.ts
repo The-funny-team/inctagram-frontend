@@ -125,7 +125,6 @@ export const en = {
       signInBtn: 'Back to Sign In',
       title: 'Forgot Password',
     },
-    home: 'Home page',
     notFound: {
       captionBtn: 'Back to home page',
       title: 'Sorry! Page not found!',
@@ -218,6 +217,13 @@ export const en = {
           title: 'My payments',
         },
       },
+    },
+    publicPage: {
+      postDescription: {
+        fullText: 'Show more',
+        shortText: 'Hide',
+      },
+      registeredUsers: 'Registered users:',
     },
     signIn: {
       emailLabel: 'Email',

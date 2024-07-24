@@ -10,7 +10,7 @@ export const profileApi = baseApi.injectEndpoints({
       }),
     }),
     getUserInfo: builder.query<User, { userName: string }>({
-      query: userName => ({
+      query: ({ userName }) => ({
         method: 'GET',
         url: `public-user/profile/${userName}`,
       }),

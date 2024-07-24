@@ -16,7 +16,7 @@ type Props = {
   comments?: any
   createdAt: string
   isMyPost: boolean
-  likesCount: number
+  likesCount?: number
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
   postDescription: string
@@ -82,7 +82,7 @@ export const PostInfoContainer = ({
       </div>
       <Actions />
       <div className={s.postLikes}>
-        {likesCount > 0 && <LikesInfo likesCount={likesCount} />}
+        {likesCount && <LikesInfo likesCount={likesCount} />}
         <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
           {`${new Date(createdAt).toLocaleDateString(router.locale === 'en' ? 'en-US' : 'ru-RU', {
             day: 'numeric',
