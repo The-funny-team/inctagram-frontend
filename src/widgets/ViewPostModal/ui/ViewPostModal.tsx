@@ -17,7 +17,7 @@ import Image from 'next/image'
 import s from './ViewPostModal.module.scss'
 
 type AddPropsType = {
-  comments: []
+  comments?: any
   isMyPost: boolean
   isOpen?: boolean
   likesCount?: number

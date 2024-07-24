@@ -55,7 +55,7 @@ export const WithManyImages: Story = {
       id: '12',
       name: 'John Galt',
     },
-    comments: [],
+    comments,
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
@@ -74,7 +74,7 @@ export const WithOneImage: Story = {
       id: '13',
       name: 'John Galt',
     },
-    comments: [],
+    comments,
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
@@ -93,7 +93,7 @@ export const StrangerPost: Story = {
       id: '12',
       name: 'John Galt',
     },
-    comments: [],
+    comments,
     createdAt: 'July 3, 2021',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',

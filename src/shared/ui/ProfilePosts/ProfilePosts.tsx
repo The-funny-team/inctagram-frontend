@@ -15,7 +15,6 @@ export const ProfilePosts = ({ isMyPost, isShowPostId, profilePosts }: PropsType
       {profilePosts.map(post => (
         <ViewPostModal
           author={post.author}
-          comments={[]}
           createdAt={post.createdAt}
           description={post.description}
           id={post.id}
