@@ -8,7 +8,7 @@ export const TotalUsersCounter = () => {
   const { data: usersCount } = useGetUsersCountQuery()
   const totalUsersCount = usersCount?.totalCount
   const { text } = useTranslation()
-  const t = text.pages.home
+  const t = text.pages.publicPage
 
   if (!totalUsersCount) {
     return null

@@ -127,9 +127,6 @@ export const ru: LocaleType = {
       signInBtn: 'Страница входа',
       title: 'Восстановить пароль',
     },
-    home: {
-      registeredUsers: 'Зарегистрированные пользователи:',
-    },
     notFound: {
       captionBtn: 'Вернуться на главную',
       title: 'Извините! Эта страница недоступна',
@@ -222,6 +219,13 @@ export const ru: LocaleType = {
           title: 'Мои платежи',
         },
       },
+    },
+    publicPage: {
+      postDescription: {
+        fullText: 'Показать',
+        shortText: 'Скрыть',
+      },
+      registeredUsers: 'Зарегистрированные пользователи:',
     },
     signIn: {
       emailLabel: 'Электронная почта',

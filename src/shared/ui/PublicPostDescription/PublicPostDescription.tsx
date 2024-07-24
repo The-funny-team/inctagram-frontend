@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/lib/hooks'
 import { Typography } from '@/shared/ui'
 import clsx from 'clsx'
 
@@ -10,6 +11,8 @@ type PropsType = {
   toggleText: () => void
 }
 export const PublicPostDescription = (props: PropsType) => {
+  const { text } = useTranslation()
+  const t = text.pages.publicPage.postDescription
   const { children, descriptionMaxLength, isFullText, toggleText } = props
   const descriptionText = children
   const isShowFullSize = descriptionText.length <= descriptionMaxLength
@@ -22,10 +25,10 @@ export const PublicPostDescription = (props: PropsType) => {
         className={clsx(s.text, { [s.fullText]: isFullText })}
         variant={'regularText14'}
       >
-        {isFullText ? `${descriptionText}...` : `${shortText}...`}
+        {isFullText ? `${descriptionText}` : `${shortText}...`}
         {!isShowFullSize && (
           <span className={s.toggleButton} onClick={toggleText}>
-            {isFullText ? 'Hide' : 'Show more'}
+            {isFullText ? `${t.shortText}` : `${t.fullText}`}
           </span>
         )}
       </Typography>
