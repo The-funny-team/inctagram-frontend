@@ -21,27 +21,27 @@ const DESCRIPTION_SIZES = {
 
 export const PublicPost = (props: GetPostResponse) => {
   const { author, description, id, imagesUrl, updatedAt } = props
+
+  console.log(author)
   const { locale } = useRouter()
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState(DESCRIPTION_SIZES.minHeight)
 
-  const timeAgo = formatDistanceToNowStrict(parseISO(updatedAt as string), {
-    addSuffix: true,
-    locale: locale === 'ru' ? ru : enUS,
-  })
+  const [timeAgo, setTimeAgo] = useState<null | string>(null)
+
+  useEffect(() => {
+    setTimeAgo(
+      formatDistanceToNowStrict(parseISO(updatedAt as string), {
+        addSuffix: true,
+        locale: locale === 'ru' ? ru : enUS,
+      })
+    )
+  }, [locale, updatedAt])
 
   const handleToggle = () => {
     setIsExpanded(prev => !prev)
   }
-
-  useEffect(() => {
-    if (isExpanded && contentRef.current) {
-      setHeight(contentRef.current?.scrollHeight)
-    } else {
-      setHeight(DESCRIPTION_SIZES.minHeight)
-    }
-  }, [height, isExpanded])
 
   const top = DESCRIPTION_SIZES.maxHeight - (height - DESCRIPTION_SIZES.minHeight)
   const topStyle = !isExpanded ? `${DESCRIPTION_SIZES.maxHeight}px` : `${top}px`
