@@ -18,7 +18,7 @@ type Props = {
   sliderLength: number
 }
 
-export const Slider = ({ children, setSlideId, sizeBtn, slideId, sliderLength }: Props) => {
+export const Slider = ({ children, isDots, setSlideId, sizeBtn, slideId, sliderLength }: Props) => {
   const [slideIdR, setSlideIdR] = useState<number>(0)
 
   const beforeChangeHandler = (currentSlide: number, nextSlide: number) => {
@@ -37,7 +37,7 @@ export const Slider = ({ children, setSlideId, sizeBtn, slideId, sliderLength }:
     customPaging: index => {
       return <SliderDot isActive={usedSlideId === index} />
     },
-    dots: true,
+    dots: isDots,
     dotsClass: s.slickDots,
     infinite: false,
     nextArrow: (
