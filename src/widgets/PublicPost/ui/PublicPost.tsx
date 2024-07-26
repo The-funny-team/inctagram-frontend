@@ -20,16 +20,21 @@ const DESCRIPTION_SIZES = {
 }
 
 export const PublicPost = (props: GetPostResponse) => {
-  const { author, description, id, imagesUrl, updatedAt } = props
+  const { author, createdAt, description, id, imagesUrl } = props
   const { locale } = useRouter()
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState(DESCRIPTION_SIZES.minHeight)
+  const [timeAgo, setTimeAgo] = useState<null | string>(null)
 
-  const timeAgo = formatDistanceToNowStrict(parseISO(updatedAt as string), {
-    addSuffix: true,
-    locale: locale === 'ru' ? ru : enUS,
-  })
+  useEffect(() => {
+    setTimeAgo(
+      formatDistanceToNowStrict(parseISO(createdAt as string), {
+        addSuffix: true,
+        locale: locale === 'ru' ? ru : enUS,
+      })
+    )
+  }, [locale, createdAt])
 
   const handleToggle = () => {
     setIsExpanded(prev => !prev)
