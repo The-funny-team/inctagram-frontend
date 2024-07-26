@@ -20,7 +20,7 @@ const DESCRIPTION_SIZES = {
 }
 
 export const PublicPost = (props: GetPostResponse) => {
-  const { author, createdAt, description, id, imagesUrl, updatedAt } = props
+  const { author, createdAt, description, id, imagesUrl } = props
   const { locale } = useRouter()
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
