@@ -25,7 +25,7 @@ export const PublicPostDescription = (props: PropsType) => {
         className={clsx(s.text, { [s.fullText]: isFullText })}
         variant={'regularText14'}
       >
-        {isFullText ? `${descriptionText}` : `${shortText}...`}
+        {isFullText ? `${descriptionText}` : `${shortText}`}
         {!isShowFullSize && (
           <span className={s.toggleButton} onClick={toggleText}>
             {isFullText ? `${t.shortText}` : `${t.fullText}`}
