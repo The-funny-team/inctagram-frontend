@@ -34,7 +34,7 @@ export const PublicPost = (props: GetPostResponse) => {
         locale: locale === 'ru' ? ru : enUS,
       })
     )
-  }, [locale, updatedAt])
+  }, [locale, createdAt])
 
   const handleToggle = () => {
     setIsExpanded(prev => !prev)
