@@ -2,9 +2,11 @@ import {
   ArrowLeftPaginationIcon,
   ArrowRightPaginationIcon,
 } from '@/shared/assets/icons/paginationIcons'
-import { Select, Typography } from '@/shared/ui'
+import { Select, SelectProps, Typography } from '@/shared/ui'
 import { usePagination } from '@/shared/ui/Pagination/usePagination'
 import { clsx } from 'clsx'
+
+import s from './Pagination.module.scss'
 
 type Props = {
   className?: string
@@ -33,8 +35,10 @@ export const Pagination = ({
 
   if (currentPage === 0 || paginationRange.length < 2) {
     return (
-      <Typography as={'div'} className={s.selectWithoutPagination} variant={'body2'}>
-        Show <Select {...restProps} pagination value={pageSize.toString()} /> on page
+      <Typography as={'div'} className={s.selectWithoutPagination} variant={'regularText14'}>
+        Show{' '}
+        <Select {...restProps} className={s.selectWithPagination} value={pageSize.toString()} /> on
+        page
       </Typography>
     )
   }
@@ -93,7 +97,7 @@ export const Pagination = ({
         </button>
       </div>
       <Typography as={'div'} className={s.selectWrapper} variant={'regularText14'}>
-        Show <Select {...restProps} pagination value={pageSize.toString()} /> on page
+        Show <Select {...restProps} value={pageSize.toString()} /> on page
       </Typography>
     </div>
   )
