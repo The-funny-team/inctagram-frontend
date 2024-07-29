@@ -1,0 +1,43 @@
+.radioGroupItem {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: transparent;
+  border: 2px solid var(--color-light-100);
+  border-radius: 50%;
+}
+
+.radioGroupIndicator {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 10px;
+  height: 10px;
+}
+
+.radioGroupIndicator::after {
+  content: '';
+
+  display: block;
+
+  width: 10px;
+  height: 10px;
+
+  background-color: var(--color-light-100);
+  border-radius: 50%;
+}
+
+.label {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}
