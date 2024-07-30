@@ -14,7 +14,7 @@ type Props = {
   onChangePage?: (page: number) => void
   pageSize?: number
   siblingCount?: number
-  totalCount: number
+  totalCount?: number
 } & Omit<SelectProps, 'fullWidth' | 'label' | 'pagination' | 'value'>
 
 export const Pagination = ({
