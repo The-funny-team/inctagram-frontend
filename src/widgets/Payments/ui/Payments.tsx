@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-import { useTranslation } from '@/shared/lib/hooks'
 import { Pagination } from '@/shared/ui/Pagination'
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@/shared/ui/Table'
 import { PaymentsListTable } from '@/widgets/Payments/ui/PaymentsListTable'
 
 import s from './Payments.module.scss'
