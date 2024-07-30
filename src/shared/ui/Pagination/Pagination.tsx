@@ -10,20 +10,20 @@ import s from './Pagination.module.scss'
 
 type Props = {
   className?: string
-  currentPage: number
-  onChangePage: (page: number) => void
-  pageSize: number
+  currentPage?: number
+  onChangePage?: (page: number) => void
+  pageSize?: number
   siblingCount?: number
-  totalCount: number
+  totalCount?: number
 } & Omit<SelectProps, 'fullWidth' | 'label' | 'pagination' | 'value'>
 
 export const Pagination = ({
   className,
   currentPage = 1,
   onChangePage,
-  pageSize,
+  pageSize = 10,
   siblingCount = 1,
-  totalCount,
+  totalCount = 0,
   ...restProps
 }: Props) => {
   const paginationRange = usePagination({
@@ -44,11 +44,15 @@ export const Pagination = ({
   }
 
   const handleClickPrev = () => {
-    onChangePage(currentPage - 1)
+    if (onChangePage) {
+      onChangePage(currentPage - 1)
+    }
   }
 
   const handleClickNext = () => {
-    onChangePage(currentPage + 1)
+    if (onChangePage) {
+      onChangePage(currentPage + 1)
+    }
   }
 
   const isFirstPage = currentPage === 1
@@ -74,7 +78,11 @@ export const Pagination = ({
           }
           const isCurrentPage = num === currentPage
 
-          const handleChangePage = () => onChangePage(num)
+          const handleChangePage = () => {
+            if (onChangePage) {
+              onChangePage(num)
+            }
+          }
 
           return (
             <button
