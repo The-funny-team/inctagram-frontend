@@ -19,7 +19,11 @@ type Props = {
   payments: Payment[]
 }
 
-const PAGINATION_OPTIONS = [
+type Option = {
+  label: string
+  value: string
+}
+const PAGINATION_OPTIONS: Option[] = [
   { label: '10', value: '10' },
   { label: '25', value: '25' },
   { label: '50', value: '50' },
