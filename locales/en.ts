@@ -178,6 +178,7 @@ export const en = {
         paymentType: 'Payment type',
         price: 'Price',
         subscriptionType: 'Subscription type',
+        tableEmpty: 'There is no data here yet',
       },
       profileInfoForm: {
         citySelectLabel: 'Select your city',

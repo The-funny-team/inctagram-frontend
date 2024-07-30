@@ -180,6 +180,7 @@ export const ru: LocaleType = {
         paymentType: 'Способ оплаты',
         price: 'Цена',
         subscriptionType: 'Тип подписки',
+        tableEmpty: 'Пока тут еще нет данных',
       },
       profileInfoForm: {
         citySelectLabel: 'Выберете Ваш город',
@@ -280,6 +281,7 @@ export const ru: LocaleType = {
     onPage: 'на странице',
     show: 'Показать',
   },
+
   timeIntervals: {
     days: 'дн.',
     hours: 'ч.',
