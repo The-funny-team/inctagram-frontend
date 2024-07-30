@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { Payments } from '@/widgets/Payments'
-import { Payment } from '@/widgets/Payments/Payments'
+import { Payment } from '@/widgets/Payments/ui/Payments'
 
 const meta = {
   component: Payments,

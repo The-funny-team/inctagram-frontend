@@ -1,11 +1,14 @@
 import { getTabsLayout } from '@/shared/layouts'
 import { HeadMeta } from '@/shared/ui'
+import { Payments } from '@/widgets/Payments'
 
 const PaymentsPage = () => {
   return (
     <>
       <HeadMeta title={'Payments'} />
-      <p>Payments Page</p>
+      <main>
+        <Payments payments={[]} />
+      </main>
     </>
   )
 }

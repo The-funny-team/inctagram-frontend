@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Pagination } from '@/shared/ui/Pagination'
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@/shared/ui/Table'
+import { PaymentsListTable } from '@/widgets/Payments/ui/PaymentsListTable'
 
 import s from './Payments.module.scss'
 
@@ -28,9 +29,6 @@ const PAGINATION_OPTIONS = [
 ]
 
 export const Payments = ({ payments }: Props) => {
-  const { text } = useTranslation()
-  const t = text.pages.profile.myPayments
-
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(10)
 
@@ -40,30 +38,7 @@ export const Payments = ({ payments }: Props) => {
 
   return (
     <div className={s.container}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>{t.dateOfPayment}</TableCell>
-            <TableCell>{t.endDateOfSubscription}</TableCell>
-            <TableCell>{t.price}</TableCell>
-            <TableCell>{t.subscriptionType}</TableCell>
-            <TableCell>{t.paymentType}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {payments?.map(payment => (
-            <TableRow key={payment.userId}>
-              <TableCell>{new Date(payment.dateOfPayment).toLocaleDateString('ru-RU')}</TableCell>
-              <TableCell>
-                {new Date(payment.endDateOfSubscription).toLocaleDateString('ru-RU')}
-              </TableCell>
-              <TableCell>${payment.price}</TableCell>
-              <TableCell>{payment.subscriptionType}</TableCell>
-              <TableCell>{payment.paymentType}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <PaymentsListTable payments={payments} />
       <Pagination
         currentPage={currentPage}
         onChangePage={setCurrentPage}
