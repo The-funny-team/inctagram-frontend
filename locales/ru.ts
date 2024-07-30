@@ -174,6 +174,13 @@ export const ru: LocaleType = {
         sendMessage: 'Отправить сообщение',
         unFollow: 'Отписаться',
       },
+      myPayments: {
+        dateOfPayment: 'Дата платежа',
+        endDateOfSubscription: 'Дата окончания подписки',
+        paymentType: 'Способ оплаты',
+        price: 'Цена',
+        subscriptionType: 'Тип подписки',
+      },
       profileInfoForm: {
         citySelectLabel: 'Выберете Ваш город',
         citySelectPlaceholder: 'Город',
@@ -268,6 +275,10 @@ export const ru: LocaleType = {
         'Eu mi bibendum neque egestas congue quisque egestas diam in. Neque viverra justo nec ultrices dui sapien. Congue mauris rhoncus aenean vel elit. Vitae aliquet nec ullamcorper sit. Tempus imperdiet nulla malesuada pellentesque. Sed lectus vestibulum mattis ullamcorper velit. Commodo odio aenean sed adipiscing diam. Viverra nam libero justo laoreet. Id neque aliquam vestibulum morbi blandit cursus. Vel facilisis volutpat est velit egestas dui id ornare. Feugiat nibh sed pulvinar proin.',
       title: 'Условия использования',
     },
+  },
+  pagination: {
+    onPage: 'на странице',
+    show: 'Показать',
   },
   timeIntervals: {
     days: 'дн.',
