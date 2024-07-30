@@ -110,14 +110,3 @@ const payments: Payment[] = [
 export const PaymentsDefault: Story = {
   args: { payments },
 }
-
-// export const DefaultPagination: Story = {
-//   args: { payments },
-//   render: args => {
-//     const [currentPage, setCurrentPage] = useState(1)
-//
-//     const handleChangePage = (currentPage: number) => {}
-//
-//     return <Payments payments={args.payments} />
-//   },
-// }
