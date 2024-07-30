@@ -1,5 +1,6 @@
 import { ComponentProps, ComponentPropsWithoutRef, ElementRef, FC, forwardRef } from 'react'
 
+import { useTranslation } from '@/shared/lib/hooks'
 import { Typography } from '@/shared/ui'
 import { clsx } from 'clsx'
 
@@ -55,14 +56,15 @@ export const TableCell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'
   }
 )
 
-export const TableEmpty: FC<ComponentProps<'div'> & { mb?: string; mt?: string }> = ({
-  className,
-  mb,
-  mt = '89px',
-}) => {
+export const TableEmpty: FC<
+  ComponentProps<'div'> & { mb?: string; message?: string; mt?: string }
+> = ({ className, mb, message, mt = '89px' }) => {
   const classNames = {
     empty: clsx(className, s.empty),
   }
+
+  const { text } = useTranslation()
+  const t = text.pages.profile.myPayments.tableEmpty
 
   return (
     <Typography
@@ -70,7 +72,7 @@ export const TableEmpty: FC<ComponentProps<'div'> & { mb?: string; mt?: string }
       style={{ marginBottom: mb, marginTop: mt }}
       variant={'h2'}
     >
-      Пока тут еще нет данных! :(
+      {t}
     </Typography>
   )
 }
