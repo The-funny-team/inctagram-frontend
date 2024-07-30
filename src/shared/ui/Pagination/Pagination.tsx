@@ -15,7 +15,7 @@ type Props = {
   pageSize?: number
   siblingCount?: number
   totalCount?: number
-} & Omit<SelectProps, 'fullWidth' | 'label' | 'value'>
+} & Omit<SelectProps, 'label' | 'value'>
 
 export const Pagination = ({
   className,
