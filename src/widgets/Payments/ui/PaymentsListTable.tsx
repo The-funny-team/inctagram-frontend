@@ -1,5 +1,13 @@
 import { useTranslation } from '@/shared/lib/hooks'
-import { Table, TableBody, TableCell, TableEmpty, TableHead, TableRow } from '@/shared/ui/Table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableEmpty,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+} from '@/shared/ui/Table'
 import { Payment } from '@/widgets/Payments/ui/Payments'
 
 type Props = {
@@ -18,11 +26,11 @@ export const PaymentsListTable = ({ payments }: Props) => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>{t.dateOfPayment}</TableCell>
-          <TableCell>{t.endDateOfSubscription}</TableCell>
-          <TableCell>{t.price}</TableCell>
-          <TableCell>{t.subscriptionType}</TableCell>
-          <TableCell>{t.paymentType}</TableCell>
+          <TableHeadCell>{t.dateOfPayment}</TableHeadCell>
+          <TableHeadCell>{t.endDateOfSubscription}</TableHeadCell>
+          <TableHeadCell>{t.price}</TableHeadCell>
+          <TableHeadCell>{t.subscriptionType}</TableHeadCell>
+          <TableHeadCell>{t.paymentType}</TableHeadCell>
         </TableRow>
       </TableHead>
       <TableBody>
