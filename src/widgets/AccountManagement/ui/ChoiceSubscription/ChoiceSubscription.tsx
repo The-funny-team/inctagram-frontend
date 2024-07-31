@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import { Paypal, Stripe } from '@/shared/assets'
 import { Card, RadioGroup, Typography } from '@/shared/ui'
 import { ChoicePayment } from '@/widgets/AccountManagement/ui/ChoiceSubscription/ChoicePayment'
 
