@@ -32,7 +32,12 @@ export const SignUp = () => {
   }
   const submitHandler = async (data: SignUpSchemaType) => {
     try {
-      await signUp(data).unwrap()
+      await signUp({
+        baseUrl: 'http://localhost:3000',
+        email: data.email,
+        password: data.password,
+        userName: data.username,
+      }).unwrap()
       setIsOpen(true)
     } catch (e: unknown) {
       onRequestErrorHandler(e, setError)

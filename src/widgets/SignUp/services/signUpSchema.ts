@@ -6,7 +6,7 @@ export const signUpSchema = (text: LocaleType) => {
   return z
     .object({
       agree: z.boolean(),
-      email: z.string().email({ message: text.validation.emailVerification }).trim(),
+      email: z.string().email({ message: text.validation.emailVerification }).trim().toLowerCase(),
       password: z
         .string()
         .min(6, text.validation.minLength6)
