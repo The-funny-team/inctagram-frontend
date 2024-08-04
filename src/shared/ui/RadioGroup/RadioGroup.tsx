@@ -20,7 +20,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof RadixRadioGroup.Item>, Pr
         onValueChange={onValueChange}
         value={value}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {items.map(item => (
             <div key={item.value} style={{ alignItems: 'center', display: 'flex', gap: '12px' }}>
               <div style={{ height: '24px', padding: '2px', width: '24px' }}>
