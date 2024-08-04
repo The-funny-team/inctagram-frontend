@@ -174,6 +174,14 @@ export const ru: LocaleType = {
         sendMessage: 'Отправить сообщение',
         unFollow: 'Отписаться',
       },
+      myPayments: {
+        dateOfPayment: 'Дата платежа',
+        endDateOfSubscription: 'Дата окончания подписки',
+        paymentType: 'Способ оплаты',
+        price: 'Цена',
+        subscriptionType: 'Тип подписки',
+        tableEmpty: 'Пока тут еще нет данных',
+      },
       profileInfoForm: {
         citySelectLabel: 'Выберете Ваш город',
         citySelectPlaceholder: 'Город',
@@ -269,6 +277,11 @@ export const ru: LocaleType = {
       title: 'Условия использования',
     },
   },
+  pagination: {
+    onPage: 'на странице',
+    show: 'Показать',
+  },
+
   timeIntervals: {
     days: 'дн.',
     hours: 'ч.',

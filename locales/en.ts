@@ -172,6 +172,14 @@ export const en = {
         sendMessage: 'Send Message',
         unFollow: 'Unfollow',
       },
+      myPayments: {
+        dateOfPayment: 'Date of payment',
+        endDateOfSubscription: 'End date of subscription',
+        paymentType: 'Payment type',
+        price: 'Price',
+        subscriptionType: 'Subscription type',
+        tableEmpty: 'There is no data here yet',
+      },
       profileInfoForm: {
         citySelectLabel: 'Select your city',
         citySelectPlaceholder: 'City',
@@ -265,6 +273,10 @@ export const en = {
         'Eu mi bibendum neque egestas congue quisque egestas diam in. Neque viverra justo nec ultrices dui sapien. Congue mauris rhoncus aenean vel elit. Vitae aliquet nec ullamcorper sit. Tempus imperdiet nulla malesuada pellentesque. Sed lectus vestibulum mattis ullamcorper velit. Commodo odio aenean sed adipiscing diam. Viverra nam libero justo laoreet. Id neque aliquam vestibulum morbi blandit cursus. Vel facilisis volutpat est velit egestas dui id ornare. Feugiat nibh sed pulvinar proin.',
       title: 'Terms of Service',
     },
+  },
+  pagination: {
+    onPage: 'on page',
+    show: 'Show',
   },
   timeIntervals: {
     days: 'd',
