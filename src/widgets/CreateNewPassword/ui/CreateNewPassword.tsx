@@ -27,15 +27,15 @@ export const CreateNewPassword = ({ code, setRecoveryErrorHandler }: Props) => {
   const [creatNewPassword] = useCreateNewPasswordMutation()
   const createNewPasswordHandler: SubmitHandler<CreateNewPasswordSchemaType> = data => {
     creatNewPassword({
-      ...data,
+      newPassword: data.password,
       recoveryCode: code,
     })
       .unwrap()
       .then(() => router.push(ROUTES_URL.SIGN_IN))
       .catch(error => {
         if (isFetchBaseQueryError(error)) {
-          if (Array.isArray(error.data.message)) {
-            const el = error.data.message.find(el => el.field === 'recoveryCode')
+          if (Array.isArray(error.data.messages)) {
+            const el = error.data.messages.find(el => el.field === 'recoveryCode')
 
             if (el) {
               setRecoveryErrorHandler(true)

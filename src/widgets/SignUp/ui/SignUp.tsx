@@ -11,6 +11,8 @@ import Link from 'next/link'
 import { onRequestErrorHandler } from 'src/shared/lib/helpers'
 
 import s from './SignUp.module.scss'
+export const currentUrl =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://funny-inctagram.site'
 
 export const SignUp = () => {
   const [signUp] = useSignUpMutation()
@@ -25,6 +27,7 @@ export const SignUp = () => {
     },
     modalCloseBtn: s.modalCloseBtn,
     modalDescription: s.modalDescription,
+    modalSignUp: s.modalSignUp,
     otherRegistration: clsx(s.otherRegistration),
     question: clsx(s.question),
     root: clsx(s.root),
@@ -32,7 +35,12 @@ export const SignUp = () => {
   }
   const submitHandler = async (data: SignUpSchemaType) => {
     try {
-      await signUp(data).unwrap()
+      await signUp({
+        baseUrl: currentUrl,
+        email: data.email,
+        password: data.password,
+        userName: data.username,
+      }).unwrap()
       setIsOpen(true)
     } catch (e: unknown) {
       onRequestErrorHandler(e, setError)
@@ -152,18 +160,18 @@ export const SignUp = () => {
         {text.pages.signUp.signUpLink}
       </Button>
       <Modal
+        className={classNames.modalSignUp}
         isOpen={isOpen}
         onIsOpenChange={modalCloseHandler}
         title={text.pages.signUp.modal.title}
       >
-        <Typography className={classNames.modalDescription}>
+        <Typography className={classNames.modalDescription} variant={'regularText16'}>
           {text.pages.signUp.modal.getDescription(getValues('email'))}
         </Typography>
-        <div className={classNames.modalCloseBtn}>
-          <Button fullWidth={false} onClick={modalCloseHandler}>
-            OK
-          </Button>
-        </div>
+
+        <Button className={classNames.modalCloseBtn} fullWidth={false} onClick={modalCloseHandler}>
+          OK
+        </Button>
       </Modal>
     </Card>
   )

@@ -1,5 +1,6 @@
+import { useMeQuery } from '@/shared/api/authApi'
 import { GetPostResponse } from '@/shared/api/postsApi'
-import { useGetUserInfoQuery, useMeQuery } from '@/shared/api/profileApi'
+import { useGetUserInfoQuery } from '@/shared/api/profileApi'
 import { BASE_API_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
 import { ProfileHeader, ProfilePosts } from '@/shared/ui'

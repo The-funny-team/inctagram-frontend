@@ -1,8 +1,8 @@
 type ErrorData = {
   data: {
-    message: { field: string; message: string }[] | string
-    path: string
-    timestamp: string
+    error: string
+    messages: { field: string; message: string }[]
+    statusCode: number
   }
   status: number
 }
