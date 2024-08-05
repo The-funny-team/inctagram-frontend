@@ -11,13 +11,13 @@ import Link from 'next/link'
 import { onRequestErrorHandler } from 'src/shared/lib/helpers'
 
 import s from './SignUp.module.scss'
+export const currentUrl =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://funny-inctagram.site'
 
 export const SignUp = () => {
   const [signUp] = useSignUpMutation()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { control, getValues, handleSubmit, isDisabled, reset, setError, text } = useSignUp()
-
-  const currentUrl = window.location.origin
 
   const classNames = {
     form: clsx(s.form),

@@ -9,6 +9,7 @@ import { getRootLayout } from '@/shared/layouts'
 import { Loader } from '@/shared/ui'
 import { ConfirmedEmail } from '@/widgets/ConfirmedEmail'
 import { ExpiredLink } from '@/widgets/ExpiredLink'
+import { currentUrl } from '@/widgets/SignUp/ui/SignUp'
 import { useRouter } from 'next/router'
 
 const EmailVerificationPage = () => {
@@ -21,7 +22,6 @@ const EmailVerificationPage = () => {
   const [confirmation, { isError, isLoading, isSuccess }] = useEmailConfirmationMutation()
 
   const [emailResending] = useEmailResendingMutation()
-  const currentUrl = window.location.origin
 
   useEffect(() => {
     if (code && typeof code === 'string') {
