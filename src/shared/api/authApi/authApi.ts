@@ -1,5 +1,4 @@
 import { baseApi } from '@/shared/api/baseApi'
-import { profileApi } from '@/shared/api/profileApi'
 import { ACCESS_TOKEN } from '@/shared/const'
 import { saveToLocalStorage } from '@/shared/lib/helpers'
 
@@ -14,14 +13,14 @@ const authApi = baseApi.injectEndpoints({
         }
       },
     }),
-    emailConfirmation: builder.mutation<void, ConfirmationCodeDto>({
-      query: body => ({
-        body,
+    emailConfirmation: builder.mutation<void, string | string[]>({
+      query: code => ({
+        body: { confirmationCode: code },
         method: 'POST',
         url: '/auth/registration-confirmation',
       }),
     }),
-    emailResending: builder.mutation<void, ConfirmationCodeDto>({
+    emailResending: builder.mutation<void, EmailResendingRequestType>({
       query: body => ({
         body,
         method: 'POST',
@@ -32,14 +31,14 @@ const authApi = baseApi.injectEndpoints({
       query: ({ code }) => ({
         method: 'GET',
         params: { code },
-        url: 'auth/google',
+        url: 'auth/google/login',
       }),
     }),
     logout: builder.mutation<void, void>({
       invalidatesTags: ['Me'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
-          profileApi.util.updateQueryData('me', undefined, () => {
+          authApi.util.updateQueryData('me', undefined, () => {
             return null
           })
         )
@@ -55,6 +54,13 @@ const authApi = baseApi.injectEndpoints({
       query: () => ({
         method: 'POST',
         url: '/auth/logout',
+      }),
+    }),
+    me: builder.query<MeResponse, void>({
+      providesTags: ['Me'],
+      query: () => ({
+        method: 'GET',
+        url: '/auth/me',
       }),
     }),
     passwordRecovery: builder.mutation<void, { email: string }>({
@@ -88,7 +94,7 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/login',
       }),
     }),
-    signUp: builder.mutation<SignUpResponse, CreateUserDto>({
+    signUp: builder.mutation<string, CreateUserDto>({
       query: body => ({
         body,
         method: 'POST',
@@ -104,6 +110,7 @@ export const {
   useEmailResendingMutation,
   useLoginByGoogleQuery,
   useLogoutMutation,
+  useMeQuery,
   usePasswordRecoveryMutation,
   usePasswordRecoveryResendingMutation,
   useSignInMutation,
@@ -111,10 +118,10 @@ export const {
 } = authApi
 
 export type CreateUserDto = {
+  baseUrl: string
   email: string
   password: string
-  passwordConfirm: string
-  username: string
+  userName: string
 }
 
 export type SignUpResponse = {
@@ -137,11 +144,17 @@ export type SignInRequestType = Pick<CreateUserDto, 'email' | 'password'>
 export type SignInResponseType = { accessToken: string }
 
 export type NewPasswordRequestType = {
-  password: string
-  passwordConfirmation: string
+  newPassword: string
   recoveryCode: string
 }
 
 type ConfirmationCodeDto = {
   code: string
 }
+type EmailResendingRequestType = Pick<CreateUserDto, 'baseUrl' | 'email'>
+type MeResponse = {
+  email: string
+  isBlocked: boolean
+  userId: number
+  userName: string
+} | null
