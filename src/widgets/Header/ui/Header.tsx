@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { useMeQuery } from '@/shared/api/profileApi'
+import { useMeQuery } from '@/shared/api/authApi'
 import { BellNotifyIcon } from '@/shared/assets'
 import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'

@@ -1,5 +1,5 @@
+import { useMeQuery } from '@/shared/api/authApi'
 import { useGetUserPostsQuery } from '@/shared/api/postsApi'
-import { useMeQuery } from '@/shared/api/profileApi'
 import { Loader, ProfileHeader } from '@/shared/ui'
 import { ViewPostModal } from '@/widgets/ViewPostModal'
 

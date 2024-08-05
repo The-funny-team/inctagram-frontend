@@ -1,4 +1,4 @@
-import { useMeQuery } from '@/shared/api/profileApi'
+import { useMeQuery } from '@/shared/api/authApi'
 import { getTabsLayout } from '@/shared/layouts'
 import { HeadMeta } from '@/shared/ui'
 import { AddProfilePhoto } from '@/widgets/AddProfilePhoto'
