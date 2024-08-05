@@ -17,6 +17,8 @@ export const SignUp = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { control, getValues, handleSubmit, isDisabled, reset, setError, text } = useSignUp()
 
+  const currentUrl = window.location.origin
+
   const classNames = {
     form: clsx(s.form),
     formCheckbox: clsx(s.formCheckbox),
@@ -25,6 +27,7 @@ export const SignUp = () => {
     },
     modalCloseBtn: s.modalCloseBtn,
     modalDescription: s.modalDescription,
+    modalSignUp: s.modalSignUp,
     otherRegistration: clsx(s.otherRegistration),
     question: clsx(s.question),
     root: clsx(s.root),
@@ -33,7 +36,7 @@ export const SignUp = () => {
   const submitHandler = async (data: SignUpSchemaType) => {
     try {
       await signUp({
-        baseUrl: 'http://localhost:3000',
+        baseUrl: currentUrl,
         email: data.email,
         password: data.password,
         userName: data.username,
@@ -157,18 +160,18 @@ export const SignUp = () => {
         {text.pages.signUp.signUpLink}
       </Button>
       <Modal
+        className={classNames.modalSignUp}
         isOpen={isOpen}
         onIsOpenChange={modalCloseHandler}
         title={text.pages.signUp.modal.title}
       >
-        <Typography className={classNames.modalDescription}>
+        <Typography className={classNames.modalDescription} variant={'regularText16'}>
           {text.pages.signUp.modal.getDescription(getValues('email'))}
         </Typography>
-        <div className={classNames.modalCloseBtn}>
-          <Button fullWidth={false} onClick={modalCloseHandler}>
-            OK
-          </Button>
-        </div>
+
+        <Button className={classNames.modalCloseBtn} fullWidth={false} onClick={modalCloseHandler}>
+          OK
+        </Button>
       </Modal>
     </Card>
   )
