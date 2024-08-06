@@ -8,12 +8,13 @@ import s from './ProfileMain.module.scss'
 
 export const ProfileMain = () => {
   const { data: userInfo } = useMeQuery()
-  const { data: profileInfo, isLoading } = useGetProfileInfoQuery()
+  const { data: profileInfo } = useGetProfileInfoQuery()
   const myId = userInfo?.userId
-  const { data: profilePosts } = useGetUserPostsQuery({ userId: myId as number })
+  const { data: profilePosts, isLoading } = useGetUserPostsQuery({ userId: myId as number })
 
-  const { data: userPosts, isLoading } = useGetUserPostsQuery({})
-  const authorId = userPosts && userPosts.data.length !== 0 ? userPosts.data[0].author.id : ''
+  //const { data: userPosts, isLoading } = useGetUserPostsQuery({})
+  const authorId =
+    profilePosts && profilePosts.items.length !== 0 ? profilePosts.items[0].ownerId : ''
   const isMyPost = myId === authorId
 
   if (!userInfo) {
@@ -24,7 +25,7 @@ export const ProfileMain = () => {
     return null
   }
 
-  if (!userPosts) {
+  if (!profilePosts) {
     return null
   }
 
@@ -38,18 +39,24 @@ export const ProfileMain = () => {
             user={profileInfo}
           />
           <div className={s.postsList}>
-            {userPosts &&
-              userPosts.data.map(post => (
+            {profilePosts &&
+              profilePosts.items.map(post => (
                 <ViewPostModal
-                  author={post.author}
+                  avatarOwner={post.avatarOwner}
                   comments={[]}
                   createdAt={post.createdAt}
                   description={post.description}
                   id={post.id}
-                  imagesUrl={post.imagesUrl}
+                  images={post.images}
+                  isLiked
                   isMyPost={isMyPost}
                   key={post.id}
+                  likesCount={3}
+                  location={''}
+                  owner={post.owner}
+                  ownerId={post.ownerId}
                   updatedAt={post.updatedAt}
+                  userName={post.userName}
                 />
               ))}
           </div>

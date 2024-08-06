@@ -137,9 +137,3 @@ export type UploadResponseImages = {
   url: string
   width: number
 }
-export type PostsResponce = {
-  items: GetPostResponse[]
-  pageSize?: number
-  totalCount?: number
-  totalUsers?: number
-}
