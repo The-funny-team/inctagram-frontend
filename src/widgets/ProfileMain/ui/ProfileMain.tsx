@@ -11,6 +11,7 @@ export const ProfileMain = () => {
   const { data: profileInfo } = useGetProfileInfoQuery()
   const myId = userInfo?.userId
   const { data: profilePosts, isLoading } = useGetUserPostsQuery({ userId: myId as number })
+  console.log(profilePosts)
 
   //const { data: userPosts, isLoading } = useGetUserPostsQuery({})
   const authorId =

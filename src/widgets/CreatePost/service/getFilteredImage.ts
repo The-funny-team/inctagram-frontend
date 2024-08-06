@@ -45,8 +45,8 @@ export const getFilteredImage = async (
         }
       } catch (error: unknown) {
         if (isFetchBaseQueryError(error)) {
-          if (!Array.isArray(error.data.message)) {
-            toast.error(error.data.message)
+          if (!Array.isArray(error.data.messages[0].message)) {
+            toast.error(error.data.messages[0].message)
           }
         }
       }

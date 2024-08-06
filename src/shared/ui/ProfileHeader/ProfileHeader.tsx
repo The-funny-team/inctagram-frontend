@@ -25,7 +25,7 @@ export const ProfileHeader = ({ isAuth, postsTotalCount = 0, user }: PropsType) 
       <Avatar
         className={s.avatarPhoto}
         size={204}
-        src={user.avatars[0].url}
+        src={user?.avatars[0]?.url}
         userName={'my profile'}
       />
       <div className={s.infoAboutMe}>
