@@ -38,7 +38,7 @@ export const ProfileInfoForm = () => {
     <form className={s.form} onSubmit={handleSubmit(onSubmitHandler)}>
       <Controller
         control={control}
-        name={'username'}
+        name={'userName'}
         render={({ field, fieldState: { error } }) => (
           <Input
             className={error && s.formFieldWithError}

@@ -37,7 +37,7 @@ const userProfileSchema = (t: ErrorsTextProps) =>
         .min(1, t.minLastNameLength)
         .max(50, t.maxLastNameLength)
         .regex(USER_FIRST_LAST_NAME_PATTERN, t.lastNameRegex),
-      username: z
+      userName: z
         .string()
         .trim()
         .min(6, t.minUserNameLength)
