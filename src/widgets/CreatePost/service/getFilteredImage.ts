@@ -34,14 +34,14 @@ export const getFilteredImage = async (
       const file = new File([blob], fileName, { type: 'image/png' })
       const formData = new FormData()
 
-      formData.append('image', file)
+      formData.append('file', file)
 
       try {
         const response = await uploadToServer(formData)
-        const imageId = response?.data?.fileId
+        const imageId = response?.data.images[0].uploadId
 
         if (imageId) {
-          dispatch(setPicturesIds(imageId))
+          dispatch(setPicturesIds({ uploadId: imageId }))
         }
       } catch (error: unknown) {
         if (isFetchBaseQueryError(error)) {

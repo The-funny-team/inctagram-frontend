@@ -37,7 +37,7 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
   const onPublishHandler = async () => {
     try {
       if (imagesIds.length) {
-        await createPost({ description, images: imagesIds })
+        await createPost({ childrenMetadata: imagesIds, description })
         dispatch(resetState())
         onCloseBtn()
         toast.success('Post is published')
