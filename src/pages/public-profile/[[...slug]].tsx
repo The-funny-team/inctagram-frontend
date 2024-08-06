@@ -1,6 +1,6 @@
 import { useMeQuery } from '@/shared/api/authApi'
 import { GetPostResponse } from '@/shared/api/postsApi'
-import { useGetUserInfoQuery } from '@/shared/api/profileApi'
+import { useGetPublicUserInfoQuery } from '@/shared/api/profileApi'
 import { BASE_API_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
 import { ProfileHeader, ProfilePosts } from '@/shared/ui'
@@ -19,24 +19,33 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return {
     props: {
       error: 'No posts yet!',
-      posts: userPosts?.data,
+      postId: Number(postId),
+      posts: userPosts?.items,
       postsTotalCount: userPosts?.totalCount,
+      profileId: Number(authorId),
       publicPost,
-      userName: userPosts?.data[0]?.author?.name,
     },
   }
 }
 
 type PropsType = {
   error: string
+  postId?: number
   posts: GetPostResponse[]
   postsTotalCount: number
+  profileId: number
   publicPost: GetPostResponse
-  userName: string
 }
-const PublicUser = ({ error, posts, postsTotalCount, publicPost, userName }: PropsType) => {
+const PublicUser = ({
+  error,
+  postId,
+  posts,
+  postsTotalCount,
+  profileId,
+  publicPost,
+}: PropsType) => {
   const { data: myProfile } = useMeQuery()
-  const { data: publicUser } = useGetUserInfoQuery({ userName: userName })
+  const { data: publicUser } = useGetPublicUserInfoQuery({ profileId })
 
   if (!publicUser || !publicPost) {
     return <div>{error}</div>
@@ -47,7 +56,7 @@ const PublicUser = ({ error, posts, postsTotalCount, publicPost, userName }: Pro
       {publicUser && (
         <ProfileHeader isAuth={!!myProfile} postsTotalCount={postsTotalCount} user={publicUser} />
       )}
-      {posts && <ProfilePosts isMyPost={false} isShowPostId={publicPost.id} profilePosts={posts} />}
+      {posts && <ProfilePosts isMyPost={false} isShowPostId={postId} profilePosts={posts} />}
     </div>
   )
 }

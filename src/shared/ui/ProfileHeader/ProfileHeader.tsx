@@ -1,5 +1,5 @@
 import { useMeQuery } from '@/shared/api/authApi'
-import { ProfileType } from '@/shared/api/profileApi'
+import { ProfileType, PublicProfileType } from '@/shared/api/profileApi'
 import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, Typography } from '@/shared/ui'
@@ -12,7 +12,7 @@ import { UserButtons, UsersCountInfo } from './features'
 type PropsType = {
   isAuth: boolean
   postsTotalCount: number | undefined
-  user: ProfileType
+  user: ProfileType | PublicProfileType
 }
 
 export const ProfileHeader = ({ isAuth, postsTotalCount = 0, user }: PropsType) => {

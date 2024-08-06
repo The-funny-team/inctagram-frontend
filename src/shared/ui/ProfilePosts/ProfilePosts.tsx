@@ -14,15 +14,21 @@ export const ProfilePosts = ({ isMyPost, isShowPostId, profilePosts }: PropsType
     <div className={s.postsList}>
       {profilePosts.map(post => (
         <ViewPostModal
-          author={post.author}
+          avatarOwner={post.avatarOwner}
           createdAt={post.createdAt}
           description={post.description}
           id={post.id}
-          imagesUrl={post.imagesUrl}
+          images={post.images}
+          isLiked
           isMyPost={isMyPost}
           isOpen={post.id === isShowPostId}
           key={post.id}
+          likesCount={3}
+          location={''}
+          owner={post.owner}
+          ownerId={post.ownerId}
           updatedAt={post.updatedAt}
+          userName={post.userName}
         />
       ))}
     </div>
