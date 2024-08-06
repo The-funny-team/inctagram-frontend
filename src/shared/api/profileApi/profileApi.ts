@@ -15,10 +15,10 @@ export const profileApi = baseApi.injectEndpoints({
         url: `/users/profile`,
       }),
     }),
-    getPublicUserInfo: builder.query<PublicProfileType, { userName: string }>({
-      query: ({ userName }) => ({
+    getPublicUserInfo: builder.query<PublicProfileType, { profileId: number }>({
+      query: ({ profileId }) => ({
         method: 'GET',
-        url: `public-user/profile/${userName}`,
+        url: `public-user/profile/${profileId}`,
       }),
     }),
     getUsersCount: builder.query<UsersCount, void>({
