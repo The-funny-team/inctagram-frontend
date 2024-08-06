@@ -3,13 +3,14 @@ import { baseApi } from '@/shared/api/baseApi'
 export const profileApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     deleteAvatar: builder.mutation<void, void>({
-      invalidatesTags: ['Me'],
+      invalidatesTags: ['Profile'],
       query: () => ({
         method: 'DELETE',
         url: '/users/profile/avatar',
       }),
     }),
     getProfileInfo: builder.query<ProfileType, void>({
+      providesTags: ['Profile'],
       query: () => ({
         method: 'GET',
         url: `/users/profile`,
@@ -28,7 +29,7 @@ export const profileApi = baseApi.injectEndpoints({
       }),
     }),
     updateAvatar: builder.mutation<void, AvatarDto>({
-      invalidatesTags: ['Me'],
+      invalidatesTags: ['Profile'],
       query: ({ file }) => {
         const formData = new FormData()
 
@@ -42,7 +43,7 @@ export const profileApi = baseApi.injectEndpoints({
       },
     }),
     updateUser: builder.mutation<void, UpdateProfileType>({
-      invalidatesTags: ['Me'],
+      invalidatesTags: ['Profile'],
       query: body => {
         return {
           body,
