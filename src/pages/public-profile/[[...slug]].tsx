@@ -10,9 +10,10 @@ import { fetch } from 'next/dist/compiled/@edge-runtime/primitives'
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { slug } = params || {}
   const [authorId, postId] = slug as string[]
-  const res = await fetch(`${BASE_API_URL}/public/post/user/${authorId}`)
+
+  const res = await fetch(`${BASE_API_URL}public-posts/user/${authorId}`)
   const userPosts = await res.json()
-  const response = await fetch(`${BASE_API_URL}/public/post/${postId}`)
+  const response = await fetch(`${BASE_API_URL}public-posts/${postId}`)
   const publicPost = await response.json()
 
   return {

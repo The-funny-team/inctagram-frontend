@@ -5,7 +5,7 @@ import s from './ProfilePosts.module.scss'
 
 type PropsType = {
   isMyPost: boolean
-  isShowPostId?: string | undefined
+  isShowPostId?: number | undefined
   profilePosts: GetPostResponse[]
 }
 
