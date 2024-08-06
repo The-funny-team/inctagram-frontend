@@ -8,7 +8,7 @@ const postApi = baseApi.injectEndpoints({
         return {
           body,
           method: 'POST',
-          url: `/post`,
+          url: `/posts`,
         }
       },
     }),
@@ -17,15 +17,7 @@ const postApi = baseApi.injectEndpoints({
       query: ({ id }) => {
         return {
           method: 'DELETE',
-          url: `/post/${id}`,
-        }
-      },
-    }),
-    getPost: builder.query<GetPostResponse, { id: string }>({
-      query: ({ id }) => {
-        return {
-          method: 'GET',
-          url: `/post/${id}`,
+          url: `/posts/${id}`,
         }
       },
     }),
@@ -33,7 +25,7 @@ const postApi = baseApi.injectEndpoints({
       query: ({ id }) => {
         return {
           method: 'GET',
-          url: `/post/${id}`,
+          url: `/public-posts/${id}`,
         }
       },
     }),
@@ -42,7 +34,7 @@ const postApi = baseApi.injectEndpoints({
         return {
           method: 'GET',
           params: args,
-          url: `/public/post`,
+          url: `/public-posts/all/${endCursorPostId}`,
         }
       },
     }),
@@ -52,7 +44,7 @@ const postApi = baseApi.injectEndpoints({
         return {
           method: 'GET',
           params: args,
-          url: `/post`,
+          url: `/public-posts/user/${userId}/${endCursorPostId}`,
         }
       },
     }),
@@ -62,7 +54,7 @@ const postApi = baseApi.injectEndpoints({
         return {
           body,
           method: 'PUT',
-          url: `/post/${id}`,
+          url: `/posts/${id}`,
         }
       },
     }),
@@ -71,7 +63,7 @@ const postApi = baseApi.injectEndpoints({
         return {
           body: file,
           method: 'POST',
-          url: `/post/image`,
+          url: `/posts/image`,
         }
       },
     }),
