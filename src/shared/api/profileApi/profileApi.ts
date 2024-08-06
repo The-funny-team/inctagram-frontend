@@ -9,13 +9,13 @@ export const profileApi = baseApi.injectEndpoints({
         url: '/users/profile/avatar',
       }),
     }),
-    getProfileInfo: builder.query<void, void>({
+    getProfileInfo: builder.query<ProfileType, void>({
       query: () => ({
         method: 'GET',
         url: `/users/profile`,
       }),
     }),
-    getPublicUserInfo: builder.query<User, { userName: string }>({
+    getPublicUserInfo: builder.query<PublicProfileType, { userName: string }>({
       query: ({ userName }) => ({
         method: 'GET',
         url: `public-user/profile/${userName}`,
@@ -41,7 +41,7 @@ export const profileApi = baseApi.injectEndpoints({
         }
       },
     }),
-    updateUser: builder.mutation<User, UpdateUserDto>({
+    updateUser: builder.mutation<void, UpdateProfileType>({
       invalidatesTags: ['Me'],
       query: body => {
         return {
@@ -56,35 +56,48 @@ export const profileApi = baseApi.injectEndpoints({
 
 export const {
   useDeleteAvatarMutation,
-  useGetUserInfoQuery,
+  useGetProfileInfoQuery,
+  useGetPublicUserInfoQuery,
   useGetUsersCountQuery,
   useUpdateAvatarMutation,
   useUpdateUserMutation,
 } = profileApi
 
-export type User = {
-  aboutMe: null | string
-  avatarUrl: null | string
-  city: null | string
-  country: null | string
+export type ProfileType = {
+  aboutMe: string
+  avatars: AvatarsType[]
+  city: string
+  country: string
   createdAt: string
-  dateOfBirth: null | string
-  email: string
-  firstName: null | string
-  id: string
-  lastName: null | string
-  updatedAt: string
-  username: string
+  dateOfBirth: string
+  firstName: string
+  id: number
+  lastName: string
+  userName: string
+}
+export type PublicProfileType = {
+  aboutMe: string
+  avatars: AvatarsType[]
+  id: number
+  userName: string
 }
 
-type UpdateUserDto = {
-  aboutMe?: string | undefined
-  city?: string | undefined
-  country?: string | undefined
-  dateOfBirth?: Date | undefined
+export type AvatarsType = {
+  createdAt: string
+  fileSize: number
+  height: number
+  url: string
+  width: number
+}
+
+export type UpdateProfileType = {
+  aboutMe: string
+  city: string
+  country: string
+  dateOfBirth: string
   firstName: string
   lastName: string
-  username: string
+  userName: string
 }
 
 type AvatarDto = {
