@@ -1,15 +1,14 @@
-import { useMeQuery } from '@/shared/api/authApi'
+import { useGetProfileInfoQuery } from '@/shared/api/profileApi'
 import { getTabsLayout } from '@/shared/layouts'
 import { HeadMeta } from '@/shared/ui'
 import { AddProfilePhoto } from '@/widgets/AddProfilePhoto'
 import { ProfileInfoForm } from '@/widgets/ProfileInfoForm'
 
 import s from './GeneralPage.module.scss'
-import { useGetProfileInfoQuery } from '@/shared/api/profileApi'
 
 const GeneralPage = () => {
   const { data: userInfo, isLoading } = useGetProfileInfoQuery()
-  const avatar = userInfo?.avatars[0].url
+  const avatar = userInfo?.avatars[0]?.url
   const classNames = {
     page: s.page,
     photoUploader: s.photoUploader,
