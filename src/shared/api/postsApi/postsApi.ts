@@ -104,13 +104,10 @@ export type PostResponseImages = {
 }
 
 export type GetPostsResponse = {
-  data: GetPostResponse[]
-  hasNextPage?: boolean
-  hasPreviousPage?: boolean
-  page?: number
+  items: GetPostResponse[]
   pageSize?: number
-  pagesCount?: number
   totalCount?: number
+  totalUsers?: number
 }
 
 export type FileUploadResponse = { images: UploadResponseImages[] }
@@ -139,4 +136,10 @@ export type UploadResponseImages = {
   uploadId: string
   url: string
   width: number
+}
+export type PostsResponce = {
+  items: GetPostResponse[]
+  pageSize?: number
+  totalCount?: number
+  totalUsers?: number
 }
