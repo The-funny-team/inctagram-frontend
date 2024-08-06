@@ -1,4 +1,5 @@
-import { User, useMeQuery } from '@/shared/api/profileApi'
+import { useMeQuery } from '@/shared/api/authApi'
+import { ProfileType } from '@/shared/api/profileApi'
 import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, Typography } from '@/shared/ui'
@@ -10,23 +11,28 @@ import { UserButtons, UsersCountInfo } from './features'
 
 type PropsType = {
   isAuth: boolean
-  postsTotalCount: number
-  user: User
+  postsTotalCount: number | undefined
+  user: ProfileType
 }
 
-export const ProfileHeader = ({ isAuth, postsTotalCount, user }: PropsType) => {
+export const ProfileHeader = ({ isAuth, postsTotalCount = 0, user }: PropsType) => {
   const { data: me } = useMeQuery()
   const { text } = useTranslation()
   const t = text.pages.profile.main
 
   return (
     <div className={s.mainInfo}>
-      <Avatar className={s.avatarPhoto} size={204} src={user.avatarUrl} userName={'my profile'} />
+      <Avatar
+        className={s.avatarPhoto}
+        size={204}
+        src={user.avatars[0].url}
+        userName={'my profile'}
+      />
       <div className={s.infoAboutMe}>
         <div className={s.nameAndBtn}>
-          <Typography variant={'h1'}> {user?.username}</Typography>
+          <Typography variant={'h1'}> {user?.userName}</Typography>
           {isAuth &&
-            (user.id === me?.id ? (
+            (user.id === me?.userId ? (
               <Button as={Link} href={ROUTES_URL.GENERAL_INFO} variant={'secondary'}>
                 {t.profileSettings}
               </Button>
