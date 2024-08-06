@@ -13,6 +13,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       error: 'No posts yet!',
       publicPosts: posts.items,
+      totalUsersCount: posts.totalUsers,
     },
     revalidate: 60,
   }
@@ -21,15 +22,16 @@ export const getStaticProps: GetStaticProps = async () => {
 type PropsType = {
   error: string
   publicPosts: GetPostResponse[]
+  totalUsersCount: number
 }
 
-const PublicPage = ({ error, publicPosts }: PropsType) => {
+const PublicPage = ({ error, publicPosts, totalUsersCount }: PropsType) => {
   return (
     <>
       <HeadMeta title={'public page'} />
       {publicPosts ? (
         <main style={{ margin: '0 auto', maxWidth: '972px' }}>
-          <TotalUsersCounter />
+          <TotalUsersCounter usersCount={totalUsersCount} />
           {publicPosts && <PublicPosts publicPosts={publicPosts} />}
         </main>
       ) : (
