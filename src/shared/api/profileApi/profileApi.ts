@@ -6,10 +6,16 @@ export const profileApi = baseApi.injectEndpoints({
       invalidatesTags: ['Me'],
       query: () => ({
         method: 'DELETE',
-        url: '/user/avatar',
+        url: '/users/profile/avatar',
       }),
     }),
-    getUserInfo: builder.query<User, { userName: string }>({
+    getProfileInfo: builder.query<void, void>({
+      query: () => ({
+        method: 'GET',
+        url: `/users/profile`,
+      }),
+    }),
+    getPublicUserInfo: builder.query<User, { userName: string }>({
       query: ({ userName }) => ({
         method: 'GET',
         url: `public-user/profile/${userName}`,
@@ -18,10 +24,9 @@ export const profileApi = baseApi.injectEndpoints({
     getUsersCount: builder.query<UsersCount, void>({
       query: () => ({
         method: 'GET',
-        url: '/public-user/total',
+        url: '/public-user',
       }),
     }),
-
     updateAvatar: builder.mutation<void, AvatarDto>({
       invalidatesTags: ['Me'],
       query: ({ file }) => {
@@ -32,7 +37,7 @@ export const profileApi = baseApi.injectEndpoints({
         return {
           body: formData,
           method: 'POST',
-          url: '/user/avatar',
+          url: '/users/profile/avatar',
         }
       },
     }),
@@ -42,7 +47,7 @@ export const profileApi = baseApi.injectEndpoints({
         return {
           body,
           method: 'PUT',
-          url: '/user',
+          url: '/users/profile',
         }
       },
     }),
