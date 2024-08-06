@@ -12,25 +12,25 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    deletePost: builder.mutation<void, { id: string }>({
+    deletePost: builder.mutation<void, { postId: number }>({
       invalidatesTags: ['Posts'],
-      query: ({ id }) => {
+      query: ({ postId }) => {
         return {
           method: 'DELETE',
-          url: `/posts/${id}`,
+          url: `/posts/${postId}`,
         }
       },
     }),
-    getPublicPost: builder.query<GetPostResponse, { id: string }>({
-      query: ({ id }) => {
+    getPublicPost: builder.query<GetPostResponse, { postId: number }>({
+      query: ({ postId }) => {
         return {
           method: 'GET',
-          url: `/public-posts/${id}`,
+          url: `/public-posts/${postId}`,
         }
       },
     }),
     getPublicPosts: builder.query<GetPostsResponse, GetPostsArgs>({
-      query: args => {
+      query: ({ endCursorPostId, ...args }) => {
         return {
           method: 'GET',
           params: args,
@@ -38,9 +38,9 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    getUserPosts: builder.query<GetPostsResponse, GetPostsArgs>({
+    getUserPosts: builder.query<GetPostsResponse, UserPostsArgs>({
       providesTags: ['Posts'],
-      query: args => {
+      query: ({ endCursorPostId, userId, ...args }) => {
         return {
           method: 'GET',
           params: args,
@@ -50,11 +50,11 @@ const postApi = baseApi.injectEndpoints({
     }),
     updatePost: builder.mutation<GetPostResponse, UpdatePostArgs>({
       invalidatesTags: ['Posts'],
-      query: ({ id, ...body }) => {
+      query: ({ postId, ...body }) => {
         return {
           body,
           method: 'PUT',
-          url: `/posts/${id}`,
+          url: `/posts/${postId}`,
         }
       },
     }),
@@ -73,7 +73,6 @@ const postApi = baseApi.injectEndpoints({
 export const {
   useCreatePostMutation,
   useDeletePostMutation,
-  useGetPostQuery,
   useGetPublicPostQuery,
   useGetPublicPostsQuery,
   useGetUserPostsQuery,
@@ -82,42 +81,62 @@ export const {
 } = postApi
 
 export type GetPostResponse = {
-  author: {
-    avatarUrl: string
-    id: string
-    name: string
-  }
+  avatarOwner: string
   createdAt: string
   description: string
-  id: string
-  imagesUrl: string[]
+  id: number
+  images: PostResponseImages[]
+  isLiked: boolean
+  likesCount: number
+  location: string
+  owner: { firstName: string; lastName: string }
+  ownerId: number
   updatedAt: string
+  userName: string
+}
+export type PostResponseImages = {
+  createdAt: string
+  fileSize: number
+  height: number
+  uploadId: string
+  url: string
+  width: number
 }
 
 export type GetPostsResponse = {
   data: GetPostResponse[]
-  hasNextPage: boolean
-  hasPreviousPage: boolean
-  page: number
-  pageSize: number
-  pagesCount: number
-  totalCount: number
+  hasNextPage?: boolean
+  hasPreviousPage?: boolean
+  page?: number
+  pageSize?: number
+  pagesCount?: number
+  totalCount?: number
 }
 
-export type FileUploadResponse = { fileId: string }
+export type FileUploadResponse = { images: UploadResponseImages[] }
 
 export type CreatePostData = {
+  childrenMetadata: Array<{ uploadId: string }>
   description: string
-  images: string[]
 }
 
 export type UpdatePostData = { description: string }
 
-export type UpdatePostArgs = { id: string } & UpdatePostData
+export type UpdatePostArgs = { postId: number } & UpdatePostData
+export type UserPostsArgs = { userId: number } & GetPostsArgs
 
 export type GetPostsArgs = {
-  skip?: number
-  sortDirection?: 'asc' | 'desc'
-  sortField?: 'createdAt' | 'updatedAt'
-  take?: number
+  endCursorPostId?: number
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: string
+}
+
+export type UploadResponseImages = {
+  createdAt: string
+  fileSize: number
+  height: number
+  uploadId: string
+  url: string
+  width: number
 }
