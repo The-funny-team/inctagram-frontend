@@ -1,5 +1,4 @@
-import { ChoiceSubscription } from '@/widgets/AccountManagement/ui/ChoiceSubscription/ChoiceSubscription'
-import { CurrentSubscription } from '@/widgets/AccountManagement/ui/CurrentSubscription/CurrentSubscription'
+import { ChoiceSubscription, CurrentSubscription } from '@/widgets/AccountManagement'
 
 import s from './AccountManagement.module.scss'
 
