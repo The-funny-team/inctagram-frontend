@@ -49,8 +49,8 @@ export const NavBar = ({ className }: Props) => {
       await logout().unwrap()
     } catch (e) {
       if (isFetchBaseQueryError(e)) {
-        if (!Array.isArray(e.data.message)) {
-          toast.error(e.data.message)
+        if (!Array.isArray(e.data.messages[0].message)) {
+          toast.error(e.data.messages[0].message)
         }
       } else {
         toast.error(JSON.stringify(e))

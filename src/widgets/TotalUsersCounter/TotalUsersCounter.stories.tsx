@@ -11,6 +11,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const TotalUsersCounterWidget: Story = {
-  args: { totalUsersCount: 1120 },
+  args: { usersCount: 1120 },
   render: args => <TotalUsersCounter {...args} />,
 }
