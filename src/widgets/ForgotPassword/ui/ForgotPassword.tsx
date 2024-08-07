@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-named-as-default
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Controller } from 'react-hook-form'
 
@@ -7,6 +6,7 @@ import { ROUTES_URL } from '@/shared/const'
 import { onRequestErrorHandler } from '@/shared/lib/helpers'
 import { Button, Card, Input, Modal, Typography } from '@/shared/ui'
 import { ForgotPasswordFormValues, useForgotPassword } from '@/widgets/ForgotPassword/services'
+import { currentUrl } from '@/widgets/SignUp/ui/SignUp'
 import Link from 'next/link'
 
 import s from './ForgotPassword.module.scss'
@@ -14,6 +14,7 @@ import s from './ForgotPassword.module.scss'
 export const ForgotPassword = () => {
   const [emailSending, { isSuccess }] = usePasswordRecoveryMutation()
   const {
+    captcha,
     control,
     getValues,
     handleSubmit,
@@ -26,7 +27,7 @@ export const ForgotPassword = () => {
   } = useForgotPassword()
 
   const submitHandler = (data: ForgotPasswordFormValues) => {
-    emailSending(data)
+    emailSending({ baseUrl: currentUrl, email: data.email, recaptcha: captcha || '' })
       .unwrap()
       .then(() => {
         setIsOpenModal(true)
@@ -63,7 +64,7 @@ export const ForgotPassword = () => {
             {transcription.captionAfterSubmit}
           </Typography>
         )}
-        <Button className={s.sendLink} disabled={isDisabled} type={'submit'}>
+        <Button className={s.sendLink} disabled={isDisabled} fullWidth type={'submit'}>
           {isSuccess ? transcription.resendLink : transcription.sendLinkBtn}
         </Button>
       </form>
