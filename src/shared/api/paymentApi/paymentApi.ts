@@ -12,7 +12,9 @@ const paymentApi = baseApi.injectEndpoints({
       CreatePaymentSubscriptionsResponse,
       CreatePaymentSubscriptionsArgs
     >({
-      query: () => ({
+      invalidatesTags: ['Payments'],
+      query: args => ({
+        body: args,
         method: 'POST',
         url: 'subscriptions',
       }),
@@ -51,10 +53,10 @@ export type GetPaymentsResponse = Payment[]
 export type Payment = {
   dateOfPayment: string
   endDateOfSubscription: string
-  paymentType: 'CREDIT_CARD' | 'PAYPAL' | 'STRIPE'
+  paymentType: PaymentType
   price: number
   subscriptionId: string
-  subscriptionType: 'DAY' | 'MONTHLY' | 'WEEKLY'
+  subscriptionType: SubscriptionType
   userId: number
 }
 
@@ -75,15 +77,18 @@ export type GetCostOfPaymentSubscriptionsResponse = {
 }
 export type CostOfPaymentSubscription = {
   amount: number
-  typeDescription: 'DAY' | 'MONTHLY' | 'WEEKLY'
+  typeDescription: SubscriptionType
 }
 
 export type CreatePaymentSubscriptionsArgs = {
   amount: number
   baseUrl: string
-  paymentType: 'CREDIT_CARD' | 'PAYPAL' | 'STRIPE'
-  typeSubscription: 'DAY' | 'MONTHLY' | 'WEEKLY'
+  paymentType: PaymentType
+  typeSubscription: SubscriptionType
 }
 export type CreatePaymentSubscriptionsResponse = {
   url: string
 }
+
+export type PaymentType = 'CREDIT_CARD' | 'PAYPAL' | 'STRIPE'
+export type SubscriptionType = 'DAY' | 'MONTHLY' | 'WEEKLY'
