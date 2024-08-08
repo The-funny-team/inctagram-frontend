@@ -4,16 +4,17 @@ import { Typography } from '@/shared/ui'
 
 import s from './TotalUsersCounter.module.scss'
 
-export const TotalUsersCounter = () => {
-  const { data: usersCount } = useGetUsersCountQuery()
-  const totalUsersCount = usersCount?.totalCount
+type PropsType = {
+  usersCount: number
+}
+export const TotalUsersCounter = ({ usersCount }: PropsType) => {
   const { text } = useTranslation()
   const t = text.pages.publicPage
 
-  if (!totalUsersCount) {
+  if (!usersCount) {
     return null
   }
-  const arrayNumbers = Array.from(totalUsersCount.toString(), Number)
+  const arrayNumbers = Array.from(usersCount.toString(), Number)
 
   return (
     <div className={s.wrapper}>

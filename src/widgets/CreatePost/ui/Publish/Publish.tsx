@@ -2,7 +2,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 
 import { useCreatePostMutation } from '@/shared/api/postsApi'
-import { useMeQuery } from '@/shared/api/profileApi'
+import { useGetProfileInfoQuery } from '@/shared/api/profileApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
 import { MAX_DESCRIPTION_LENGTH } from '@/shared/const'
 import { isFetchBaseQueryError } from '@/shared/lib/helpers'
@@ -20,7 +20,7 @@ type PublishProps = {
 export const Publish = ({ onCloseBtn }: PublishProps) => {
   const { text } = useTranslation()
   const t = text.modals.createPostModal
-  const { data } = useMeQuery()
+  const { data } = useGetProfileInfoQuery()
   const filteredImages = useAppSelector(state => state.createPostSlice.filteredPictures)
   const description = useAppSelector(state => state.createPostSlice.description)
   const dispatch = useAppDispatch()
@@ -37,15 +37,15 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
   const onPublishHandler = async () => {
     try {
       if (imagesIds.length) {
-        await createPost({ description, images: imagesIds })
+        await createPost({ childrenMetadata: imagesIds, description })
         dispatch(resetState())
         onCloseBtn()
         toast.success('Post is published')
       }
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
-        if (!Array.isArray(error.data.message)) {
-          toast.error(error.data.message)
+        if (!Array.isArray(error.data.messages[0].message)) {
+          toast.error(error.data.messages[0].message)
         }
       }
     }
@@ -92,8 +92,8 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
         </div>
         <div className={s.publishBlock}>
           <div className={s.userInfo}>
-            <Avatar size={36} src={data?.avatarUrl} userName={`${data?.username}`} />
-            <Typography as={'span'}>{data?.username ?? 'URL Profile'}</Typography>
+            <Avatar size={36} src={data?.avatars[0]?.url} userName={`${data?.userName}`} />
+            <Typography as={'span'}>{data?.userName ?? 'URL Profile'}</Typography>
           </div>
           <TextField
             label={t.description.label}

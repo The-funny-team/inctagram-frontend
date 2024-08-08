@@ -1,6 +1,6 @@
-import { User } from '@/shared/api/profileApi'
+import { ProfileType } from '@/shared/api/profileApi'
 
-export const profileFormDataCreator = (data: User | null | undefined) => {
+export const profileFormDataCreator = (data: ProfileType | null | undefined) => {
   return {
     aboutMe: data?.aboutMe || '',
     city: data?.city || '',
@@ -8,6 +8,6 @@ export const profileFormDataCreator = (data: User | null | undefined) => {
     dateOfBirth: (data?.dateOfBirth && new Date(data.dateOfBirth)) || undefined,
     firstName: data?.firstName || '',
     lastName: data?.lastName || '',
-    username: data?.username || '',
+    userName: data?.userName || '',
   }
 }

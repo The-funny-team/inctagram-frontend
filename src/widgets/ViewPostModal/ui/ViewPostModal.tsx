@@ -25,16 +25,17 @@ type AddPropsType = {
 type PropsType = GetPostResponse & AddPropsType
 
 export const ViewPostModal = ({
-  author,
+  avatarOwner,
   comments,
   createdAt,
   description,
   id,
-  imagesUrl,
+  images,
   isMyPost,
   isOpen = false,
   likesCount,
   updatedAt,
+  userName,
 }: PropsType) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
   const [isOpenPost, setIsOpenPost] = useState<boolean>(isOpen)
@@ -82,7 +83,7 @@ export const ViewPostModal = ({
   }
 
   const handleSaveChanges = async () => {
-    updatePost({ description: postDescription, id })
+    updatePost({ description: postDescription, postId: id })
       .unwrap()
       .then(() => {
         setIsEditMode(prev => !prev)
@@ -94,7 +95,7 @@ export const ViewPostModal = ({
   }
 
   const handleDeletePost = async () => {
-    deletePost({ id })
+    deletePost({ postId: id })
   }
 
   return (
@@ -107,7 +108,7 @@ export const ViewPostModal = ({
         <Image
           alt={'post image'}
           height={228}
-          src={imagesUrl[0]}
+          src={images[0].url}
           style={{ borderRadius: '2px', objectFit: 'cover' }}
           width={234}
         />
@@ -116,14 +117,14 @@ export const ViewPostModal = ({
     >
       {isEditMode ? (
         <div className={s.main}>
-          <SliderContainer imageUrls={imagesUrl} />
+          <SliderContainer imageUrls={images} />
           <EditContainer
-            avatar={author.avatarUrl}
+            avatar={avatarOwner}
             description={description}
             onChangeDescription={handleChangeDescription}
             onSaveChanges={handleSaveChanges}
             postDescription={postDescription}
-            userName={author.name}
+            userName={userName}
           />
           <ClosePostConfirmationModal
             onCancelChanges={handleCancelChanges}
@@ -133,9 +134,9 @@ export const ViewPostModal = ({
         </div>
       ) : (
         <div className={s.main}>
-          <SliderContainer imageUrls={imagesUrl} />
+          <SliderContainer imageUrls={images} />
           <PostInfoContainer
-            avatar={author.avatarUrl}
+            avatar={avatarOwner}
             comments={comments}
             createdAt={createdAt}
             isMyPost={isMyPost}
@@ -144,7 +145,7 @@ export const ViewPostModal = ({
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
             postDescription={postDescription}
             updatedAt={updatedAt}
-            userName={author.name}
+            userName={userName}
           />
           <DeletePostConfirmationModal
             onDeletePost={handleDeletePost}
