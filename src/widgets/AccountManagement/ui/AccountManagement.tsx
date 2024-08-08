@@ -1,6 +1,7 @@
-import { ChoiceSubscription, CurrentSubscription } from '@/widgets/AccountManagement'
-
 import s from './AccountManagement.module.scss'
+
+import { ChoiceSubscription } from './ChoiceSubscription'
+import { CurrentSubscription } from './CurrentSubscription'
 
 export const AccountManagement = () => {
   const isCurrentSubscriptions = true // request current subscriptions
