@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { GetPostResponse } from '@/shared/api/postsApi'
+import { GetPostResponse, PostResponseImages } from '@/shared/api/postsApi'
 import { ROUTES_URL } from '@/shared/const'
 import { Avatar, PublicPostDescription, Typography } from '@/shared/ui'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
@@ -20,7 +20,7 @@ const DESCRIPTION_SIZES = {
 }
 
 export const PublicPost = (props: GetPostResponse) => {
-  const { author, createdAt, description, id, imagesUrl } = props
+  const { avatarOwner, createdAt, description, id, images, ownerId, userName } = props
   const { locale } = useRouter()
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -54,15 +54,15 @@ export const PublicPost = (props: GetPostResponse) => {
   return (
     <div className={s.post}>
       <div className={s.slider}>
-        <Link href={`${ROUTES_URL.PUBLIC_PROFILE}/${author.id}/${id}`}>
-          <Slider isDots={imagesUrl.length > 1} sizeBtn={24} sliderLength={imagesUrl.length}>
-            {imagesUrl.map((photo: string) => (
+        <Link href={`${ROUTES_URL.PUBLIC_PROFILE}/${ownerId}/${id}`}>
+          <Slider isDots={images.length > 1} sizeBtn={24} sliderLength={images.length}>
+            {images.map((photo: PostResponseImages) => (
               <Image
                 alt={'post image'}
                 className={s.image}
                 height={240}
-                key={photo}
-                src={photo}
+                key={photo.uploadId}
+                src={photo.url}
                 width={234}
               />
             ))}
@@ -70,11 +70,11 @@ export const PublicPost = (props: GetPostResponse) => {
         </Link>
       </div>
       <div className={clsx(s.postInfo, { [s.expanded]: isExpanded })} style={{ top: topStyle }}>
-        <Link href={`${ROUTES_URL.PUBLIC_PROFILE}/${author.id}`} style={{ textDecoration: 'none' }}>
+        <Link href={`${ROUTES_URL.PUBLIC_PROFILE}/${ownerId}`} style={{ textDecoration: 'none' }}>
           <div style={{ alignItems: 'center', display: 'flex', gap: '13px' }}>
-            <Avatar size={36} src={author.avatarUrl} userName={author.name} />
+            <Avatar size={36} src={avatarOwner} userName={userName} />
             <Typography as={'h3'} className={s.userName} variant={'h3'}>
-              {author.name}
+              {userName}
             </Typography>
           </div>
         </Link>

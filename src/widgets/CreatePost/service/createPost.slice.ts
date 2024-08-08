@@ -27,7 +27,7 @@ export type FilteredPictureObj = {
   img: string
 }
 
-export type PicturesIds = string[]
+export type PicturesIds = Array<{ uploadId: string }>
 
 const initialState = {
   croppedPictures: [] as CroppedPicture[],
@@ -112,7 +112,7 @@ export const createPostSlice = createSlice({
 
       state.pictures = state.pictures.concat(newPictureObjs)
     },
-    setPicturesIds: (state, action: PayloadAction<string>) => {
+    setPicturesIds: (state, action: PayloadAction<{ uploadId: string }>) => {
       state.picturesIds.push(action.payload)
     },
     setPrevStage: state => {

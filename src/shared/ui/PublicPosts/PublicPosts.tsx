@@ -12,13 +12,19 @@ export const PublicPosts = ({ publicPosts }: Props) => {
     <div className={s.postsWrapper}>
       {publicPosts?.map(p => (
         <PublicPost
-          author={p.author}
+          avatarOwner={p.avatarOwner}
           createdAt={p.createdAt}
           description={p.description}
           id={p.id}
-          imagesUrl={p.imagesUrl}
+          images={p.images}
+          isLiked
           key={p.id}
+          likesCount={1}
+          location={''}
+          owner={p.owner}
+          ownerId={p.ownerId}
           updatedAt={p.updatedAt}
+          userName={p.userName}
         />
       ))}
     </div>

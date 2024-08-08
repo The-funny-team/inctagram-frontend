@@ -1,6 +1,6 @@
 import { useMeQuery } from '@/shared/api/authApi'
 import { GetPostResponse } from '@/shared/api/postsApi'
-import { useGetUserInfoQuery } from '@/shared/api/profileApi'
+import { useGetPublicUserInfoQuery } from '@/shared/api/profileApi'
 import { BASE_API_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
 import { ProfileHeader, ProfilePosts } from '@/shared/ui'
@@ -10,32 +10,42 @@ import { fetch } from 'next/dist/compiled/@edge-runtime/primitives'
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { slug } = params || {}
   const [authorId, postId] = slug as string[]
-  const res = await fetch(`${BASE_API_URL}/public/post/user/${authorId}`)
+
+  const res = await fetch(`${BASE_API_URL}public-posts/user/${authorId}`)
   const userPosts = await res.json()
-  const response = await fetch(`${BASE_API_URL}/public/post/${postId}`)
+  const response = await fetch(`${BASE_API_URL}public-posts/${postId}`)
   const publicPost = await response.json()
 
   return {
     props: {
       error: 'No posts yet!',
-      posts: userPosts?.data,
+      postId: Number(postId),
+      posts: userPosts?.items,
       postsTotalCount: userPosts?.totalCount,
+      profileId: Number(authorId),
       publicPost,
-      userName: userPosts?.data[0]?.author?.name,
     },
   }
 }
 
 type PropsType = {
   error: string
+  postId?: number
   posts: GetPostResponse[]
   postsTotalCount: number
+  profileId: number
   publicPost: GetPostResponse
-  userName: string
 }
-const PublicUser = ({ error, posts, postsTotalCount, publicPost, userName }: PropsType) => {
+const PublicUser = ({
+  error,
+  postId,
+  posts,
+  postsTotalCount,
+  profileId,
+  publicPost,
+}: PropsType) => {
   const { data: myProfile } = useMeQuery()
-  const { data: publicUser } = useGetUserInfoQuery({ userName: userName })
+  const { data: publicUser } = useGetPublicUserInfoQuery({ profileId })
 
   if (!publicUser || !publicPost) {
     return <div>{error}</div>
@@ -46,7 +56,7 @@ const PublicUser = ({ error, posts, postsTotalCount, publicPost, userName }: Pro
       {publicUser && (
         <ProfileHeader isAuth={!!myProfile} postsTotalCount={postsTotalCount} user={publicUser} />
       )}
-      {posts && <ProfilePosts isMyPost={false} isShowPostId={publicPost.id} profilePosts={posts} />}
+      {posts && <ProfilePosts isMyPost={false} isShowPostId={postId} profilePosts={posts} />}
     </div>
   )
 }
