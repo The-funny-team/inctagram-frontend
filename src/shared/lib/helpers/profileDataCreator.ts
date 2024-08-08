@@ -5,7 +5,7 @@ export const profileFormDataCreator = (data: ProfileType | null | undefined) => 
     aboutMe: data?.aboutMe || '',
     city: data?.city || '',
     country: data?.country || '',
-    dateOfBirth: (data?.dateOfBirth && new Date(data.dateOfBirth)) || undefined,
+    dateOfBirth: (data?.dateOfBirth && new Date(data.dateOfBirth)) || null,
     firstName: data?.firstName || '',
     lastName: data?.lastName || '',
     userName: data?.userName || '',
