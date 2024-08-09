@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { usePasswordRecoveryResendingMutation } from '@/shared/api/authApi'
-import { getRootLayout } from '@/shared/layouts'
-import { HeadMeta } from '@/shared/ui'
 import { CreateNewPassword } from '@/widgets/CreateNewPassword'
 import { ExpiredLink } from '@/widgets/ExpiredLink'
 import { useRouter } from 'next/router'
 
-const CreateNewPasswordPage = () => {
+import s from './Recovery.module.scss'
+
+export const Recovery = () => {
   const [recoveryError, setRecoveryError] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [passwordRecoveryResending] = usePasswordRecoveryResendingMutation()
@@ -23,8 +23,7 @@ const CreateNewPasswordPage = () => {
   }
 
   return (
-    <>
-      <HeadMeta title={'Forgot Password'} />
+    <main className={s.recoveryRoot}>
       {!recoveryError ? (
         <CreateNewPassword code={code} setRecoveryErrorHandler={setRecoveryError} />
       ) : (
@@ -34,9 +33,6 @@ const CreateNewPasswordPage = () => {
           setIsOpenModal={setIsOpenModal}
         />
       )}
-    </>
+    </main>
   )
 }
-
-CreateNewPasswordPage.getLayout = getRootLayout
-export default CreateNewPasswordPage
