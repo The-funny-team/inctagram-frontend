@@ -49,7 +49,7 @@ export const customFetchBase: BaseQueryFn<
           saveToLocalStorage(ACCESS_TOKEN, data.accessToken)
         }
 
-        if (refreshResult.meta?.response?.status === 201) {
+        if (refreshResult.meta?.response?.status === 200) {
           result = await baseQuery(args, api, extraOptions)
         } else {
           const accessToken = localStorage.getItem(ACCESS_TOKEN)

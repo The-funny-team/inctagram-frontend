@@ -95,7 +95,7 @@ export type UpdateProfileType = {
   aboutMe?: string
   city?: string
   country?: string
-  dateOfBirth?: Date
+  dateOfBirth?: Date | null
   firstName: string
   lastName: string
   userName: string

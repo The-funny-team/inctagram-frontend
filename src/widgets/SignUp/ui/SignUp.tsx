@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form'
 
 import { useSignUpMutation } from '@/shared/api/authApi'
 import { GithubIcon, GoogleIcon } from '@/shared/assets'
-import { GOOGLE_URL, ROUTES_URL } from '@/shared/const'
+import { BASE_LOCAL_URL, BASE_URL, GOOGLE_URL, ROUTES_URL } from '@/shared/const'
 import { Button, Card, Checkbox, Input, Modal, Trans, Typography } from '@/shared/ui'
 import { SignUpSchemaType, useSignUp } from '@/widgets/SignUp/services'
 import { clsx } from 'clsx'
@@ -11,8 +11,8 @@ import Link from 'next/link'
 import { onRequestErrorHandler } from 'src/shared/lib/helpers'
 
 import s from './SignUp.module.scss'
-export const currentUrl =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://funny-inctagram.site'
+
+export const currentUrl = process.env.NODE_ENV === 'development' ? BASE_LOCAL_URL : BASE_URL
 
 export const SignUp = () => {
   const [signUp] = useSignUpMutation()
@@ -136,12 +136,12 @@ export const SignUp = () => {
               tags={{
                 1: () => (
                   <Typography as={Link} href={ROUTES_URL.TERMS_OF_SERVICE} variant={'smallLink'}>
-                    {text.pages.signUp.agreement.privacy}
+                    {text.pages.signUp.agreement.terms}
                   </Typography>
                 ),
                 2: () => (
                   <Typography as={Link} href={ROUTES_URL.PRIVACY_POLICY} variant={'smallLink'}>
-                    {text.pages.signUp.agreement.terms}
+                    {text.pages.signUp.agreement.privacy}
                   </Typography>
                 ),
               }}

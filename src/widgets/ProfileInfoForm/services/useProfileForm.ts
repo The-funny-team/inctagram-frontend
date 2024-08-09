@@ -24,7 +24,7 @@ const userProfileSchema = (t: ErrorsTextProps) =>
         .optional(),
       city: z.string().optional(),
       country: z.string().optional(),
-      dateOfBirth: z.date().optional(),
+      dateOfBirth: z.date().nullable(),
       firstName: z
         .string()
         .trim()

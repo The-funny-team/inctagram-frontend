@@ -11,6 +11,6 @@ export const useSignIn = (t: LocaleType['validation']) =>
       email: '',
       password: '',
     },
-    mode: 'onTouched',
+    mode: 'onChange',
     resolver: zodResolver(signInSchema(t)),
   })

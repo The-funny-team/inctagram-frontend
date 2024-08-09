@@ -63,7 +63,7 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/me',
       }),
     }),
-    passwordRecovery: builder.mutation<void, { email: string }>({
+    passwordRecovery: builder.mutation<void, PasswordRecoveryResponse>({
       query: body => ({
         body,
         method: 'POST',
@@ -152,6 +152,7 @@ type ConfirmationCodeDto = {
   code: string
 }
 type EmailResendingRequestType = Pick<CreateUserDto, 'baseUrl' | 'email'>
+type PasswordRecoveryResponse = EmailResendingRequestType & { recaptcha: string }
 type MeResponse = {
   email: string
   isBlocked: boolean
