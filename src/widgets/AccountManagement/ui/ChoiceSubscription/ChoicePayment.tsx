@@ -21,8 +21,6 @@ export const ChoicePayment = () => {
       paymentType: name,
       typeSubscription: time,
     }
-
-    console.log(paymentRequest)
   }
   const changePaymentType = (value: string) => {
     setChosenSubscription(value)
