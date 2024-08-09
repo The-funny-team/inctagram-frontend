@@ -3,7 +3,7 @@ export const BASE_LOCAL_URL = 'http://localhost:3000'
 
 export const BASE_API_URL = 'https://inctagram.work/api/v1/'
 const GOOGLE_OAUTH_CLIENT_ID =
-  '345492523163-2pqkddlousgd8mnjnvq5s4q76s3v7fms.apps.googleusercontent.com'
+  '617342613759-f3kbvgm8l310fn40vh6qna2pv8u2uccr.apps.googleusercontent.com'
 
 const FRONTEND_REDIRECT_URL = `${BASE_URL}auth/google`
 
