@@ -13,8 +13,8 @@ const paymentApi = baseApi.injectEndpoints({
       CreatePaymentSubscriptionsArgs
     >({
       invalidatesTags: ['Payments'],
-      query: args => ({
-        body: args,
+      query: body => ({
+        body,
         method: 'POST',
         url: 'subscriptions',
       }),
