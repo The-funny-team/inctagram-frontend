@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import { Card, RadioGroup, Typography } from '@/shared/ui'
-import { ChoicePayment } from '@/widgets/AccountManagement/ui/ChoiceSubscription/ChoicePayment'
 
 import s from './ChoiceSubscription.module.scss'
+
+import { ChoicePayment } from './ChoicePayment'
 
 const accountTypes = [
   { label: 'Personal', value: 'personal' },

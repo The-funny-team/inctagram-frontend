@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import { Card, Checkbox, Typography } from '@/shared/ui'
-import { ShowDate } from '@/widgets/AccountManagement/ui/CurrentSubscription/ShowDate'
 
 import s from './CurrentSubscription.module.scss'
+
+import { ShowDate } from './ShowDate'
 
 export const CurrentSubscription = () => {
   const [isShowNextPayment, setShowNextPayment] = useState(false)
