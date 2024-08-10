@@ -75,19 +75,22 @@ export const ForgotPassword = () => {
         <div className={s.recaptcha}>
           <ReCAPTCHA
             onChange={setCaptcha}
-            sitekey={'6LdB1UQpAAAAABdCmM8MNUd13CwLGz3GGWGozevO'}
+            sitekey={'6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'}
             theme={'dark'}
           />
         </div>
       )}
-      <Modal isOpen={isOpenModal} onIsOpenChange={setIsOpenModal} title={transcription.modal.title}>
-        <Typography variant={'regularText16'}>
+      <Modal
+        className={s.emailSentModal}
+        isOpen={isOpenModal}
+        onIsOpenChange={setIsOpenModal}
+        title={transcription.modal.title}
+      >
+        <Typography className={s.modalTextGroup} variant={'regularText16'}>
           {transcription.modal.getBody(getValues('email'))}
         </Typography>
         <div className={s.modalBtnGroup}>
-          <Button fullWidth={false} onClick={() => setIsOpenModal(false)}>
-            OK
-          </Button>
+          <Button onClick={() => setIsOpenModal(false)}>OK</Button>
         </div>
       </Modal>
     </Card>
