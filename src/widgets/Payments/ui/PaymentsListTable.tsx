@@ -1,3 +1,4 @@
+import { useGetPaymentsQuery } from '@/shared/api/paymentApi'
 import { useTranslation } from '@/shared/lib/hooks'
 import {
   Table,
@@ -12,8 +13,9 @@ import {
 export const PaymentsListTable = () => {
   const { text } = useTranslation()
   const t = text.pages.profile.myPayments
+  const { data: payments } = useGetPaymentsQuery()
 
-  if (!payments.length) {
+  if (!payments?.length) {
     return <TableEmpty />
   }
 
