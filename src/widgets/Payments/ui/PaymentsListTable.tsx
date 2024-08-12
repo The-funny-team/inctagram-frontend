@@ -8,13 +8,8 @@ import {
   TableHeadCell,
   TableRow,
 } from '@/shared/ui/Table'
-import { Payment } from '@/widgets/Payments/ui/Payments'
 
-type Props = {
-  payments: Payment[]
-}
-
-export const PaymentsListTable = ({ payments }: Props) => {
+export const PaymentsListTable = () => {
   const { text } = useTranslation()
   const t = text.pages.profile.myPayments
 

@@ -5,20 +5,6 @@ import { PaymentsListTable } from '@/widgets/Payments/ui/PaymentsListTable'
 
 import s from './Payments.module.scss'
 
-export type Payment = {
-  dateOfPayment: string
-  endDateOfSubscription: string
-  paymentType: 'Paypal' | 'Stripe'
-  price: number
-  subscriptionId: string
-  subscriptionType: string
-  userId: number
-}
-
-type Props = {
-  payments: Payment[]
-}
-
 type Option = {
   label: string
   value: string
@@ -30,7 +16,7 @@ const PAGINATION_OPTIONS: Option[] = [
   { label: '100', value: '100' },
 ]
 
-export const Payments = ({ payments }: Props) => {
+export const Payments = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(10)
 
@@ -40,7 +26,7 @@ export const Payments = ({ payments }: Props) => {
 
   return (
     <div className={s.container}>
-      <PaymentsListTable payments={payments} />
+      <PaymentsListTable />
       <Pagination
         currentPage={currentPage}
         onChangePage={setCurrentPage}
