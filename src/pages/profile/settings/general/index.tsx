@@ -7,7 +7,7 @@ import { ProfileInfoForm } from '@/widgets/ProfileInfoForm'
 import s from './GeneralPage.module.scss'
 
 const GeneralPage = () => {
-  const { data: userInfo, isLoading } = useGetProfileInfoQuery()
+  const { data: userInfo } = useGetProfileInfoQuery()
   const avatar = userInfo?.avatars[0]?.url
   const classNames = {
     page: s.page,

@@ -12,7 +12,6 @@ export const ProfileMain = () => {
   const myId = userInfo?.userId
   const { data: profilePosts, isLoading } = useGetUserPostsQuery({ userId: myId as number })
 
-  //const { data: userPosts, isLoading } = useGetUserPostsQuery({})
   const authorId =
     profilePosts && profilePosts.items.length !== 0 ? profilePosts.items[0].ownerId : ''
   const isMyPost = myId === authorId

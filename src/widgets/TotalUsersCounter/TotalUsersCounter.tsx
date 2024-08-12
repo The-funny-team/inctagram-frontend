@@ -1,4 +1,3 @@
-import { useGetUsersCountQuery } from '@/shared/api/profileApi'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Typography } from '@/shared/ui'
 
