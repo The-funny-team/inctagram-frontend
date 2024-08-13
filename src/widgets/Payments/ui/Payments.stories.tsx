@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Payment } from '@/shared/api/paymentApi'
 import { Payments } from '@/widgets/Payments'
-import { Payment } from '@/widgets/Payments/ui/Payments'
 
 const meta = {
   component: Payments,
@@ -16,16 +16,16 @@ const payments: Payment[] = [
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Paypal',
+    paymentType: 'PAYPAL',
     price: 10,
     subscriptionId: 'string',
-    subscriptionType: 'DAILY',
+    subscriptionType: 'DAY',
     userId: 0,
   },
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Paypal',
+    paymentType: 'PAYPAL',
     price: 50,
     subscriptionId: 'string',
     subscriptionType: 'MONTHLY',
@@ -34,7 +34,7 @@ const payments: Payment[] = [
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Stripe',
+    paymentType: 'STRIPE',
     price: 100,
     subscriptionId: 'string',
     subscriptionType: 'MONTHLY',
@@ -43,7 +43,7 @@ const payments: Payment[] = [
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Paypal',
+    paymentType: 'PAYPAL',
     price: 100,
     subscriptionId: 'string',
     subscriptionType: 'MONTHLY',
@@ -52,34 +52,34 @@ const payments: Payment[] = [
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Stripe',
+    paymentType: 'STRIPE',
     price: 10,
     subscriptionId: 'string',
-    subscriptionType: 'DAILY',
+    subscriptionType: 'DAY',
     userId: 0,
   },
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Stripe',
+    paymentType: 'STRIPE',
     price: 50,
     subscriptionId: 'string',
-    subscriptionType: 'ANNUAL',
+    subscriptionType: 'DAY',
     userId: 0,
   },
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Stripe',
+    paymentType: 'STRIPE',
     price: 50,
     subscriptionId: 'string',
-    subscriptionType: 'DAILY',
+    subscriptionType: 'DAY',
     userId: 0,
   },
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Stripe',
+    paymentType: 'STRIPE',
     price: 100,
     subscriptionId: 'string',
     subscriptionType: 'MONTHLY',
@@ -88,16 +88,16 @@ const payments: Payment[] = [
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Paypal',
+    paymentType: 'PAYPAL',
     price: 10,
     subscriptionId: 'string',
-    subscriptionType: 'ANNUAL',
+    subscriptionType: 'MONTHLY',
     userId: 0,
   },
   {
     dateOfPayment: '2024-07-29T15:40:56.578Z',
     endDateOfSubscription: '2024-07-29T15:40:56.578Z',
-    paymentType: 'Paypal',
+    paymentType: 'PAYPAL',
     price: 50,
     subscriptionId: 'string',
     subscriptionType: 'MONTHLY',
