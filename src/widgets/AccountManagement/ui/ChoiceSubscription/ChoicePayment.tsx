@@ -1,8 +1,14 @@
 import { useState } from 'react'
 
+import {
+  CreatePaymentSubscriptionsArgs,
+  PaymentType,
+  SubscriptionType,
+  useCreatePaymentSubscriptionsMutation,
+} from '@/shared/api/paymentApi'
 import { Paypal, Stripe } from '@/shared/assets'
-import { ROUTES_URL } from '@/shared/const'
 import { Card, RadioGroup, Typography } from '@/shared/ui'
+import { useRouter } from 'next/router'
 
 import s from './ChoiceSubscription.module.scss'
 
@@ -13,17 +19,29 @@ const subscriptions = [
 ]
 
 export const ChoicePayment = () => {
-  const [chosenSubscription, setChosenSubscription] = useState('day')
-  const transferToPayment = (name: string, time: string) => {
-    const paymentRequest = {
-      amount: 1,
-      baseUrl: ROUTES_URL.ACCOUNT_MANAGEMENT,
+  const [chosenSubscription, setChosenSubscription] = useState<'day' | 'month' | 'week'>('day')
+  const [createSubscription] = useCreatePaymentSubscriptionsMutation()
+  const router = useRouter()
+  const allSubscriptions = {
+    day: { amount: 10, period: 'DAY' as SubscriptionType },
+    month: { amount: 100, period: 'MONTHLY' as SubscriptionType },
+    week: { amount: 50, period: 'WEEKLY' as SubscriptionType },
+  }
+
+  const transferToPayment = async (name: PaymentType) => {
+    const paymentRequest: CreatePaymentSubscriptionsArgs = {
+      amount: allSubscriptions[chosenSubscription].amount,
+      baseUrl: window.location.href,
       paymentType: name,
-      typeSubscription: time,
+      typeSubscription: allSubscriptions[chosenSubscription].period,
     }
+
+    const res = await createSubscription(paymentRequest).unwrap()
+
+    void router.push(res.url)
   }
   const changePaymentType = (value: string) => {
-    setChosenSubscription(value)
+    setChosenSubscription(value as 'day' | 'month' | 'week')
   }
 
   return (
@@ -33,13 +51,13 @@ export const ChoicePayment = () => {
         <RadioGroup
           defaultValue={'day'}
           items={subscriptions}
-          onValueChange={value => changePaymentType(value)}
+          onValueChange={value => changePaymentType(value as string)}
         />
       </Card>
       <div className={s.changePayment}>
         <div
           onClick={() => {
-            transferToPayment('paypal', chosenSubscription)
+            transferToPayment('PAYPAL' as PaymentType)
           }}
         >
           <Paypal />
@@ -48,7 +66,7 @@ export const ChoicePayment = () => {
         <Typography variant={'regularText14'}>Or</Typography>
         <div
           onClick={() => {
-            transferToPayment('stripe', chosenSubscription)
+            transferToPayment('STRIPE' as PaymentType)
           }}
         >
           <Stripe />
