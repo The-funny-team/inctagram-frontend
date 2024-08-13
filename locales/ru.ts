@@ -174,6 +174,33 @@ export const ru: LocaleType = {
         sendMessage: 'Отправить сообщение',
         unFollow: 'Отписаться',
       },
+      management: {
+        accountType: {
+          business: 'Бизнес',
+          personal: 'Личный',
+          title: 'Тип аккаунта:',
+        },
+        currSubscription: {
+          autoRenew: 'Автопродление',
+          lastDay: 'Истекает',
+          nextPayment: 'Следующий платеж',
+          title: 'Текущая подписка:',
+        },
+        subscriptionsCosts: {
+          btnErr: 'Назад к оплате',
+          btnOk: 'Закрыть',
+          day: '$10 за 1 День',
+          modals: {
+            error: 'Ошибка',
+            success: 'Успешно',
+            textErr: 'Транзакция не удалась. Пожалуйста попробуйте снова',
+            textSuccess: 'Платеж выполнен успешно!',
+          },
+          month: '$100 за Месяц',
+          title: 'Цены за подписки:',
+          week: '$50 за 7 Дней',
+        },
+      },
       myPayments: {
         dateOfPayment: 'Дата платежа',
         endDateOfSubscription: 'Дата окончания подписки',

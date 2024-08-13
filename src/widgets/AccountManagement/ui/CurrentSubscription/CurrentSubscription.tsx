@@ -5,6 +5,7 @@ import {
   useCancelAutoRenewalMutation,
   useGetPaymentsQuery,
 } from '@/shared/api/paymentApi'
+import { useTranslation } from '@/shared/lib/hooks'
 import { Card, Checkbox, Typography } from '@/shared/ui'
 
 import s from './CurrentSubscription.module.scss'
@@ -20,6 +21,8 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
   const [isAutoRenewal, setIsAutoRenewal] = useState(autoRenewal)
   const [cancelAutoRenew] = useCancelAutoRenewalMutation()
   const { data: payments } = useGetPaymentsQuery()
+  const { text } = useTranslation()
+  const t = text.pages.profile.management.currSubscription
   const formatDate = (date: string) => new Date(date).getTime()
   const sortPayments =
     payments &&
@@ -34,22 +37,22 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
 
   return (
     <div className={s.currentSubscription}>
-      <Typography variant={'h3'}>Current Subscription:</Typography>
+      <Typography variant={'h3'}>{t.title}</Typography>
       <Card style={{ padding: '12px 24px' }}>
         <div className={s.info}>
           <ShowDate
             date={new Date(lastDay as string).toLocaleDateString('ru-RU')}
-            headerText={'Expire at'}
+            headerText={t.lastDay}
           />
           {isAutoRenewal && (
             <ShowDate
               date={new Date(dateOfPayment).toLocaleDateString('ru-RU')}
-              headerText={'Next payment'}
+              headerText={t.nextPayment}
             />
           )}
         </div>
       </Card>
-      <Checkbox checked={isAutoRenewal} label={'Auto-Renewal'} onCheckedChange={cancelRenew} />
+      <Checkbox checked={isAutoRenewal} label={t.autoRenew} onCheckedChange={cancelRenew} />
     </div>
   )
 }
