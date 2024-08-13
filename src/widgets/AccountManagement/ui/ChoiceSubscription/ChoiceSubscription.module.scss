@@ -25,3 +25,17 @@
     }
   }
 }
+
+.modal {
+  width: 375px;
+  height: 228px;
+
+  .modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+    justify-content: space-between;
+
+    padding: 18px 24px 36px;
+  }
+}

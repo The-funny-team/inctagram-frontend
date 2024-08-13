@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   CreatePaymentSubscriptionsArgs,
@@ -7,7 +7,7 @@ import {
   useCreatePaymentSubscriptionsMutation,
 } from '@/shared/api/paymentApi'
 import { Paypal, Stripe } from '@/shared/assets'
-import { Card, RadioGroup, Typography } from '@/shared/ui'
+import { Button, Card, Modal, RadioGroup, Typography } from '@/shared/ui'
 import { useRouter } from 'next/router'
 
 import s from './ChoiceSubscription.module.scss'
@@ -20,8 +20,17 @@ const subscriptions = [
 
 export const ChoicePayment = () => {
   const [chosenSubscription, setChosenSubscription] = useState<'day' | 'month' | 'week'>('day')
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [createSubscription] = useCreatePaymentSubscriptionsMutation()
+
   const router = useRouter()
+
+  useEffect(() => {
+    if (router.query.success) {
+      setIsOpenModal(true)
+    }
+  }, [router.query.success])
+
   const allSubscriptions = {
     day: { amount: 10, period: 'DAY' as SubscriptionType },
     month: { amount: 100, period: 'MONTHLY' as SubscriptionType },
@@ -42,6 +51,10 @@ export const ChoicePayment = () => {
   }
   const changePaymentType = (value: string) => {
     setChosenSubscription(value as 'day' | 'month' | 'week')
+  }
+
+  const onCloseModal = () => {
+    setIsOpenModal(false)
   }
 
   return (
@@ -72,6 +85,42 @@ export const ChoicePayment = () => {
           <Stripe />
         </div>
       </div>
+      {router.query.success && isOpenModal ? (
+        <Modal
+          className={s.modal}
+          isOpen={isOpenModal}
+          onIsOpenChange={onCloseModal}
+          title={'Success'}
+        >
+          <div className={s.modalBody}>
+            <Typography variant={'regularText16'}>Payment was successful!</Typography>
+            <Button fullWidth onClick={onCloseModal}>
+              OK
+            </Button>
+          </div>
+        </Modal>
+      ) : (
+        ''
+      )}
+      {!router.query.success && isOpenModal ? (
+        <Modal
+          className={s.modal}
+          isOpen={isOpenModal}
+          onIsOpenChange={onCloseModal}
+          title={'Error'}
+        >
+          <div className={s.modalBody}>
+            <Typography variant={'regularText16'}>
+              Transaction failed. Please, write to support
+            </Typography>
+            <Button fullWidth onClick={onCloseModal}>
+              Back to payment
+            </Button>
+          </div>
+        </Modal>
+      ) : (
+        ''
+      )}
     </div>
   )
 }
