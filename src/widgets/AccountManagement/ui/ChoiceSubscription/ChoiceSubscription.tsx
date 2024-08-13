@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { CurrentPaymentSubscription } from '@/shared/api/paymentApi'
 import { Card, RadioGroup, Typography } from '@/shared/ui'
 
 import s from './ChoiceSubscription.module.scss'
@@ -11,8 +12,13 @@ const accountTypes = [
   { label: 'Business', value: 'business' },
 ]
 
-export const ChoiceSubscription = () => {
-  const [accountType, setAccountType] = useState('personal')
+type PropsType = {
+  currentSubscription: CurrentPaymentSubscription
+}
+
+export const ChoiceSubscription = ({ currentSubscription }: PropsType) => {
+  const accType = currentSubscription ? 'business' : 'personal'
+  const [accountType, setAccountType] = useState(accType)
   const changeAccountType = (value: string) => {
     setAccountType(value)
   }
@@ -23,7 +29,7 @@ export const ChoiceSubscription = () => {
         <Typography variant={'h3'}>Account type:</Typography>
         <Card style={{ padding: '12px 24px' }}>
           <RadioGroup
-            defaultValue={'personal'}
+            defaultValue={accType}
             items={accountTypes}
             onValueChange={value => {
               changeAccountType(value)

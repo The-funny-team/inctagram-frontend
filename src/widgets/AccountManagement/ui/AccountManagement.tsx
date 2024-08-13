@@ -20,7 +20,7 @@ export const AccountManagement = () => {
   return (
     <main className={s.root}>
       {isValidCurSubscription && <CurrentSubscription currentSubscription={curSubscription} />}
-      <ChoiceSubscription />
+      <ChoiceSubscription currentSubscription={curSubscription} />
     </main>
   )
 }
