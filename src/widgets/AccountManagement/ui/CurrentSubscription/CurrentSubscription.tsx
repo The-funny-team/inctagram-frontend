@@ -1,6 +1,10 @@
 import { useState } from 'react'
 
-import { CurrentPaymentSubscription, useCancelAutoRenewalMutation } from '@/shared/api/paymentApi'
+import {
+  CurrentPaymentSubscription,
+  useCancelAutoRenewalMutation,
+  useGetPaymentsQuery,
+} from '@/shared/api/paymentApi'
 import { Card, Checkbox, Typography } from '@/shared/ui'
 
 import s from './CurrentSubscription.module.scss'
@@ -12,9 +16,17 @@ type PropsType = {
 }
 
 export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
-  const { autoRenewal, dateOfPayment, endDateOfSubscription } = currentSubscription
+  const { autoRenewal, dateOfPayment } = currentSubscription
   const [isAutoRenewal, setIsAutoRenewal] = useState(autoRenewal)
   const [cancelAutoRenew] = useCancelAutoRenewalMutation()
+  const { data: payments } = useGetPaymentsQuery()
+  const formatDate = (date: string) => new Date(date).getTime()
+  const sortPayments =
+    payments &&
+    [...payments].sort(
+      (a, b) => formatDate(b.endDateOfSubscription) - formatDate(a.endDateOfSubscription)
+    )
+  const lastDay = sortPayments && sortPayments[0].endDateOfSubscription
   const cancelRenew = () => {
     cancelAutoRenew().unwrap()
     setIsAutoRenewal(prev => !prev)
@@ -26,7 +38,7 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
       <Card style={{ padding: '12px 24px' }}>
         <div className={s.info}>
           <ShowDate
-            date={new Date(endDateOfSubscription).toLocaleDateString('ru-RU')}
+            date={new Date(lastDay as string).toLocaleDateString('ru-RU')}
             headerText={'Expire at'}
           />
           {isAutoRenewal && (
