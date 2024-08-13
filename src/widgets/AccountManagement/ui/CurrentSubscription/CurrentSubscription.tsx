@@ -1,4 +1,6 @@
-import { CurrentPaymentSubscription } from '@/shared/api/paymentApi'
+import { useState } from 'react'
+
+import { CurrentPaymentSubscription, useCancelAutoRenewalMutation } from '@/shared/api/paymentApi'
 import { Card, Checkbox, Typography } from '@/shared/ui'
 
 import s from './CurrentSubscription.module.scss'
@@ -11,6 +13,12 @@ type PropsType = {
 
 export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
   const { autoRenewal, dateOfPayment, endDateOfSubscription } = currentSubscription
+  const [isAutoRenewal, setIsAutoRenewal] = useState(autoRenewal)
+  const [cancelAutoRenew] = useCancelAutoRenewalMutation()
+  const cancelRenew = () => {
+    cancelAutoRenew().unwrap()
+    setIsAutoRenewal(prev => !prev)
+  }
 
   return (
     <div className={s.currentSubscription}>
@@ -21,13 +29,15 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
             date={new Date(endDateOfSubscription).toLocaleDateString('ru-RU')}
             headerText={'Expire at'}
           />
-          <ShowDate
-            date={new Date(dateOfPayment).toLocaleDateString('ru-RU')}
-            headerText={'Next payment'}
-          />
+          {isAutoRenewal && (
+            <ShowDate
+              date={new Date(dateOfPayment).toLocaleDateString('ru-RU')}
+              headerText={'Next payment'}
+            />
+          )}
         </div>
       </Card>
-      <Checkbox checked={autoRenewal} label={'Auto-Renewal'} />
+      <Checkbox checked={isAutoRenewal} label={'Auto-Renewal'} onCheckedChange={cancelRenew} />
     </div>
   )
 }
