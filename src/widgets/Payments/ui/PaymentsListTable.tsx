@@ -9,6 +9,10 @@ type PropsType = {
 export const PaymentsListTable = ({ payments }: PropsType) => {
   const { text } = useTranslation()
   const t = text.pages.profile.myPayments
+  const formatDate = (date: string) => new Date(date).getTime()
+  const sortPayments = [...payments].sort(
+    (a, b) => formatDate(b.endDateOfSubscription) - formatDate(a.endDateOfSubscription)
+  )
 
   return (
     <Table>
@@ -22,7 +26,7 @@ export const PaymentsListTable = ({ payments }: PropsType) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {payments?.map(payment => (
+        {sortPayments.map(payment => (
           <TableRow key={payment.subscriptionId}>
             <TableCell>{new Date(payment.dateOfPayment).toLocaleDateString('ru-RU')}</TableCell>
             <TableCell>
