@@ -15,7 +15,7 @@ export const AccountManagement = () => {
   const curSubscription = currentSubscription.data[0]
 
   const isValidCurSubscription =
-    new Date().getTime() < new Date(curSubscription.endDateOfSubscription).getTime()
+    new Date().getTime() < new Date(curSubscription?.endDateOfSubscription).getTime()
 
   return (
     <main className={s.root}>
