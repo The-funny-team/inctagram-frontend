@@ -17,7 +17,7 @@ type PropsType = {
 }
 
 export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
-  const { autoRenewal, dateOfPayment } = currentSubscription
+  const { autoRenewal, dateOfPayment, endDateOfSubscription } = currentSubscription
   const [isAutoRenewal, setIsAutoRenewal] = useState(autoRenewal)
   const [cancelAutoRenew] = useCancelAutoRenewalMutation()
   const { data: payments } = useGetPaymentsQuery()
@@ -30,6 +30,11 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
       (a, b) => formatDate(b.endDateOfSubscription) - formatDate(a.endDateOfSubscription)
     )
   const lastDay = sortPayments && sortPayments[0].endDateOfSubscription
+  const nextPayment = new Date(endDateOfSubscription)
+  const nextPaymentDate = new Date(
+    nextPayment.setDate(nextPayment.getDate() + 1)
+  ).toLocaleDateString('ru-RU')
+
   const cancelRenew = () => {
     cancelAutoRenew().unwrap()
     setIsAutoRenewal(prev => !prev)
@@ -46,7 +51,7 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
           />
           {isAutoRenewal && (
             <ShowDate
-              date={new Date(dateOfPayment).toLocaleDateString('ru-RU')}
+              date={new Date(nextPaymentDate).toLocaleDateString('ru-RU')}
               headerText={t.nextPayment}
             />
           )}
