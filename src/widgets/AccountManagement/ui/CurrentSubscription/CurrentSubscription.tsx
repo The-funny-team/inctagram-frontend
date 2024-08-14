@@ -29,7 +29,8 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
     [...payments].sort(
       (a, b) => formatDate(b.endDateOfSubscription) - formatDate(a.endDateOfSubscription)
     )
-  const lastDay = sortPayments && sortPayments[0].endDateOfSubscription
+  const lastDay =
+    sortPayments && new Date(sortPayments[0].endDateOfSubscription).toLocaleDateString('ru-RU')
   const nextPayment = new Date(endDateOfSubscription)
   const nextPaymentDate = new Date(
     nextPayment.setDate(nextPayment.getDate() + 1)
@@ -45,16 +46,8 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
       <Typography variant={'h3'}>{t.title}</Typography>
       <Card style={{ padding: '12px 24px' }}>
         <div className={s.info}>
-          <ShowDate
-            date={new Date(lastDay as string).toLocaleDateString('ru-RU')}
-            headerText={t.lastDay}
-          />
-          {isAutoRenewal && (
-            <ShowDate
-              date={new Date(nextPaymentDate).toLocaleDateString('ru-RU')}
-              headerText={t.nextPayment}
-            />
-          )}
+          <ShowDate date={lastDay as string} headerText={t.lastDay} />
+          {isAutoRenewal && <ShowDate date={nextPaymentDate} headerText={t.nextPayment} />}
         </div>
       </Card>
       <Checkbox checked={isAutoRenewal} label={t.autoRenew} onCheckedChange={cancelRenew} />
