@@ -18,6 +18,7 @@ export const ChoicePayment = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [createSubscription] = useCreatePaymentSubscriptionsMutation()
   const router = useRouter()
+  const success = router.query.success === 'true'
   const { text } = useTranslation()
   const t = text.pages.profile.management.subscriptionsCosts
   const subscriptions = [
@@ -86,7 +87,7 @@ export const ChoicePayment = () => {
           <Stripe />
         </div>
       </div>
-      {router.query.success && isOpenModal ? (
+      {success && isOpenModal ? (
         <Modal
           className={s.modal}
           isOpen={isOpenModal}
@@ -101,9 +102,6 @@ export const ChoicePayment = () => {
           </div>
         </Modal>
       ) : (
-        ''
-      )}
-      {!router.query.success && isOpenModal ? (
         <Modal
           className={s.modal}
           isOpen={isOpenModal}
@@ -117,8 +115,6 @@ export const ChoicePayment = () => {
             </Button>
           </div>
         </Modal>
-      ) : (
-        ''
       )}
     </div>
   )
