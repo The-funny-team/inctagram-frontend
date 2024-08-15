@@ -17,20 +17,14 @@ type PropsType = {
 }
 
 export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
-  const { autoRenewal, dateOfPayment, endDateOfSubscription } = currentSubscription
+  const { autoRenewal, endDateOfSubscription } = currentSubscription
   const [isAutoRenewal, setIsAutoRenewal] = useState(autoRenewal)
   const [cancelAutoRenew] = useCancelAutoRenewalMutation()
   const { data: payments } = useGetPaymentsQuery()
   const { text } = useTranslation()
   const t = text.pages.profile.management.currSubscription
-  const formatDate = (date: string) => new Date(date).getTime()
-  const sortPayments =
-    payments &&
-    [...payments].sort(
-      (a, b) => formatDate(b.endDateOfSubscription) - formatDate(a.endDateOfSubscription)
-    )
   const lastDay =
-    sortPayments && new Date(sortPayments[0].endDateOfSubscription).toLocaleDateString('ru-RU')
+    payments && new Date(payments[0].endDateOfSubscription).toLocaleDateString('ru-RU')
   const nextPayment = new Date(endDateOfSubscription)
   const nextPaymentDate = new Date(
     nextPayment.setDate(nextPayment.getDate() + 1)
