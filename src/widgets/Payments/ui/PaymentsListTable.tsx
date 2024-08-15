@@ -1,26 +1,14 @@
+import { Payment } from '@/shared/api/paymentApi'
 import { useTranslation } from '@/shared/lib/hooks'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableEmpty,
-  TableHead,
-  TableHeadCell,
-  TableRow,
-} from '@/shared/ui/Table'
-import { Payment } from '@/widgets/Payments/ui/Payments'
+import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/shared/ui/Table'
 
-type Props = {
+type PropsType = {
   payments: Payment[]
 }
 
-export const PaymentsListTable = ({ payments }: Props) => {
+export const PaymentsListTable = ({ payments }: PropsType) => {
   const { text } = useTranslation()
   const t = text.pages.profile.myPayments
-
-  if (!payments.length) {
-    return <TableEmpty />
-  }
 
   return (
     <Table>
@@ -34,8 +22,8 @@ export const PaymentsListTable = ({ payments }: Props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {payments?.map(payment => (
-          <TableRow key={payment.userId}>
+        {payments.map(payment => (
+          <TableRow key={payment.subscriptionId}>
             <TableCell>{new Date(payment.dateOfPayment).toLocaleDateString('ru-RU')}</TableCell>
             <TableCell>
               {new Date(payment.endDateOfSubscription).toLocaleDateString('ru-RU')}

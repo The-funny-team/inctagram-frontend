@@ -7,7 +7,7 @@ const PaymentsPage = () => {
     <>
       <HeadMeta title={'Payments'} />
       <main>
-        <Payments payments={[]} />
+        <Payments />
       </main>
     </>
   )

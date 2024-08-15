@@ -172,6 +172,33 @@ export const en = {
         sendMessage: 'Send Message',
         unFollow: 'Unfollow',
       },
+      management: {
+        accountType: {
+          business: 'Business',
+          personal: 'Personal',
+          title: 'Account type:',
+        },
+        currSubscription: {
+          autoRenew: 'Auto-Renewal',
+          lastDay: 'Expire at',
+          nextPayment: 'Next payment',
+          title: 'Current Subscription:',
+        },
+        subscriptionsCosts: {
+          btnErr: 'Back to payment',
+          btnOk: 'OK',
+          day: '$10 per 1 Day',
+          modals: {
+            error: 'Error',
+            success: 'Success',
+            textErr: 'Transaction failed. Please, try again',
+            textSuccess: 'Payment was successful!',
+          },
+          month: '$100 per Month',
+          title: 'Your subscription costs:',
+          week: '$50 per 7 Days',
+        },
+      },
       myPayments: {
         dateOfPayment: 'Date of payment',
         endDateOfSubscription: 'End date of subscription',

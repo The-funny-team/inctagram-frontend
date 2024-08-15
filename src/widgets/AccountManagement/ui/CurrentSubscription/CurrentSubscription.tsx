@@ -1,28 +1,53 @@
 import { useState } from 'react'
 
+import {
+  CurrentPaymentSubscription,
+  useCancelAutoRenewalMutation,
+  useGetPaymentsQuery,
+} from '@/shared/api/paymentApi'
+import { useTranslation } from '@/shared/lib/hooks'
 import { Card, Checkbox, Typography } from '@/shared/ui'
 
 import s from './CurrentSubscription.module.scss'
 
 import { ShowDate } from './ShowDate'
 
-export const CurrentSubscription = () => {
-  const [isShowNextPayment, setShowNextPayment] = useState(false)
+type PropsType = {
+  currentSubscription: CurrentPaymentSubscription
+  isRenewal: boolean
+}
 
-  const showNextPayment = () => {
-    setShowNextPayment(!isShowNextPayment)
+export const CurrentSubscription = ({ currentSubscription, isRenewal }: PropsType) => {
+  const { autoRenewal, endDateOfSubscription } = currentSubscription
+  const [isAutoRenewal, setIsAutoRenewal] = useState(autoRenewal)
+  const [cancelAutoRenew] = useCancelAutoRenewalMutation()
+  const { data: payments } = useGetPaymentsQuery()
+  const { text } = useTranslation()
+  const t = text.pages.profile.management.currSubscription
+  const lastDay =
+    payments && new Date(payments[0].endDateOfSubscription).toLocaleDateString('ru-RU')
+  const nextPayment = new Date(endDateOfSubscription)
+  const nextPaymentDate = new Date(
+    nextPayment.setDate(nextPayment.getDate() + 1)
+  ).toLocaleDateString('ru-RU')
+
+  const cancelRenew = () => {
+    cancelAutoRenew().unwrap()
+    setIsAutoRenewal(prev => !prev)
   }
 
   return (
     <div className={s.currentSubscription}>
-      <Typography variant={'h3'}>Current Subscription:</Typography>
-      <Card style={{ padding: '12px 24px' }}>
+      <Typography variant={'h3'}>{t.title}</Typography>
+      <Card style={{ padding: '12px 24px', width: '100%' }}>
         <div className={s.info}>
-          <ShowDate date={'12.12.2022'} headerText={'Expire at'} />
-          {isShowNextPayment && <ShowDate date={'12.12.2022'} headerText={'Next payment'} />}
+          <ShowDate date={lastDay as string} headerText={t.lastDay} />
+          {isAutoRenewal && <ShowDate date={nextPaymentDate} headerText={t.nextPayment} />}
         </div>
       </Card>
-      <Checkbox label={'Auto-Renewal'} onCheckedChange={showNextPayment} />
+      {isRenewal && (
+        <Checkbox checked={isAutoRenewal} label={t.autoRenew} onCheckedChange={cancelRenew} />
+      )}
     </div>
   )
 }
