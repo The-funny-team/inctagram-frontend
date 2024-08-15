@@ -14,9 +14,10 @@ import { ShowDate } from './ShowDate'
 
 type PropsType = {
   currentSubscription: CurrentPaymentSubscription
+  isRenewal: boolean
 }
 
-export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
+export const CurrentSubscription = ({ currentSubscription, isRenewal }: PropsType) => {
   const { autoRenewal, endDateOfSubscription } = currentSubscription
   const [isAutoRenewal, setIsAutoRenewal] = useState(autoRenewal)
   const [cancelAutoRenew] = useCancelAutoRenewalMutation()
@@ -38,13 +39,15 @@ export const CurrentSubscription = ({ currentSubscription }: PropsType) => {
   return (
     <div className={s.currentSubscription}>
       <Typography variant={'h3'}>{t.title}</Typography>
-      <Card style={{ padding: '12px 24px' }}>
+      <Card style={{ padding: '12px 24px', width: '100%' }}>
         <div className={s.info}>
           <ShowDate date={lastDay as string} headerText={t.lastDay} />
           {isAutoRenewal && <ShowDate date={nextPaymentDate} headerText={t.nextPayment} />}
         </div>
       </Card>
-      <Checkbox checked={isAutoRenewal} label={t.autoRenew} onCheckedChange={cancelRenew} />
+      {isRenewal && (
+        <Checkbox checked={isAutoRenewal} label={t.autoRenew} onCheckedChange={cancelRenew} />
+      )}
     </div>
   )
 }

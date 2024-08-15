@@ -13,13 +13,16 @@ export const AccountManagement = () => {
   }
 
   const curSubscription = currentSubscription.data[0]
+  const isRenewal = currentSubscription.hasAutoRenewal
 
   const isValidCurSubscription =
     new Date().getTime() < new Date(curSubscription?.endDateOfSubscription).getTime()
 
   return (
     <main className={s.root}>
-      {isValidCurSubscription && <CurrentSubscription currentSubscription={curSubscription} />}
+      {isValidCurSubscription && (
+        <CurrentSubscription currentSubscription={curSubscription} isRenewal={isRenewal} />
+      )}
       <ChoiceSubscription currentSubscription={curSubscription} />
     </main>
   )
