@@ -1,0 +1,36 @@
+.trigger {
+  cursor: pointer;
+
+  &[data-state='open'] {
+    fill: var(--color-accent-500);
+  }
+}
+
+.label {
+  margin: 0;
+  padding: 0 0 16px;
+}
+
+.notificationsList {
+  height: 280px;
+  padding-right: 12px;
+}
+
+.content {
+  padding: 16px 6px 16px 16px;
+
+  > div {
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+
+
+
