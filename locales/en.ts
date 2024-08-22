@@ -17,6 +17,12 @@ export const en = {
   },
   layout: {
     header: {
+      notifications: {
+        new: 'New',
+        newNotification: 'New notification!',
+        noNotifications: 'You have no notifications',
+        notifications: 'Notifications',
+      },
       signInBtn: 'Log in',
       signUpBtn: 'Sign up',
     },
@@ -279,6 +285,7 @@ export const en = {
     show: 'Show',
   },
   timeIntervals: {
+    ago: 'ago',
     days: 'd',
     hours: 'h',
     minutes: 'min',

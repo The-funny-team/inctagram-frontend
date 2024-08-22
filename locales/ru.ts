@@ -19,6 +19,12 @@ export const ru: LocaleType = {
   },
   layout: {
     header: {
+      notifications: {
+        new: 'Новое',
+        newNotification: 'Новое уведомление!',
+        noNotifications: 'У вас нет уведомлений',
+        notifications: 'Уведомления',
+      },
       signInBtn: 'Войти',
       signUpBtn: 'Регистрация',
     },
@@ -283,6 +289,7 @@ export const ru: LocaleType = {
   },
 
   timeIntervals: {
+    ago: 'назад',
     days: 'дн.',
     hours: 'ч.',
     minutes: 'мин.',
