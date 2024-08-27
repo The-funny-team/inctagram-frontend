@@ -1,10 +1,10 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { useMeQuery } from '@/shared/api/authApi'
-import { BellNotifyIcon } from '@/shared/assets'
 import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Select, Typography } from '@/shared/ui'
+import { NotificationsDropdown } from '@/widgets/NotificationsDropdown/ui/NotificationsDropdown'
 import { clsx } from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -63,7 +63,7 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
           Inctagram
         </Typography>
         <div className={classNames.headerDashboard}>
-          {data && <BellNotifyIcon />}
+          {data && <NotificationsDropdown notifications={[]} />}
           <Select
             onValueChange={changeLangHandler}
             options={languageOptions}
