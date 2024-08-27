@@ -1,4 +1,6 @@
-import { BellNotifyIcon } from '@/shared/assets'
+import { useState } from 'react'
+
+import { BellNotifyIcon, FilledBellNotifyIcon } from '@/shared/assets'
 import { useTranslation } from '@/shared/lib/hooks'
 import {
   DropdownMenu,
@@ -10,6 +12,7 @@ import {
   Typography,
 } from '@/shared/ui'
 import { NotificationsList } from '@/widgets/NotificationsDropdown/ui/NotificationsList/NotificationsList'
+import { DropdownMenuArrow } from '@radix-ui/react-dropdown-menu'
 
 import s from '@/widgets/NotificationsDropdown/ui/NotificationsDropdown.module.scss'
 
@@ -28,12 +31,19 @@ export const NotificationsDropdown = ({ notifications }: NotificationsDropdownPr
   const { text } = useTranslation()
   const t = text.layout.header.notifications
 
+  const [isBellActive, setIsBellActive] = useState<boolean>(false)
+
+  const handleOpenNotifications = (isOpen: boolean) => setIsBellActive(isOpen)
+
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={handleOpenNotifications}>
       <DropdownMenuTrigger asChild className={s.trigger}>
-        <BellNotifyIcon />
+        {isBellActive ? <FilledBellNotifyIcon /> : <BellNotifyIcon />}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className={s.content}>
+      <DropdownMenuContent align={'end'} arrowPadding={20} className={s.content} sideOffset={10}>
+        <DropdownMenuArrow asChild>
+          <div className={s.arrow}></div>
+        </DropdownMenuArrow>
         <DropdownMenuLabel className={s.label}>
           <Typography as={'span'} variant={'boldText14'}>
             {t.notifications}
