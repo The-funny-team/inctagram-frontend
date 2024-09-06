@@ -27,10 +27,18 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/registration-email-resending',
       }),
     }),
-    loginByGoogle: builder.query<SignInResponseType, ConfirmationCodeDto>({
-      query: ({ code }) => ({
+    loginByGitHub: builder.query<GoogleAuthResponseType, void>({
+      providesTags: ['Me'],
+      query: () => ({
         method: 'GET',
-        params: { code },
+        url: 'auth/github/login',
+      }),
+    }),
+    loginByGoogle: builder.mutation<GoogleAuthResponseType, ConfirmationCodeDto>({
+      invalidatesTags: ['Me'],
+      query: body => ({
+        body,
+        method: 'POST',
         url: 'auth/google/login',
       }),
     }),
@@ -108,10 +116,12 @@ export const {
   useCreateNewPasswordMutation,
   useEmailConfirmationMutation,
   useEmailResendingMutation,
-  useLoginByGoogleQuery,
+  useLoginByGitHubQuery,
+  useLoginByGoogleMutation,
   useLogoutMutation,
   useMeQuery,
   usePasswordRecoveryMutation,
+
   usePasswordRecoveryResendingMutation,
   useSignInMutation,
   useSignUpMutation,
@@ -142,6 +152,7 @@ export type SignUpResponse = {
 export type SignInRequestType = Pick<CreateUserDto, 'email' | 'password'>
 
 export type SignInResponseType = { accessToken: string }
+export type GoogleAuthResponseType = SignInResponseType & { email: string }
 
 export type NewPasswordRequestType = {
   newPassword: string
