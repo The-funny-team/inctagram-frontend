@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
-import { useLoginByGoogleQuery } from '@/shared/api/authApi'
+import { useLoginByGoogleMutation } from '@/shared/api/authApi'
 import { ACCESS_TOKEN, ROUTES_URL } from '@/shared/const'
 import { saveToLocalStorage } from '@/shared/lib/helpers'
 import { Loader } from '@/shared/ui'
 import { useRouter } from 'next/router'
 
-const GoogleAuthPage = () => {
+export const GitHubAuth = () => {
   const router = useRouter()
   const { code } = router.query as { code: string }
 
@@ -31,5 +31,3 @@ const GoogleAuthPage = () => {
 
   return null
 }
-
-export default GoogleAuthPage
