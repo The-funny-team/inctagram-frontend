@@ -39,7 +39,7 @@ export const SignUp = () => {
         baseUrl: currentUrl,
         email: data.email,
         password: data.password,
-        userName: data.username,
+        userName: data.userName,
       }).unwrap()
       setIsOpen(true)
     } catch (e: unknown) {
@@ -71,7 +71,7 @@ export const SignUp = () => {
       <form className={classNames.form} onSubmit={handleSubmit(submitHandler)}>
         <Controller
           control={control}
-          name={'username'}
+          name={'userName'}
           render={({ field, fieldState: { error } }) => (
             <Input
               className={classNames.formInput(error?.message)}
