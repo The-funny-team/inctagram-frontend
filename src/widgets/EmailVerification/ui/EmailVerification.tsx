@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import {
-  useEmailConfirmationMutation,
-  useEmailResendingMutation,
-  useMeQuery,
-} from '@/shared/api/authApi'
+import { useEmailConfirmationMutation, useEmailResendingMutation } from '@/shared/api/authApi'
 import { Loader } from '@/shared/ui'
 import { ConfirmedEmail } from '@/widgets/ConfirmedEmail'
 import { ExpiredLink } from '@/widgets/ExpiredLink'
@@ -13,9 +9,8 @@ import { useRouter } from 'next/router'
 
 export const EmailVerification = () => {
   const router = useRouter()
-  const { data: userInfo } = useMeQuery()
-  const currentEmail = userInfo?.email || ''
-  const { code } = router.query
+
+  const { code, email: currentEmail } = router.query
   const [isOpenModal, setIsOpenModal] = useState(false)
 
   const [confirmation, { isError, isLoading, isSuccess }] = useEmailConfirmationMutation()
@@ -29,7 +24,7 @@ export const EmailVerification = () => {
   }, [code, confirmation])
 
   const sendEmail = () => {
-    if (code && typeof code === 'string') {
+    if (code && currentEmail && typeof code === 'string' && typeof currentEmail === 'string') {
       emailResending({ baseUrl: currentUrl, email: currentEmail })
         .unwrap()
         .then(() => setIsOpenModal(true))
@@ -50,7 +45,7 @@ export const EmailVerification = () => {
     )
   }
 
-  if (!isSuccess) {
+  if (isSuccess) {
     return <ConfirmedEmail />
   }
 
