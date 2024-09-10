@@ -19,7 +19,7 @@ export const Recovery = () => {
 
   useEffect(() => {
     code && checkRecoveryCode({ recoveryCode: code })
-  }, [code])
+  }, [code, checkRecoveryCode])
 
   const sendEmail = () => {
     router.push(ROUTES_URL.FORGOT_PASSWORD)
