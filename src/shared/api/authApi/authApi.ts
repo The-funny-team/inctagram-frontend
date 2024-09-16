@@ -116,12 +116,11 @@ export const {
   useCreateNewPasswordMutation,
   useEmailConfirmationMutation,
   useEmailResendingMutation,
-  useLoginByGitHubQuery,
+  useLazyLoginByGitHubQuery,
   useLoginByGoogleMutation,
   useLogoutMutation,
   useMeQuery,
   usePasswordRecoveryMutation,
-
   usePasswordRecoveryResendingMutation,
   useSignInMutation,
   useSignUpMutation,
