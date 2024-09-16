@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { BASE_LOCAL_URL, BASE_URL } from '@/shared/const'
+import { ROUTES_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
 import { GoogleAuth } from '@/widgets/GoogleAuth'
 import { useRouter } from 'next/router'
@@ -15,9 +15,9 @@ const Page = () => {
 
   useEffect(() => {
     if (!code) {
-      router.push('/profile')
+      void router.push(ROUTES_URL.PUBLIC_PAGE)
     }
-  }, [router])
+  }, [code, router])
 
   return null
 }

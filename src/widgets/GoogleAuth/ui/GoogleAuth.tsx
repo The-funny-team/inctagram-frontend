@@ -21,13 +21,13 @@ export const GoogleAuth = ({ code }: Props) => {
       .unwrap()
       .then(data => {
         saveToLocalStorage(ACCESS_TOKEN, data.accessToken)
-        router.push('/')
+        void router.push(ROUTES_URL.PROFILE)
       })
       .catch(error => {
         toast.error(error.data.messages[0].message)
-        router.push(ROUTES_URL.SIGN_IN)
+        void router.push(ROUTES_URL.SIGN_IN)
       })
-  }, [])
+  }, [code, router, loginByGoogle])
 
   if (isLoading) {
     return <Loader />

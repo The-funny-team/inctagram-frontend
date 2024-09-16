@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form'
 
-import { useLoginByGitHubQuery, useSignInMutation } from '@/shared/api/authApi'
+import { useLazyLoginByGitHubQuery, useSignInMutation } from '@/shared/api/authApi'
 import { GithubIcon, GoogleIcon } from '@/shared/assets'
 import { GOOGLE_URL, ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
@@ -15,7 +15,9 @@ import { SignInFormValuesType, useSignIn } from '../services'
 
 export const SignIn = () => {
   const [signIn, { isLoading }] = useSignInMutation()
-  const { data: LoginByGitHub, refetch: refetchLoginByGitHub } = useLoginByGitHubQuery()
+
+  const [trigger] = useLazyLoginByGitHubQuery()
+
   const { router, text } = useTranslation()
   const t = text.pages.signIn
   const {
@@ -50,9 +52,6 @@ export const SignIn = () => {
   const loginByGoogle = () => {
     window.location.assign(GOOGLE_URL)
   }
-  const loginByGithub = () => {
-    refetchLoginByGitHub()
-  }
 
   return (
     <Card className={classNames.root}>
@@ -63,7 +62,7 @@ export const SignIn = () => {
         <button onClick={loginByGoogle}>
           <GoogleIcon />
         </button>
-        <button onClick={loginByGithub}>
+        <button onClick={() => trigger}>
           <GithubIcon />
         </button>
       </div>
