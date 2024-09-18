@@ -1,6 +1,8 @@
 import { useDeleteUserMutation } from '@/shared/api/profileApi'
 import { getProtectedNavbarLayout } from '@/shared/layouts'
+
 import { Button, HeadMeta } from '@/shared/ui'
+
 
 const HomePage = () => {
   const [deleteMe] = useDeleteUserMutation()
