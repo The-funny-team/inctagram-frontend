@@ -4,6 +4,13 @@ import { saveToLocalStorage } from '@/shared/lib/helpers'
 
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
+    checkRecoveryCode: builder.mutation<{ email: string }, { recoveryCode: string }>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/auth/check-recovery-code',
+      }),
+    }),
     createNewPassword: builder.mutation<void, NewPasswordRequestType>({
       query: body => {
         return {
@@ -78,13 +85,7 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/password-recovery',
       }),
     }),
-    passwordRecoveryResending: builder.mutation<void, ConfirmationCodeDto>({
-      query: body => ({
-        body,
-        method: 'POST',
-        url: '/auth/password-recovery-resending',
-      }),
-    }),
+
     signIn: builder.mutation<SignInResponseType, SignInRequestType>({
       invalidatesTags: ['Me'],
       async onQueryStarted(_, { queryFulfilled }) {
@@ -113,6 +114,7 @@ const authApi = baseApi.injectEndpoints({
 })
 
 export const {
+  useCheckRecoveryCodeMutation,
   useCreateNewPasswordMutation,
   useEmailConfirmationMutation,
   useEmailResendingMutation,
@@ -121,7 +123,7 @@ export const {
   useLogoutMutation,
   useMeQuery,
   usePasswordRecoveryMutation,
-  usePasswordRecoveryResendingMutation,
+
   useSignInMutation,
   useSignUpMutation,
 } = authApi
@@ -131,21 +133,6 @@ export type CreateUserDto = {
   email: string
   password: string
   userName: string
-}
-
-export type SignUpResponse = {
-  aboutMe: null | string
-  avatarUrl: null | string
-  city: null | string
-  country: null | string
-  createdAt: string
-  dateOfBirth: null | string
-  email: string
-  firstName: null | string
-  id: string
-  lastName: null | string
-  updatedAt: string
-  username: string
 }
 
 export type SignInRequestType = Pick<CreateUserDto, 'email' | 'password'>
