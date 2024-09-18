@@ -20,7 +20,7 @@ export const useSignUp = () => {
       email: '',
       password: '',
       passwordConfirm: '',
-      username: '',
+      userName: '',
     },
     mode: 'onTouched',
     resolver: zodResolver(signUpSchema(text)),
