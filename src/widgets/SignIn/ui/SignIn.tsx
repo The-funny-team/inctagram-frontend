@@ -62,7 +62,7 @@ export const SignIn = () => {
         <button onClick={loginByGoogle}>
           <GoogleIcon />
         </button>
-        <button onClick={() => trigger}>
+        <button onClick={() => trigger()}>
           <GithubIcon />
         </button>
       </div>

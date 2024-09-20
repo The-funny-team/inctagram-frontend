@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://funny-inctagram.site/'
+export const BASE_URL = 'https://funny-inctagram.site'
 export const BASE_LOCAL_URL = 'http://localhost:3000'
 
 export const BASE_API_URL = 'https://inctagram.work/api/v1/'
