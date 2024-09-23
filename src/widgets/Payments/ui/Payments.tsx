@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { useGetPaymentsQuery } from '@/shared/api/paymentApi'
+import { getPaginatedItems } from '@/shared/lib/helpers/getPaginatedItems'
 import { Loader } from '@/shared/ui'
 import { Pagination } from '@/shared/ui/Pagination'
 import { TableEmpty } from '@/shared/ui/Table'
@@ -22,11 +23,13 @@ const PAGINATION_OPTIONS: Option[] = [
 export const Payments = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(10)
-  const { data: payments, isLoading } = useGetPaymentsQuery()
+  const { data: payments = [], isLoading } = useGetPaymentsQuery()
 
   const handlePageSize = (pageSize: string) => {
     setPageSize(+pageSize)
   }
+
+  const paginatedPayments = getPaginatedItems(payments, currentPage, pageSize)
 
   if (isLoading) {
     return <Loader />
@@ -34,9 +37,9 @@ export const Payments = () => {
 
   return (
     <div className={s.container}>
-      {payments && payments.length ? (
+      {payments.length > 0 ? (
         <div className={s.paymentsTable}>
-          <PaymentsListTable payments={payments} />
+          <PaymentsListTable payments={paginatedPayments} />
           <Pagination
             className={s.pagination}
             currentPage={currentPage}
