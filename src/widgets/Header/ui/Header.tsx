@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useEffect } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
 import { useMeQuery } from '@/shared/api/authApi'
 import { ROUTES_URL } from '@/shared/const'
@@ -38,7 +38,7 @@ const languageOptions = [
 
 export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'header'>) => {
   const { router, text } = useTranslation()
-  const { data, isLoading } = useMeQuery()
+  const { data } = useMeQuery()
 
   const showSignButton = router.pathname === ('/sign-in' || '/sign-up')
 
