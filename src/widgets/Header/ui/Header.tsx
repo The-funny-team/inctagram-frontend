@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useEffect } from 'react'
 
 import { useMeQuery } from '@/shared/api/authApi'
 import { ROUTES_URL } from '@/shared/const'
@@ -38,7 +38,9 @@ const languageOptions = [
 
 export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'header'>) => {
   const { router, text } = useTranslation()
-  const { data } = useMeQuery()
+  const { data, isLoading } = useMeQuery()
+
+  const showSignButton = router.pathname === ('/sign-in' || '/sign-up')
 
   const changeLangHandler = (value: string) => {
     router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
@@ -69,7 +71,7 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
             options={languageOptions}
             value={router.locale}
           />
-          {!data && (
+          {!data && !showSignButton && (
             <div className={classNames.authLinks}>
               <Typography
                 as={Link}
