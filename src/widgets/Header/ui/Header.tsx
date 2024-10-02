@@ -41,7 +41,7 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
   const { data } = useMeQuery()
 
   const changeLangHandler = (value: string) => {
-    router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
+    void router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
       locale: value,
     })
   }
@@ -63,7 +63,7 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
           Inctagram
         </Typography>
         <div className={classNames.headerDashboard}>
-          {data && <NotificationsDropdown notifications={[]} />}
+          {data && <NotificationsDropdown />}
           <Select
             onValueChange={changeLangHandler}
             options={languageOptions}
