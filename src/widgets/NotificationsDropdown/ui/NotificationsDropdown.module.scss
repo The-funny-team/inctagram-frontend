@@ -31,6 +31,36 @@
   }
 }
 
+.bell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .count {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 15px;
+    height: 15px;
+
+    font-family: var(--font-family);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 80%;
+    color: var(--light-100);
+    text-align: center;
+
+    background-color: red;
+    border-radius: 50%;
+  }
+}
+
 .arrow {
   position: absolute;
   top: -3.75px;
