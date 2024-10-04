@@ -18,7 +18,7 @@ export const NotificationModal = ({ closeOtherModal, isOpen, isOpenChange }: Pro
   const onDiscardHandler = () => {
     dispatch(resetState())
     isOpenChange(false)
-    closeOtherModal(false)
+    //closeOtherModal(false)
   }
 
   const onSaveDraftHandler = () => {

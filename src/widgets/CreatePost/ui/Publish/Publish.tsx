@@ -40,6 +40,7 @@ export const Publish = ({ onCloseBtn }: PublishProps) => {
         await createPost({ childrenMetadata: imagesIds, description })
         dispatch(resetState())
         onCloseBtn()
+
         toast.success('Post is published')
       }
     } catch (error) {

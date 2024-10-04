@@ -19,11 +19,15 @@ export const CreatePost = ({ isOpen, isOpenChange }: Props) => {
   const [openNotification, setOpenNotification] = useState<boolean>(false)
   const stage = useAppSelector(state => state.createPostSlice.stage)
   const onCloseHandler = () => {
-    if (stage === 0 || stage === 3) {
+    if (stage === 0) {
       isOpenChange(false)
     } else {
       setOpenNotification(true)
     }
+  }
+  const onPublishedSuccess = () => {
+    isOpenChange(false)
+    setOpenNotification(false)
   }
 
   return (
@@ -32,7 +36,7 @@ export const CreatePost = ({ isOpen, isOpenChange }: Props) => {
         {stage === 0 && <ImageSelection onCloseBtn={onCloseHandler} />}
         {stage === 1 && <Cropping />}
         {stage === 2 && <Filtering />}
-        {stage === 3 && <Publish onCloseBtn={onCloseHandler} />}
+        {stage === 3 && <Publish onCloseBtn={onPublishedSuccess} />}
       </Modal>
       <NotificationModal
         closeOtherModal={isOpenChange}
