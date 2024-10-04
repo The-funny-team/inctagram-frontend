@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { GetPostResponse, GetPostsResponse } from '@/shared/api/postsApi'
 import { BASE_API_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
@@ -6,7 +8,11 @@ import { TotalUsersCounter } from '@/widgets/TotalUsersCounter'
 import { GetStaticProps } from 'next'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`${BASE_API_URL}public-posts/all?pageSize=4`)
+  const res = await fetch(`${BASE_API_URL}public-posts/all?pageSize=4`, {
+    headers: {
+      'Cache-Control': 'no-cache',
+    },
+  })
   const posts: GetPostsResponse = await res.json()
 
   return {
@@ -26,18 +32,35 @@ type PropsType = {
 }
 
 const PublicPage = ({ error, publicPosts, totalUsersCount }: PropsType) => {
+  const [data, setData] = useState({ error, publicPosts, totalUsersCount })
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      const res = await fetch(`${BASE_API_URL}public-posts/all?pageSize=4`)
+      const updatePosts: GetPostsResponse = await res.json()
+
+      setData({
+        error: updatePosts.items.length ? '' : 'No posts yet!',
+        publicPosts: updatePosts.items,
+        totalUsersCount: updatePosts.totalUsers || 0,
+      })
+    }, 60000)
+
+    return () => clearInterval(intervalId)
+  }, [])
+
   return (
     <>
       <HeadMeta title={'public page'} />
-      {publicPosts ? (
+      {data.publicPosts ? (
         <main style={{ margin: '0 auto', maxWidth: '972px' }}>
-          <TotalUsersCounter usersCount={totalUsersCount} />
-          {publicPosts && <PublicPosts publicPosts={publicPosts} />}
+          <TotalUsersCounter usersCount={data.totalUsersCount} />
+          {publicPosts && <PublicPosts publicPosts={data.publicPosts} />}
         </main>
       ) : (
         <div style={{ paddingTop: '36px', textAlign: 'center' }}>
           <Typography as={'p'} variant={'boldText16'}>
-            {error}
+            {data.error}
           </Typography>
         </div>
       )}
