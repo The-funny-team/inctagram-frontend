@@ -73,6 +73,12 @@ export const en = {
       noBtn: 'No',
       yesBtn: 'Yes',
     },
+    logOutModal: {
+      getBody: (email: string) => `Are you really want to log out of your account "${email}"?`,
+      header: 'Log Out',
+      noBtn: 'No',
+      yesBtn: 'Yes',
+    },
     notificationModal: {
       discardBtn: 'Discard',
       draftBtn: 'Save draft',

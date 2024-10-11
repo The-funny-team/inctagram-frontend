@@ -75,6 +75,13 @@ export const ru: LocaleType = {
       noBtn: 'Нет',
       yesBtn: 'Да',
     },
+    logOutModal: {
+      getBody: (email: string) =>
+        `Вы действительно хотите выйти из своей учетной записи "${email}"?`,
+      header: 'Выйти',
+      noBtn: 'Нет',
+      yesBtn: 'Да',
+    },
     notificationModal: {
       discardBtn: 'Отменить',
       draftBtn: 'Сохранить черновик',
