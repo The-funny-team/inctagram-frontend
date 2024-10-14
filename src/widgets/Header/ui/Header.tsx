@@ -40,10 +40,11 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
   const { router, text } = useTranslation()
   const { data } = useMeQuery()
 
-  const showSignButton = router.pathname === ('/sign-in' || '/sign-up')
+  const authRoutes = [ROUTES_URL.SIGN_IN, ROUTES_URL.SIGN_UP]
+  const showSignButton = authRoutes.includes(router.pathname)
 
   const changeLangHandler = (value: string) => {
-    router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
+    void router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
       locale: value,
     })
   }
