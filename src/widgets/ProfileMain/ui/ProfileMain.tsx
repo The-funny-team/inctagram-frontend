@@ -10,7 +10,10 @@ export const ProfileMain = () => {
   const { data: userInfo } = useMeQuery()
   const { data: profileInfo } = useGetProfileInfoQuery()
   const myId = userInfo?.userId
-  const { data: profilePosts, isLoading } = useGetUserPostsQuery({ userId: myId as number })
+  const { data: profilePosts, isLoading } = useGetUserPostsQuery({
+    pageSize: 8,
+    userId: myId as number,
+  })
 
   const authorId =
     profilePosts && profilePosts.items.length !== 0 ? profilePosts.items[0].ownerId : ''
