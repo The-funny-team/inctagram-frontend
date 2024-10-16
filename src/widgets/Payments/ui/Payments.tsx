@@ -27,6 +27,7 @@ export const Payments = () => {
 
   const handlePageSize = (pageSize: string) => {
     setPageSize(+pageSize)
+    setCurrentPage(1)
   }
 
   const paginatedPayments = getPaginatedItems(payments, currentPage, pageSize)
