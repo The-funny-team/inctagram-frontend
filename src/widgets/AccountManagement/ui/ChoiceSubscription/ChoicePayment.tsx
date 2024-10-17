@@ -7,6 +7,7 @@ import {
   useCreatePaymentSubscriptionsMutation,
 } from '@/shared/api/paymentApi'
 import { Paypal, Stripe } from '@/shared/assets'
+import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Button, Card, Modal, RadioGroup, Typography } from '@/shared/ui'
 import { useRouter } from 'next/router'
@@ -19,6 +20,7 @@ export const ChoicePayment = () => {
   const [createSubscription] = useCreatePaymentSubscriptionsMutation()
   const router = useRouter()
   const success = router.query.success === 'true'
+
   const { text } = useTranslation()
   const t = text.pages.profile.management.subscriptionsCosts
   const subscriptions = [
@@ -57,6 +59,7 @@ export const ChoicePayment = () => {
 
   const onCloseModal = () => {
     setIsOpenModal(false)
+    void router.replace(ROUTES_URL.ACCOUNT_MANAGEMENT)
   }
 
   return (
