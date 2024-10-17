@@ -66,7 +66,7 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
           Inctagram
         </Typography>
         <div className={classNames.headerDashboard}>
-          {data && <NotificationsDropdown notifications={[]} />}
+          {data && <NotificationsDropdown />}
           <Select
             onValueChange={changeLangHandler}
             options={languageOptions}
