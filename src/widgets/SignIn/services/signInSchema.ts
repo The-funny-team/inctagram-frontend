@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export const signInSchema = (t: LocaleType['validation']) => {
   return z.object({
-    email: z.string().email({ message: t.emailVerification }).trim(),
+    email: z.string().email({ message: t.emailVerification }).trim().toLowerCase(),
     password: z
       .string()
       .min(6, t.minLength6)

@@ -1,0 +1,11 @@
+.rootPage {
+  padding-top: 35px;
+  padding-left: 24px;
+
+  .postsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 53px;
+  }
+}

@@ -1,0 +1,21 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 378px;
+  height: 216px;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 30px 24px;
+}
+
+.buttons {
+  display: flex;
+  column-gap: 24px;
+  justify-content: flex-end;
+}

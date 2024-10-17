@@ -16,10 +16,9 @@ import styles from './CreateNewPassword.module.scss'
 
 type Props = {
   code: string
-  setRecoveryErrorHandler: (isError: boolean) => void
 }
 
-export const CreateNewPassword = ({ code, setRecoveryErrorHandler }: Props) => {
+export const CreateNewPassword = ({ code }: Props) => {
   const { control, handleSubmit, isDisabled, setError, text } = useCreateNewPassword()
 
   const router = useRouter()
@@ -27,19 +26,17 @@ export const CreateNewPassword = ({ code, setRecoveryErrorHandler }: Props) => {
   const [creatNewPassword] = useCreateNewPasswordMutation()
   const createNewPasswordHandler: SubmitHandler<CreateNewPasswordSchemaType> = data => {
     creatNewPassword({
-      ...data,
+      newPassword: data.password,
       recoveryCode: code,
     })
       .unwrap()
       .then(() => router.push(ROUTES_URL.SIGN_IN))
       .catch(error => {
         if (isFetchBaseQueryError(error)) {
-          if (Array.isArray(error.data.message)) {
-            const el = error.data.message.find(el => el.field === 'recoveryCode')
+          if (Array.isArray(error.data.messages)) {
+            const el = error.data.messages.find(el => el.field === 'recoveryCode')
 
-            if (el) {
-              setRecoveryErrorHandler(true)
-            } else {
+            if (!el) {
               onRequestErrorHandler(error, setError)
             }
           }

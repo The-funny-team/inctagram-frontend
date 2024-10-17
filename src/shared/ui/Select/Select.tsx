@@ -10,8 +10,9 @@ const inter = Inter({ subsets: ['latin'] })
 // eslint-disable-next-line perfectionist/sort-imports
 import s from './Select.module.scss'
 
-type Props = {
+export type SelectProps = {
   children?: ReactNode
+  className?: string
   disabled?: boolean
   label?: string
   name?: string
@@ -21,8 +22,11 @@ type Props = {
   value?: string
 }
 
-export const Select = forwardRef<ElementRef<typeof SelectRadix.Trigger>, Props>(
-  ({ children, disabled, label, name, onValueChange, options, placeholder, value }, ref) => {
+export const Select = forwardRef<ElementRef<typeof SelectRadix.Trigger>, SelectProps>(
+  (
+    { children, className, disabled, label, name, onValueChange, options, placeholder, value },
+    ref
+  ) => {
     const selectedItem = options.find(el => el.value === value)
 
     return (
@@ -38,7 +42,12 @@ export const Select = forwardRef<ElementRef<typeof SelectRadix.Trigger>, Props>(
           onValueChange={onValueChange}
           value={value}
         >
-          <SelectRadix.Trigger className={clsx(s.trigger)} id={label} ref={ref} tabIndex={0}>
+          <SelectRadix.Trigger
+            className={clsx(s.trigger, className)}
+            id={label}
+            ref={ref}
+            tabIndex={0}
+          >
             <SelectRadix.Value className={s.value} placeholder={placeholder}>
               {selectedItem?.label || placeholder}
             </SelectRadix.Value>

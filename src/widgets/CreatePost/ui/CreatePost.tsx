@@ -25,6 +25,10 @@ export const CreatePost = ({ isOpen, isOpenChange }: Props) => {
       setOpenNotification(true)
     }
   }
+  const onPublishedSuccess = () => {
+    isOpenChange(false)
+    setOpenNotification(false)
+  }
 
   return (
     <>
@@ -32,7 +36,7 @@ export const CreatePost = ({ isOpen, isOpenChange }: Props) => {
         {stage === 0 && <ImageSelection onCloseBtn={onCloseHandler} />}
         {stage === 1 && <Cropping />}
         {stage === 2 && <Filtering />}
-        {stage === 3 && <Publish />}
+        {stage === 3 && <Publish onCloseBtn={onPublishedSuccess} />}
       </Modal>
       <NotificationModal
         closeOtherModal={isOpenChange}

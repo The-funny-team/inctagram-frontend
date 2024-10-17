@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 
-import { useLogoutMutation } from '@/shared/api/authApi'
 import {
   CreateIcon,
   FavoritesIcon,
@@ -18,7 +16,7 @@ import {
   StatisticsIcon,
 } from '@/shared/assets'
 import { ROUTES_URL } from '@/shared/const'
-import { isFetchBaseQueryError } from '@/shared/lib/helpers'
+import { LogOutModal } from '@/shared/layouts/NavbarLayout/LogOutModal/LogOutModal'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Button } from '@/shared/ui'
 import { CreatePost } from '@/widgets/CreatePost'
@@ -32,8 +30,8 @@ type Props = {
 }
 
 export const NavBar = ({ className }: Props) => {
-  const [logout] = useLogoutMutation()
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [logOutModalIsOpen, setLogOutModalIsOpen] = useState<boolean>(false)
 
   const {
     router,
@@ -43,20 +41,6 @@ export const NavBar = ({ className }: Props) => {
   } = useTranslation()
 
   const pathname = '/'.concat(router.pathname.split('/')[1])
-
-  const logoutHandler = async () => {
-    try {
-      await logout().unwrap()
-    } catch (e) {
-      if (isFetchBaseQueryError(e)) {
-        if (!Array.isArray(e.data.message)) {
-          toast.error(e.data.message)
-        }
-      } else {
-        toast.error(JSON.stringify(e))
-      }
-    }
-  }
 
   const shouldActive = (value: boolean) => {
     return !isOpen && value
@@ -128,11 +112,12 @@ export const NavBar = ({ className }: Props) => {
           {t.favorites}
         </Button>
       </nav>
-      <Button className={s.button} onClick={logoutHandler}>
+      <Button className={s.button} onClick={() => setLogOutModalIsOpen(true)}>
         <LogOutIcon />
         {t.logOut}
       </Button>
       <CreatePost isOpen={isOpen} isOpenChange={setIsOpen} />
+      <LogOutModal isOpen={logOutModalIsOpen} setIsOpen={setLogOutModalIsOpen} />
     </aside>
   )
 }

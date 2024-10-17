@@ -10,15 +10,15 @@ export const onRequestErrorHandler = <T>(
   fieldName?: T
 ) => {
   if (isFetchBaseQueryError(error)) {
-    if (Array.isArray(error.data.message)) {
-      error.data.message.forEach(item =>
+    if (Array.isArray(error.data.messages)) {
+      error.data.messages.forEach(item =>
         setError(item.field as T, { message: item.message, type: 'validationError' })
       )
     } else {
       if (fieldName && error.status === 401) {
-        setError(fieldName, { message: error.data.message, type: 'validationError' })
+        setError(fieldName, { message: error.data.messages, type: 'validationError' })
       } else {
-        toast.error(error.data.message as string)
+        toast.error(error.data.messages as string)
       }
     }
   }

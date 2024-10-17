@@ -1,31 +1,15 @@
 import { getRootLayout } from '@/shared/layouts'
-import { useTranslation } from '@/shared/lib/hooks'
-import { HeadMeta, LinkTo, Typography } from '@/shared/ui'
+import { HeadMeta } from '@/shared/ui'
+import { PrivacyPolicy } from '@/widgets/PrivacyPolicy'
 
-import s from './PrivacyPolicy.module.scss'
-
-const PrivacyPolicy = () => {
-  const {
-    text: {
-      pages: { privacyPolicy },
-    },
-  } = useTranslation()
-
+const PrivacyPolicyPage = () => {
   return (
     <>
       <HeadMeta title={'Privacy Policy'} />
-      <main className={s.root}>
-        <LinkTo>{privacyPolicy.backToBtn}</LinkTo>
-        <Typography as={'h1'} className={s.title} variant={'h1'}>
-          {privacyPolicy.title}
-        </Typography>
-        <Typography className={s.desc} variant={'regularText14'}>
-          {privacyPolicy.descripton}
-        </Typography>
-      </main>
+      <PrivacyPolicy />
     </>
   )
 }
 
-PrivacyPolicy.getLayout = getRootLayout
-export default PrivacyPolicy
+PrivacyPolicyPage.getLayout = getRootLayout
+export default PrivacyPolicyPage

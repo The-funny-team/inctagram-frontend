@@ -1,11 +1,26 @@
-import { getNavbarLayout } from '@/shared/layouts'
-import { useTranslation } from '@/shared/lib/hooks'
+import { useEffect } from 'react'
 
-const Home = () => {
-  const { text } = useTranslation()
+import { ROUTES_URL } from '@/shared/const'
+import { getRootLayout } from '@/shared/layouts'
+import { GoogleAuth } from '@/widgets/GoogleAuth'
+import { useRouter } from 'next/router'
 
-  return <main>{text.pages.home}</main>
+const Page = () => {
+  const router = useRouter()
+  const { code } = router.query as { code: string }
+
+  if (code) {
+    return <GoogleAuth code={code} />
+  }
+
+  useEffect(() => {
+    if (!code) {
+      void router.push(ROUTES_URL.PUBLIC_PAGE)
+    }
+  }, [code, router])
+
+  return null
 }
 
-Home.getLayout = getNavbarLayout
-export default Home
+Page.getLayout = getRootLayout
+export default Page

@@ -1,11 +1,12 @@
 import { getProtectedNavbarLayout } from '@/shared/layouts'
 import { HeadMeta } from '@/shared/ui'
+import { ProfileMain } from '@/widgets/ProfileMain'
 
 const ProfilePage = () => {
   return (
     <>
       <HeadMeta title={'Profile'} />
-      <main>Profile Page</main>
+      <ProfileMain />
     </>
   )
 }

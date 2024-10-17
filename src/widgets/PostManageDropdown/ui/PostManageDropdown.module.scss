@@ -1,0 +1,16 @@
+.trigger {
+  cursor: pointer;
+
+  &[data-state='open'] {
+    fill: var(--color-accent-500);
+  }
+}
+
+.menuItem {
+  display: flex;
+  gap: 12px;
+}
+
+.menuItem:hover {
+  background-color: var(--color-dark-100);
+}

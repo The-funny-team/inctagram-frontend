@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form'
 
 import { useSignInMutation } from '@/shared/api/authApi'
 import { GithubIcon, GoogleIcon } from '@/shared/assets'
-import { GOOGLE_URL, ROUTES_URL } from '@/shared/const'
+import { GITHUB_URL, GOOGLE_URL, ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Button, Card, Input, Typography } from '@/shared/ui'
 import { clsx } from 'clsx'
@@ -15,6 +15,7 @@ import { SignInFormValuesType, useSignIn } from '../services'
 
 export const SignIn = () => {
   const [signIn, { isLoading }] = useSignInMutation()
+
   const { router, text } = useTranslation()
   const t = text.pages.signIn
   const {
@@ -49,6 +50,9 @@ export const SignIn = () => {
   const loginByGoogle = () => {
     window.location.assign(GOOGLE_URL)
   }
+  const loginByGitHub = () => {
+    window.location.assign(GITHUB_URL)
+  }
 
   return (
     <Card className={classNames.root}>
@@ -59,9 +63,9 @@ export const SignIn = () => {
         <button onClick={loginByGoogle}>
           <GoogleIcon />
         </button>
-        <Link href={'https://github.com/login/oauth/authorize'} target={'_blank'}>
+        <button onClick={loginByGitHub}>
           <GithubIcon />
-        </Link>
+        </button>
       </div>
       <form className={classNames.form} onSubmit={handleSubmit(onFormSubmit)}>
         <Controller

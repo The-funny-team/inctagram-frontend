@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
+import { useUploadPostPhotoMutation } from '@/shared/api/postsApi'
 import { ArrowLeftShortIcon } from '@/shared/assets'
 import { FILTERS } from '@/shared/const'
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/lib/hooks'
 import { Button, Typography } from '@/shared/ui'
 import {
-  getCroppedImage,
   getFilteredImage,
   setFilter,
   setFilteredImages,
@@ -19,16 +19,18 @@ import NextImage from 'next/image'
 import s from './Filtering.module.scss'
 
 export const Filtering = () => {
+  const { text } = useTranslation()
+  const t = text.modals.createPostModal
   const [slideId, setSlideId] = useState<number>(0)
   const croppedPictures = useAppSelector(state => state.createPostSlice.croppedPictures)
-
   const dispatch = useAppDispatch()
+  const [uploadToServer] = useUploadPostPhotoMutation()
 
   const savedImages = async () => {
     const images: string[] = []
 
     for (let i = 0; i < croppedPictures.length; i++) {
-      images.push(await getFilteredImage(croppedPictures[i]))
+      images.push(await getFilteredImage(croppedPictures[i], dispatch, uploadToServer))
     }
 
     return images
@@ -54,15 +56,21 @@ export const Filtering = () => {
           <ArrowLeftShortIcon />
         </button>
         <Typography as={'h1'} variant={'h1'}>
-          Filtering
+          {t.filter}
         </Typography>
         <Button onClick={setNext} style={{ padding: 'unset' }} variant={'link'}>
-          Next
+          {t.nextBtn}
         </Button>
       </div>
       <div className={s.body}>
         <div className={s.sliderBlock}>
-          <Slider setSlideId={setSlideId} slideId={slideId} sliderLength={croppedPictures.length}>
+          <Slider
+            isDots={croppedPictures.length > 1}
+            setSlideId={setSlideId}
+            sizeBtn={36}
+            slideId={slideId}
+            sliderLength={croppedPictures.length}
+          >
             {croppedPictures.map((pic, i) => (
               <div key={i}>
                 <NextImage

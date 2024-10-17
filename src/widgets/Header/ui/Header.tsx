@@ -1,10 +1,10 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { useMeQuery } from '@/shared/api/profileApi'
-import { BellNotifyIcon } from '@/shared/assets'
+import { useMeQuery } from '@/shared/api/authApi'
 import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Select, Typography } from '@/shared/ui'
+import { NotificationsDropdown } from '@/widgets/NotificationsDropdown/ui/NotificationsDropdown'
 import { clsx } from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -40,8 +40,11 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
   const { router, text } = useTranslation()
   const { data } = useMeQuery()
 
+  const authRoutes = [ROUTES_URL.SIGN_IN, ROUTES_URL.SIGN_UP]
+  const showSignButton = authRoutes.includes(router.pathname)
+
   const changeLangHandler = (value: string) => {
-    router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
+    void router.push({ pathname: router.pathname, query: router.query }, router.asPath, {
       locale: value,
     })
   }
@@ -59,17 +62,17 @@ export const Header = ({ className, ...restProps }: ComponentPropsWithoutRef<'he
   return (
     <header className={classNames.header} {...restProps}>
       <div className={classNames.container}>
-        <Typography as={Link} className={classNames.link} href={'/'} variant={'large'}>
+        <Typography as={Link} className={classNames.link} href={ROUTES_URL.HOME} variant={'large'}>
           Inctagram
         </Typography>
         <div className={classNames.headerDashboard}>
-          {data && <BellNotifyIcon />}
+          {data && <NotificationsDropdown notifications={[]} />}
           <Select
             onValueChange={changeLangHandler}
             options={languageOptions}
             value={router.locale}
           />
-          {!data && (
+          {!data && !showSignButton && (
             <div className={classNames.authLinks}>
               <Typography
                 as={Link}

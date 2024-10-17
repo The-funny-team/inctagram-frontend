@@ -3,31 +3,22 @@ import type { Meta, StoryObj } from '@storybook/react'
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
+  ArrowSliderLeftIcon,
+  ArrowSliderRightIcon,
   BellNotifyIcon,
   CalendarBtnLeftIcon,
   CalendarBtnRightIcon,
   CalendarIcon,
   CheckboxIcon,
-  CreateIcon,
+  DotIcon,
+  DotsHorizontalIcon,
+  EditOutlineIcon,
   EyeOutlineIcon,
-  FavoritesIcon,
-  FilledCreateIcon,
-  FilledFavoritesIcon,
-  FilledHomeIcon,
-  FilledMessengerIcon,
-  FilledProfileIcon,
   GithubIcon,
   GoogleIcon,
-  HomeIcon,
-  LogOutIcon,
-  MessengerIcon,
-  PhotoIcon,
-  ProfileIcon,
   RecaptchaIcon,
   SearchOutlineIcon,
-  StatisticsIcon,
 } from '@/shared/assets'
-import { DeleteIcon } from '@/shared/assets/icons/DeleteIcon'
 
 import { IconsList } from './IconsList'
 
@@ -61,11 +52,61 @@ export const ArrowLeft: Story = {
   },
 }
 
+export const ArrowSliderLeft: Story = {
+  args: {
+    children: (
+      <>
+        <ArrowSliderLeftIcon />
+      </>
+    ),
+  },
+}
+
+export const ArrowSliderRight: Story = {
+  args: {
+    children: (
+      <>
+        <ArrowSliderRightIcon />
+      </>
+    ),
+  },
+}
+
 export const Checkbox: Story = {
   args: {
     children: (
       <>
         <CheckboxIcon />
+      </>
+    ),
+  },
+}
+
+export const Dot: Story = {
+  args: {
+    children: (
+      <>
+        <DotIcon />
+      </>
+    ),
+  },
+}
+
+export const DotsHorizontal: Story = {
+  args: {
+    children: (
+      <>
+        <DotsHorizontalIcon />
+      </>
+    ),
+  },
+}
+
+export const EditOutline: Story = {
+  args: {
+    children: (
+      <>
+        <EditOutlineIcon />
       </>
     ),
   },
@@ -156,144 +197,6 @@ export const CalendarImg: Story = {
     children: (
       <>
         <CalendarIcon />
-      </>
-    ),
-  },
-}
-
-export const Home: Story = {
-  args: {
-    children: (
-      <>
-        <HomeIcon />
-      </>
-    ),
-  },
-}
-
-export const FilledHome: Story = {
-  args: {
-    children: (
-      <>
-        <FilledHomeIcon />
-      </>
-    ),
-  },
-}
-
-export const Create: Story = {
-  args: {
-    children: (
-      <>
-        <CreateIcon />
-      </>
-    ),
-  },
-}
-
-export const FilledCreate: Story = {
-  args: {
-    children: (
-      <>
-        <FilledCreateIcon />
-      </>
-    ),
-  },
-}
-
-export const Profile: Story = {
-  args: {
-    children: (
-      <>
-        <ProfileIcon />
-      </>
-    ),
-  },
-}
-
-export const FilledProfile: Story = {
-  args: {
-    children: (
-      <>
-        <FilledProfileIcon />
-      </>
-    ),
-  },
-}
-
-export const Messenger: Story = {
-  args: {
-    children: (
-      <>
-        <MessengerIcon />
-      </>
-    ),
-  },
-}
-
-export const FilledMessenger: Story = {
-  args: {
-    children: (
-      <>
-        <FilledMessengerIcon />
-      </>
-    ),
-  },
-}
-
-export const Statistics: Story = {
-  args: {
-    children: (
-      <>
-        <StatisticsIcon />
-      </>
-    ),
-  },
-}
-
-export const Favorites: Story = {
-  args: {
-    children: (
-      <>
-        <FavoritesIcon />
-      </>
-    ),
-  },
-}
-
-export const FilledFavorites: Story = {
-  args: {
-    children: (
-      <>
-        <FilledFavoritesIcon />
-      </>
-    ),
-  },
-}
-
-export const LogOut: Story = {
-  args: {
-    children: (
-      <>
-        <LogOutIcon />
-      </>
-    ),
-  },
-}
-export const PhotoOutline: Story = {
-  args: {
-    children: (
-      <>
-        <PhotoIcon />
-      </>
-    ),
-  },
-}
-export const DeletePhoto: Story = {
-  args: {
-    children: (
-      <>
-        <DeleteIcon />
       </>
     ),
   },

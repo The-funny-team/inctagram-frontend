@@ -1,0 +1,67 @@
+.container {
+  position: relative;
+
+  overflow: hidden;
+  display: flex;
+
+  width: 490px;
+  height: 562px;
+}
+
+.image {
+  transition: translate 300ms ease-in-out;
+}
+
+.imgBtn {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: inline-block;
+
+  padding: 0;
+
+  background-color: color-mix(in srgb, var(--color-dark-300) 50%, transparent);
+  border: none;
+  border-radius: 2px;
+}
+
+.imgBtnLeft {
+  left: 0;
+  margin-left: 12px;
+}
+
+.imgBtnRight {
+  right: 0;
+  margin-right: 12px;
+}
+
+.dotWrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 12px;
+
+  margin-bottom: 12px;
+  padding: 8px;
+
+  background-color: color-mix(in srgb, var(--color-dark-300) 50%, transparent);
+  border-radius: 2px;
+}
+
+.dot {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.checkedDot {
+  > svg {
+    fill: var(--color-accent-500);
+  }
+}
