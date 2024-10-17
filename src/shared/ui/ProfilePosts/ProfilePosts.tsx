@@ -4,12 +4,12 @@ import { ViewPostModal } from '@/widgets/ViewPostModal'
 import s from './ProfilePosts.module.scss'
 
 type PropsType = {
-  isMyPost: boolean
   isShowPostId?: number | undefined
+  loggedUserId: number | undefined
   profilePosts: GetPostResponse[]
 }
 
-export const ProfilePosts = ({ isMyPost, isShowPostId, profilePosts }: PropsType) => {
+export const ProfilePosts = ({ isShowPostId, loggedUserId, profilePosts }: PropsType) => {
   return (
     <div className={s.postsList}>
       {profilePosts.map(post => (
@@ -20,11 +20,11 @@ export const ProfilePosts = ({ isMyPost, isShowPostId, profilePosts }: PropsType
           id={post.id}
           images={post.images}
           isLiked
-          isMyPost={isMyPost}
           isOpen={post.id === isShowPostId}
           key={post.id}
           likesCount={3}
           location={''}
+          loggedUserId={loggedUserId}
           owner={post.owner}
           ownerId={post.ownerId}
           updatedAt={post.updatedAt}
