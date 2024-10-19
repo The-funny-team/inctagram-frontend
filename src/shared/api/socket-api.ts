@@ -1,11 +1,12 @@
 import { ACCESS_TOKEN } from '@/shared/const'
+import { loadFromLocalStorage } from '@/shared/lib/helpers'
 import { Socket, io } from 'socket.io-client'
 
 class SocketApi {
   static socket: Socket | null = null
 
   static createConnection() {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN)?.replace(/"/g, '') || ''
+    const accessToken = loadFromLocalStorage(ACCESS_TOKEN, '')
     const queryParams = {
       query: {
         accessToken: accessToken,
