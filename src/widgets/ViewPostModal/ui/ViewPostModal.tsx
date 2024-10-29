@@ -18,9 +18,9 @@ import s from './ViewPostModal.module.scss'
 
 type AddPropsType = {
   comments?: any
-  isMyPost: boolean
   isOpen?: boolean
   likesCount?: number
+  loggedUserId: number | undefined
 }
 type PropsType = GetPostResponse & AddPropsType
 
@@ -31,9 +31,10 @@ export const ViewPostModal = ({
   description,
   id,
   images,
-  isMyPost,
   isOpen = false,
   likesCount,
+  loggedUserId,
+  ownerId,
   updatedAt,
   userName,
 }: PropsType) => {
@@ -139,10 +140,11 @@ export const ViewPostModal = ({
             avatar={avatarOwner}
             comments={comments}
             createdAt={createdAt}
-            isMyPost={isMyPost}
             likesCount={likesCount}
+            loggedUserId={loggedUserId}
             onChangeEditMode={handleChangeEditMode}
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
+            ownerId={ownerId}
             postDescription={postDescription}
             updatedAt={updatedAt}
             userName={userName}

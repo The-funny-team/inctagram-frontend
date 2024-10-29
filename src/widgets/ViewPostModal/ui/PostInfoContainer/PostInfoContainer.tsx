@@ -15,10 +15,11 @@ type Props = {
   avatar: string
   comments?: any
   createdAt: string
-  isMyPost: boolean
   likesCount?: number
+  loggedUserId: number | undefined
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
+  ownerId: number
   postDescription: string
   updatedAt: string
   userName: string
@@ -28,16 +29,20 @@ export const PostInfoContainer = ({
   avatar,
   comments = [],
   createdAt,
-  isMyPost,
   likesCount,
+  loggedUserId,
   onChangeEditMode,
   onOpenConfirmationDeletePostModal,
+  ownerId,
   postDescription,
   updatedAt,
   userName,
 }: Props) => {
   const { router, text } = useTranslation()
   const t = text.modals.viewPostModal
+
+  const isUserAuthorized = loggedUserId !== undefined
+  const isMyPost = ownerId === loggedUserId
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = '24px'
@@ -94,10 +99,13 @@ export const PostInfoContainer = ({
       <div className={s.sendCommentContainer}>
         <TextField
           className={s.sendCommentInput}
+          disabled={!isUserAuthorized}
           onChange={handleCommentChange}
           placeholder={t.publishCommentPlaceholder}
         />
-        <Button variant={'link'}>{t.publishCommentBtn}</Button>
+        <Button disabled={!isUserAuthorized} variant={'link'}>
+          {t.publishCommentBtn}
+        </Button>
       </div>
     </div>
   )
