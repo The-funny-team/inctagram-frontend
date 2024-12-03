@@ -29,6 +29,14 @@ const followApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getUserWithPosts: builder.query<any, { userName: string }>({
+      query: ({ userName }) => {
+        return {
+          method: 'GET',
+          url: `users/${userName}`,
+        }
+      },
+    }),
     getUsers: builder.query<GetUsersResponse, GetUsersArgs>({
       query: ({ ...args }) => {
         return {
@@ -49,7 +57,14 @@ const followApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetUsersQuery } = followApi
+export const {
+  useGetUsersQuery,
+  useGetUserFollowersQuery,
+  useGetUserFollowingQuery,
+  useGetUserWithPostsQuery,
+  useFollowMutation,
+  useUnfollowMutation,
+} = followApi
 
 export type GetUsersArgs = {
   cursor?: number
