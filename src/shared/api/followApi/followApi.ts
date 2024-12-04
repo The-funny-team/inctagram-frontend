@@ -49,7 +49,7 @@ const followApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetUsersQuery } = followApi
+export const { useGetUsersQuery, useLazyGetUsersQuery } = followApi
 
 export type GetUsersArgs = {
   cursor?: number
@@ -59,7 +59,7 @@ export type GetUsersArgs = {
 }
 export type GetUserFollowArgs = GetUsersArgs & { userName: string }
 export type GetUsersResponse = {
-  items: GetUsersResponseItems
+  items: GetUsersResponseItems[]
   nextCursor: number
   page: number
   pageSize: number
