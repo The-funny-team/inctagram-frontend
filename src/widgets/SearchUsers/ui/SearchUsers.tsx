@@ -16,7 +16,9 @@ export const SearchUsers = () => {
   const [endCursorPostId, setEndCursorPostId] = useState(0)
   const debounceValue = useDebounce(searchUser, 500)
   const handleSearch = (value: string) => {
+    setFoundUsers([])
     setSearchUser(value)
+    setEndCursorPostId(0)
   }
   const { data } = useGetUsersQuery(
     { cursor: endCursorPostId, pageNumber: 1, pageSize: 10, search: debounceValue },
@@ -58,7 +60,9 @@ export const SearchUsers = () => {
         type={'search'}
         value={searchUser}
       />
-      {foundUsers && searchUser && <ShowFoundUsers users={foundUsers} />}
+      <div className={s.found}>
+        {foundUsers && searchUser && <ShowFoundUsers users={foundUsers} />}
+      </div>
       {!searchUser.trim() && <RecentUsers />}
     </div>
   )
