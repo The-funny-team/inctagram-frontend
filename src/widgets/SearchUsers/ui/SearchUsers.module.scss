@@ -1,0 +1,30 @@
+.rootSearch {
+  padding: 24px;
+
+  .title {
+    margin: 11px 0 13px;
+  }
+
+  input {
+    margin-bottom: 24px;
+  }
+}
+
+.recentUsers {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+
+    margin-top: 84px;
+
+    p {
+      color: var(--color-light-900);
+    }
+  }
+}
