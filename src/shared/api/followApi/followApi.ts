@@ -29,6 +29,14 @@ const followApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getUserProfile: builder.query<GetUserProfileResponse, { userName: string }>({
+      query: ({ userName }) => {
+        return {
+          method: 'GET',
+          url: `users/${userName}`,
+        }
+      },
+    }),
     getUsers: builder.query<GetUsersResponse, GetUsersArgs>({
       query: ({ ...args }) => {
         return {
@@ -49,7 +57,14 @@ const followApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetUsersQuery } = followApi
+export const {
+  useGetUsersQuery,
+  useUnfollowMutation,
+  useFollowMutation,
+  useGetUserFollowingQuery,
+  useGetUserFollowersQuery,
+  useGetUserProfileQuery,
+} = followApi
 
 export type GetUsersArgs = {
   cursor?: number
@@ -100,5 +115,22 @@ export type GetUserFollowResponseItems = {
   isFollowedBy: boolean
   isFollowing: boolean
   userId: number
+  userName: string
+}
+export type GetUserProfileResponse = {
+  aboutMe: string
+  avatars: GetItemsAvatars
+  city: string
+  country: string
+  dateOfBirth: string
+  firstName: string
+  followersCount: number
+  followingCount: number
+  id: number
+  isFollowedBy: boolean
+  isFollowing: boolean
+  lastName: string
+  publicationsCount: number
+  region: string
   userName: string
 }
