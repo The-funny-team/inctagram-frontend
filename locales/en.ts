@@ -272,6 +272,12 @@ export const en = {
       },
       registeredUsers: 'Registered users:',
     },
+    searchUsers: {
+      emptyOne: 'Oops! This place looks empty!',
+      emptyTwo: 'No recent requests',
+      recent: 'Recent requests',
+      title: 'Search',
+    },
     signIn: {
       emailLabel: 'Email',
       forgotPasswordLink: 'Forgot Password?',

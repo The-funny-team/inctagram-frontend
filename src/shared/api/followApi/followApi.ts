@@ -74,7 +74,7 @@ export type GetUsersArgs = {
 }
 export type GetUserFollowArgs = GetUsersArgs & { userName: string }
 export type GetUsersResponse = {
-  items: GetUsersResponseItems
+  items: GetUsersResponseItems[]
   nextCursor: number
   page: number
   pageSize: number

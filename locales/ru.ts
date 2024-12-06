@@ -275,6 +275,12 @@ export const ru: LocaleType = {
       },
       registeredUsers: 'Зарегистрированные пользователи:',
     },
+    searchUsers: {
+      emptyOne: 'Упсс! Здесь ничего нет!',
+      emptyTwo: 'Нет недавних запросов',
+      recent: 'Недавние запросы',
+      title: 'Поиск',
+    },
     signIn: {
       emailLabel: 'Электронная почта',
       forgotPasswordLink: 'Забыли пароль?',
