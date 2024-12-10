@@ -1,4 +1,3 @@
-import { PASSWORD_PATTERN } from '@/shared/const'
 import { LocaleType } from '@locales/en'
 import { z } from 'zod'
 
