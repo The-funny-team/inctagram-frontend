@@ -60,9 +60,7 @@ export const SearchUsers = () => {
         type={'search'}
         value={searchUser}
       />
-      <div className={s.found}>
-        {foundUsers && searchUser && <ShowFoundUsers users={foundUsers} />}
-      </div>
+      <div>{foundUsers && searchUser && <ShowFoundUsers users={foundUsers} />}</div>
       {!searchUser.trim() && <RecentUsers />}
     </div>
   )
