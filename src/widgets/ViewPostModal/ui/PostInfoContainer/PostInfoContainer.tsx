@@ -1,5 +1,7 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
+import { Controller } from 'react-hook-form'
 
+import { useCreateNewCommentMutation } from '@/shared/api/commentsApi'
 import { useTranslation } from '@/shared/lib/hooks'
 import { useCalculateUpdatedInterval } from '@/shared/lib/hooks/useCalculateTimePassed'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
@@ -7,6 +9,8 @@ import { PostManageDropdown } from '@/widgets/PostManageDropdown'
 import { Actions } from '@/widgets/ViewPostModal/ui/Actions/Actions'
 import { Comments } from '@/widgets/ViewPostModal/ui/Comments/Comments'
 import { LikesInfo } from '@/widgets/ViewPostModal/ui/LikesInfo/LikesInfo'
+import { useAddComment } from '@/widgets/ViewPostModal/ui/PostInfoContainer/services'
+import { AddCommentType } from '@/widgets/ViewPostModal/ui/PostInfoContainer/services/addCommentSchema'
 import Link from 'next/link'
 
 import s from './PostInfoContainer.module.scss'
@@ -21,6 +25,7 @@ type Props = {
   onOpenConfirmationDeletePostModal: () => void
   ownerId: number
   postDescription: string
+  postId: number
   updatedAt: string
   userName: string
 }
@@ -35,21 +40,34 @@ export const PostInfoContainer = ({
   onOpenConfirmationDeletePostModal,
   ownerId,
   postDescription,
+  postId,
   updatedAt,
   userName,
 }: Props) => {
   const { router, text } = useTranslation()
   const t = text.modals.viewPostModal
 
+  const [publishComment] = useCreateNewCommentMutation()
+
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    reset,
+  } = useAddComment(text.validation)
+
   const isUserAuthorized = loggedUserId !== undefined
   const isMyPost = ownerId === loggedUserId
 
-  const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    e.target.style.height = '24px'
-    e.target.style.height = `${e.target.scrollHeight}px`
-  }
-
   const timeIntervalSinceUpdated = useCalculateUpdatedInterval(updatedAt ?? createdAt)
+
+  const onFormSubmit = (data: AddCommentType) => {
+    publishComment({ content: data.text, postId: postId })
+      .unwrap()
+      .then(() => {
+        reset()
+      })
+  }
 
   return (
     <div className={s.postInfoContainer}>
@@ -96,17 +114,24 @@ export const PostInfoContainer = ({
           })}`}
         </Typography>
       </div>
-      <div className={s.sendCommentContainer}>
-        <TextField
-          className={s.sendCommentInput}
-          disabled={!isUserAuthorized}
-          onChange={handleCommentChange}
-          placeholder={t.publishCommentPlaceholder}
+      <form className={s.sendCommentContainer} onSubmit={handleSubmit(onFormSubmit)}>
+        <Controller
+          control={control}
+          name={'text'}
+          render={({ field }) => (
+            <TextField
+              className={s.sendCommentInput}
+              disabled={!isUserAuthorized}
+              placeholder={t.publishCommentPlaceholder}
+              {...field}
+            />
+          )}
         />
-        <Button disabled={!isUserAuthorized} variant={'link'}>
+
+        <Button disabled={!isValid || !isUserAuthorized} type={'submit'} variant={'link'}>
           {t.publishCommentBtn}
         </Button>
-      </div>
+      </form>
     </div>
   )
 }

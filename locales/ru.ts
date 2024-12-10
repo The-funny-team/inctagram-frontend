@@ -340,6 +340,8 @@ export const ru: LocaleType = {
     emailVerification: 'Электронная почта должна соответствовать формату example@example.com',
     maxLength20: 'Максимальное количество символов 20',
     maxLength30: 'Максимальное количество символов 30',
+    maxLength300: 'Максимальное количество символов 300',
+    minLength1: 'Минимальное количество символов 1',
     minLength6: 'Минимальное количество символов 6',
     passwordMismatch: 'Пароли должны совпадать',
     passwordVerification:
