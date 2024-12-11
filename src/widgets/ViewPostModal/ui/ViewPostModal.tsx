@@ -146,6 +146,7 @@ export const ViewPostModal = ({
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
             ownerId={ownerId}
             postDescription={postDescription}
+            postId={id}
             updatedAt={updatedAt}
             userName={userName}
           />

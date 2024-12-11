@@ -1,4 +1,5 @@
 .rootSearch {
+  min-height: 100vh;
   padding: 24px;
 
   .title {
@@ -7,10 +8,6 @@
 
   input {
     margin-bottom: 24px;
-  }
-
-  .found {
-    height: 100vh;
   }
 }
 

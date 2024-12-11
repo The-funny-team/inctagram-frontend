@@ -335,6 +335,8 @@ export const en = {
     emailVerification: 'The email must match the format example@example.com',
     maxLength20: 'Maximum number of characters 20',
     maxLength30: 'Maximum number of characters 30',
+    maxLength300: 'Maximum number of characters 300',
+    minLength1: 'Minimum number of characters 1',
     minLength6: 'Minimum number of characters 6',
     passwordMismatch: 'Passwords must match',
     passwordVerification:
