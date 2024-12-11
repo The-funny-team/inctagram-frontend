@@ -1,4 +1,5 @@
 import { useMeQuery } from '@/shared/api/authApi'
+import { useGetUserProfileQuery } from '@/shared/api/followApi'
 import { ProfileType, PublicProfileType } from '@/shared/api/profileApi'
 import { ROUTES_URL } from '@/shared/const'
 import { useTranslation } from '@/shared/lib/hooks'
@@ -17,6 +18,7 @@ type PropsType = {
 
 export const ProfileHeader = ({ isAuth, postsTotalCount = 0, user }: PropsType) => {
   const { data: me } = useMeQuery()
+  const { data: aboutUserInfo } = useGetUserProfileQuery({ userName: user.userName })
   const { text } = useTranslation()
   const t = text.pages.profile.main
 
@@ -26,7 +28,7 @@ export const ProfileHeader = ({ isAuth, postsTotalCount = 0, user }: PropsType) 
         className={s.avatarPhoto}
         size={204}
         src={(user?.avatars && user?.avatars[0]?.url) || ''}
-        userName={'my profile'}
+        userName={user.userName}
       />
       <div className={s.infoAboutMe}>
         <div className={s.nameAndBtn}>
@@ -41,8 +43,8 @@ export const ProfileHeader = ({ isAuth, postsTotalCount = 0, user }: PropsType) 
             ))}
         </div>
         <div className={s.counting}>
-          <UsersCountInfo count={2232} name={t.following} />
-          <UsersCountInfo count={2311} name={t.followers} />
+          <UsersCountInfo count={aboutUserInfo?.followingCount || 0} name={t.following} />
+          <UsersCountInfo count={aboutUserInfo?.followersCount || 0} name={t.followers} />
           <UsersCountInfo count={postsTotalCount} name={t.publications} />
         </div>
         <div className={s.description}>
