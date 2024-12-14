@@ -16,33 +16,16 @@ import Image from 'next/image'
 
 import s from './ViewPostModal.module.scss'
 
-type AddPropsType = {
-  comments?: any
-  isOpen?: boolean
-  likesCount?: number
-  loggedUserId: number | undefined
+type PropsType = {
+  post: GetPostResponse
 }
-type PropsType = GetPostResponse & AddPropsType
 
-export const ViewPostModal = ({
-  avatarOwner,
-  comments,
-  createdAt,
-  description,
-  id,
-  images,
-  isOpen = false,
-  likesCount,
-  loggedUserId,
-  ownerId,
-  updatedAt,
-  userName,
-}: PropsType) => {
+export const ViewPostModal = ({ post }: PropsType) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
-  const [isOpenPost, setIsOpenPost] = useState<boolean>(isOpen)
+  const [isOpenPost, setIsOpenPost] = useState<boolean>(false)
   const [isOpenConfirmDeletePostModal, setIsOpenConfirmDeletePostModal] = useState<boolean>(false)
   const [isOpenConfirmCloseModal, setIsOpenConfirmCloseModal] = useState<boolean>(false)
-  const [postDescription, setPostDescription] = useState<string>(description ?? '')
+  const [postDescription, setPostDescription] = useState<string>(post?.description || '')
 
   const { text } = useTranslation()
   const t = text.modals.viewPostModal
@@ -62,7 +45,7 @@ export const ViewPostModal = ({
   const handleCancelChanges = () => {
     setIsOpenConfirmCloseModal(prev => !prev)
     setIsEditMode(false)
-    setPostDescription(description)
+    setPostDescription(post?.description)
   }
 
   const handlePostModalState = () => {
@@ -72,7 +55,7 @@ export const ViewPostModal = ({
     if (isOpenPost && !isEditMode) {
       setIsOpenPost(false)
     }
-    if (isEditMode && description !== postDescription) {
+    if (isEditMode && post?.description !== postDescription) {
       setIsOpenConfirmCloseModal(true)
     } else {
       setIsEditMode(false)
@@ -84,7 +67,7 @@ export const ViewPostModal = ({
   }
 
   const handleSaveChanges = async () => {
-    updatePost({ description: postDescription, postId: id })
+    updatePost({ description: postDescription, postId: post.id })
       .unwrap()
       .then(() => {
         setIsEditMode(prev => !prev)
@@ -96,7 +79,11 @@ export const ViewPostModal = ({
   }
 
   const handleDeletePost = async () => {
-    deletePost({ postId: id })
+    deletePost({ postId: post.id })
+  }
+
+  if (!post) {
+    return <div>Loading post...</div>
   }
 
   return (
@@ -109,7 +96,7 @@ export const ViewPostModal = ({
         <Image
           alt={'post image'}
           height={228}
-          src={images[0].url}
+          src={post?.images[0].url || ''}
           style={{ borderRadius: '2px', objectFit: 'cover' }}
           width={234}
         />
@@ -118,14 +105,14 @@ export const ViewPostModal = ({
     >
       {isEditMode ? (
         <div className={s.main}>
-          <SliderContainer imageUrls={images} />
+          <SliderContainer imageUrls={post.images} />
           <EditContainer
-            avatar={avatarOwner}
-            description={description}
+            avatar={post.avatarOwner}
+            description={post.description}
             onChangeDescription={handleChangeDescription}
             onSaveChanges={handleSaveChanges}
             postDescription={postDescription}
-            userName={userName}
+            userName={post.userName}
           />
           <ClosePostConfirmationModal
             onCancelChanges={handleCancelChanges}
@@ -135,20 +122,18 @@ export const ViewPostModal = ({
         </div>
       ) : (
         <div className={s.main}>
-          <SliderContainer imageUrls={images} />
+          <SliderContainer imageUrls={post?.images || []} />
           <PostInfoContainer
-            avatar={avatarOwner}
-            comments={comments}
-            createdAt={createdAt}
-            likesCount={likesCount}
-            loggedUserId={loggedUserId}
+            avatar={post?.avatarOwner || ''}
+            createdAt={post?.createdAt}
+            likesCount={post?.likesCount}
             onChangeEditMode={handleChangeEditMode}
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
-            ownerId={ownerId}
+            ownerId={post?.ownerId}
             postDescription={postDescription}
-            postId={id}
-            updatedAt={updatedAt}
-            userName={userName}
+            postId={post?.id}
+            updatedAt={post?.updatedAt}
+            userName={post?.userName}
           />
           <DeletePostConfirmationModal
             onDeletePost={handleDeletePost}
