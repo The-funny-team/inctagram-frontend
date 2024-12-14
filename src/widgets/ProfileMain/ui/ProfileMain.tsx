@@ -48,19 +48,7 @@ export const ProfileMain = () => {
     }
   }, [profilePosts, allPosts])
 
-  const authorId =
-    profilePosts && profilePosts.items.length !== 0 ? profilePosts.items[0].ownerId : ''
-  const isMyPost = myId === authorId
-
-  if (!userInfo) {
-    return null
-  }
-
-  if (!profileInfo) {
-    return null
-  }
-
-  if (!profilePosts) {
+  if (!userInfo || !profileInfo || !profilePosts) {
     return null
   }
 
@@ -75,22 +63,7 @@ export const ProfileMain = () => {
           />
           <div className={s.postsList}>
             {allPosts.map(post => (
-              <ViewPostModal
-                avatarOwner={post.avatarOwner}
-                comments={[]}
-                createdAt={post.createdAt}
-                description={post.description}
-                id={post.id}
-                images={post.images}
-                isLiked
-                key={post.id}
-                likesCount={3}
-                location={''}
-                owner={post.owner}
-                ownerId={post.ownerId}
-                updatedAt={post.updatedAt}
-                userName={post.userName}
-              />
+              <ViewPostModal key={post.id} post={post} />
             ))}
           </div>
         </main>

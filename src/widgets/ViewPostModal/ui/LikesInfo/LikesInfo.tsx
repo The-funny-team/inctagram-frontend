@@ -5,7 +5,7 @@ import { Avatar, Typography } from '@/shared/ui'
 import s from './LikesInfo.module.scss'
 
 type Props = {
-  likesCount: number
+  likesCount?: number
   userName?: string
 }
 
