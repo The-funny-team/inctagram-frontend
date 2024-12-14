@@ -1,7 +1,7 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
 
-import { useCreateNewCommentMutation } from '@/shared/api/commentsApi'
+import { useCreateNewCommentMutation, useGetPostCommentsQuery } from '@/shared/api/commentsApi'
 import { useTranslation } from '@/shared/lib/hooks'
 import { useCalculateUpdatedInterval } from '@/shared/lib/hooks/useCalculateTimePassed'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
@@ -20,7 +20,7 @@ type Props = {
   comments?: any
   createdAt: string
   likesCount?: number
-  loggedUserId: number | undefined
+  loggedUserId?: number | undefined
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
   ownerId: number
@@ -32,7 +32,6 @@ type Props = {
 
 export const PostInfoContainer = ({
   avatar,
-  comments = [],
   createdAt,
   likesCount,
   loggedUserId,
@@ -46,6 +45,9 @@ export const PostInfoContainer = ({
 }: Props) => {
   const { router, text } = useTranslation()
   const t = text.modals.viewPostModal
+  const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
+    postId: postId,
+  })
 
   const [publishComment] = useCreateNewCommentMutation()
 
@@ -66,6 +68,7 @@ export const PostInfoContainer = ({
       .unwrap()
       .then(() => {
         reset()
+        getUpdatedComments()
       })
   }
 
@@ -101,11 +104,11 @@ export const PostInfoContainer = ({
             </Typography>
           </div>
         </div>
-        <Comments comments={comments} />
+        <Comments comments={postComments?.items || []} />
       </div>
       <Actions />
       <div className={s.postLikes}>
-        {likesCount && <LikesInfo likesCount={likesCount} />}
+        <LikesInfo likesCount={likesCount} />
         <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
           {`${new Date(createdAt).toLocaleDateString(router.locale === 'en' ? 'en-US' : 'ru-RU', {
             day: 'numeric',
@@ -128,7 +131,7 @@ export const PostInfoContainer = ({
           )}
         />
 
-        <Button disabled={!isValid || !isUserAuthorized} type={'submit'} variant={'link'}>
+        <Button disabled={!isValid} type={'submit'} variant={'link'}>
           {t.publishCommentBtn}
         </Button>
       </form>

@@ -1,21 +1,23 @@
 import React from 'react'
 
+import { CommentsViewModel } from '@/shared/api/commentsApi'
 import { LikeOutlineIcon } from '@/shared/assets'
 import { useTranslation } from '@/shared/lib/hooks'
+import { useCalculateUpdatedInterval } from '@/shared/lib/hooks/useCalculateTimePassed'
 import { Avatar, Typography } from '@/shared/ui'
 
 import s from './Comments.module.scss'
 
-type CommentType = {
-  avatar: string
-  createdAt: string
-  id: string
-  text: string
-  userName: string
-}
+// type CommentType = {
+//   avatar: string
+//   createdAt: string
+//   id: string
+//   text: string
+//   userName: string
+// }
 
 type Props = {
-  comments: CommentType[]
+  comments: CommentsViewModel[]
 }
 
 export const Comments = ({ comments }: Props) => {
@@ -24,22 +26,26 @@ export const Comments = ({ comments }: Props) => {
 
   return (
     <ul className={s.comments}>
-      {comments.map((comment: CommentType) => (
+      {comments.map(comment => (
         <li className={s.commentWrapper} key={comment.id}>
           <div className={s.comment}>
             <div>
-              <Avatar size={36} src={comment.avatar} userName={comment.userName} />
+              <Avatar
+                size={36}
+                src={comment.from.avatars.length !== 0 ? comment.from.avatars[0].url : ''}
+                userName={comment.from.username}
+              />
             </div>
             <div>
               <Typography as={'p'} variant={'regularText14'}>
                 <Typography as={'span'} variant={'boldText14'}>
-                  {`${comment.userName} `}
+                  {`${comment.from.username} `}
                 </Typography>
-                {comment.text}
+                {comment.content}
               </Typography>
               <div>
                 <Typography as={'time'} className={s.commentCreatedAt} variant={'smallText'}>
-                  {comment.createdAt}
+                  {`${useCalculateUpdatedInterval(comment.createdAt)} ago`}
                 </Typography>
                 <button className={s.answerBtn}>
                   <Typography as={'span'} variant={'semiBoldSmallText'}>
