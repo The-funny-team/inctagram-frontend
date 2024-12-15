@@ -1,21 +1,13 @@
-import { useDeleteUserMutation } from '@/shared/api/profileApi'
 import { getProtectedNavbarLayout } from '@/shared/layouts'
-import { Button, HeadMeta } from '@/shared/ui'
+import { HeadMeta } from '@/shared/ui'
+import { Home } from '@/widgets/Home'
 
 const HomePage = () => {
-  const [deleteMe] = useDeleteUserMutation()
-  const deleteMeHandler = () => {
-    deleteMe()
-  }
-
   return (
     <>
       <HeadMeta title={'Home'} />
       <main>
-        Home Page
-        <div>
-          <Button onClick={deleteMeHandler}>delete me</Button>
-        </div>
+        <Home />
       </main>
     </>
   )
