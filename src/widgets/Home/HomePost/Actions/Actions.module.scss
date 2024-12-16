@@ -1,0 +1,15 @@
+.actionsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .actionsRight {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .icon {
+    cursor: pointer;
+  }
+}
