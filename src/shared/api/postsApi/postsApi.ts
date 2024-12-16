@@ -82,6 +82,7 @@ export const {
 
 export type GetPostResponse = {
   avatarOwner: string
+  avatarWhoLikes: string[]
   createdAt: string
   description: string
   id: number

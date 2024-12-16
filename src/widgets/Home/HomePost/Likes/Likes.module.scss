@@ -1,0 +1,30 @@
+.likesWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  .avatarsBlock {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 52px;
+
+    .avatar:nth-child(2) {
+      position: absolute;
+      z-index: -1;
+      left: 15px;
+    }
+
+    .avatar:nth-child(3) {
+      position: absolute;
+      z-index: -2;
+      left: 27px;
+    }
+  }
+
+  .countBlock {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+}

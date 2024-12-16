@@ -21,4 +21,19 @@
   .postSlider {
     padding: 12px 0;
   }
+
+  .actions {
+    padding-bottom: 20px;
+  }
+
+  .postInfo {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding-bottom: 14px;
+
+    span {
+      margin-right: 5px;
+    }
+  }
 }

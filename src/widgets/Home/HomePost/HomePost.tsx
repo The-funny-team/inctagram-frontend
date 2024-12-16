@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import s from './HomePost.module.scss'
 
 import { Actions } from './Actions'
+import { Likes } from './Likes'
 
 type Props = {
   post: GetPostResponse
@@ -50,7 +51,21 @@ export const HomePost = ({ post }: Props) => {
           ))}
         </Slider>
       </div>
-      <Actions isLiked={post.isLiked} />
+      <div className={s.actions}>
+        <Actions isLiked={post.isLiked} />
+      </div>
+      <div className={s.postInfo}>
+        <Avatar size={36} src={post.avatarOwner} userName={post.userName} />
+        <div className={s.description}>
+          <Typography variant={'regularText14'}>
+            <Typography as={'span'} variant={'boldText14'}>
+              {post.userName}
+            </Typography>
+            {post.description}
+          </Typography>
+        </div>
+      </div>
+      <Likes avatarsWhoLiked={post.avatarWhoLikes} likesCount={post.likesCount} />
     </div>
   )
 }
