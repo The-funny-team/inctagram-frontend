@@ -1,0 +1,20 @@
+.postWrapper {
+  width: 100%;
+  max-width: 490px;
+
+  .postHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .postHeaderLeft {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      .postDate {
+        color: var(--color-light-900);
+      }
+    }
+  }
+}
