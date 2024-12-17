@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useGetPostCommentsQuery } from '@/shared/api/commentsApi'
-import { GetPostResponse } from '@/shared/api/postsApi'
+import { GetPublicationsResponseItem } from '@/shared/api/postsApi'
 import { DotSmallIcon } from '@/shared/assets'
 import { Avatar, Typography } from '@/shared/ui'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
@@ -18,7 +18,7 @@ import { AllComments } from './Comments'
 import { Likes } from './Likes'
 
 type Props = {
-  post: GetPostResponse
+  post: GetPublicationsResponseItem
 }
 export const HomePost = ({ post }: Props) => {
   const { locale } = useRouter()

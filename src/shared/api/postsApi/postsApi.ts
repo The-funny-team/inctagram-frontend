@@ -38,6 +38,14 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getPublicationsFollowers: builder.query<GetPublicationsResponse, GetPublicationsArgs>({
+      query: () => {
+        return {
+          method: 'GET',
+          url: `home/publications-followers`,
+        }
+      },
+    }),
     getUserPosts: builder.query<GetPostsResponse, UserPostsArgs>({
       providesTags: ['Posts'],
       query: ({ endCursorPostId, userId, ...args }) => {
@@ -75,6 +83,7 @@ export const {
   useDeletePostMutation,
   useGetPublicPostQuery,
   useGetPublicPostsQuery,
+  useGetPublicationsFollowersQuery,
   useGetUserPostsQuery,
   useUpdatePostMutation,
   useUploadPostPhotoMutation,
@@ -130,6 +139,12 @@ export type GetPostsArgs = {
   sortDirection?: string
 }
 
+export type GetPublicationsArgs = {
+  endCursorPostId?: number
+  pageNumber?: number
+  pageSize?: number
+}
+
 export type UploadResponseImages = {
   createdAt: string
   fileSize: number
@@ -137,4 +152,30 @@ export type UploadResponseImages = {
   uploadId: string
   url: string
   width: number
+}
+
+export type GetPublicationsResponse = {
+  items: GetPublicationsResponseItem[]
+  nextCursor: number
+  page: number
+  pageSize: number
+  pagesCount: number
+  prevCursor: number
+  totalCount: number
+}
+
+export type GetPublicationsResponseItem = {
+  avatarOwner: string
+  avatarWhoLikes: string[]
+  createdAt: string
+  description: string
+  id: number
+  images: PostResponseImages[]
+  isLiked: boolean
+  likesCount: number
+  location: string
+  owner: { firstName: string; lastName: string }
+  ownerId: number
+  updatedAt: string
+  userName: string
 }
