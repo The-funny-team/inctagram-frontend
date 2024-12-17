@@ -1,0 +1,44 @@
+.commentsWrapper {
+  margin-bottom: 42px;
+  padding-top: 24px;
+
+  .commentsCount {
+    padding-bottom: 12px;
+
+    .commentsText {
+      color: var(--color-light-900);
+    }
+  }
+
+  .commentsInput {
+    position: relative;
+
+    input {
+      padding: 0 80px 12px 0 !important;
+      border: none !important;
+      border-bottom: 1px solid var(--color-dark-100) !important;
+
+      &::placeholder {
+        font-size: var(--font-size-s);
+        line-height: var(--line-height-s);
+      }
+
+      &:focus-visible {
+        padding-left: 10px !important;
+        color: var(--color-light-100);
+        border-color: var(--color-accent-500);
+        outline: none !important;
+      }
+    }
+
+    .commentsButton {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      padding: 0;
+
+      font-weight: var(--font-weight-semi-bold);
+    }
+  }
+}

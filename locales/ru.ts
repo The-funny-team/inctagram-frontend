@@ -140,6 +140,11 @@ export const ru: LocaleType = {
       signInBtn: 'Страница входа',
       title: 'Восстановить пароль',
     },
+    home: {
+      placeholder: 'Добавить комментарий...',
+      publicComment: 'Опубликовать',
+      viewComments: 'Показать все комментарии',
+    },
     notFound: {
       captionBtn: 'Вернуться на главную',
       title: 'Извините! Эта страница недоступна',

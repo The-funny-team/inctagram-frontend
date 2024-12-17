@@ -1,0 +1,39 @@
+.postWrapper {
+  width: 100%;
+  max-width: 490px;
+
+  .postHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .postHeaderLeft {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      .postDate {
+        color: var(--color-light-900);
+      }
+    }
+  }
+
+  .postSlider {
+    padding: 12px 0;
+  }
+
+  .actions {
+    padding-bottom: 20px;
+  }
+
+  .postInfo {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding-bottom: 14px;
+
+    span {
+      margin-right: 5px;
+    }
+  }
+}

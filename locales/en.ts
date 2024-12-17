@@ -137,6 +137,11 @@ export const en = {
       signInBtn: 'Back to Sign In',
       title: 'Forgot Password',
     },
+    home: {
+      placeholder: 'Add a Comment...',
+      publicComment: 'Publish',
+      viewComments: 'View All Comments',
+    },
     notFound: {
       captionBtn: 'Back to home page',
       title: 'Sorry! Page not found!',
