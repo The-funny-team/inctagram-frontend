@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { useGetPostCommentsQuery } from '@/shared/api/commentsApi'
 import { GetPostResponse } from '@/shared/api/postsApi'
 import { DotSmallIcon } from '@/shared/assets'
 import { Avatar, Typography } from '@/shared/ui'
@@ -13,6 +14,7 @@ import { useRouter } from 'next/router'
 import s from './HomePost.module.scss'
 
 import { Actions } from './Actions'
+import { AllComments } from './Comments'
 import { Likes } from './Likes'
 
 type Props = {
@@ -21,6 +23,10 @@ type Props = {
 export const HomePost = ({ post }: Props) => {
   const { locale } = useRouter()
   const [timeAgo, setTimeAgo] = useState<null | string>(null)
+
+  const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
+    postId: post.id,
+  })
 
   useEffect(() => {
     setTimeAgo(
@@ -66,6 +72,11 @@ export const HomePost = ({ post }: Props) => {
         </div>
       </div>
       <Likes avatarsWhoLiked={post.avatarWhoLikes} likesCount={post.likesCount} />
+      <AllComments
+        comments={postComments?.items || []}
+        postId={post.id}
+        updateCommentsCount={getUpdatedComments}
+      />
     </div>
   )
 }
