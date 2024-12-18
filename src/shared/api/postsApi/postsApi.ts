@@ -39,11 +39,11 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     getPublicationsFollowers: builder.query<GetPublicationsResponse, GetPublicationsArgs>({
-      query: ({ endCursorPostId, pageSize, ...args }) => {
+      query: ({ ...args }) => {
         return {
           method: 'GET',
           params: args,
-          url: `home/publications-followers`,
+          url: `/home/publications-followers`,
         }
       },
     }),
