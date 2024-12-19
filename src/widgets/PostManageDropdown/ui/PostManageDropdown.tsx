@@ -3,6 +3,7 @@ import {
   DotsHorizontalIcon,
   FollowOutlineIcon,
   TrashOutlineIcon,
+  UnfollowOutlineIcon,
 } from '@/shared/assets'
 import { EditOutlineIcon } from '@/shared/assets/icons'
 import { useTranslation } from '@/shared/lib/hooks'
@@ -17,12 +18,18 @@ import {
 import s from './PostManageDropdown.module.scss'
 
 type Props = {
+  isMyFollowing: boolean
   isMyPost: boolean
   onDeleteMode: () => void
   onEditMode: () => void
 }
 
-export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props) => {
+export const PostManageDropdown = ({
+  isMyFollowing,
+  isMyPost,
+  onDeleteMode,
+  onEditMode,
+}: Props) => {
   const { text } = useTranslation()
   const t = text.modals.viewPostModal
 
@@ -49,12 +56,22 @@ export const PostManageDropdown = ({ isMyPost, onDeleteMode, onEditMode }: Props
           </>
         ) : (
           <>
-            <DropdownMenuItem className={s.menuItem}>
-              <FollowOutlineIcon />
-              <Typography as={'span'} variant={'regularText14'}>
-                {t.managePostDropdown.follow}
-              </Typography>
-            </DropdownMenuItem>
+            {!isMyFollowing && (
+              <DropdownMenuItem className={s.menuItem}>
+                <FollowOutlineIcon />
+                <Typography as={'span'} variant={'regularText14'}>
+                  {t.managePostDropdown.follow}
+                </Typography>
+              </DropdownMenuItem>
+            )}
+            {isMyFollowing && (
+              <DropdownMenuItem className={s.menuItem}>
+                <UnfollowOutlineIcon />
+                <Typography as={'span'} variant={'regularText14'}>
+                  {t.managePostDropdown.unfollow}
+                </Typography>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuItem className={s.menuItem}>
               <CopyLinkOutlineIcon />
               <Typography as={'span'} variant={'regularText14'}>

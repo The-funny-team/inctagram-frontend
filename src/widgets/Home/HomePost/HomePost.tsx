@@ -48,7 +48,12 @@ export const HomePost = ({ post }: Props) => {
             {timeAgo}
           </Typography>
         </div>
-        <PostManageDropdown isMyPost={false} onDeleteMode={() => {}} onEditMode={() => {}} />
+        <PostManageDropdown
+          isMyFollowing
+          isMyPost={false}
+          onDeleteMode={() => {}}
+          onEditMode={() => {}}
+        />
       </div>
       <div className={s.postSlider}>
         <Slider isDots={post.images.length > 1} sizeBtn={48} sliderLength={post.images.length}>
