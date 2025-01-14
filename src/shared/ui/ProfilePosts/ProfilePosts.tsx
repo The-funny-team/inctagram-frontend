@@ -4,14 +4,15 @@ import { ViewPostModal } from '@/widgets/ViewPostModal'
 import s from './ProfilePosts.module.scss'
 
 type PropsType = {
+  isAuth: boolean
   profilePosts: GetPostResponse[]
 }
 
-export const ProfilePosts = ({ profilePosts }: PropsType) => {
+export const ProfilePosts = ({ isAuth, profilePosts }: PropsType) => {
   return (
     <div className={s.postsList}>
       {profilePosts.map(post => (
-        <ViewPostModal key={post.id} post={post} />
+        <ViewPostModal isAuth={isAuth} key={post.id} post={post} />
       ))}
     </div>
   )

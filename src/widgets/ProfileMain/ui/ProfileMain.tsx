@@ -63,7 +63,7 @@ export const ProfileMain = () => {
           />
           <div className={s.postsList}>
             {allPosts.map(post => (
-              <ViewPostModal key={post.id} post={post} />
+              <ViewPostModal isAuth={!!userInfo} key={post.id} post={post} />
             ))}
           </div>
         </main>

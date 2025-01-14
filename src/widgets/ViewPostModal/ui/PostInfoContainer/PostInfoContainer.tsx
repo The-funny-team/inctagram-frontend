@@ -17,6 +17,7 @@ import { useAddComment } from './services'
 import { AddCommentType } from './services/addCommentSchema'
 
 type Props = {
+  isAuth: boolean
   loggedUserId?: number | undefined
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
@@ -25,6 +26,7 @@ type Props = {
 }
 
 export const PostInfoContainer = ({
+  isAuth,
   loggedUserId,
   onChangeEditMode,
   onOpenConfirmationDeletePostModal,
@@ -68,11 +70,13 @@ export const PostInfoContainer = ({
             {postInfo.userName}
           </Typography>
         </Link>
-        <PostManageDropdown
-          isMyPost={isMyPost}
-          onDeleteMode={onOpenConfirmationDeletePostModal}
-          onEditMode={onChangeEditMode}
-        />
+        {isAuth && (
+          <PostManageDropdown
+            isMyPost={isMyPost}
+            onDeleteMode={onOpenConfirmationDeletePostModal}
+            onEditMode={onChangeEditMode}
+          />
+        )}
       </div>
       <div className={s.descriptionAndComments}>
         <div className={s.description}>
@@ -100,24 +104,26 @@ export const PostInfoContainer = ({
           {timeAgo}
         </Typography>
       </div>
-      <form className={s.sendCommentContainer} onSubmit={handleSubmit(onFormSubmit)}>
-        <Controller
-          control={control}
-          name={'text'}
-          render={({ field }) => (
-            <TextField
-              className={s.sendCommentInput}
-              disabled={!isUserAuthorized}
-              placeholder={t.publishCommentPlaceholder}
-              {...field}
-            />
-          )}
-        />
+      {isAuth && (
+        <form className={s.sendCommentContainer} onSubmit={handleSubmit(onFormSubmit)}>
+          <Controller
+            control={control}
+            name={'text'}
+            render={({ field }) => (
+              <TextField
+                className={s.sendCommentInput}
+                disabled={!isUserAuthorized}
+                placeholder={t.publishCommentPlaceholder}
+                {...field}
+              />
+            )}
+          />
 
-        <Button disabled={!isValid} type={'submit'} variant={'link'}>
-          {t.publishCommentBtn}
-        </Button>
-      </form>
+          <Button disabled={!isValid} type={'submit'} variant={'link'}>
+            {t.publishCommentBtn}
+          </Button>
+        </form>
+      )}
     </div>
   )
 }

@@ -17,10 +17,11 @@ import Image from 'next/image'
 import s from './ViewPostModal.module.scss'
 
 type PropsType = {
+  isAuth: boolean
   post: GetPostResponse
 }
 
-export const ViewPostModal = ({ post }: PropsType) => {
+export const ViewPostModal = ({ isAuth, post }: PropsType) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
   const [isOpenPost, setIsOpenPost] = useState<boolean>(false)
   const [isOpenConfirmDeletePostModal, setIsOpenConfirmDeletePostModal] = useState<boolean>(false)
@@ -124,6 +125,7 @@ export const ViewPostModal = ({ post }: PropsType) => {
         <div className={s.main}>
           <SliderContainer imageUrls={post?.images || []} />
           <PostInfoContainer
+            isAuth={isAuth}
             onChangeEditMode={handleChangeEditMode}
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
             postDescription={postDescription}
