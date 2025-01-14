@@ -3,8 +3,7 @@ import { Controller } from 'react-hook-form'
 
 import { useCreateNewCommentMutation, useGetPostCommentsQuery } from '@/shared/api/commentsApi'
 import { GetPostResponse } from '@/shared/api/postsApi'
-import { useTranslation } from '@/shared/lib/hooks'
-import { useCalculateUpdatedInterval } from '@/shared/lib/hooks/useCalculateTimePassed'
+import { useGetTimeAgo, useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
 import { PostManageDropdown } from '@/widgets/PostManageDropdown'
 import Link from 'next/link'
@@ -32,7 +31,7 @@ export const PostInfoContainer = ({
   postDescription,
   postInfo,
 }: Props) => {
-  const { router, text } = useTranslation()
+  const { text } = useTranslation()
   const t = text.modals.viewPostModal
   const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
     postId: postInfo.id,
@@ -49,10 +48,7 @@ export const PostInfoContainer = ({
 
   const isUserAuthorized = loggedUserId !== undefined
   const isMyPost = postInfo.ownerId === loggedUserId
-
-  const timeIntervalSinceUpdated = useCalculateUpdatedInterval(
-    postInfo.updatedAt ?? postInfo.createdAt
-  )
+  const timeAgo = useGetTimeAgo(postInfo.updatedAt)
 
   const onFormSubmit = (data: AddCommentType) => {
     publishComment({ content: data.text, postId: postInfo.id })
@@ -91,7 +87,7 @@ export const PostInfoContainer = ({
               {postDescription}
             </Typography>
             <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
-              {timeIntervalSinceUpdated}
+              {timeAgo}
             </Typography>
           </div>
         </div>
@@ -101,14 +97,7 @@ export const PostInfoContainer = ({
       <div className={s.postLikes}>
         <LikesInfo likesCount={postInfo.likesCount} />
         <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
-          {`${new Date(postInfo.createdAt).toLocaleDateString(
-            router.locale === 'en' ? 'en-US' : 'ru-RU',
-            {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            }
-          )}`}
+          {timeAgo}
         </Typography>
       </div>
       <form className={s.sendCommentContainer} onSubmit={handleSubmit(onFormSubmit)}>

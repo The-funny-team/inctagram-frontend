@@ -2,14 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { GetPostResponse, PostResponseImages } from '@/shared/api/postsApi'
 import { ROUTES_URL } from '@/shared/const'
+import { useGetTimeAgo } from '@/shared/lib/hooks'
 import { Avatar, PublicPostDescription, Typography } from '@/shared/ui'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import clsx from 'clsx'
-import { formatDistanceToNowStrict, parseISO } from 'date-fns'
-import { enUS, ru } from 'date-fns/locale'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import s from './PublicPost.module.scss'
 
@@ -21,21 +19,10 @@ const DESCRIPTION_SIZES = {
 
 export const PublicPost = (props: GetPostResponse) => {
   const { avatarOwner, createdAt, description, id, images, ownerId, userName } = props
-  const { locale } = useRouter()
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState(DESCRIPTION_SIZES.minHeight)
-  const [timeAgo, setTimeAgo] = useState<null | string>(null)
-
-  useEffect(() => {
-    setTimeAgo(
-      formatDistanceToNowStrict(parseISO(createdAt as string), {
-        addSuffix: true,
-        locale: locale === 'ru' ? ru : enUS,
-      })
-    )
-  }, [locale, createdAt])
-
+  const timeAgo = useGetTimeAgo(createdAt)
   const handleToggle = () => {
     setIsExpanded(prev => !prev)
   }
