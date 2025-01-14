@@ -124,16 +124,10 @@ export const ViewPostModal = ({ post }: PropsType) => {
         <div className={s.main}>
           <SliderContainer imageUrls={post?.images || []} />
           <PostInfoContainer
-            avatar={post?.avatarOwner || ''}
-            createdAt={post?.createdAt}
-            likesCount={post?.likesCount}
             onChangeEditMode={handleChangeEditMode}
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
-            ownerId={post?.ownerId}
             postDescription={postDescription}
-            postId={post?.id}
-            updatedAt={post?.updatedAt}
-            userName={post?.userName}
+            postInfo={post}
           />
           <DeletePostConfirmationModal
             onDeletePost={handleDeletePost}

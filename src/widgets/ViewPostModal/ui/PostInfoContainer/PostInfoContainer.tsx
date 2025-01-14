@@ -2,6 +2,7 @@ import React from 'react'
 import { Controller } from 'react-hook-form'
 
 import { useCreateNewCommentMutation, useGetPostCommentsQuery } from '@/shared/api/commentsApi'
+import { GetPostResponse } from '@/shared/api/postsApi'
 import { useTranslation } from '@/shared/lib/hooks'
 import { useCalculateUpdatedInterval } from '@/shared/lib/hooks/useCalculateTimePassed'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
@@ -16,37 +17,24 @@ import Link from 'next/link'
 import s from './PostInfoContainer.module.scss'
 
 type Props = {
-  avatar: string
-  comments?: any
-  createdAt: string
-  likesCount?: number
   loggedUserId?: number | undefined
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
-  ownerId: number
   postDescription: string
-  postId: number
-  updatedAt: string
-  userName: string
+  postInfo: GetPostResponse
 }
 
 export const PostInfoContainer = ({
-  avatar,
-  createdAt,
-  likesCount,
   loggedUserId,
   onChangeEditMode,
   onOpenConfirmationDeletePostModal,
-  ownerId,
   postDescription,
-  postId,
-  updatedAt,
-  userName,
+  postInfo,
 }: Props) => {
   const { router, text } = useTranslation()
   const t = text.modals.viewPostModal
   const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
-    postId: postId,
+    postId: postInfo.id,
   })
 
   const [publishComment] = useCreateNewCommentMutation()
@@ -59,12 +47,14 @@ export const PostInfoContainer = ({
   } = useAddComment(text.validation)
 
   const isUserAuthorized = loggedUserId !== undefined
-  const isMyPost = ownerId === loggedUserId
+  const isMyPost = postInfo.ownerId === loggedUserId
 
-  const timeIntervalSinceUpdated = useCalculateUpdatedInterval(updatedAt ?? createdAt)
+  const timeIntervalSinceUpdated = useCalculateUpdatedInterval(
+    postInfo.updatedAt ?? postInfo.createdAt
+  )
 
   const onFormSubmit = (data: AddCommentType) => {
-    publishComment({ content: data.text, postId: postId })
+    publishComment({ content: data.text, postId: postInfo.id })
       .unwrap()
       .then(() => {
         reset()
@@ -76,9 +66,9 @@ export const PostInfoContainer = ({
     <div className={s.postInfoContainer}>
       <div className={s.header}>
         <Link className={s.postAuthorName} href={'/'}>
-          <Avatar size={36} src={avatar} userName={userName} />
+          <Avatar size={36} src={postInfo.avatarOwner || ''} userName={postInfo.userName} />
           <Typography as={'h3'} variant={'h3'}>
-            {userName}
+            {postInfo.userName}
           </Typography>
         </Link>
         <PostManageDropdown
@@ -90,12 +80,12 @@ export const PostInfoContainer = ({
       <div className={s.descriptionAndComments}>
         <div className={s.description}>
           <div>
-            <Avatar size={36} src={avatar} userName={userName} />
+            <Avatar size={36} src={postInfo.avatarOwner || ''} userName={postInfo.userName} />
           </div>
           <div>
             <Typography as={'p'} variant={'regularText14'}>
               <Typography as={'span'} variant={'boldText14'}>
-                {`${userName} `}
+                {`${postInfo.userName} `}
               </Typography>
               {postDescription}
             </Typography>
@@ -108,13 +98,16 @@ export const PostInfoContainer = ({
       </div>
       <Actions />
       <div className={s.postLikes}>
-        <LikesInfo likesCount={likesCount} />
+        <LikesInfo likesCount={postInfo.likesCount} />
         <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
-          {`${new Date(createdAt).toLocaleDateString(router.locale === 'en' ? 'en-US' : 'ru-RU', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          })}`}
+          {`${new Date(postInfo.createdAt).toLocaleDateString(
+            router.locale === 'en' ? 'en-US' : 'ru-RU',
+            {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            }
+          )}`}
         </Typography>
       </div>
       <form className={s.sendCommentContainer} onSubmit={handleSubmit(onFormSubmit)}>
