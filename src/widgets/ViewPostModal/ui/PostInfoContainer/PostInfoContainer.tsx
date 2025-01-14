@@ -7,14 +7,15 @@ import { useTranslation } from '@/shared/lib/hooks'
 import { useCalculateUpdatedInterval } from '@/shared/lib/hooks/useCalculateTimePassed'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
 import { PostManageDropdown } from '@/widgets/PostManageDropdown'
-import { Actions } from '@/widgets/ViewPostModal/ui/Actions/Actions'
-import { Comments } from '@/widgets/ViewPostModal/ui/Comments/Comments'
-import { LikesInfo } from '@/widgets/ViewPostModal/ui/LikesInfo/LikesInfo'
-import { useAddComment } from '@/widgets/ViewPostModal/ui/PostInfoContainer/services'
-import { AddCommentType } from '@/widgets/ViewPostModal/ui/PostInfoContainer/services/addCommentSchema'
 import Link from 'next/link'
 
 import s from './PostInfoContainer.module.scss'
+
+import { Actions } from '../Actions'
+import { Comments } from '../Comments'
+import { LikesInfo } from '../LikesInfo'
+import { useAddComment } from './services'
+import { AddCommentType } from './services/addCommentSchema'
 
 type Props = {
   loggedUserId?: number | undefined
