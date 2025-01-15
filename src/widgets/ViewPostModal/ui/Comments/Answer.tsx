@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import { AnswersViewModel, useUpdateAnswerLikeStatusMutation } from '@/shared/api/commentsApi'
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
-import { useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
 import { enUS, ru } from 'date-fns/locale'
