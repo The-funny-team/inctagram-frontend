@@ -1,3 +1,7 @@
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+
+import { useFollowMutation, useUnfollowMutation } from '@/shared/api/followApi'
 import {
   CopyLinkOutlineIcon,
   DotsHorizontalIcon,
@@ -22,6 +26,7 @@ type Props = {
   isMyPost: boolean
   onDeleteMode: () => void
   onEditMode: () => void
+  ownerId: number
 }
 
 export const PostManageDropdown = ({
@@ -29,9 +34,29 @@ export const PostManageDropdown = ({
   isMyPost,
   onDeleteMode,
   onEditMode,
+  ownerId,
 }: Props) => {
+  const [isFollowed, setIsFollowed] = useState(isMyFollowing)
   const { text } = useTranslation()
   const t = text.modals.viewPostModal
+  const [follow] = useFollowMutation()
+  const [unfollow] = useUnfollowMutation()
+
+  const followUser = () => {
+    follow({ selectedUserId: ownerId })
+      .unwrap()
+      .then(() => setIsFollowed(prevState => !prevState))
+      .then(() => toast.success('Follow success'))
+      .catch(() => toast.error('Something went wrong'))
+  }
+
+  const unfollowUser = () => {
+    unfollow({ userId: ownerId })
+      .unwrap()
+      .then(() => setIsFollowed(prevState => !prevState))
+      .then(() => toast.success('Unfollow success'))
+      .catch(() => toast.error('Something went wrong'))
+  }
 
   return (
     <DropdownMenu>
@@ -56,16 +81,16 @@ export const PostManageDropdown = ({
           </>
         ) : (
           <>
-            {!isMyFollowing && (
-              <DropdownMenuItem className={s.menuItem}>
+            {!isFollowed && (
+              <DropdownMenuItem className={s.menuItem} onClick={followUser}>
                 <FollowOutlineIcon />
                 <Typography as={'span'} variant={'regularText14'}>
                   {t.managePostDropdown.follow}
                 </Typography>
               </DropdownMenuItem>
             )}
-            {isMyFollowing && (
-              <DropdownMenuItem className={s.menuItem}>
+            {isFollowed && (
+              <DropdownMenuItem className={s.menuItem} onClick={unfollowUser}>
                 <UnfollowOutlineIcon />
                 <Typography as={'span'} variant={'regularText14'}>
                   {t.managePostDropdown.unfollow}

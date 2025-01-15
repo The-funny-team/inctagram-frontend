@@ -53,6 +53,7 @@ export const HomePost = ({ post }: Props) => {
           isMyPost={false}
           onDeleteMode={() => {}}
           onEditMode={() => {}}
+          ownerId={post.ownerId}
         />
       </div>
       <div className={s.postSlider}>

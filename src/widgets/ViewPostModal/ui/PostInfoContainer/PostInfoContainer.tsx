@@ -77,6 +77,7 @@ export const PostInfoContainer = ({
             isMyPost={isMyPost}
             onDeleteMode={onOpenConfirmationDeletePostModal}
             onEditMode={onChangeEditMode}
+            ownerId={postInfo.ownerId}
           />
         )}
       </div>
