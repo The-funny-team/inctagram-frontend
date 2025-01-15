@@ -4,6 +4,7 @@ import { PostResponseImages } from '@/shared/api/postsApi'
 const commentsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     createNewAnswerToComment: builder.mutation<CommentsViewModel, CreateAnswerToCommentRequest>({
+      invalidatesTags: ['Answer'],
       query: ({ commentId, postId, ...body }) => {
         return {
           body,
@@ -13,6 +14,7 @@ const commentsApi = baseApi.injectEndpoints({
       },
     }),
     createNewComment: builder.mutation<CommentsViewModel, CreateCommentRequest>({
+      invalidatesTags: ['Comments'],
       query: ({ postId, ...body }) => {
         return {
           body,
@@ -35,6 +37,7 @@ const commentsApi = baseApi.injectEndpoints({
       GetAnswersToPostCommentsResponse,
       GetAnswersToPostCommentRequest
     >({
+      providesTags: ['Answer'],
       query: ({ commentId, postId, ...args }) => {
         return {
           method: 'GET',
@@ -53,6 +56,7 @@ const commentsApi = baseApi.injectEndpoints({
       },
     }),
     getPostComments: builder.query<GetPostCommentsResponse, GetPostCommentsRequest>({
+      providesTags: ['Comments'],
       query: ({ postId, ...args }) => {
         return {
           method: 'GET',
@@ -62,15 +66,17 @@ const commentsApi = baseApi.injectEndpoints({
       },
     }),
     updateAnswerLikeStatus: builder.mutation<void, UpdateAnswerLikeStatusRequest>({
+      invalidatesTags: ['Answer'],
       query: ({ answerId, commentId, postId, ...body }) => {
         return {
           body,
           method: 'PUT',
-          url: `/posts/${postId}/comments/${commentId}/answer/${answerId}like-status`,
+          url: `/posts/${postId}/comments/${commentId}/answers/${answerId}/like-status`,
         }
       },
     }),
-    updateLikeStatus: builder.mutation<void, UpdateLikeStatusRequest>({
+    updateCommentLikeStatus: builder.mutation<void, UpdateLikeStatusRequest>({
+      invalidatesTags: ['Comments'],
       query: ({ commentId, postId, ...body }) => {
         return {
           body,
@@ -90,7 +96,8 @@ export const {
   useGetCommentLikesQuery,
   useGetPostCommentsQuery,
   useUpdateAnswerLikeStatusMutation,
-  useUpdateLikeStatusMutation,
+
+  useUpdateCommentLikeStatusMutation,
 } = commentsApi
 
 export type CreateCommentRequest = {
