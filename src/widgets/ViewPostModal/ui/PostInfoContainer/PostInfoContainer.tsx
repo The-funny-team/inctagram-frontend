@@ -18,7 +18,8 @@ import { AddCommentType } from './services/addCommentSchema'
 
 type Props = {
   isAuth: boolean
-  loggedUserId?: number | undefined
+  isFollowing: boolean
+  loggedUserId?: number
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
   postDescription: string
@@ -27,6 +28,7 @@ type Props = {
 
 export const PostInfoContainer = ({
   isAuth,
+  isFollowing,
   loggedUserId,
   onChangeEditMode,
   onOpenConfirmationDeletePostModal,
@@ -38,7 +40,6 @@ export const PostInfoContainer = ({
   const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
     postId: postInfo.id,
   })
-
   const [publishComment] = useCreateNewCommentMutation()
 
   const {
@@ -72,6 +73,7 @@ export const PostInfoContainer = ({
         </Link>
         {isAuth && (
           <PostManageDropdown
+            isMyFollowing={isFollowing}
             isMyPost={isMyPost}
             onDeleteMode={onOpenConfirmationDeletePostModal}
             onEditMode={onChangeEditMode}

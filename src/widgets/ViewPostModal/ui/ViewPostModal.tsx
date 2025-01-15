@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { useGetUserProfileQuery } from '@/shared/api/followApi'
 import {
   GetPostResponse,
   useDeletePostMutation,
@@ -27,6 +28,7 @@ export const ViewPostModal = ({ isAuth, post }: PropsType) => {
   const [isOpenConfirmDeletePostModal, setIsOpenConfirmDeletePostModal] = useState<boolean>(false)
   const [isOpenConfirmCloseModal, setIsOpenConfirmCloseModal] = useState<boolean>(false)
   const [postDescription, setPostDescription] = useState<string>(post?.description || '')
+  const { data: postOwner } = useGetUserProfileQuery({ userName: post.userName })
 
   const { text } = useTranslation()
   const t = text.modals.viewPostModal
@@ -87,6 +89,10 @@ export const ViewPostModal = ({ isAuth, post }: PropsType) => {
     return <div>Loading post...</div>
   }
 
+  if (!postOwner) {
+    return null
+  }
+
   return (
     <ModalRadix
       className={s.modal}
@@ -126,6 +132,7 @@ export const ViewPostModal = ({ isAuth, post }: PropsType) => {
           <SliderContainer imageUrls={post?.images || []} />
           <PostInfoContainer
             isAuth={isAuth}
+            isFollowing={postOwner.isFollowing}
             onChangeEditMode={handleChangeEditMode}
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
             postDescription={postDescription}
