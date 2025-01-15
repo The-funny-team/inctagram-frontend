@@ -18,7 +18,7 @@ import {
 import s from './PostManageDropdown.module.scss'
 
 type Props = {
-  isMyFollowing: boolean
+  isMyFollowing?: boolean
   isMyPost: boolean
   onDeleteMode: () => void
   onEditMode: () => void

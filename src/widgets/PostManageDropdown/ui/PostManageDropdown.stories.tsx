@@ -23,6 +23,23 @@ export const PostDropdownWithMyPost: Story = {
 export const PostDropdownWithAnotherUserPost: Story = {
   args: {},
   render: () => (
-    <PostManageDropdown isMyPost={false} onDeleteMode={() => {}} onEditMode={() => {}} />
+    <PostManageDropdown
+      isMyFollowing={false}
+      isMyPost={false}
+      onDeleteMode={() => {}}
+      onEditMode={() => {}}
+    />
+  ),
+}
+
+export const PostDropdownWithFriendPost: Story = {
+  args: {},
+  render: () => (
+    <PostManageDropdown
+      isMyFollowing
+      isMyPost={false}
+      onDeleteMode={() => {}}
+      onEditMode={() => {}}
+    />
   ),
 }
