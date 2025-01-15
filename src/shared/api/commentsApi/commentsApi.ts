@@ -31,17 +31,18 @@ const commentsApi = baseApi.injectEndpoints({
       },
     }),
 
-    getAnswersToPostComment: builder.query<GetPostCommentsResponse, GetAnswersToPostCommentRequest>(
-      {
-        query: ({ commentId, postId, ...args }) => {
-          return {
-            method: 'GET',
-            params: args,
-            url: `/posts/${postId}/comments/${commentId}/answers`,
-          }
-        },
-      }
-    ),
+    getAnswersToPostComment: builder.query<
+      GetAnswersToPostCommentsResponse,
+      GetAnswersToPostCommentRequest
+    >({
+      query: ({ commentId, postId, ...args }) => {
+        return {
+          method: 'GET',
+          params: args,
+          url: `/posts/${postId}/comments/${commentId}/answers`,
+        }
+      },
+    }),
     getCommentLikes: builder.query<GetCommentLikesResponse, GetCommentLikesRequest>({
       query: ({ commentId, postId, ...args }) => {
         return {
@@ -114,6 +115,19 @@ export type CommentsViewModel = {
   likeCount: number
   postId: number
 }
+export type AnswersViewModel = {
+  commentId: number
+  content: string
+  createdAt: string
+  from: {
+    avatars: Array<any>
+    id: number
+    username: string
+  }
+  id: number
+  isLiked: boolean
+  likeCount: number
+}
 
 export type GetPostCommentsArg = {
   pageNumber?: number
@@ -129,6 +143,12 @@ export type GetAnswersToPostCommentRequest = { commentId: number } & GetPostComm
 
 export type GetPostCommentsResponse = {
   items: Array<CommentsViewModel>
+  pageSize: number
+  totalCount: number
+}
+export type GetAnswersToPostCommentsResponse = {
+  items: Array<AnswersViewModel>
+  notReadCount: number
   pageSize: number
   totalCount: number
 }
