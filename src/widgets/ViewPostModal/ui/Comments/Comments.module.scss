@@ -1,4 +1,7 @@
 .comments {
+  scrollbar-width: none;
+
+  overflow: auto;
   display: flex;
   flex-direction: column;
   row-gap: 15px;
@@ -11,6 +14,7 @@
 .commentWrapper {
   display: flex;
   column-gap: 12px;
+  justify-content: space-between;
 }
 
 .comment {
@@ -18,17 +22,20 @@
   column-gap: 12px;
 }
 
-.commentCreatedAt {
-  color: var(--color-light-900);
-}
+.commentInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
 
-.answerBtn {
-  all: unset;
-  cursor: pointer;
-  padding-left: 30px;
-  background-color: transparent;
+  margin-top: 2px;
 
-  & span {
+  :last-child {
+    cursor: pointer;
+  }
+
+  p {
     color: var(--color-light-900);
   }
 }
@@ -40,5 +47,30 @@
   > svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-left: 40px;
+
+  button {
+    margin-left: auto;
+    font-size: var(--font-size-s);
+  }
+}
+
+.commentsWithAnswers {
+  .answers {
+    margin: 10px auto 0 42px;
+
+    p {
+      cursor: pointer;
+      margin-bottom: 12px;
+      margin-left: 6px;
+      color: var(--color-light-900);
+    }
   }
 }

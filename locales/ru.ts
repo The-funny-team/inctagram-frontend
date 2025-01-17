@@ -90,10 +90,11 @@ export const ru: LocaleType = {
     viewPostModal: {
       answer: 'Ответить',
       editDescriptionLabel: 'Изменить описание',
-      editHeader: 'Редактировать Пост',
+      editHeader: 'Редактировать пост',
+      hideAnswers: '- Скрыть ответы',
       like: 'Нравится',
       managePostDropdown: {
-        copy: 'Копировать Адрес',
+        copy: 'Копировать адрес',
         delete: 'Удалить',
         edit: 'Редактировать',
         follow: 'Подписаться',
@@ -102,6 +103,7 @@ export const ru: LocaleType = {
       publishCommentBtn: 'Опубликовать',
       publishCommentPlaceholder: 'Добавить комментарий...',
       saveChangesBtn: 'Сохранить изменения',
+      showAnswers: '- Показать ответы',
     },
   },
   pages: {

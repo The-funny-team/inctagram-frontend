@@ -88,7 +88,8 @@ export const en = {
       answer: 'Answer',
       editDescriptionLabel: 'Change publication description',
       editHeader: 'Edit Post',
-      like: 'like',
+      hideAnswers: '- Hide Answers',
+      like: 'Like',
       managePostDropdown: {
         copy: 'Copy Link',
         delete: 'Delete Post',
@@ -99,6 +100,7 @@ export const en = {
       publishCommentBtn: 'Publish',
       publishCommentPlaceholder: 'Add a Comment...',
       saveChangesBtn: 'Save Changes',
+      showAnswers: '- Show Answers',
     },
   },
   pages: {
