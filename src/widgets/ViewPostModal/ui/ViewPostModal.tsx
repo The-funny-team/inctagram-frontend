@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { useGetUserProfileQuery } from '@/shared/api/followApi'
 import {
   GetPostResponse,
   useDeletePostMutation,
@@ -17,15 +18,17 @@ import Image from 'next/image'
 import s from './ViewPostModal.module.scss'
 
 type PropsType = {
+  isAuth: boolean
   post: GetPostResponse
 }
 
-export const ViewPostModal = ({ post }: PropsType) => {
+export const ViewPostModal = ({ isAuth, post }: PropsType) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
   const [isOpenPost, setIsOpenPost] = useState<boolean>(false)
   const [isOpenConfirmDeletePostModal, setIsOpenConfirmDeletePostModal] = useState<boolean>(false)
   const [isOpenConfirmCloseModal, setIsOpenConfirmCloseModal] = useState<boolean>(false)
   const [postDescription, setPostDescription] = useState<string>(post?.description || '')
+  const { data: postOwner } = useGetUserProfileQuery({ userName: post.userName })
 
   const { text } = useTranslation()
   const t = text.modals.viewPostModal
@@ -86,6 +89,10 @@ export const ViewPostModal = ({ post }: PropsType) => {
     return <div>Loading post...</div>
   }
 
+  if (!postOwner) {
+    return null
+  }
+
   return (
     <ModalRadix
       className={s.modal}
@@ -124,16 +131,12 @@ export const ViewPostModal = ({ post }: PropsType) => {
         <div className={s.main}>
           <SliderContainer imageUrls={post?.images || []} />
           <PostInfoContainer
-            avatar={post?.avatarOwner || ''}
-            createdAt={post?.createdAt}
-            likesCount={post?.likesCount}
+            isAuth={isAuth}
+            isFollowing={postOwner.isFollowing}
             onChangeEditMode={handleChangeEditMode}
             onOpenConfirmationDeletePostModal={handleOpenConfirmationDeletePostModal}
-            ownerId={post?.ownerId}
             postDescription={postDescription}
-            postId={post?.id}
-            updatedAt={post?.updatedAt}
-            userName={post?.userName}
+            postInfo={post}
           />
           <DeletePostConfirmationModal
             onDeletePost={handleDeletePost}

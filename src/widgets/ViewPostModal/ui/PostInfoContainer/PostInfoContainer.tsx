@@ -2,53 +2,44 @@ import React from 'react'
 import { Controller } from 'react-hook-form'
 
 import { useCreateNewCommentMutation, useGetPostCommentsQuery } from '@/shared/api/commentsApi'
-import { useTranslation } from '@/shared/lib/hooks'
-import { useCalculateUpdatedInterval } from '@/shared/lib/hooks/useCalculateTimePassed'
+import { GetPostResponse } from '@/shared/api/postsApi'
+import { useGetTimeAgo, useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, TextField, Typography } from '@/shared/ui'
 import { PostManageDropdown } from '@/widgets/PostManageDropdown'
-import { Actions } from '@/widgets/ViewPostModal/ui/Actions/Actions'
-import { Comments } from '@/widgets/ViewPostModal/ui/Comments/Comments'
-import { LikesInfo } from '@/widgets/ViewPostModal/ui/LikesInfo/LikesInfo'
-import { useAddComment } from '@/widgets/ViewPostModal/ui/PostInfoContainer/services'
-import { AddCommentType } from '@/widgets/ViewPostModal/ui/PostInfoContainer/services/addCommentSchema'
 import Link from 'next/link'
 
 import s from './PostInfoContainer.module.scss'
 
+import { Actions } from '../Actions'
+import { Comments } from '../Comments'
+import { LikesInfo } from '../LikesInfo'
+import { useAddComment } from './services'
+import { AddCommentType } from './services/addCommentSchema'
+
 type Props = {
-  avatar: string
-  comments?: any
-  createdAt: string
-  likesCount?: number
-  loggedUserId?: number | undefined
+  isAuth: boolean
+  isFollowing: boolean
+  loggedUserId?: number
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
-  ownerId: number
   postDescription: string
-  postId: number
-  updatedAt: string
-  userName: string
+  postInfo: GetPostResponse
 }
 
 export const PostInfoContainer = ({
-  avatar,
-  createdAt,
-  likesCount,
+  isAuth,
+  isFollowing,
   loggedUserId,
   onChangeEditMode,
   onOpenConfirmationDeletePostModal,
-  ownerId,
   postDescription,
-  postId,
-  updatedAt,
-  userName,
+  postInfo,
 }: Props) => {
-  const { router, text } = useTranslation()
+  const { text } = useTranslation()
   const t = text.modals.viewPostModal
   const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
-    postId: postId,
+    postId: postInfo.id,
   })
-
   const [publishComment] = useCreateNewCommentMutation()
 
   const {
@@ -59,12 +50,11 @@ export const PostInfoContainer = ({
   } = useAddComment(text.validation)
 
   const isUserAuthorized = loggedUserId !== undefined
-  const isMyPost = ownerId === loggedUserId
-
-  const timeIntervalSinceUpdated = useCalculateUpdatedInterval(updatedAt ?? createdAt)
+  const isMyPost = postInfo.ownerId === loggedUserId
+  const timeAgo = useGetTimeAgo(postInfo.updatedAt)
 
   const onFormSubmit = (data: AddCommentType) => {
-    publishComment({ content: data.text, postId: postId })
+    publishComment({ content: data.text, postId: postInfo.id })
       .unwrap()
       .then(() => {
         reset()
@@ -76,31 +66,35 @@ export const PostInfoContainer = ({
     <div className={s.postInfoContainer}>
       <div className={s.header}>
         <Link className={s.postAuthorName} href={'/'}>
-          <Avatar size={36} src={avatar} userName={userName} />
+          <Avatar size={36} src={postInfo.avatarOwner || ''} userName={postInfo.userName} />
           <Typography as={'h3'} variant={'h3'}>
-            {userName}
+            {postInfo.userName}
           </Typography>
         </Link>
-        <PostManageDropdown
-          isMyPost={isMyPost}
-          onDeleteMode={onOpenConfirmationDeletePostModal}
-          onEditMode={onChangeEditMode}
-        />
+        {isAuth && (
+          <PostManageDropdown
+            isMyFollowing={isFollowing}
+            isMyPost={isMyPost}
+            onDeleteMode={onOpenConfirmationDeletePostModal}
+            onEditMode={onChangeEditMode}
+            ownerId={postInfo.ownerId}
+          />
+        )}
       </div>
       <div className={s.descriptionAndComments}>
         <div className={s.description}>
           <div>
-            <Avatar size={36} src={avatar} userName={userName} />
+            <Avatar size={36} src={postInfo.avatarOwner || ''} userName={postInfo.userName} />
           </div>
           <div>
             <Typography as={'p'} variant={'regularText14'}>
               <Typography as={'span'} variant={'boldText14'}>
-                {`${userName} `}
+                {`${postInfo.userName} `}
               </Typography>
               {postDescription}
             </Typography>
             <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
-              {timeIntervalSinceUpdated}
+              {timeAgo}
             </Typography>
           </div>
         </div>
@@ -108,33 +102,31 @@ export const PostInfoContainer = ({
       </div>
       <Actions />
       <div className={s.postLikes}>
-        <LikesInfo likesCount={likesCount} />
+        <LikesInfo likesCount={postInfo.likesCount} />
         <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
-          {`${new Date(createdAt).toLocaleDateString(router.locale === 'en' ? 'en-US' : 'ru-RU', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          })}`}
+          {timeAgo}
         </Typography>
       </div>
-      <form className={s.sendCommentContainer} onSubmit={handleSubmit(onFormSubmit)}>
-        <Controller
-          control={control}
-          name={'text'}
-          render={({ field }) => (
-            <TextField
-              className={s.sendCommentInput}
-              disabled={!isUserAuthorized}
-              placeholder={t.publishCommentPlaceholder}
-              {...field}
-            />
-          )}
-        />
+      {isAuth && (
+        <form className={s.sendCommentContainer} onSubmit={handleSubmit(onFormSubmit)}>
+          <Controller
+            control={control}
+            name={'text'}
+            render={({ field }) => (
+              <TextField
+                className={s.sendCommentInput}
+                disabled={!isUserAuthorized}
+                placeholder={t.publishCommentPlaceholder}
+                {...field}
+              />
+            )}
+          />
 
-        <Button disabled={!isValid} type={'submit'} variant={'link'}>
-          {t.publishCommentBtn}
-        </Button>
-      </form>
+          <Button disabled={!isValid} type={'submit'} variant={'link'}>
+            {t.publishCommentBtn}
+          </Button>
+        </form>
+      )}
     </div>
   )
 }

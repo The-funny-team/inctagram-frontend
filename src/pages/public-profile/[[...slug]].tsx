@@ -56,7 +56,7 @@ const PublicUser = ({
       {publicUser && (
         <ProfileHeader isAuth={!!myProfile} postsTotalCount={postsTotalCount} user={publicUser} />
       )}
-      {posts && <ProfilePosts profilePosts={posts} />}
+      {posts && <ProfilePosts isAuth={!!myProfile} profilePosts={posts} />}
     </div>
   )
 }

@@ -75,77 +75,61 @@ const comments = [
   },
 ]
 
+const postWithManyImages = {
+  avatarOwner: avatar,
+  avatarWhoLikes: ['', ''],
+  createdAt: 'July 3, 2021',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
+  id: 3,
+  images: fewImages,
+  isLiked: true,
+  isMyPost: true,
+  isOpen: false,
+  likesCount: 2394,
+  location: '',
+  owner: {
+    firstName: 'John',
+    lastName: 'Galt',
+  },
+  ownerId: 12,
+  updatedAt: '1d ago',
+  userName: 'Johnalt',
+}
+
+const postWithOneImage = {
+  avatarOwner: avatar,
+  avatarWhoLikes: ['', ''],
+  createdAt: 'July 3, 2021',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
+  id: 1,
+  images: oneImage,
+  isLiked: false,
+  isMyPost: true,
+  isOpen: false,
+  likesCount: 2394,
+  location: '',
+  owner: {
+    firstName: 'John',
+    lastName: 'Galt',
+  },
+  ownerId: 13,
+  updatedAt: '1d ago',
+  userName: 'J_D-13',
+}
+
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const WithManyImages: Story = {
   args: {
-    avatarOwner: avatar,
-    comments,
-    createdAt: 'July 3, 2021',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
-    id: 3,
-    images: fewImages,
-    isLiked: true,
-    isMyPost: true,
-    isOpen: false,
-    likesCount: 2394,
-    location: '',
-    owner: {
-      firstName: 'John',
-      lastName: 'Galt',
-    },
-    ownerId: 12,
-    updatedAt: '1d ago',
-    userName: 'Johnalt',
+    isAuth: true,
+    post: postWithManyImages,
   },
 }
 
 export const WithOneImage: Story = {
   args: {
-    avatarOwner: avatar,
-    comments,
-    createdAt: 'July 3, 2021',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
-    id: 1,
-    images: oneImage,
-    isLiked: false,
-    isMyPost: true,
-    isOpen: false,
-    likesCount: 2394,
-    location: '',
-    owner: {
-      firstName: 'John',
-      lastName: 'Galt',
-    },
-    ownerId: 13,
-    updatedAt: '1d ago',
-    userName: 'J_D-13',
-  },
-}
-
-export const StrangerPost: Story = {
-  args: {
-    avatarOwner: avatar,
-    comments,
-    createdAt: 'July 3, 2021',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, reiciendis.',
-    id: 2,
-    images: oneImage,
-    isLiked: true,
-    isMyPost: false,
-    isOpen: false,
-    likesCount: 2394,
-    location: '',
-    owner: {
-      firstName: 'John',
-      lastName: 'Galt',
-    },
-    ownerId: 11,
-    updatedAt: '1d ago',
-    userName: 'John1_2',
+    isAuth: true,
+    post: postWithOneImage,
   },
 }

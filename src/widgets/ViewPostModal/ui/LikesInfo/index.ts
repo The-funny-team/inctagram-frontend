@@ -1,0 +1,1 @@
+export { LikesInfo } from './LikesInfo'

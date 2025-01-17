@@ -17,12 +17,33 @@ type Story = StoryObj<typeof meta>
 
 export const PostDropdownWithMyPost: Story = {
   args: {},
-  render: () => <PostManageDropdown isMyPost onDeleteMode={() => {}} onEditMode={() => {}} />,
+  render: () => (
+    <PostManageDropdown isMyPost onDeleteMode={() => {}} onEditMode={() => {}} ownerId={250} />
+  ),
 }
 
 export const PostDropdownWithAnotherUserPost: Story = {
   args: {},
   render: () => (
-    <PostManageDropdown isMyPost={false} onDeleteMode={() => {}} onEditMode={() => {}} />
+    <PostManageDropdown
+      isMyFollowing={false}
+      isMyPost={false}
+      onDeleteMode={() => {}}
+      onEditMode={() => {}}
+      ownerId={250}
+    />
+  ),
+}
+
+export const PostDropdownWithFriendPost: Story = {
+  args: {},
+  render: () => (
+    <PostManageDropdown
+      isMyFollowing
+      isMyPost={false}
+      onDeleteMode={() => {}}
+      onEditMode={() => {}}
+      ownerId={250}
+    />
   ),
 }

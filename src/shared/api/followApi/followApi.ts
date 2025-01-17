@@ -58,12 +58,12 @@ const followApi = baseApi.injectEndpoints({
 })
 
 export const {
+  useFollowMutation,
+  useGetUserFollowersQuery,
+  useGetUserFollowingQuery,
+  useGetUserProfileQuery,
   useGetUsersQuery,
   useUnfollowMutation,
-  useFollowMutation,
-  useGetUserFollowingQuery,
-  useGetUserFollowersQuery,
-  useGetUserProfileQuery,
 } = followApi
 
 export type GetUsersArgs = {
