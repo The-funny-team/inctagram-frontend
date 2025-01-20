@@ -57,6 +57,16 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
+    updateLikeStatusPost: builder.mutation<void, UpdateLikeStatusRequest>({
+      invalidatesTags: ['Posts'],
+      query: ({ postId, ...body }) => {
+        return {
+          body,
+          method: 'PUT',
+          url: `/posts/${postId}/like-status`,
+        }
+      },
+    }),
     updatePost: builder.mutation<GetPostResponse, UpdatePostArgs>({
       invalidatesTags: ['Posts'],
       query: ({ postId, ...body }) => {
@@ -86,6 +96,7 @@ export const {
   useGetPublicPostsQuery,
   useGetPublicationsFollowersQuery,
   useGetUserPostsQuery,
+  useUpdateLikeStatusPostMutation,
   useUpdatePostMutation,
   useUploadPostPhotoMutation,
 } = postApi
@@ -179,4 +190,8 @@ export type GetPublicationsResponseItem = {
   ownerId: number
   updatedAt: string
   userName: string
+}
+export type UpdateLikeStatusRequest = {
+  likeStatus: string
+  postId: number
 }
