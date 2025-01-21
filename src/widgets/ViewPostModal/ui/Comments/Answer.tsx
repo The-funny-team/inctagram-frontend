@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { AnswersViewModel, useUpdateAnswerLikeStatusMutation } from '@/shared/api/commentsApi'
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
+import { useGetTimeAgo } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
 import { enUS, ru } from 'date-fns/locale'
@@ -15,9 +16,6 @@ type Props = {
 }
 
 export const Answer = ({ answer, postId }: Props) => {
-  const { locale } = useRouter()
-  const [timeAgo, setTimeAgo] = useState<null | string>(null)
-
   const [isLiked, setIsLiked] = useState<boolean>(answer.isLiked)
   const [updateLikeAnswerStatus] = useUpdateAnswerLikeStatusMutation()
   const toggleLikeAnswer = () => {
@@ -32,15 +30,6 @@ export const Answer = ({ answer, postId }: Props) => {
         setIsLiked(prevState => !prevState)
       })
   }
-
-  useEffect(() => {
-    setTimeAgo(
-      formatDistanceToNowStrict(parseISO(answer.createdAt as string), {
-        addSuffix: true,
-        locale: locale === 'ru' ? ru : enUS,
-      })
-    )
-  }, [locale, answer.createdAt])
 
   return (
     <>
@@ -62,7 +51,7 @@ export const Answer = ({ answer, postId }: Props) => {
             </Typography>
             <div>
               <Typography as={'time'} className={s.commentCreatedAt} variant={'smallText'}>
-                {timeAgo}
+                {useGetTimeAgo(answer.createdAt)}
               </Typography>
             </div>
           </div>

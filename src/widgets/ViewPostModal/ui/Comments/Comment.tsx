@@ -6,7 +6,7 @@ import {
   useUpdateCommentLikeStatusMutation,
 } from '@/shared/api/commentsApi'
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
-import { useTranslation } from '@/shared/lib/hooks'
+import { useGetTimeAgo, useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, Input, Typography } from '@/shared/ui'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
 import { enUS, ru } from 'date-fns/locale'
@@ -20,9 +20,9 @@ type Props = {
 
 export const Comment = ({ comment }: Props) => {
   const { text } = useTranslation()
-  const { locale } = useRouter()
+
   const t = text.modals.viewPostModal
-  const [timeAgo, setTimeAgo] = useState<null | string>(null)
+
   const [isShowInput, setIsShowInput] = useState(false)
   const [commentValue, setCommentValue] = useState<string>('')
   const [isLiked, setIsLiked] = useState<boolean>(comment.isLiked)
@@ -60,15 +60,6 @@ export const Comment = ({ comment }: Props) => {
       })
   }
 
-  useEffect(() => {
-    setTimeAgo(
-      formatDistanceToNowStrict(parseISO(comment.createdAt as string), {
-        addSuffix: true,
-        locale: locale === 'ru' ? ru : enUS,
-      })
-    )
-  }, [locale, comment.createdAt])
-
   return (
     <>
       <div className={s.commentWrapper}>
@@ -88,7 +79,7 @@ export const Comment = ({ comment }: Props) => {
               {comment.content}
             </Typography>
             <div className={s.commentInfo}>
-              <Typography variant={'smallText'}>{timeAgo}</Typography>
+              <Typography variant={'smallText'}>{useGetTimeAgo(comment.createdAt)}</Typography>
               {comment.likeCount !== 0 && (
                 <Typography variant={'smallText'}>
                   {t.like}: {comment.likeCount}
