@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import {
   CommentsViewModel,
@@ -8,9 +8,6 @@ import {
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
 import { useGetTimeAgo, useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, Input, Typography } from '@/shared/ui'
-import { formatDistanceToNowStrict, parseISO } from 'date-fns'
-import { enUS, ru } from 'date-fns/locale'
-import { useRouter } from 'next/router'
 
 import s from './Comments.module.scss'
 
