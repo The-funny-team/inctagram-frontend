@@ -87,6 +87,11 @@ export type PublicProfileType = {
   aboutMe: string
   avatars: AvatarsType[]
   id: number
+  userMetadata: {
+    followers: number
+    following: number
+    publications: number
+  }
   userName: string
 }
 

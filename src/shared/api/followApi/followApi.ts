@@ -83,15 +83,8 @@ export type GetUsersResponse = {
   prevCursor: number
   totalCount: number
 }
-export type GetItemsAvatars = {
-  createdAt: string
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
 export type GetUsersResponseItems = {
-  avatars: GetItemsAvatars[]
+  avatars: AvatarsType[]
   createdAt: string
   firstName: string
   id: number
@@ -110,7 +103,7 @@ export type GetUserFollowResponse = {
 }
 
 export type GetUserFollowResponseItems = {
-  avatars: GetItemsAvatars[]
+  avatars: AvatarsType[]
   createdAt: string
   id: number
   isFollowedBy: boolean
