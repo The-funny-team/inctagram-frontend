@@ -1,4 +1,5 @@
 import { baseApi } from '@/shared/api/baseApi'
+import { AvatarsType } from '@/shared/api/profileApi'
 
 const followApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -119,7 +120,7 @@ export type GetUserFollowResponseItems = {
 }
 export type GetUserProfileResponse = {
   aboutMe: string
-  avatars: GetItemsAvatars
+  avatars: AvatarsType[]
   city: string
   country: string
   dateOfBirth: string
