@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { useUpdateLikeStatusPostMutation } from '@/shared/api/postsApi'
 import { FavoritesIcon, LikeIcon, LikeOutlineIcon, MessageIcon, ShareIcon } from '@/shared/assets'
-import { ROUTES_URL } from '@/shared/const'
+import { LIKE_STATUS, ROUTES_URL } from '@/shared/const'
 import { useRouter } from 'next/router'
 
 import s from './Actions.module.scss'
@@ -19,7 +19,10 @@ export const Actions = ({ isLiked, isMyPost, postId }: Props) => {
 
   const [updateLikeStatus] = useUpdateLikeStatusPostMutation()
   const toggleLikeHandler = () => {
-    updateLikeStatus({ likeStatus: isLiked ? 'NONE' : 'LIKE', postId: postId })
+    updateLikeStatus({
+      likeStatus: isLiked ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
+      postId: postId,
+    })
       .unwrap()
       .then(() => {
         setIsLikedPost(prevState => !prevState)

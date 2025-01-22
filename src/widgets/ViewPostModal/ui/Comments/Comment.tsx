@@ -6,6 +6,7 @@ import {
   useUpdateCommentLikeStatusMutation,
 } from '@/shared/api/commentsApi'
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
+import { LIKE_STATUS } from '@/shared/const'
 import { useGetTimeAgo, useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, Input, Typography } from '@/shared/ui'
 
@@ -37,7 +38,7 @@ export const Comment = ({ comment }: Props) => {
   const toggleLikeComment = () => {
     updateLikeStatus({
       commentId: comment.id,
-      likeStatus: isLiked ? 'NONE' : 'LIKE',
+      likeStatus: isLiked ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
       postId: comment.postId,
     })
       .unwrap()

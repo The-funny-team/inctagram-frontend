@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { AnswersViewModel, useUpdateAnswerLikeStatusMutation } from '@/shared/api/commentsApi'
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
+import { LIKE_STATUS } from '@/shared/const'
 import { useGetTimeAgo } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 
@@ -19,7 +20,7 @@ export const Answer = ({ answer, postId }: Props) => {
     updateLikeAnswerStatus({
       answerId: answer.id,
       commentId: answer.commentId,
-      likeStatus: isLiked ? 'NONE' : 'LIKE',
+      likeStatus: isLiked ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
       postId,
     })
       .unwrap()
