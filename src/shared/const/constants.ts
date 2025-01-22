@@ -43,3 +43,7 @@ export const FILTERS = [
     value: 'contrast(1.5) brightness(0.9)',
   },
 ]
+export const LIKE_STATUS = {
+  LIKE: 'LIKE',
+  UNLIKE: 'NONE',
+}

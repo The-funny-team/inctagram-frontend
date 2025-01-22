@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import {
   CommentsViewModel,
@@ -6,11 +6,9 @@ import {
   useUpdateCommentLikeStatusMutation,
 } from '@/shared/api/commentsApi'
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
-import { useTranslation } from '@/shared/lib/hooks'
+import { LIKE_STATUS } from '@/shared/const'
+import { useGetTimeAgo, useTranslation } from '@/shared/lib/hooks'
 import { Avatar, Button, Input, Typography } from '@/shared/ui'
-import { formatDistanceToNowStrict, parseISO } from 'date-fns'
-import { enUS, ru } from 'date-fns/locale'
-import { useRouter } from 'next/router'
 
 import s from './Comments.module.scss'
 
@@ -20,9 +18,9 @@ type Props = {
 
 export const Comment = ({ comment }: Props) => {
   const { text } = useTranslation()
-  const { locale } = useRouter()
+
   const t = text.modals.viewPostModal
-  const [timeAgo, setTimeAgo] = useState<null | string>(null)
+
   const [isShowInput, setIsShowInput] = useState(false)
   const [commentValue, setCommentValue] = useState<string>('')
   const [isLiked, setIsLiked] = useState<boolean>(comment.isLiked)
@@ -32,6 +30,7 @@ export const Comment = ({ comment }: Props) => {
   const [updateLikeStatus] = useUpdateCommentLikeStatusMutation()
 
   const inputRef = useRef<HTMLInputElement>(null)
+  const timeAgo = useGetTimeAgo(comment.createdAt)
   const addAnswerToComment = () => {
     setIsShowInput(prevState => !prevState)
     setTimeout(() => inputRef.current?.focus(), 0)
@@ -39,7 +38,7 @@ export const Comment = ({ comment }: Props) => {
   const toggleLikeComment = () => {
     updateLikeStatus({
       commentId: comment.id,
-      likeStatus: isLiked ? 'NONE' : 'LIKE',
+      likeStatus: isLiked ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
       postId: comment.postId,
     })
       .unwrap()
@@ -59,15 +58,6 @@ export const Comment = ({ comment }: Props) => {
         setIsShowInput(false)
       })
   }
-
-  useEffect(() => {
-    setTimeAgo(
-      formatDistanceToNowStrict(parseISO(comment.createdAt as string), {
-        addSuffix: true,
-        locale: locale === 'ru' ? ru : enUS,
-      })
-    )
-  }, [locale, comment.createdAt])
 
   return (
     <>

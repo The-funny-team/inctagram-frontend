@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { AnswersViewModel, useUpdateAnswerLikeStatusMutation } from '@/shared/api/commentsApi'
 import { LikeIcon, LikeOutlineIcon } from '@/shared/assets'
+import { LIKE_STATUS } from '@/shared/const'
+import { useGetTimeAgo } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
-import { formatDistanceToNowStrict, parseISO } from 'date-fns'
-import { enUS, ru } from 'date-fns/locale'
-import { useRouter } from 'next/router'
 
 import s from './Comments.module.scss'
 
@@ -15,16 +14,13 @@ type Props = {
 }
 
 export const Answer = ({ answer, postId }: Props) => {
-  const { locale } = useRouter()
-  const [timeAgo, setTimeAgo] = useState<null | string>(null)
-
   const [isLiked, setIsLiked] = useState<boolean>(answer.isLiked)
   const [updateLikeAnswerStatus] = useUpdateAnswerLikeStatusMutation()
   const toggleLikeAnswer = () => {
     updateLikeAnswerStatus({
       answerId: answer.id,
       commentId: answer.commentId,
-      likeStatus: isLiked ? 'NONE' : 'LIKE',
+      likeStatus: isLiked ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
       postId,
     })
       .unwrap()
@@ -32,15 +28,7 @@ export const Answer = ({ answer, postId }: Props) => {
         setIsLiked(prevState => !prevState)
       })
   }
-
-  useEffect(() => {
-    setTimeAgo(
-      formatDistanceToNowStrict(parseISO(answer.createdAt as string), {
-        addSuffix: true,
-        locale: locale === 'ru' ? ru : enUS,
-      })
-    )
-  }, [locale, answer.createdAt])
+  const timeAgo = useGetTimeAgo(answer.createdAt)
 
   return (
     <>
