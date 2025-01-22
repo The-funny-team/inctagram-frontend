@@ -29,6 +29,7 @@ export const Comment = ({ comment }: Props) => {
   const [updateLikeStatus] = useUpdateCommentLikeStatusMutation()
 
   const inputRef = useRef<HTMLInputElement>(null)
+  const timeAgo = useGetTimeAgo(comment.createdAt)
   const addAnswerToComment = () => {
     setIsShowInput(prevState => !prevState)
     setTimeout(() => inputRef.current?.focus(), 0)
@@ -76,7 +77,7 @@ export const Comment = ({ comment }: Props) => {
               {comment.content}
             </Typography>
             <div className={s.commentInfo}>
-              <Typography variant={'smallText'}>{useGetTimeAgo(comment.createdAt)}</Typography>
+              <Typography variant={'smallText'}>{timeAgo}</Typography>
               {comment.likeCount !== 0 && (
                 <Typography variant={'smallText'}>
                   {t.like}: {comment.likeCount}

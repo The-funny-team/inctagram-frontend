@@ -27,6 +27,7 @@ export const Answer = ({ answer, postId }: Props) => {
         setIsLiked(prevState => !prevState)
       })
   }
+  const timeAgo = useGetTimeAgo(answer.createdAt)
 
   return (
     <>
@@ -48,7 +49,7 @@ export const Answer = ({ answer, postId }: Props) => {
             </Typography>
             <div>
               <Typography as={'time'} className={s.commentCreatedAt} variant={'smallText'}>
-                {useGetTimeAgo(answer.createdAt)}
+                {timeAgo}
               </Typography>
             </div>
           </div>
