@@ -12,7 +12,7 @@ import s from './ProfileMain.module.scss'
 export const ProfileMain = () => {
   const router = useRouter()
   const urlUserName = router.query.userName
-  const { data: myProfileInfo } = useMeQuery()
+  const { data: myProfileInfo, isLoading } = useMeQuery()
   const myId = Number(myProfileInfo?.userId)
   const myName = myProfileInfo?.userName
 
@@ -20,13 +20,15 @@ export const ProfileMain = () => {
 
   const [endCursorPostId, setEndCursorPostId] = useState(0)
   const [allPosts, setAllPosts] = useState<GetPostResponse[]>([] as GetPostResponse[])
-  const { data: profilePosts, isLoading } = useGetUserPostsQuery({
+  const { data: profilePosts } = useGetUserPostsQuery({
     endCursorPostId: endCursorPostId,
     pageSize: 8,
     userId: myId,
   })
 
-  const { data: profileInfo } = useGetUserProfileQuery({ userName: username as string })
+  const { data: profileInfo, isLoading: profileInfoLoading } = useGetUserProfileQuery({
+    userName: username as string,
+  })
 
   useEffect(() => {
     if (profilePosts && profilePosts.items.length !== 0) {
@@ -55,6 +57,10 @@ export const ProfileMain = () => {
     }
   }, [profilePosts, allPosts])
 
+  if (profileInfoLoading) {
+    return <Loader />
+  }
+
   if (!myProfileInfo || !profileInfo || !profilePosts) {
     return null
   }
@@ -63,11 +69,7 @@ export const ProfileMain = () => {
     <>
       {!isLoading ? (
         <main className={s.rootPage}>
-          <ProfileHeader
-            isAuth={!!myProfileInfo}
-            postsTotalCount={profilePosts?.totalCount}
-            user={profileInfo}
-          />
+          <ProfileHeader isAuth={!!myProfileInfo} myId={myProfileInfo.userId} user={profileInfo} />
           <div className={s.postsList}>
             {allPosts.map(post => (
               <ViewPostModal isAuth={!!myProfileInfo} key={post.id} post={post} />

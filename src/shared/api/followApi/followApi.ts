@@ -111,6 +111,12 @@ export type GetUserFollowResponseItems = {
   userId: number
   userName: string
 }
+
+export enum User_Count_Info {
+  FOLLOWERS_COUNT = 'followersCount',
+  FOLLOWING_COUNT = 'followingCount',
+  PUBLICATIONS_COUNT = 'publicationsCount',
+}
 export type GetUserProfileResponse = {
   aboutMe: string
   avatars: AvatarsType[]
