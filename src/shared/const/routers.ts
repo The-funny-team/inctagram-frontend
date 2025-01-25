@@ -16,4 +16,5 @@ export const ROUTES_URL = {
   SIGN_UP: '/sign-up',
   STATISTICS: '/statistics',
   TERMS_OF_SERVICE: '/terms-of-service',
+  USER: '/user',
 }
