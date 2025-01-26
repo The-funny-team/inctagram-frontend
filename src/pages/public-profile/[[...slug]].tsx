@@ -88,7 +88,7 @@ const PublicUser = ({
       const documentHeight = document.documentElement.scrollHeight
 
       if (scrollTop + windowHeight >= documentHeight - 100) {
-        loadMorePosts()
+        void loadMorePosts()
       }
     }
 

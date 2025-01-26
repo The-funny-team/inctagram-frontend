@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { useMeQuery } from '@/shared/api/authApi'
 import { useGetUserProfileQuery } from '@/shared/api/followApi'
-import { GetPostResponse, useGetUserPostsQuery } from '@/shared/api/postsApi'
-import { Loader, ProfileHeader } from '@/shared/ui'
-import { ViewPostModal } from '@/widgets/ViewPostModal'
+import { GetPostResponse, useGetUserPostsByUserNameQuery } from '@/shared/api/postsApi'
+import { Loader, ProfileHeader, ProfilePosts } from '@/shared/ui'
 import { useRouter } from 'next/router'
 
 import s from './ProfileMain.module.scss'
@@ -18,14 +17,10 @@ export const ProfileMain = () => {
 
   const username = urlUserName ?? myName
 
-  const [endCursorPostId, setEndCursorPostId] = useState(0)
-  const [allPosts, setAllPosts] = useState<GetPostResponse[]>([] as GetPostResponse[])
-  const { data: profilePosts } = useGetUserPostsQuery({
-    endCursorPostId: endCursorPostId,
-    pageSize: 8,
-    userId: myId,
-  })
-
+  const [currentPage, setCurrentPage] = useState(1)
+  const [fetching, setFetching] = useState(true)
+  const [pagesCount, setPagesCount] = useState(0)
+  const [allPosts, setAllPosts] = useState<GetPostResponse[]>([])
   const {
     data: profileInfo,
     isLoading: profileInfoLoading,
@@ -34,32 +29,38 @@ export const ProfileMain = () => {
     userName: username as string,
   })
 
+  const { data: profilePosts } = useGetUserPostsByUserNameQuery({
+    pageNumber: currentPage,
+    pageSize: 8,
+    userName: username as string,
+  })
+
+  const scrollHandler = () => {
+    const scrollTop = document.documentElement.scrollTop
+    const windowHeight = window.innerHeight
+    const fullHeight = document.documentElement.scrollHeight
+
+    if (fullHeight - (scrollTop + windowHeight) < 100 && currentPage <= pagesCount && !fetching) {
+      setFetching(true)
+    }
+  }
+
   useEffect(() => {
-    if (profilePosts && profilePosts.items.length !== 0) {
+    if (fetching && profilePosts) {
       setAllPosts(prevPosts => [...prevPosts, ...profilePosts.items])
+      setPagesCount(profilePosts.pagesCount)
+      setCurrentPage(prevState => prevState + 1)
+      setFetching(false)
     }
-  }, [profilePosts])
+  }, [fetching, profilePosts])
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = document.documentElement.scrollTop
-      const windowHeight = window.innerHeight
-      const fullHeight = document.documentElement.scrollHeight
-
-      if (windowHeight + scrollTop >= fullHeight - 100) {
-        if (allPosts.length > 0) {
-          const lastId = allPosts[allPosts.length - 1].id
-
-          setEndCursorPostId(lastId)
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', scrollHandler)
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', scrollHandler)
     }
-  }, [profilePosts, allPosts])
+  }, [currentPage, pagesCount])
 
   if (profileInfoLoading) {
     return <Loader />
@@ -79,16 +80,11 @@ export const ProfileMain = () => {
             updateInfo={refetch}
             user={profileInfo}
           />
-          <div className={s.postsList}>
-            {allPosts.map(post => (
-              <ViewPostModal
-                isAuth={!!myProfileInfo}
-                isFollow={profileInfo.isFollowing}
-                key={post.id}
-                post={post}
-              />
-            ))}
-          </div>
+          <ProfilePosts
+            isAuth={!!myProfileInfo}
+            isFollow={profileInfo.isFollowing}
+            profilePosts={allPosts}
+          />
         </main>
       ) : (
         <Loader />

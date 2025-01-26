@@ -57,6 +57,15 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getUserPostsByUserName: builder.query<GetPostsResponse, UserPostsByNameArgs>({
+      query: ({ userName, ...args }) => {
+        return {
+          method: 'GET',
+          params: args,
+          url: `/posts/${userName}`,
+        }
+      },
+    }),
     updateLikeStatusPost: builder.mutation<void, UpdateLikeStatusRequest>({
       invalidatesTags: ['Posts'],
       query: ({ postId, ...body }) => {
@@ -92,9 +101,8 @@ const postApi = baseApi.injectEndpoints({
 export const {
   useCreatePostMutation,
   useDeletePostMutation,
-  useGetPublicPostQuery,
-  useGetPublicPostsQuery,
   useGetPublicationsFollowersQuery,
+  useGetUserPostsByUserNameQuery,
   useGetUserPostsQuery,
   useUpdateLikeStatusPostMutation,
   useUpdatePostMutation,
@@ -128,6 +136,7 @@ export type PostResponseImages = {
 export type GetPostsResponse = {
   items: GetPostResponse[]
   pageSize?: number
+  pagesCount: number
   totalCount?: number
   totalUsers?: number
 }
@@ -143,6 +152,12 @@ export type UpdatePostData = { description: string }
 
 export type UpdatePostArgs = { postId: number } & UpdatePostData
 export type UserPostsArgs = { userId: number } & GetPostsArgs
+export type UserPostsByNameArgs = {
+  pageNumber?: number
+  pageSize?: number
+  sortBy?: 'asc' | 'desc'
+  userName: string
+}
 
 export type GetPostsArgs = {
   endCursorPostId?: number
