@@ -3,7 +3,7 @@ import { GetPostResponse } from '@/shared/api/postsApi'
 import { useGetPublicUserInfoQuery } from '@/shared/api/profileApi'
 import { BASE_API_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
-import { ProfileHeader, ProfilePosts } from '@/shared/ui'
+import { Loader, ProfileHeader, ProfilePosts } from '@/shared/ui'
 import { GetServerSideProps } from 'next'
 import { fetch } from 'next/dist/compiled/@edge-runtime/primitives'
 
@@ -38,7 +38,11 @@ type PropsType = {
 }
 const PublicUser = ({ error, postId, posts, profileId, publicPost }: PropsType) => {
   const { data: myProfile } = useMeQuery()
-  const { data: publicUser } = useGetPublicUserInfoQuery({ profileId })
+  const { data: publicUser, isLoading } = useGetPublicUserInfoQuery({ profileId })
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   if (!publicUser || !publicPost || !myProfile) {
     return <div>{error}</div>
