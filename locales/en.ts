@@ -279,6 +279,10 @@ export const en = {
       },
       registeredUsers: 'Registered users:',
     },
+    publicProfile: {
+      loadingPosts: 'Loading more posts...',
+      noMorePosts: 'No more posts to load.',
+    },
     searchUsers: {
       emptyOne: 'Oops! This place looks empty!',
       emptyTwo: 'No recent requests',
