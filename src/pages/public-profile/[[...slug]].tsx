@@ -38,21 +38,20 @@ type PropsType = {
 }
 const PublicUser = ({ error, postId, posts, profileId, publicPost }: PropsType) => {
   const { data: myProfile } = useMeQuery()
+  const myId = Number(myProfile?.userId)
   const { data: publicUser, isLoading } = useGetPublicUserInfoQuery({ profileId })
 
   if (isLoading) {
     return <Loader />
   }
 
-  if (!publicUser || !publicPost || !myProfile) {
+  if (!publicUser || !publicPost) {
     return <div>{error}</div>
   }
 
   return (
     <div style={{ margin: '0 auto', maxWidth: '972px', paddingTop: '36px' }}>
-      {publicUser && (
-        <ProfileHeader isAuth={!!myProfile} myId={myProfile.userId} user={publicUser} />
-      )}
+      {publicUser && <ProfileHeader isAuth={!!myProfile} myId={myId} user={publicUser} />}
       {posts && <ProfilePosts isAuth={!!myProfile} profilePosts={posts} />}
     </div>
   )

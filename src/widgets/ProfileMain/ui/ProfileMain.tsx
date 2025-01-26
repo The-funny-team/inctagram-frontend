@@ -81,7 +81,12 @@ export const ProfileMain = () => {
           />
           <div className={s.postsList}>
             {allPosts.map(post => (
-              <ViewPostModal isAuth={!!myProfileInfo} key={post.id} post={post} />
+              <ViewPostModal
+                isAuth={!!myProfileInfo}
+                isFollow={profileInfo.isFollowing}
+                key={post.id}
+                post={post}
+              />
             ))}
           </div>
         </main>

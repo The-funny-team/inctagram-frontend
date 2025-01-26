@@ -18,7 +18,7 @@ import { AddCommentType } from './services/addCommentSchema'
 
 type Props = {
   isAuth: boolean
-  isFollowing: boolean
+  isFollowing?: boolean
   loggedUserId?: number
   onChangeEditMode: () => void
   onOpenConfirmationDeletePostModal: () => void
