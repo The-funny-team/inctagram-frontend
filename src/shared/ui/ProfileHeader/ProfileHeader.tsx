@@ -12,12 +12,14 @@ import { UserButtons, UsersCountInfo } from './features'
 type PropsType = {
   isAuth: boolean
   myId: number
+  updateInfo: () => void
   user: GetUserProfileResponse | PublicProfileType
 }
 
-export const ProfileHeader = ({ isAuth, myId, user }: PropsType) => {
+export const ProfileHeader = ({ isAuth, myId, updateInfo, user }: PropsType) => {
   const { text } = useTranslation()
   const t = text.pages.profile.main
+  const isFollowing = 'isFollowing' in user ? user.isFollowing : false
   const followingCount =
     User_Count_Info.FOLLOWING_COUNT in user ? user.followingCount : user.userMetadata.following
   const followersCount =
@@ -44,7 +46,7 @@ export const ProfileHeader = ({ isAuth, myId, user }: PropsType) => {
                 {t.profileSettings}
               </Button>
             ) : (
-              <UserButtons />
+              <UserButtons isFollowing={isFollowing} updateInfo={updateInfo} userId={user.id} />
             ))}
         </div>
         <div className={s.counting}>

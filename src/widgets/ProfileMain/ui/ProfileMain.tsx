@@ -26,7 +26,11 @@ export const ProfileMain = () => {
     userId: myId,
   })
 
-  const { data: profileInfo, isLoading: profileInfoLoading } = useGetUserProfileQuery({
+  const {
+    data: profileInfo,
+    isLoading: profileInfoLoading,
+    refetch,
+  } = useGetUserProfileQuery({
     userName: username as string,
   })
 
@@ -69,7 +73,12 @@ export const ProfileMain = () => {
     <>
       {!isLoading ? (
         <main className={s.rootPage}>
-          <ProfileHeader isAuth={!!myProfileInfo} myId={myProfileInfo.userId} user={profileInfo} />
+          <ProfileHeader
+            isAuth={!!myProfileInfo}
+            myId={myProfileInfo.userId}
+            user={profileInfo}
+            updateInfo={refetch}
+          />
           <div className={s.postsList}>
             {allPosts.map(post => (
               <ViewPostModal isAuth={!!myProfileInfo} key={post.id} post={post} />
