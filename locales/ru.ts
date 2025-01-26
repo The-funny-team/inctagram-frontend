@@ -282,6 +282,10 @@ export const ru: LocaleType = {
       },
       registeredUsers: 'Зарегистрированные пользователи:',
     },
+    publicProfile: {
+      loadingPosts: 'Подгружаем посты...',
+      noMorePosts: 'Больше нет постов.',
+    },
     searchUsers: {
       emptyOne: 'Упсс! Здесь ничего нет!',
       emptyTwo: 'Нет недавних запросов',
