@@ -12,7 +12,7 @@ import { UserButtons, UsersCountInfo } from './features'
 type PropsType = {
   isAuth: boolean
   myId: number
-  updateInfo: () => void
+  updateInfo?: () => void
   user: GetUserProfileResponse | PublicProfileType
 }
 

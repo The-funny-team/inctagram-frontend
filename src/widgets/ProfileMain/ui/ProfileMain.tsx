@@ -75,9 +75,9 @@ export const ProfileMain = () => {
         <main className={s.rootPage}>
           <ProfileHeader
             isAuth={!!myProfileInfo}
-            myId={myProfileInfo.userId}
-            user={profileInfo}
+            myId={myId}
             updateInfo={refetch}
+            user={profileInfo}
           />
           <div className={s.postsList}>
             {allPosts.map(post => (

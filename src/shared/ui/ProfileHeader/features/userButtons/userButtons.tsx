@@ -9,7 +9,7 @@ import s from './userButtons.module.scss'
 
 type PropsType = {
   isFollowing: boolean
-  updateInfo: () => void
+  updateInfo?: () => void
   userId: number
 }
 export const UserButtons = ({ isFollowing, updateInfo, userId }: PropsType) => {
@@ -22,7 +22,11 @@ export const UserButtons = ({ isFollowing, updateInfo, userId }: PropsType) => {
     follow({ selectedUserId: userId })
       .unwrap()
       .then(() => setIsFollow(prevState => !prevState))
-      .then(() => updateInfo())
+      .then(() => {
+        if (updateInfo) {
+          updateInfo()
+        }
+      })
       .then(() => toast.success('Follow success'))
       .catch(() => toast.error('follow error'))
   }
@@ -31,7 +35,11 @@ export const UserButtons = ({ isFollowing, updateInfo, userId }: PropsType) => {
     unfollow({ userId })
       .unwrap()
       .then(() => setIsFollow(prevState => !prevState))
-      .then(() => updateInfo())
+      .then(() => {
+        if (updateInfo) {
+          updateInfo()
+        }
+      })
       .then(() => toast.success('Unfollow success'))
       .catch(() => toast.error('unfollow error'))
   }
