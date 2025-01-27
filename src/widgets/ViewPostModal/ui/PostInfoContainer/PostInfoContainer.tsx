@@ -102,7 +102,7 @@ export const PostInfoContainer = ({
       </div>
       <Actions isLiked={postInfo.isLiked} isMyPost={isMyPost} postId={postInfo.id} />
       <div className={s.postLikes}>
-        <LikesInfo likesCount={postInfo.likesCount} />
+        <LikesInfo postId={postInfo.id} />
         <Typography as={'time'} className={s.postCreatedAt} variant={'smallText'}>
           {timeAgo}
         </Typography>
