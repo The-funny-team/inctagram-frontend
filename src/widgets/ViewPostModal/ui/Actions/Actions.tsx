@@ -20,7 +20,7 @@ export const Actions = ({ isLiked, isMyPost, postId }: Props) => {
   const [updateLikeStatus] = useUpdateLikeStatusPostMutation()
   const toggleLikeHandler = () => {
     updateLikeStatus({
-      likeStatus: isLiked ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
+      likeStatus: isLikedPost ? LIKE_STATUS.UNLIKE : LIKE_STATUS.LIKE,
       postId: postId,
     })
       .unwrap()
