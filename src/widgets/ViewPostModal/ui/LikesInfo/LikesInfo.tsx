@@ -1,29 +1,41 @@
 import React from 'react'
 
+import { useGetPostLikesQuery } from '@/shared/api/postsApi'
 import { Avatar, Typography } from '@/shared/ui'
 
 import s from './LikesInfo.module.scss'
 
 type Props = {
-  likesCount?: number
-  userName?: string
+  postId: number
 }
 
-export const LikesInfo = ({ likesCount }: Props) => {
-  return (
-    <div className={s.likesContainer}>
-      <Avatar className={s.avatarLikesFirst} size={24} userName={'test'} />
-      <Avatar className={s.avatarLikesSecond} size={24} userName={'test'} />
-      <Avatar className={s.avatarLikesThird} size={24} userName={'test'} />
+export const LikesInfo = ({ postId }: Props) => {
+  const { data: postLikes, isLoading } = useGetPostLikesQuery({ postId: postId })
+  const likesInfo = postLikes?.items.slice(0, 3) || []
 
-      <div className={s.likesCount}>
-        <Typography as={'span'} variant={'regularText14'}>
-          {`${likesCount} `}
-          <Typography as={'span'} variant={'boldText14'}>
-            &quot;Like&quot;
-          </Typography>
-        </Typography>
-      </div>
-    </div>
+  return (
+    <>
+      {!isLoading && (
+        <div className={s.likesContainer}>
+          {likesInfo.map(user => (
+            <Avatar
+              key={user.userId}
+              size={24}
+              src={user.avatars[0].url || ''}
+              userName={user.userName}
+            />
+          ))}
+
+          <div className={s.likesCount}>
+            <Typography as={'span'} variant={'regularText14'}>
+              {postLikes?.totalCount || 0}
+              <Typography as={'span'} variant={'boldText14'}>
+                &nbsp;&quot;Like&quot;
+              </Typography>
+            </Typography>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
