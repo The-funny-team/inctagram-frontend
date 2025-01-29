@@ -20,7 +20,7 @@ export const ShowUser = ({ user }: Props) => {
 
       saveToLocalStorage('recentSearch', updatedUsers)
     }
-    void void router.push(`${ROUTES_URL.PUBLIC_PROFILE}/${user.id}`)
+    void router.push(`${ROUTES_URL.USER}/${user.userName}`)
   }
 
   return (

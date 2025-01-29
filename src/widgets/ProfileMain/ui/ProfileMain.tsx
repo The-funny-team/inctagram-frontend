@@ -6,7 +6,6 @@ import { useGetUserProfileQuery } from '@/shared/api/followApi'
 import { GetPostResponse, useGetUserPostsByUserNameQuery } from '@/shared/api/postsApi'
 import { useTranslation } from '@/shared/lib/hooks'
 import { Loader, ProfileHeader, ProfilePosts, Typography } from '@/shared/ui'
-import { debounce } from 'lodash'
 
 import s from './ProfileMain.module.scss'
 
@@ -23,6 +22,7 @@ export const ProfileMain = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pagesCount, setPagesCount] = useState(0)
   const [allPosts, setAllPosts] = useState<GetPostResponse[]>([])
+  const [loading, setLoading] = useState(false)
   const {
     data: profileInfo,
     isLoading: profileInfoLoading,
@@ -33,28 +33,21 @@ export const ProfileMain = () => {
 
   const { data: profilePosts, isLoading: profilePostsLoad } = useGetUserPostsByUserNameQuery({
     pageNumber: currentPage,
-    pageSize: 12,
+    pageSize: 8,
     userName: username as string,
   })
 
   useEffect(() => {
-    if (profilePosts?.items && currentPage === 1) {
+    if (profilePosts?.items) {
       setPagesCount(profilePosts.pagesCount)
       setAllPosts(prevPosts => [...prevPosts, ...profilePosts.items])
-      setCurrentPage(prevState => prevState + 1)
     }
-  }, [currentPage, profilePosts])
+  }, [profilePosts])
 
-  const fetchMorePosts = debounce(() => {
-    if (currentPage > pagesCount) {
-      return
-    }
-
-    if (!profilePostsLoad && profilePosts) {
-      setAllPosts(prevPosts => [...prevPosts, ...profilePosts.items])
-    }
+  const fetchMorePosts = () => {
+    setLoading(true)
     setCurrentPage(prev => prev + 1)
-  }, 500)
+  }
 
   if (profileInfoLoading) {
     return <Loader />
@@ -83,9 +76,11 @@ export const ProfileMain = () => {
             }
             hasMore={currentPage <= pagesCount}
             loader={
-              <div style={{ margin: '10px 0', textAlign: 'center' }}>
-                <Typography variant={'regularText14'}>{t.loadingPosts}</Typography>
-              </div>
+              loading && (
+                <div style={{ margin: '10px 0', textAlign: 'center' }}>
+                  <Typography variant={'regularText14'}>{t.loadingPosts}</Typography>
+                </div>
+              )
             }
             next={fetchMorePosts}
           >
