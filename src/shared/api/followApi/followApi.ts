@@ -1,4 +1,5 @@
 import { baseApi } from '@/shared/api/baseApi'
+import { AvatarsType } from '@/shared/api/profileApi'
 
 const followApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -82,15 +83,8 @@ export type GetUsersResponse = {
   prevCursor: number
   totalCount: number
 }
-export type GetItemsAvatars = {
-  createdAt: string
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
 export type GetUsersResponseItems = {
-  avatars: GetItemsAvatars[]
+  avatars: AvatarsType[]
   createdAt: string
   firstName: string
   id: number
@@ -109,7 +103,7 @@ export type GetUserFollowResponse = {
 }
 
 export type GetUserFollowResponseItems = {
-  avatars: GetItemsAvatars[]
+  avatars: AvatarsType[]
   createdAt: string
   id: number
   isFollowedBy: boolean
@@ -117,9 +111,15 @@ export type GetUserFollowResponseItems = {
   userId: number
   userName: string
 }
+
+export enum User_Count_Info {
+  FOLLOWERS_COUNT = 'followersCount',
+  FOLLOWING_COUNT = 'followingCount',
+  PUBLICATIONS_COUNT = 'publicationsCount',
+}
 export type GetUserProfileResponse = {
   aboutMe: string
-  avatars: GetItemsAvatars
+  avatars: AvatarsType[]
   city: string
   country: string
   dateOfBirth: string

@@ -6,7 +6,7 @@ import { useGetPublicUserInfoQuery } from '@/shared/api/profileApi'
 import { BASE_API_URL } from '@/shared/const'
 import { getRootLayout } from '@/shared/layouts'
 import { useTranslation } from '@/shared/lib/hooks'
-import { ProfileHeader, ProfilePosts, Typography } from '@/shared/ui'
+import { Loader, ProfileHeader, ProfilePosts, Typography } from '@/shared/ui'
 import { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -49,7 +49,7 @@ const PublicUser = ({
   const { text } = useTranslation()
   const t = text.pages.publicProfile
   const { data: myProfile } = useMeQuery()
-  const { data: publicUser } = useGetPublicUserInfoQuery({ profileId })
+  const { data: publicUser, isLoading } = useGetPublicUserInfoQuery({ profileId })
   const [posts, setPosts] = useState<GetPostResponse[]>(initialPosts)
 
   const [loading, setLoading] = useState(false)
@@ -88,7 +88,7 @@ const PublicUser = ({
       const documentHeight = document.documentElement.scrollHeight
 
       if (scrollTop + windowHeight >= documentHeight - 100) {
-        loadMorePosts()
+        void loadMorePosts()
       }
     }
 
@@ -96,16 +96,19 @@ const PublicUser = ({
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [loading, hasMore])
+  const myId = Number(myProfile?.userId)
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   if (!publicUser || !publicPost) {
     return <div>{error}</div>
   }
 
   return (
-    <div style={{ height: '100vh', margin: '0 auto', maxWidth: '972px', paddingTop: '36px' }}>
-      {publicUser && (
-        <ProfileHeader isAuth={!!myProfile} postsTotalCount={postsTotalCount} user={publicUser} />
-      )}
+    <div style={{ margin: '0 auto', maxWidth: '972px', paddingTop: '36px' }}>
+      {publicUser && <ProfileHeader isAuth={!!myProfile} myId={myId} user={publicUser} />}
       {posts && <ProfilePosts isAuth={!!myProfile} profilePosts={posts} />}
       {loading && (
         <div style={{ marginTop: '10px', textAlign: 'center' }}>

@@ -1,54 +1,59 @@
 import { useEffect, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { useMeQuery } from '@/shared/api/authApi'
-import { GetPostResponse, useGetUserPostsQuery } from '@/shared/api/postsApi'
-import { useGetProfileInfoQuery } from '@/shared/api/profileApi'
-import { Loader, ProfileHeader } from '@/shared/ui'
-import { ViewPostModal } from '@/widgets/ViewPostModal'
+import { useGetUserProfileQuery } from '@/shared/api/followApi'
+import { GetPostResponse, useGetUserPostsByUserNameQuery } from '@/shared/api/postsApi'
+import { useTranslation } from '@/shared/lib/hooks'
+import { Loader, ProfileHeader, ProfilePosts, Typography } from '@/shared/ui'
 
 import s from './ProfileMain.module.scss'
 
 export const ProfileMain = () => {
-  const { data: userInfo } = useMeQuery()
-  const { data: profileInfo } = useGetProfileInfoQuery()
-  const myId = Number(userInfo?.userId)
+  const { router, text } = useTranslation()
+  const t = text.pages.publicProfile
+  const urlUserName = router.query.userName
+  const { data: myProfileInfo, isLoading } = useMeQuery()
+  const myId = Number(myProfileInfo?.userId)
+  const myName = myProfileInfo?.userName
 
-  const [endCursorPostId, setEndCursorPostId] = useState(0)
-  const [allPosts, setAllPosts] = useState<GetPostResponse[]>([] as GetPostResponse[])
-  const { data: profilePosts, isLoading } = useGetUserPostsQuery({
-    endCursorPostId: endCursorPostId,
+  const username = urlUserName ?? myName
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pagesCount, setPagesCount] = useState(0)
+  const [allPosts, setAllPosts] = useState<GetPostResponse[]>([])
+  const [loading, setLoading] = useState(false)
+  const {
+    data: profileInfo,
+    isLoading: profileInfoLoading,
+    refetch,
+  } = useGetUserProfileQuery({
+    userName: username as string,
+  })
+
+  const { data: profilePosts, isLoading: profilePostsLoad } = useGetUserPostsByUserNameQuery({
+    pageNumber: currentPage,
     pageSize: 8,
-    userId: myId,
+    userName: username as string,
   })
 
   useEffect(() => {
-    if (profilePosts && profilePosts.items.length !== 0) {
+    if (profilePosts?.items) {
+      setPagesCount(profilePosts.pagesCount)
       setAllPosts(prevPosts => [...prevPosts, ...profilePosts.items])
     }
   }, [profilePosts])
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = document.documentElement.scrollTop
-      const windowHeight = window.innerHeight
-      const fullHeight = document.documentElement.scrollHeight
 
-      if (windowHeight + scrollTop >= fullHeight - 100) {
-        if (allPosts.length > 0) {
-          const lastId = allPosts[allPosts.length - 1].id
+  const fetchMorePosts = () => {
+    setLoading(true)
+    setCurrentPage(prev => prev + 1)
+  }
 
-          setEndCursorPostId(lastId)
-        }
-      }
-    }
+  if (profileInfoLoading) {
+    return <Loader />
+  }
 
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [profilePosts, allPosts])
-
-  if (!userInfo || !profileInfo || !profilePosts) {
+  if (!myProfileInfo || !profileInfo || !profilePosts) {
     return null
   }
 
@@ -57,15 +62,34 @@ export const ProfileMain = () => {
       {!isLoading ? (
         <main className={s.rootPage}>
           <ProfileHeader
-            isAuth={!!userInfo}
-            postsTotalCount={profilePosts?.totalCount}
+            isAuth={!!myProfileInfo}
+            myId={myId}
+            updateInfo={refetch}
             user={profileInfo}
           />
-          <div className={s.postsList}>
-            {allPosts.map(post => (
-              <ViewPostModal isAuth={!!userInfo} key={post.id} post={post} />
-            ))}
-          </div>
+          <InfiniteScroll
+            dataLength={allPosts.length}
+            endMessage={
+              <div style={{ margin: '10px 0', textAlign: 'center' }}>
+                <Typography variant={'regularText14'}>{t.noMorePosts}</Typography>
+              </div>
+            }
+            hasMore={currentPage <= pagesCount}
+            loader={
+              loading && (
+                <div style={{ margin: '10px 0', textAlign: 'center' }}>
+                  <Typography variant={'regularText14'}>{t.loadingPosts}</Typography>
+                </div>
+              )
+            }
+            next={fetchMorePosts}
+          >
+            <ProfilePosts
+              isAuth={!!myProfileInfo}
+              isFollow={profileInfo.isFollowing}
+              profilePosts={allPosts}
+            />
+          </InfiniteScroll>
         </main>
       ) : (
         <Loader />

@@ -1,5 +1,4 @@
 import { baseApi } from '@/shared/api/baseApi'
-import { AvatarsType } from '@/shared/api/profileApi'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -19,16 +18,6 @@ const postApi = baseApi.injectEndpoints({
         return {
           method: 'DELETE',
           url: `/posts/${postId}`,
-        }
-      },
-    }),
-    getPostLikes: builder.query<GetPostLikesResponse, GetPostLikesArgs>({
-      providesTags: ['LikesInfo'],
-      query: ({ postId, ...args }) => {
-        return {
-          method: 'GET',
-          params: args,
-          url: `/posts/${postId}/likes`,
         }
       },
     }),
@@ -68,8 +57,17 @@ const postApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getUserPostsByUserName: builder.query<GetPostsResponse, UserPostsByNameArgs>({
+      query: ({ userName, ...args }) => {
+        return {
+          method: 'GET',
+          params: args,
+          url: `/posts/${userName}`,
+        }
+      },
+    }),
     updateLikeStatusPost: builder.mutation<void, UpdateLikeStatusRequest>({
-      invalidatesTags: ['Posts', 'LikesInfo'],
+      invalidatesTags: ['Posts'],
       query: ({ postId, ...body }) => {
         return {
           body,
@@ -103,10 +101,8 @@ const postApi = baseApi.injectEndpoints({
 export const {
   useCreatePostMutation,
   useDeletePostMutation,
-  useGetPostLikesQuery,
-  useGetPublicPostQuery,
-  useGetPublicPostsQuery,
   useGetPublicationsFollowersQuery,
+  useGetUserPostsByUserNameQuery,
   useGetUserPostsQuery,
   useUpdateLikeStatusPostMutation,
   useUpdatePostMutation,
@@ -140,6 +136,7 @@ export type PostResponseImages = {
 export type GetPostsResponse = {
   items: GetPostResponse[]
   pageSize?: number
+  pagesCount: number
   totalCount?: number
   totalUsers?: number
 }
@@ -155,19 +152,18 @@ export type UpdatePostData = { description: string }
 
 export type UpdatePostArgs = { postId: number } & UpdatePostData
 export type UserPostsArgs = { userId: number } & GetPostsArgs
+export type UserPostsByNameArgs = {
+  pageNumber?: number
+  pageSize?: number
+  sortBy?: 'asc' | 'desc'
+  userName: string
+}
 
 export type GetPostsArgs = {
   endCursorPostId?: number
   pageSize?: number
   sortBy?: string
   sortDirection?: string
-}
-export type GetPostLikesArgs = {
-  cursor?: number
-  pageNumber?: number
-  pageSize?: number
-  postId: number
-  search?: string
 }
 
 export type GetPublicationsArgs = {
@@ -213,18 +209,4 @@ export type GetPublicationsResponseItem = {
 export type UpdateLikeStatusRequest = {
   likeStatus: string
   postId: number
-}
-export type GetPostLikesResponse = {
-  items: {
-    avatars: AvatarsType[]
-    createdAt: string
-    id: number
-    isFollowedBy: boolean
-    isFollowing: boolean
-    userId: number
-    userName: string
-  }[]
-  notReadCount: number
-  pageSize: number
-  totalCount: number
 }
