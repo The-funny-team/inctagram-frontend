@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { useUpdateLikeStatusPostMutation } from '@/shared/api/postsApi'
+import { useGetPostLikesQuery, useUpdateLikeStatusPostMutation } from '@/shared/api/postsApi'
 import { FavoritesIcon, LikeIcon, LikeOutlineIcon, MessageIcon, ShareIcon } from '@/shared/assets'
 import { LIKE_STATUS, ROUTES_URL } from '@/shared/const'
 import { useRouter } from 'next/router'
@@ -8,14 +8,21 @@ import { useRouter } from 'next/router'
 import s from './Actions.module.scss'
 
 type Props = {
-  isLiked: boolean
   isMyPost: boolean
   postId: number
 }
 
-export const Actions = ({ isLiked, isMyPost, postId }: Props) => {
+export const Actions = ({ isMyPost, postId }: Props) => {
   const router = useRouter()
-  const [isLikedPost, setIsLikedPost] = useState(isLiked)
+
+  const { data: postLikes } = useGetPostLikesQuery({ postId: postId })
+  const [isLikedPost, setIsLikedPost] = useState(false)
+
+  useEffect(() => {
+    if (postLikes) {
+      setIsLikedPost(postLikes.isLiked)
+    }
+  }, [postLikes])
 
   const [updateLikeStatus] = useUpdateLikeStatusPostMutation()
   const toggleLikeHandler = () => {

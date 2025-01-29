@@ -23,7 +23,7 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     getPostLikes: builder.query<GetPostLikesResponse, GetPostLikesArgs>({
-      providesTags: ['LikesInfo'],
+      providesTags: ['LikesInfo', 'Actions'],
       query: ({ postId, ...args }) => {
         return {
           method: 'GET',
@@ -78,7 +78,7 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     updateLikeStatusPost: builder.mutation<void, UpdateLikeStatusRequest>({
-      invalidatesTags: ['Posts', 'LikesInfo'],
+      invalidatesTags: ['Posts', 'LikesInfo', 'Actions'],
       query: ({ postId, ...body }) => {
         return {
           body,
@@ -232,6 +232,7 @@ export type GetPostLikesArgs = {
 }
 
 export type GetPostLikesResponse = {
+  isLiked: boolean
   items: {
     avatars: AvatarsType[]
     createdAt: string
