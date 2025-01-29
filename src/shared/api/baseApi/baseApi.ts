@@ -16,5 +16,6 @@ export const baseApi = createApi({
     'Comments',
     'Answer',
     'LikesInfo',
+    'Actions',
   ],
 })
