@@ -1,4 +1,5 @@
 import { baseApi } from '@/shared/api/baseApi'
+import { AvatarsType } from '@/shared/api/profileApi'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -18,6 +19,16 @@ const postApi = baseApi.injectEndpoints({
         return {
           method: 'DELETE',
           url: `/posts/${postId}`,
+        }
+      },
+    }),
+    getPostLikes: builder.query<GetPostLikesResponse, GetPostLikesArgs>({
+      providesTags: ['LikesInfo'],
+      query: ({ postId, ...args }) => {
+        return {
+          method: 'GET',
+          params: args,
+          url: `/posts/${postId}/likes`,
         }
       },
     }),
@@ -67,7 +78,7 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     updateLikeStatusPost: builder.mutation<void, UpdateLikeStatusRequest>({
-      invalidatesTags: ['Posts'],
+      invalidatesTags: ['Posts', 'LikesInfo'],
       query: ({ postId, ...body }) => {
         return {
           body,
@@ -101,6 +112,7 @@ const postApi = baseApi.injectEndpoints({
 export const {
   useCreatePostMutation,
   useDeletePostMutation,
+  useGetPostLikesQuery,
   useGetPublicationsFollowersQuery,
   useGetUserPostsByUserNameQuery,
   useGetUserPostsQuery,
@@ -209,4 +221,27 @@ export type GetPublicationsResponseItem = {
 export type UpdateLikeStatusRequest = {
   likeStatus: string
   postId: number
+}
+
+export type GetPostLikesArgs = {
+  cursor?: number
+  pageNumber?: number
+  pageSize?: number
+  postId: number
+  search?: string
+}
+
+export type GetPostLikesResponse = {
+  items: {
+    avatars: AvatarsType[]
+    createdAt: string
+    id: number
+    isFollowedBy: boolean
+    isFollowing: boolean
+    userId: number
+    userName: string
+  }[]
+  notReadCount: number
+  pageSize: number
+  totalCount: number
 }
