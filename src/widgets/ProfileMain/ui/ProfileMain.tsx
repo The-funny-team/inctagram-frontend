@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { useMeQuery } from '@/shared/api/authApi'
 import { useGetUserProfileQuery } from '@/shared/api/followApi'
 import { GetPostResponse, useGetUserPostsByUserNameQuery } from '@/shared/api/postsApi'
-import { Loader, ProfileHeader, ProfilePosts } from '@/shared/ui'
-import { useRouter } from 'next/router'
+import { useTranslation } from '@/shared/lib/hooks'
+import { Loader, ProfileHeader, ProfilePosts, Typography } from '@/shared/ui'
+import { debounce } from 'lodash'
 
 import s from './ProfileMain.module.scss'
 
 export const ProfileMain = () => {
-  const router = useRouter()
+  const { router, text } = useTranslation()
+  const t = text.pages.publicProfile
   const urlUserName = router.query.userName
   const { data: myProfileInfo, isLoading } = useMeQuery()
   const myId = Number(myProfileInfo?.userId)
@@ -18,7 +21,6 @@ export const ProfileMain = () => {
   const username = urlUserName ?? myName
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [fetching, setFetching] = useState(true)
   const [pagesCount, setPagesCount] = useState(0)
   const [allPosts, setAllPosts] = useState<GetPostResponse[]>([])
   const {
@@ -29,38 +31,30 @@ export const ProfileMain = () => {
     userName: username as string,
   })
 
-  const { data: profilePosts } = useGetUserPostsByUserNameQuery({
+  const { data: profilePosts, isLoading: profilePostsLoad } = useGetUserPostsByUserNameQuery({
     pageNumber: currentPage,
-    pageSize: 8,
+    pageSize: 12,
     userName: username as string,
   })
 
-  const scrollHandler = () => {
-    const scrollTop = document.documentElement.scrollTop
-    const windowHeight = window.innerHeight
-    const fullHeight = document.documentElement.scrollHeight
-
-    if (fullHeight - (scrollTop + windowHeight) < 100 && currentPage <= pagesCount && !fetching) {
-      setFetching(true)
-    }
-  }
-
   useEffect(() => {
-    if (fetching && profilePosts) {
-      setAllPosts(prevPosts => [...prevPosts, ...profilePosts.items])
+    if (profilePosts?.items && currentPage === 1) {
       setPagesCount(profilePosts.pagesCount)
+      setAllPosts(prevPosts => [...prevPosts, ...profilePosts.items])
       setCurrentPage(prevState => prevState + 1)
-      setFetching(false)
     }
-  }, [fetching, profilePosts])
+  }, [currentPage, profilePosts])
 
-  useEffect(() => {
-    window.addEventListener('scroll', scrollHandler)
-
-    return () => {
-      window.removeEventListener('scroll', scrollHandler)
+  const fetchMorePosts = debounce(() => {
+    if (currentPage > pagesCount) {
+      return
     }
-  }, [currentPage, pagesCount])
+
+    if (!profilePostsLoad && profilePosts) {
+      setAllPosts(prevPosts => [...prevPosts, ...profilePosts.items])
+    }
+    setCurrentPage(prev => prev + 1)
+  }, 500)
 
   if (profileInfoLoading) {
     return <Loader />
@@ -80,11 +74,27 @@ export const ProfileMain = () => {
             updateInfo={refetch}
             user={profileInfo}
           />
-          <ProfilePosts
-            isAuth={!!myProfileInfo}
-            isFollow={profileInfo.isFollowing}
-            profilePosts={allPosts}
-          />
+          <InfiniteScroll
+            dataLength={allPosts.length}
+            endMessage={
+              <div style={{ margin: '10px 0', textAlign: 'center' }}>
+                <Typography variant={'regularText14'}>{t.noMorePosts}</Typography>
+              </div>
+            }
+            hasMore={currentPage <= pagesCount}
+            loader={
+              <div style={{ margin: '10px 0', textAlign: 'center' }}>
+                <Typography variant={'regularText14'}>{t.loadingPosts}</Typography>
+              </div>
+            }
+            next={fetchMorePosts}
+          >
+            <ProfilePosts
+              isAuth={!!myProfileInfo}
+              isFollow={profileInfo.isFollowing}
+              profilePosts={allPosts}
+            />
+          </InfiniteScroll>
         </main>
       ) : (
         <Loader />
