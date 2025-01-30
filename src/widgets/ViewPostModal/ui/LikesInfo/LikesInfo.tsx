@@ -17,15 +17,16 @@ export const LikesInfo = ({ postId }: Props) => {
     <>
       {!isLoading && (
         <div className={s.likesContainer}>
-          {likesInfo.map(user => (
-            <Avatar
-              key={user.userId}
-              size={24}
-              src={user.avatars[0].url || ''}
-              userName={user.userName}
-            />
-          ))}
-
+          <div className={s.likesAvatars}>
+            {likesInfo.map(user => (
+              <Avatar
+                key={user.userId}
+                size={24}
+                src={user.avatars[0].url || ''}
+                userName={user.userName}
+              />
+            ))}
+          </div>
           <div className={s.likesCount}>
             <Typography as={'span'} variant={'regularText14'}>
               {postLikes?.totalCount || 0}

@@ -1,27 +1,32 @@
 .likesContainer {
-  position: relative;
   display: flex;
-  margin-bottom: 5px;
+  gap: 12px;
 
-  :nth-child(1) {
+  .likesAvatars {
     position: relative;
     display: flex;
-    margin-bottom: 5px;
+    width: 48px;
+
+    :nth-child(1) {
+      position: relative;
+      display: flex;
+      margin-bottom: 5px;
+    }
+
+    :nth-child(2) {
+      position: absolute;
+      z-index: -1;
+      transform: translateX(50%);
+    }
+
+    :nth-child(3) {
+      position: absolute;
+      z-index: -2;
+      transform: translateX(100%);
+    }
   }
 
-  :nth-child(2) {
-    position: absolute;
-    z-index: -1;
-    transform: translateX(50%);
-  }
-
-  :nth-child(3) {
-    position: absolute;
-    z-index: -2;
-    transform: translateX(100%);
-  }
-
-  .likesCount {
-    margin-left: 12px;
-  }
+  //.likesCount {
+  //  margin-left: 12px;
+  //}
 }
