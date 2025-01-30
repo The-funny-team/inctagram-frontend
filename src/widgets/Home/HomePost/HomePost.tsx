@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react'
-
 import { useGetPostCommentsQuery } from '@/shared/api/commentsApi'
 import { GetPublicationsResponseItem } from '@/shared/api/postsApi'
 import { DotSmallIcon } from '@/shared/assets'
+import { useGetTimeAgo } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import { PostManageDropdown } from '@/widgets/PostManageDropdown'
-import { formatDistanceToNowStrict, parseISO } from 'date-fns'
-import { enUS, ru } from 'date-fns/locale'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
 import s from './HomePost.module.scss'
 
@@ -21,21 +17,11 @@ type Props = {
   post: GetPublicationsResponseItem
 }
 export const HomePost = ({ post }: Props) => {
-  const { locale } = useRouter()
-  const [timeAgo, setTimeAgo] = useState<null | string>(null)
+  const timeAgo = useGetTimeAgo(post.createdAt)
 
   const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
     postId: post.id,
   })
-
-  useEffect(() => {
-    setTimeAgo(
-      formatDistanceToNowStrict(parseISO(post.createdAt as string), {
-        addSuffix: true,
-        locale: locale === 'ru' ? ru : enUS,
-      })
-    )
-  }, [locale, post.createdAt])
 
   return (
     <div className={s.postWrapper}>
