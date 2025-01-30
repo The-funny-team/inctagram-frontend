@@ -10,7 +10,6 @@
     :nth-child(1) {
       position: relative;
       display: flex;
-      margin-bottom: 5px;
     }
 
     :nth-child(2) {
@@ -25,8 +24,4 @@
       transform: translateX(100%);
     }
   }
-
-  //.likesCount {
-  //  margin-left: 12px;
-  //}
 }

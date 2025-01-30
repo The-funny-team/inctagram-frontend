@@ -6,12 +6,12 @@ import { Avatar, Typography } from '@/shared/ui'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import { PostManageDropdown } from '@/widgets/PostManageDropdown'
 import { Actions } from '@/widgets/ViewPostModal/ui/Actions'
+import { LikesInfo } from '@/widgets/ViewPostModal/ui/LikesInfo'
 import Image from 'next/image'
 
 import s from './HomePost.module.scss'
 
 import { AllComments } from './Comments'
-import { Likes } from './Likes'
 
 type Props = {
   post: GetPublicationsResponseItem
@@ -63,7 +63,9 @@ export const HomePost = ({ post }: Props) => {
           </Typography>
         </div>
       </div>
-      <Likes avatarsWhoLiked={post.avatarWhoLikes} likesCount={post.likesCount} />
+      <div>
+        <LikesInfo postId={post.id} />
+      </div>
       <AllComments
         comments={postComments?.items || []}
         postId={post.id}
