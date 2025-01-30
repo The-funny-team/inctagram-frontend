@@ -21,7 +21,7 @@ export const AllComments = ({ comments, postId, updateCommentsCount }: Props) =>
   const [commentValue, setCommentValue] = useState<string>('')
   const [publishComment] = useCreateNewCommentMutation()
 
-  const isValidLength = commentValue.length > minLength && commentValue.length < maxLength
+  const isValidLength = commentValue.length >= minLength && commentValue.length <= maxLength
 
   const onPublishComment = (comment: string) => {
     publishComment({ content: comment, postId: postId })
