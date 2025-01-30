@@ -5,11 +5,11 @@ import { useGetTimeAgo } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import { PostManageDropdown } from '@/widgets/PostManageDropdown'
+import { Actions } from '@/widgets/ViewPostModal/ui/Actions'
 import Image from 'next/image'
 
 import s from './HomePost.module.scss'
 
-import { Actions } from './Actions'
 import { AllComments } from './Comments'
 import { Likes } from './Likes'
 
@@ -50,7 +50,7 @@ export const HomePost = ({ post }: Props) => {
         </Slider>
       </div>
       <div className={s.actions}>
-        <Actions isLiked={post.isLiked} />
+        <Actions isMyPost={false} postId={post.id} />
       </div>
       <div className={s.postInfo}>
         <Avatar size={36} src={post.avatarOwner} userName={post.userName} />
