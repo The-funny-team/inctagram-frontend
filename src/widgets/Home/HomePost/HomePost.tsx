@@ -63,9 +63,7 @@ export const HomePost = ({ post }: Props) => {
           </Typography>
         </div>
       </div>
-      <div>
-        <LikesInfo postId={post.id} />
-      </div>
+      <LikesInfo postId={post.id} />
       <AllComments
         comments={postComments?.items || []}
         postId={post.id}

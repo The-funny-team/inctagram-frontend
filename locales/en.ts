@@ -142,7 +142,7 @@ export const en = {
     home: {
       placeholder: 'Add a Comment...',
       publicComment: 'Publish',
-      viewComments: 'View All AllComments',
+      viewComments: 'View All Comments',
     },
     notFound: {
       captionBtn: 'Back to home page',
