@@ -1,41 +1,27 @@
-import { useEffect, useState } from 'react'
-
 import { useGetPostCommentsQuery } from '@/shared/api/commentsApi'
 import { GetPublicationsResponseItem } from '@/shared/api/postsApi'
 import { DotSmallIcon } from '@/shared/assets'
+import { useGetTimeAgo } from '@/shared/lib/hooks'
 import { Avatar, Typography } from '@/shared/ui'
 import { Slider } from '@/widgets/CreatePost/ui/Slider'
 import { PostManageDropdown } from '@/widgets/PostManageDropdown'
-import { formatDistanceToNowStrict, parseISO } from 'date-fns'
-import { enUS, ru } from 'date-fns/locale'
+import { Actions } from '@/widgets/ViewPostModal/ui/Actions'
+import { LikesInfo } from '@/widgets/ViewPostModal/ui/LikesInfo'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
 import s from './HomePost.module.scss'
 
-import { Actions } from './Actions'
 import { AllComments } from './Comments'
-import { Likes } from './Likes'
 
 type Props = {
   post: GetPublicationsResponseItem
 }
 export const HomePost = ({ post }: Props) => {
-  const { locale } = useRouter()
-  const [timeAgo, setTimeAgo] = useState<null | string>(null)
+  const timeAgo = useGetTimeAgo(post.createdAt)
 
   const { data: postComments, refetch: getUpdatedComments } = useGetPostCommentsQuery({
     postId: post.id,
   })
-
-  useEffect(() => {
-    setTimeAgo(
-      formatDistanceToNowStrict(parseISO(post.createdAt as string), {
-        addSuffix: true,
-        locale: locale === 'ru' ? ru : enUS,
-      })
-    )
-  }, [locale, post.createdAt])
 
   return (
     <div className={s.postWrapper}>
@@ -64,7 +50,7 @@ export const HomePost = ({ post }: Props) => {
         </Slider>
       </div>
       <div className={s.actions}>
-        <Actions isLiked={post.isLiked} />
+        <Actions isMyPost={false} postId={post.id} />
       </div>
       <div className={s.postInfo}>
         <Avatar size={36} src={post.avatarOwner} userName={post.userName} />
@@ -77,7 +63,7 @@ export const HomePost = ({ post }: Props) => {
           </Typography>
         </div>
       </div>
-      <Likes avatarsWhoLiked={post.avatarWhoLikes} likesCount={post.likesCount} />
+      <LikesInfo postId={post.id} />
       <AllComments
         comments={postComments?.items || []}
         postId={post.id}

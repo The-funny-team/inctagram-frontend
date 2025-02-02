@@ -1,12 +1,37 @@
 .commentsWrapper {
+  position: relative;
   margin-bottom: 42px;
   padding-top: 24px;
 
   .commentsCount {
+    cursor: pointer;
     padding-bottom: 12px;
 
     .commentsText {
       color: var(--color-light-900);
+    }
+  }
+
+  .allComments {
+    position: absolute;
+    z-index: 20;
+    bottom: 80px;
+
+    width: 100%;
+    height: 430px;
+    padding: 15px 15px 60px;
+
+    background-color: var(--color-dark-300);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    transition: 0.5s ease-in-out;
+
+    &.hide {
+      z-index: -1;
+      height: 0;
+      padding: 0;
+      transition: 0.5s ease-in-out;
     }
   }
 
