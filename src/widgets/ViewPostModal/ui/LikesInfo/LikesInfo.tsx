@@ -22,7 +22,7 @@ export const LikesInfo = ({ postId }: Props) => {
               <Avatar
                 key={user.userId}
                 size={24}
-                src={user.avatars[0].url || ''}
+                src={user.avatars[0]?.url || ''}
                 userName={user.userName}
               />
             ))}
