@@ -1,5 +1,6 @@
 export * from './Button'
 export * from './Card'
+export * from './ChatHeader'
 export * from './Checkbox'
 export * from './Select'
 export * from './Typography'
