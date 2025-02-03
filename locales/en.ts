@@ -144,6 +144,9 @@ export const en = {
       publicComment: 'Publish',
       viewComments: 'View All Comments',
     },
+    messenger: {
+      title: 'Messenger',
+    },
     notFound: {
       captionBtn: 'Back to home page',
       title: 'Sorry! Page not found!',
