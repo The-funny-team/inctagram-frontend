@@ -145,6 +145,8 @@ export const en = {
       viewComments: 'View All Comments',
     },
     messenger: {
+      loadingChats: 'Loading...',
+      noMoreChats: 'No more chats',
       title: 'Messenger',
     },
     notFound: {

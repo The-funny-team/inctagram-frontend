@@ -1,0 +1,73 @@
+import { useEffect, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+
+import { MessageViewDto, useGetLatestMessagesQuery } from '@/shared/api/messengerApi'
+import { useDebounce, useTranslation } from '@/shared/lib/hooks'
+import { Input, Typography } from '@/shared/ui'
+
+export const SearchChats = () => {
+  const { text } = useTranslation()
+  const t = text.pages.messenger
+  const [searchChat, setSearchChat] = useState<string>('')
+  const [foundChats, setFoundChats] = useState<MessageViewDto[]>([])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [cursor, setCursor] = useState<number>(0)
+  const [loading, setLoading] = useState(false)
+  const debounceValue = useDebounce(searchChat, 500)
+
+  const { data: latestChats } = useGetLatestMessagesQuery(
+    {
+      cursor,
+      pageSize: 12,
+      searchName: debounceValue,
+    },
+    { skip: !debounceValue }
+  )
+
+  useEffect(() => {
+    if (latestChats?.items) {
+      setTotalCount(latestChats.totalCount)
+      setFoundChats(prevState => [...prevState, ...latestChats.items])
+    }
+  }, [latestChats])
+
+  const fetchMoreChats = () => {
+    setLoading(true)
+    setCursor(foundChats[foundChats.length - 1]?.id || 0)
+  }
+
+  const handleSearch = (value: string) => {
+    setSearchChat(value)
+    setCursor(0)
+  }
+
+  return (
+    <div>
+      <Input
+        onValueChange={handleSearch}
+        placeholder={t.title}
+        type={'search'}
+        value={searchChat}
+      />
+      <InfiniteScroll
+        dataLength={foundChats.length}
+        endMessage={
+          <div style={{ margin: '10px 0', textAlign: 'center' }}>
+            <Typography variant={'regularText14'}>{t.noMoreChats}</Typography>
+          </div>
+        }
+        hasMore={foundChats.length <= totalCount}
+        loader={
+          loading && (
+            <div style={{ margin: '10px 0', textAlign: 'center' }}>
+              <Typography variant={'regularText14'}>{t.loadingChats}</Typography>
+            </div>
+          )
+        }
+        next={fetchMoreChats}
+      >
+        <div></div>
+      </InfiniteScroll>
+    </div>
+  )
+}

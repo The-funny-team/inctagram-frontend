@@ -76,8 +76,8 @@ export type MessageViewDto = {
   ownerId: number
   receiverId: number
   status: MessageStatus
-  updatedAt: '2025-01-19T17:39:36.085Z'
-  userName: 'string'
+  updatedAt: string
+  userName: string
 }
 export type MessageViewModel = Omit<MessageViewDto, 'avatars' | 'userName'>
 
