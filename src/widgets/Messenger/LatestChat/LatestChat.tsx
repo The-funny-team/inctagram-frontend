@@ -11,7 +11,7 @@ type PropsType = {
   latestChatData: MessageViewDto
 }
 
-export const LatestChat = ({ latestChatData, isMyMsg }: PropsType) => {
+export const LatestChat = ({ isMyMsg, latestChatData }: PropsType) => {
   const [msgTime, setMsgTime] = useState<null | string>(null)
 
   useEffect(() => {
