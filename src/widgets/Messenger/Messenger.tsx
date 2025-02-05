@@ -15,9 +15,7 @@ export const Messenger = () => {
         {t.title}
       </Typography>
       <div>
-        <div className={s.messengerSearch}>
-          <SearchChats />
-        </div>
+        <SearchChats />
       </div>
     </div>
   )

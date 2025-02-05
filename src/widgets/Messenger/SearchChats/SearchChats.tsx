@@ -5,6 +5,8 @@ import { MessageViewDto, useGetLatestMessagesQuery } from '@/shared/api/messenge
 import { useDebounce, useTranslation } from '@/shared/lib/hooks'
 import { Input, Typography } from '@/shared/ui'
 
+import s from './SearchChats.module.scss'
+
 export const SearchChats = () => {
   const { text } = useTranslation()
   const t = text.pages.messenger
@@ -43,12 +45,14 @@ export const SearchChats = () => {
 
   return (
     <div>
-      <Input
-        onValueChange={handleSearch}
-        placeholder={t.title}
-        type={'search'}
-        value={searchChat}
-      />
+      <div className={s.searchInput}>
+        <Input
+          onValueChange={handleSearch}
+          placeholder={text.pages.searchUsers.title}
+          type={'search'}
+          value={searchChat}
+        />
+      </div>
       <InfiniteScroll
         dataLength={foundChats.length}
         endMessage={
