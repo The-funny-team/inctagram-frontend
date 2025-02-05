@@ -4,7 +4,7 @@ import { MessageStatus, MessageType, MessageViewDto } from '@/shared/api/messeng
 
 import { LatestChat } from './LatestChat'
 
-export const latestChat: MessageViewDto = {
+const latestChat: MessageViewDto = {
   avatars: [
     {
       createdAt: '2024-08-06T13:38:26.600Z',
@@ -28,12 +28,16 @@ export const latestChat: MessageViewDto = {
 const meta = {
   component: LatestChat,
   tags: ['autodocs'],
-  title: 'Components/ChatHeader',
+  title: 'Widgets/LatestChat',
 } satisfies Meta<typeof LatestChat>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const WithUserData: Story = {
-  args: { latestChatData: latestChat },
+export const WithMyLastMessage: Story = {
+  args: { isMyMsg: true, latestChatData: latestChat },
+}
+
+export const WithUserLastMessage: Story = {
+  args: { isMyMsg: false, latestChatData: latestChat },
 }

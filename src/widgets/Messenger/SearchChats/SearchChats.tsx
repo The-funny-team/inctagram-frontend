@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
+import { useMeQuery } from '@/shared/api/authApi'
 import { MessageViewDto, useGetLatestMessagesQuery } from '@/shared/api/messengerApi'
 import { useDebounce, useTranslation } from '@/shared/lib/hooks'
 import { Input, ScrollArea, Typography } from '@/shared/ui'
 import { LatestChat } from '@/widgets/Messenger/LatestChat'
 
 import s from './SearchChats.module.scss'
-import { latestChat } from '@/widgets/Messenger/LatestChat/LatestChat.stories'
-import { useMeQuery } from '@/shared/api/authApi'
 
 export const SearchChats = () => {
   const { text } = useTranslation()
