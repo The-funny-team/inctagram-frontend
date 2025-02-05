@@ -4,8 +4,8 @@ import SocketApi from '@/shared/api/socket-api'
 
 enum SocketEvent {
   ERROR = 'error',
-  MESSAGE_DELETED = 'message-sent',
-  MESSAGE_SENT = 'message-deleted',
+  MESSAGE_DELETED = 'message-deleted',
+  MESSAGE_SENT = 'message-sent',
   NOTIFICATIONS = 'notifications',
   RECEIVE_MESSAGE = 'receive-message',
   UPDATE_MESSAGE = 'update-message',
@@ -21,6 +21,8 @@ export const useConnectSocket = () => {
       console.log(SocketEvent.NOTIFICATIONS, data)
       setNotifications(data)
     })
+
+    SocketApi.socket?.on(SocketEvent.MESSAGE_SENT, (data: any) => {})
 
     SocketApi.socket?.on(SocketEvent.ERROR, (data: any) => {
       console.log('error', data)
