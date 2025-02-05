@@ -12,7 +12,7 @@
   }
 
   .latestChats {
-    overflow: scroll;
+    overflow: auto;
     height: 584px;
     background-color: var(--color-dark-500);
     border-right: 1px solid var(--color-dark-300);
