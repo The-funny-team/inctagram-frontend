@@ -7,18 +7,14 @@
     padding: 17px 12px;
 
     background-color: var(--color-dark-500);
-    border: 1px solid var(--color-dark-300);
-    border-top-left-radius: 2px;
+    border-right: 1px solid var(--color-dark-300);
+    border-bottom: 1px solid var(--color-dark-300);
   }
 
   .latestChats {
     overflow: scroll;
-
     height: 584px;
-
     background-color: var(--color-dark-500);
-    border: 1px solid var(--color-dark-300);
-    border-top: none;
-    border-bottom-left-radius: 2px;
+    border-right: 1px solid var(--color-dark-300);
   }
 }

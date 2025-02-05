@@ -1,5 +1,5 @@
 import { useTranslation } from '@/shared/lib/hooks'
-import { Typography } from '@/shared/ui'
+import { ChatHeader, Typography } from '@/shared/ui'
 
 import s from './Messenger.module.scss'
 
@@ -14,8 +14,11 @@ export const Messenger = () => {
       <Typography className={s.messengerTitle} variant={'h1'}>
         {t.title}
       </Typography>
-      <div>
+      <div className={s.messenger}>
         <SearchChats />
+        <div className={s.messengerContent}>
+          <ChatHeader />
+        </div>
       </div>
     </div>
   )
