@@ -147,6 +147,11 @@ export const ru: LocaleType = {
       publicComment: 'Опубликовать',
       viewComments: 'Показать все комментарии',
     },
+    messenger: {
+      loadingChats: 'Загрузка...',
+      noMoreChats: 'Больше нет чатов',
+      title: 'Мессенджер',
+    },
     notFound: {
       captionBtn: 'Вернуться на главную',
       title: 'Извините! Эта страница недоступна',

@@ -144,6 +144,11 @@ export const en = {
       publicComment: 'Publish',
       viewComments: 'View All Comments',
     },
+    messenger: {
+      loadingChats: 'Loading...',
+      noMoreChats: 'No more chats',
+      title: 'Messenger',
+    },
     notFound: {
       captionBtn: 'Back to home page',
       title: 'Sorry! Page not found!',
