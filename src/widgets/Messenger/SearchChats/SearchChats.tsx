@@ -3,7 +3,8 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { MessageViewDto, useGetLatestMessagesQuery } from '@/shared/api/messengerApi'
 import { useDebounce, useTranslation } from '@/shared/lib/hooks'
-import { Input, Typography } from '@/shared/ui'
+import { Input, ScrollArea, Typography } from '@/shared/ui'
+import { LatestChat } from '@/widgets/Messenger/LatestChat'
 
 import s from './SearchChats.module.scss'
 
@@ -44,7 +45,7 @@ export const SearchChats = () => {
   }
 
   return (
-    <div>
+    <div className={s.latestChatsWrapper} style={{ maxWidth: '270px' }}>
       <div className={s.searchInput}>
         <Input
           onValueChange={handleSearch}
@@ -53,25 +54,31 @@ export const SearchChats = () => {
           value={searchChat}
         />
       </div>
-      <InfiniteScroll
-        dataLength={foundChats.length}
-        endMessage={
-          <div style={{ margin: '10px 0', textAlign: 'center' }}>
-            <Typography variant={'regularText14'}>{t.noMoreChats}</Typography>
-          </div>
-        }
-        hasMore={foundChats.length <= totalCount}
-        loader={
-          loading && (
+      <ScrollArea>
+        <InfiniteScroll
+          dataLength={foundChats.length}
+          endMessage={
             <div style={{ margin: '10px 0', textAlign: 'center' }}>
-              <Typography variant={'regularText14'}>{t.loadingChats}</Typography>
+              <Typography variant={'regularText14'}>{t.noMoreChats}</Typography>
             </div>
-          )
-        }
-        next={fetchMoreChats}
-      >
-        <div></div>
-      </InfiniteScroll>
+          }
+          hasMore={foundChats.length <= totalCount}
+          loader={
+            loading && (
+              <div style={{ margin: '10px 0', textAlign: 'center' }}>
+                <Typography variant={'regularText14'}>{t.loadingChats}</Typography>
+              </div>
+            )
+          }
+          next={fetchMoreChats}
+        >
+          <div className={s.latestChats}>
+            {foundChats.map(chat => (
+              <LatestChat key={chat.id} latestChatData={chat} />
+            ))}
+          </div>
+        </InfiniteScroll>
+      </ScrollArea>
     </div>
   )
 }

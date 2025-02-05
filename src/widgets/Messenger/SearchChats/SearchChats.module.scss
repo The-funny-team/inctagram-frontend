@@ -1,10 +1,24 @@
-.searchInput {
+.latestChatsWrapper {
   width: 100%;
   max-width: 270px;
-  height: 72px;
-  padding: 17px 12px;
 
-  background-color: var(--color-dark-500);
-  border: 1px solid var(--color-dark-300);
-  border-top-left-radius: 2px;
+  .searchInput {
+    height: 72px;
+    padding: 17px 12px;
+
+    background-color: var(--color-dark-500);
+    border: 1px solid var(--color-dark-300);
+    border-top-left-radius: 2px;
+  }
+
+  .latestChats {
+    overflow: scroll;
+
+    height: 584px;
+
+    background-color: var(--color-dark-500);
+    border: 1px solid var(--color-dark-300);
+    border-top: none;
+    border-bottom-left-radius: 2px;
+  }
 }
