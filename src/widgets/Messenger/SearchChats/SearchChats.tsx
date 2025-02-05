@@ -7,6 +7,8 @@ import { Input, ScrollArea, Typography } from '@/shared/ui'
 import { LatestChat } from '@/widgets/Messenger/LatestChat'
 
 import s from './SearchChats.module.scss'
+import { latestChat } from '@/widgets/Messenger/LatestChat/LatestChat.stories'
+import { useMeQuery } from '@/shared/api/authApi'
 
 export const SearchChats = () => {
   const { text } = useTranslation()
@@ -17,7 +19,8 @@ export const SearchChats = () => {
   const [cursor, setCursor] = useState<number>(0)
   const [loading, setLoading] = useState(false)
   const debounceValue = useDebounce(searchChat, 500)
-
+  const { data: myInfo } = useMeQuery()
+  const myId = myInfo?.userId
   const { data: latestChats } = useGetLatestMessagesQuery(
     {
       cursor,
@@ -74,7 +77,7 @@ export const SearchChats = () => {
         >
           <div className={s.latestChats}>
             {foundChats.map(chat => (
-              <LatestChat key={chat.id} latestChatData={chat} />
+              <LatestChat isMyMsg={chat.ownerId === myId} key={chat.id} latestChatData={chat} />
             ))}
           </div>
         </InfiniteScroll>

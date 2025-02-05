@@ -7,10 +7,11 @@ import { format, parseISO } from 'date-fns'
 import s from './LatestChat.module.scss'
 
 type PropsType = {
+  isMyMsg: boolean
   latestChatData: MessageViewDto
 }
 
-export const LatestChat = ({ latestChatData }: PropsType) => {
+export const LatestChat = ({ latestChatData, isMyMsg }: PropsType) => {
   const [msgTime, setMsgTime] = useState<null | string>(null)
 
   useEffect(() => {
@@ -38,6 +39,11 @@ export const LatestChat = ({ latestChatData }: PropsType) => {
           </Typography>
         </div>
         <Typography className={s.latestChatText} variant={'smallText'}>
+          {isMyMsg && (
+            <Typography as={'span'} className={s.latestChatText} variant={'smallText'}>
+              You:&nbsp;
+            </Typography>
+          )}
           {latestChatData.messageText}
         </Typography>
       </div>
