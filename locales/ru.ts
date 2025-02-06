@@ -148,6 +148,12 @@ export const ru: LocaleType = {
       viewComments: 'Показать все комментарии',
     },
     messenger: {
+      chat: {
+        input: {
+          action: 'Отправить сообщение',
+          placeholder: 'Написать сообщение',
+        },
+      },
       loadingChats: 'Загрузка...',
       noMoreChats: 'Больше нет чатов',
       title: 'Мессенджер',

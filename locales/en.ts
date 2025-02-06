@@ -145,6 +145,12 @@ export const en = {
       viewComments: 'View All Comments',
     },
     messenger: {
+      chat: {
+        input: {
+          action: 'Send message',
+          placeholder: 'Type Message',
+        },
+      },
       loadingChats: 'Loading...',
       noMoreChats: 'No more chats',
       title: 'Messenger',

@@ -33,6 +33,7 @@ export const SearchChats = () => {
     if (latestChats?.items) {
       setTotalCount(latestChats.totalCount)
       setFoundChats(prevState => [...prevState, ...latestChats.items])
+      setLoading(false)
     }
   }, [latestChats])
 
