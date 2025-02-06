@@ -1,0 +1,38 @@
+.messageWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+
+  .messageTime {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-top: 5px;
+  }
+}
+
+.message {
+  display: inline-block;
+  max-width: 50%;
+  padding: 7px 12px 8px;
+  border-radius: 8px;
+}
+
+.personal {
+  margin-left: auto;
+  background-color: var(--color-accent-900);
+}
+
+.friend {
+  background-color: var(--color-dark-300);
+}
+
+.myTime {
+  color: var(--color-accent-100);
+}
+
+.friendTime {
+  color: var(--color-light-900);
+}
