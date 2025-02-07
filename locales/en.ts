@@ -150,6 +150,7 @@ export const en = {
           action: 'Send message',
           placeholder: 'Type Message',
         },
+        noChosenChat: 'Choose who you would like to talk to',
       },
       loadingChats: 'Loading...',
       noMoreChats: 'No more chats',
