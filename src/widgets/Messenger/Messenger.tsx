@@ -1,5 +1,6 @@
 import { useTranslation } from '@/shared/lib/hooks'
 import { ChatHeader, Typography } from '@/shared/ui'
+import { Chat } from '@/widgets/Messenger/Chat/Chat'
 
 import s from './Messenger.module.scss'
 
@@ -18,6 +19,7 @@ export const Messenger = () => {
         <SearchChats />
         <div className={s.messengerContent}>
           <ChatHeader />
+          <Chat />
         </div>
       </div>
     </div>
