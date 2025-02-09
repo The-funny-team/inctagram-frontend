@@ -1,11 +1,14 @@
 import { getProtectedNavbarLayout } from '@/shared/layouts'
 import { HeadMeta } from '@/shared/ui'
+import { Messenger } from '@/widgets/Messenger'
 
 const MessengerPage = () => {
   return (
     <>
       <HeadMeta title={'Messenger'} />
-      <main>Messenger</main>
+      <main>
+        <Messenger />
+      </main>
     </>
   )
 }
