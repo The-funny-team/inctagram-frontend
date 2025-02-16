@@ -9,9 +9,18 @@ import s from './LatestChat.module.scss'
 type PropsType = {
   isMyMsg: boolean
   latestChatData: MessageViewDto
+  setAvatarUrl: (avatarUrl: string) => void
+  setCurrentUserId: (currentUserId: number) => void
+  setUserName: (userName: string) => void
 }
 
-export const LatestChat = ({ isMyMsg, latestChatData }: PropsType) => {
+export const LatestChat = ({
+  isMyMsg,
+  latestChatData,
+  setAvatarUrl,
+  setCurrentUserId,
+  setUserName,
+}: PropsType) => {
   const [msgTime, setMsgTime] = useState<null | string>(null)
 
   useEffect(() => {
@@ -23,9 +32,14 @@ export const LatestChat = ({ isMyMsg, latestChatData }: PropsType) => {
   if (!latestChatData) {
     return null
   }
+  const chooseUser = () => {
+    setCurrentUserId(latestChatData.receiverId)
+    setUserName(latestChatData.userName)
+    setAvatarUrl(latestChatData.avatars[0].url)
+  }
 
   return (
-    <div className={s.latestChatWrapper}>
+    <div className={s.latestChatWrapper} onClick={chooseUser}>
       <Avatar
         size={48}
         src={latestChatData.avatars[0].url || ''}
