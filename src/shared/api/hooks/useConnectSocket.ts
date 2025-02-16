@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
+import { MessageViewModel } from '@/shared/api/messengerApi'
 import SocketApi from '@/shared/api/socket-api'
 
-enum SocketEvent {
+export enum SocketEvent {
   ERROR = 'error',
   MESSAGE_DELETED = 'message-deleted',
   MESSAGE_SENT = 'message-sent',
@@ -13,19 +14,23 @@ enum SocketEvent {
 
 export const useConnectSocket = () => {
   const [notifications, setNotifications] = useState()
+  const [message, setMessage] = useState<MessageViewModel>()
   const [error, setError] = useState('')
   const connectSocket = () => {
     SocketApi.createConnection()
 
     SocketApi.socket?.on(SocketEvent.NOTIFICATIONS, (data: any) => {
-      console.log(SocketEvent.NOTIFICATIONS, data)
       setNotifications(data)
     })
 
-    SocketApi.socket?.on(SocketEvent.MESSAGE_SENT, (data: any) => {})
+    SocketApi.socket?.on(SocketEvent.RECEIVE_MESSAGE, (data: MessageViewModel) => {
+      setMessage(data)
+    })
+    SocketApi.socket?.on(SocketEvent.MESSAGE_SENT, (data: any) => {
+      setMessage(data)
+    })
 
     SocketApi.socket?.on(SocketEvent.ERROR, (data: any) => {
-      console.log('error', data)
       setError(JSON.stringify(data))
     })
   }
@@ -34,5 +39,5 @@ export const useConnectSocket = () => {
     connectSocket()
   }, [])
 
-  return { error, notifications }
+  return { error, message, notifications }
 }
