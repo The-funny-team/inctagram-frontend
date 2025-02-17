@@ -19,7 +19,7 @@ export const Avatar = ({ className, size, src, userName }: Props) => {
   const fallbackUserName = getFallBackUserName(userName)
 
   return (
-    <div className={classNames.root} style={{ height: `${size}px`, width: `${size}px` }}>
+    <div className={classNames.root} style={{ minHeight: `${size}px`, minWidth: `${size}px` }}>
       {!src && (
         <span className={classNames.userName} style={{ fontSize: `${10 + size / 8}px` }}>
           {fallbackUserName}
