@@ -1,4 +1,5 @@
 export const MAX_FILE_SIZE = 10 * 1024 * 1024
+export const MAX_DESCRIPTION_LENGTH = 500
 export const SECONDS_PER_YEAR = 1000 * 60 * 60 * 24 * 365
 export const FILTERS = [
   {
@@ -42,3 +43,7 @@ export const FILTERS = [
     value: 'contrast(1.5) brightness(0.9)',
   },
 ]
+export const LIKE_STATUS = {
+  LIKE: 'LIKE',
+  UNLIKE: 'NONE',
+}

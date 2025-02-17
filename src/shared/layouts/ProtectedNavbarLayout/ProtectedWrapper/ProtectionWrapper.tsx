@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { useMeQuery } from '@/shared/api/profileApi'
+import { useMeQuery } from '@/shared/api/authApi'
 import { ROUTES_URL } from '@/shared/const'
 import { Loader } from '@/shared/ui'
 import { useRouter } from 'next/router'

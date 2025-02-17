@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 
 import { Cross2Icon } from '@/shared/assets'
-import { useAppDispatch } from '@/shared/lib/hooks'
+import { useAppDispatch, useTranslation } from '@/shared/lib/hooks'
 import { BlankCover, Button, Typography } from '@/shared/ui'
 import {
   resetState,
@@ -18,6 +18,8 @@ type ImageSelectionProps = {
 }
 
 export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
+  const { text } = useTranslation()
+  const t = text.modals.createPostModal.selectImage
   const dispatch = useAppDispatch()
   const setNext = () => dispatch(setNextStage())
   const setPhotos = (pictures: string[]) => dispatch(setPictures({ pictures }))
@@ -40,7 +42,7 @@ export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
     <>
       <div className={s.title}>
         <Typography as={'h1'} variant={'h1'}>
-          Add Photo
+          {t.title}
         </Typography>
         <button className={s.closeBtn} onClick={onCloseBtn}>
           <Cross2Icon />
@@ -59,11 +61,11 @@ export const ImageSelection = ({ onCloseBtn }: ImageSelectionProps) => {
               style={{ display: 'none' }}
               type={'file'}
             />
-            <Button as={'span'}>Select from Computer</Button>
+            <Button as={'span'}>{t.selectPhoto}</Button>
           </label>
 
           <Button onClick={openDraftHandler} variant={'tertiary'}>
-            Open Draft
+            {t.openDraft}
           </Button>
         </div>
       </div>

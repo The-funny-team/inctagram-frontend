@@ -1,4 +1,8 @@
 module.exports = {
     extends: '@it-incubator/eslint-config',
-    rules: { 'no-console': ['warn', { allow: ['warn', 'error'] }] },
+    rules: {
+        'no-console': ['warn', { allow: ['warn', 'error'] }],
+        'react-hooks/rules-of-hooks': 'off',
+        'max-lines': ['warn', { max: 1000, skipBlankLines: true, skipComments: true }],
+    },
 }

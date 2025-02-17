@@ -25,7 +25,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
           <div className={classNames.icon}>
             <CalendarIcon />
           </div>
-          <input disabled={disabled} ref={ref} {...rest} />
+          <input disabled={disabled} ref={ref} {...rest} readOnly />
         </div>
       </label>
     )

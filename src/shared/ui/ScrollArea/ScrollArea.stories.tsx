@@ -5,7 +5,7 @@ import { ScrollArea } from '@/shared/ui'
 const meta = {
   component: ScrollArea,
   tags: ['autodocs'],
-  title: 'Components/Scrollbar',
+  title: 'Components/ScrollArea',
 } satisfies Meta<typeof ScrollArea>
 
 export default meta

@@ -6,5 +6,16 @@ export const baseApi = createApi({
   baseQuery: customFetchBase,
   endpoints: () => ({}),
   reducerPath: 'baseApi',
-  tagTypes: ['Me'],
+  tagTypes: [
+    'Me',
+    'Posts',
+    'Profile',
+    'Payments',
+    'Devices',
+    'Header',
+    'Comments',
+    'Answer',
+    'LikesInfo',
+    'Actions',
+  ],
 })

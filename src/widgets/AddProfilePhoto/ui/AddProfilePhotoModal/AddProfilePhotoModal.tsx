@@ -76,7 +76,7 @@ export const AddProfilePhotoModal = ({
               })
               .catch(error => {
                 if (isFetchBaseQueryError(error)) {
-                  toast.error(error.data.message as string)
+                  toast.error(error.data.messages[0].message as string)
                 }
               })
           } else {

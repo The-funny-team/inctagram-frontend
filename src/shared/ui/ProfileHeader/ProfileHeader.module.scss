@@ -1,0 +1,27 @@
+.mainInfo {
+  display: flex;
+  gap: 38px;
+
+  .avatarPhoto {
+    min-width: 204px;
+  }
+
+  .infoAboutMe {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+
+    .nameAndBtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .counting {
+      display: flex;
+      flex-direction: row;
+      gap: 88px;
+    }
+  }
+}

@@ -43,7 +43,11 @@ export const ZoomSetting = ({ imgId, setZoom, zoom }: Props) => {
 
 const SizeBtn = (props: { isActive: boolean; onClick?: ComponentProps<'button'>['onClick'] }) => {
   return (
-    <SliderButton className={clsx(s.sizeBtn, props.isActive && s.active)} onClick={props.onClick}>
+    <SliderButton
+      className={clsx(s.sizeBtn, props.isActive && s.active)}
+      onClick={props.onClick}
+      size={36}
+    >
       {props.isActive ? <FilledLoupeIcon /> : <LoupeIcon />}
     </SliderButton>
   )

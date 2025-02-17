@@ -1,9 +1,9 @@
-import { useMeQuery, useUpdateUserMutation } from '@/shared/api/profileApi'
+import { useGetProfileInfoQuery, useUpdateUserMutation } from '@/shared/api/profileApi'
 import { profileFormDataCreator } from '@/shared/lib/helpers'
 import { useTranslation } from '@/shared/lib/hooks'
 
 export const useProfileData = () => {
-  const { data } = useMeQuery()
+  const { data } = useGetProfileInfoQuery()
   const { text } = useTranslation()
   const {
     profileInfoForm: formText,

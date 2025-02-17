@@ -1,0 +1,26 @@
+.rootShowUser {
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  .info {
+    :first-child {
+      font-size: 14px;
+      font-weight: 700;
+      font-style: normal;
+      line-height: 24px; /* 171.429% */
+      color: var(--color-light-100);
+      text-decoration-line: underline;
+      text-decoration-style: solid;
+      text-decoration-thickness: auto;
+      text-decoration-skip-ink: none;
+      text-underline-position: from-font;
+      text-underline-offset: auto;
+    }
+
+    :last-child {
+      color: var(--color-light-900);
+    }
+  }
+}

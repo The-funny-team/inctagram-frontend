@@ -1,0 +1,27 @@
+.likesContainer {
+  display: flex;
+  gap: 12px;
+
+  .likesAvatars {
+    position: relative;
+    display: flex;
+    width: 48px;
+
+    :nth-child(1) {
+      position: relative;
+      display: flex;
+    }
+
+    :nth-child(2) {
+      position: absolute;
+      z-index: -1;
+      transform: translateX(50%);
+    }
+
+    :nth-child(3) {
+      position: absolute;
+      z-index: -2;
+      transform: translateX(100%);
+    }
+  }
+}

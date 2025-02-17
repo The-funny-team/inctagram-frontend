@@ -1,0 +1,26 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 970px;
+  height: fit-content;
+}
+
+.main {
+  display: flex;
+}
+
+.triggerClassName {
+  cursor: pointer;
+}
+
+.imageContainerEdit {
+  position: relative;
+  width: 490px;
+  height: 539px;
+}
+
+.publishBtn {
+  cursor: pointer;
+  right: 0;
+  color: var(--color-accent-500);
+}

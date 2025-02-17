@@ -1,0 +1,24 @@
+.logOutModalRoot {
+  width: 438px;
+  height: 240px;
+
+  .logOutRoot {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: flex-start;
+
+    margin: 30px 24px 36px;
+  }
+
+  .buttonsBlock {
+    display: flex;
+    gap: 24px;
+    margin-right: 0;
+    margin-left: auto;
+
+    button {
+      width: 96px;
+    }
+  }
+}

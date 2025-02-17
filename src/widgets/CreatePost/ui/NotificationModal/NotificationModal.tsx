@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/shared/lib/hooks'
+import { useAppDispatch, useTranslation } from '@/shared/lib/hooks'
 import { Button, Modal, Typography } from '@/shared/ui'
 import { resetState, setDraftedPage } from '@/widgets/CreatePost/service'
 
@@ -11,15 +11,17 @@ type Props = {
 }
 
 export const NotificationModal = ({ closeOtherModal, isOpen, isOpenChange }: Props) => {
+  const { text } = useTranslation()
+  const t = text.modals.notificationModal
   const dispatch = useAppDispatch()
 
-  const onDiscardhandler = () => {
+  const onDiscardHandler = () => {
     dispatch(resetState())
     isOpenChange(false)
-    closeOtherModal(false)
+    //closeOtherModal(false)
   }
 
-  const onSaveDrafthandler = () => {
+  const onSaveDraftHandler = () => {
     dispatch(setDraftedPage())
     isOpenChange(false)
     closeOtherModal(false)
@@ -34,14 +36,13 @@ export const NotificationModal = ({ closeOtherModal, isOpen, isOpenChange }: Pro
     >
       <div className={s.body}>
         <Typography className={s.warnCaption} variant={'regularText16'}>
-          Do you really want to close the creation of a publication? If you close everything will be
-          deleted
+          {t.text}
         </Typography>
         <div className={s.btnGroup}>
-          <Button onClick={onDiscardhandler} variant={'tertiary'}>
-            Discard
+          <Button onClick={onDiscardHandler} variant={'tertiary'}>
+            {t.discardBtn}
           </Button>
-          <Button onClick={onSaveDrafthandler}>Save draft</Button>
+          <Button onClick={onSaveDraftHandler}>{t.draftBtn}</Button>
         </div>
       </div>
     </Modal>

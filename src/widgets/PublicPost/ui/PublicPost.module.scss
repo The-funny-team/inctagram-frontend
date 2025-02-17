@@ -1,0 +1,60 @@
+.post {
+  position: relative;
+  width: 234px;
+  height: 390px;
+}
+
+.image {
+  width: 100%;
+  border-radius: 1px;
+  object-fit: cover;
+}
+
+.postInfo {
+  position: absolute;
+  z-index: 20;
+  top: 240px;
+  bottom: -5px;
+
+  overflow: hidden;
+
+  max-height: 250px;
+  padding-top: 10px;
+
+  background-color: var(--color-dark-900);
+
+  transition: all 0.3s ease-in-out;
+}
+
+.expanded {
+  top: 178px;
+  bottom: 0;
+  max-height: 370px;
+  transition: all 0.3s ease-in-out;
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
+  color: var(--color-light-100);
+}
+
+.date {
+  margin-top: 12px;
+  margin-bottom: 3px;
+
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 16px;
+  color: var(--color-light-900);
+}
+
+.slider {
+  cursor: pointer;
+  display: block;
+  width: 234px;
+  height: 240px;
+}

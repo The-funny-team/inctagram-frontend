@@ -1,0 +1,15 @@
+.actions {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.likeAndShareContainer {
+  display: flex;
+  column-gap: 24px;
+}

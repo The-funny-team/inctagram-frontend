@@ -1,1 +1,1 @@
-export type { getDeviceIcon } from 'src/widgets/Devices/services/getDeviceIcon'
+export { getDeviceIcon } from './getDeviceIcon'

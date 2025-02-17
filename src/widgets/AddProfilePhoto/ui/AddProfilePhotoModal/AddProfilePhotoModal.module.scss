@@ -1,29 +1,28 @@
 .addModalRoot {
-  max-width: 492px;
+  width: 492px;
   max-height: 564px;
 
   .modalContent {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 28px auto 36px;
 
     .saveButton {
-      margin: 36px 0 12px auto;
+      margin: 36px 24px 0 auto;
     }
 
     .withoutPhoto {
       display: flex;
       flex-direction: column;
       align-items: center;
-
-      width: 100%;
-      margin-bottom: 72px;
+      margin-bottom: 108px;
 
       .errorText {
-        width: 100%;
+        width: 444px;
         height: auto;
         margin-bottom: 24px;
-        padding: 6px 44px;
+        padding: 6px 24px;
 
         text-align: center;
 

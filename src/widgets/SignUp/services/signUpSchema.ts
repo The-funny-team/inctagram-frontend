@@ -6,7 +6,7 @@ export const signUpSchema = (text: LocaleType) => {
   return z
     .object({
       agree: z.boolean(),
-      email: z.string().email({ message: text.validation.emailVerification }).trim(),
+      email: z.string().email({ message: text.validation.emailVerification }).trim().toLowerCase(),
       password: z
         .string()
         .min(6, text.validation.minLength6)
@@ -14,7 +14,7 @@ export const signUpSchema = (text: LocaleType) => {
         .regex(PASSWORD_PATTERN, text.validation.passwordVerification)
         .trim(),
       passwordConfirm: z.string().trim(),
-      username: z
+      userName: z
         .string()
         .min(6, text.validation.minLength6)
         .max(30, text.validation.maxLength30)

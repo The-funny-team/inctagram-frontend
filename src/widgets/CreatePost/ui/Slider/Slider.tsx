@@ -11,12 +11,14 @@ import s from './Slider.module.scss'
 
 type Props = {
   children: ReactNode
+  isDots: boolean
   setSlideId?: (id: number) => void
+  sizeBtn: number
   slideId?: number
   sliderLength: number
 }
 
-export const Slider = ({ children, setSlideId, slideId, sliderLength }: Props) => {
+export const Slider = ({ children, isDots, setSlideId, sizeBtn, slideId, sliderLength }: Props) => {
   const [slideIdR, setSlideIdR] = useState<number>(0)
 
   const beforeChangeHandler = (currentSlide: number, nextSlide: number) => {
@@ -30,15 +32,22 @@ export const Slider = ({ children, setSlideId, slideId, sliderLength }: Props) =
   const usedSlideId = slideId ? slideId : slideIdR
 
   const settings: Settings = {
+    arrows: sliderLength > 1,
     beforeChange: beforeChangeHandler,
     customPaging: index => {
       return <SliderDot isActive={usedSlideId === index} />
     },
-    dots: true,
+    dots: isDots,
     dotsClass: s.slickDots,
     infinite: false,
-    nextArrow: <Btn disabled={sliderLength - 1 === usedSlideId || sliderLength === 0} isRight />,
-    prevArrow: <Btn disabled={usedSlideId === 0} isRight={false} />,
+    nextArrow: (
+      <Btn
+        disabled={sliderLength - 1 === usedSlideId || sliderLength === 0}
+        isRight
+        size={sizeBtn}
+      />
+    ),
+    prevArrow: <Btn disabled={usedSlideId === 0} isRight={false} size={sizeBtn} />,
     slidesToScroll: 1,
     slidesToShow: 1,
     speed: 500,
@@ -57,11 +66,17 @@ type BtnType = {
   disabled?: boolean
   isRight: boolean
   onClick?: ComponentProps<'button'>['onClick']
+  size: number
 }
 
-const Btn = ({ disabled, isRight, onClick }: BtnType) => {
+const Btn = ({ disabled, isRight, onClick, size }: BtnType) => {
   return (
-    <SliderButton className={isRight ? s.nextBtn : s.prevBtn} disabled={disabled} onClick={onClick}>
+    <SliderButton
+      className={isRight ? s.nextBtn : s.prevBtn}
+      disabled={disabled}
+      onClick={onClick}
+      size={size}
+    >
       {isRight ? <ArrowRightShortIcon /> : <ArrowLeftShortIcon />}
     </SliderButton>
   )

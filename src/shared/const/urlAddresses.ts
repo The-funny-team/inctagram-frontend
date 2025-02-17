@@ -1,9 +1,13 @@
-const BASE_URL = 'https://ft-inctagram.site/'
+export const BASE_URL = 'https://funny-inctagram.site'
+export const BASE_LOCAL_URL = 'http://localhost:3000'
 
-export const BASE_API_URL = 'https://ft-inctagram.site/api/v1'
+export const BASE_API_URL = 'https://inctagram.work/api/v1/'
 const GOOGLE_OAUTH_CLIENT_ID =
-  '1054565512290-ao2v9c9vubhqj7vs90jssm7j9rbomp9o.apps.googleusercontent.com'
+  '617342613759-f3kbvgm8l310fn40vh6qna2pv8u2uccr.apps.googleusercontent.com'
 
-const FRONTEND_REDIRECT_URL = `${BASE_URL}auth/google`
+const GITHUB_OAUTH_CLIENT_ID = '344513cb4d7cd98d9669'
+const REDIRECT_URL = process.env.NODE_ENV === 'development' ? BASE_LOCAL_URL : BASE_URL
 
-export const GOOGLE_URL = `https://accounts.google.com/o/oauth2/v2/auth?scope=email profile&response_type=code&redirect_uri=${FRONTEND_REDIRECT_URL}&client_id=${GOOGLE_OAUTH_CLIENT_ID}`
+export const GOOGLE_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope= profile email openid&response_type=code`
+
+export const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_OAUTH_CLIENT_ID}&redirect_uri=https://inctagram.work/api/v1/auth/github/callback&scope=user:email`

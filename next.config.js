@@ -8,8 +8,26 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'funny-team.s3.eu-north-1.amazonaws.com',
+        hostname: 'ft-bucket.storage.yandexcloud.net',
         pathname: '**',
+        protocol: 'https',
+      },
+      {
+        hostname: 'storage.yandexcloud.net',
+        pathname: '/users-inctagram/**',
+        port: '',
+        protocol: 'https',
+      },
+      {
+        hostname: 'staging-it-incubator.s3.eu-central-1.amazonaws.com',
+        pathname: '/trainee-instagram-api/**',
+        port: '',
+        protocol: 'https',
+      },
+      {
+        hostname: 'staging-it-incubator.s3.eu-central-1.amazonaws.com',
+        pathname: '/trainee-instagram-api/Image/**',
+        port: '',
         protocol: 'https',
       },
     ],

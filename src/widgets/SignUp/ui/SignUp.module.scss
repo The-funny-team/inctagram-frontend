@@ -66,11 +66,17 @@
   }
 }
 
-.modalDescription {
-  margin-top: 0;
-}
+.modalSignUp {
+  max-width: 378px;
 
-.modalCloseBtn {
-  display: flex;
-  justify-content: flex-end;
+  .modalDescription {
+    margin-top: 0;
+    padding: 30px 24px 0;
+  }
+
+  .modalCloseBtn {
+    display: flex;
+    width: 96px;
+    margin: 0 24px 36px auto;
+  }
 }

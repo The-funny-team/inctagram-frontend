@@ -59,7 +59,7 @@ const ImagePreview = ({ onRemove, photo }: ImagePreviewProps) => {
   return (
     <div className={s.imageBlock}>
       <img alt={'selected image preview'} className={s.image} src={photo} />
-      <SliderButton className={s.closeBtn} onClick={onRemove}>
+      <SliderButton className={s.closeBtn} onClick={onRemove} size={36}>
         <Cross2Icon height={6} width={6} />
       </SliderButton>
     </div>
@@ -86,7 +86,7 @@ const SelectImageBtn = ({ setPhotos }: SelectImageBtnProps) => {
 
   return (
     <label htmlFor={'pick-image-btn'}>
-      <SliderButton className={s.pickImagesBtn} onClick={selectPhoto}>
+      <SliderButton className={s.pickImagesBtn} onClick={selectPhoto} size={36}>
         <CircleIcon height={36} width={36} />
       </SliderButton>
       <input
@@ -109,6 +109,7 @@ const ShowPicturesBtn = (props: {
     <SliderButton
       className={clsx(s.addImageBtn, props.isActive && s.active)}
       onClick={props.onClick}
+      size={36}
     >
       {props.isActive ? <FilledPhotoIcon /> : <PhotoIcon height={24} width={24} />}
     </SliderButton>
