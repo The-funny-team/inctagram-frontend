@@ -5,7 +5,10 @@
   height: calc(100% - 72px);
 
   .chat {
+    display: flex;
     flex: 1;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .emptyChat {

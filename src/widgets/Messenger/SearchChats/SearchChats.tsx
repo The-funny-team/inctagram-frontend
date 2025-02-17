@@ -8,8 +8,13 @@ import { Input, ScrollArea, Typography } from '@/shared/ui'
 import { LatestChat } from '@/widgets/Messenger/LatestChat'
 
 import s from './SearchChats.module.scss'
+type Props = {
+  setAvatarUrl: (avatarUrl: string) => void
+  setCurrentUserId: (currentUserId: number) => void
+  setUserName: (userName: string) => void
+}
 
-export const SearchChats = () => {
+export const SearchChats = ({ setAvatarUrl, setCurrentUserId, setUserName }: Props) => {
   const { text } = useTranslation()
   const t = text.pages.messenger
   const [searchChat, setSearchChat] = useState<string>('')
@@ -25,8 +30,8 @@ export const SearchChats = () => {
       cursor,
       pageSize: 12,
       searchName: debounceValue,
-    },
-    { skip: !debounceValue }
+    }
+    // { skip: !debounceValue }
   )
 
   useEffect(() => {
@@ -77,7 +82,14 @@ export const SearchChats = () => {
         >
           <div className={s.latestChats}>
             {foundChats.map(chat => (
-              <LatestChat isMyMsg={chat.ownerId === myId} key={chat.id} latestChatData={chat} />
+              <LatestChat
+                isMyMsg={chat.ownerId === myId}
+                key={chat.id}
+                latestChatData={chat}
+                setAvatarUrl={setAvatarUrl}
+                setCurrentUserId={setCurrentUserId}
+                setUserName={setUserName}
+              />
             ))}
           </div>
         </InfiniteScroll>

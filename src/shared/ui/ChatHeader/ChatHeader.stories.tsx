@@ -19,4 +19,6 @@ export const WithUserData: Story = {
   },
 }
 
-export const Empty: Story = {}
+export const Empty: Story = {
+  args: { avatarUrl: null, userName: null },
+}
