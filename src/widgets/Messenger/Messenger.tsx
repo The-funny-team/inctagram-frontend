@@ -28,7 +28,12 @@ export const Messenger = () => {
         />
         <div className={s.messengerContent}>
           <ChatHeader avatarUrl={avatarUrl} userName={userName} />
-          <Chat avatarUrl={avatarUrl} currentUserId={currentUserId} userName={userName} />
+          <Chat
+            avatarUrl={avatarUrl}
+            currentUserId={currentUserId}
+            key={currentUserId}
+            userName={userName}
+          />
         </div>
       </div>
     </div>
