@@ -35,14 +35,14 @@ export const LatestChat = ({
   const chooseUser = () => {
     setCurrentUserId(latestChatData.receiverId)
     setUserName(latestChatData.userName)
-    setAvatarUrl(latestChatData.avatars[0].url)
+    setAvatarUrl(latestChatData.avatars[0]?.url)
   }
 
   return (
     <div className={s.latestChatWrapper} onClick={chooseUser}>
       <Avatar
         size={48}
-        src={latestChatData.avatars[0].url || ''}
+        src={latestChatData.avatars[0]?.url || ''}
         userName={latestChatData.userName}
       />
       <div className={s.latestChatInfo}>
