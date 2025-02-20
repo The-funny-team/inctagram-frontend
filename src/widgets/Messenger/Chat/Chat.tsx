@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { SocketEvent, useConnectSocket } from '@/shared/api/hooks/useConnectSocket'
 import { MessageViewModel, useGetMessagesByUserQuery } from '@/shared/api/messengerApi'
 import SocketApi from '@/shared/api/socket-api'
 import { PictureMessageIcon, VoiceMessageIcon } from '@/shared/assets'
 import { useTranslation } from '@/shared/lib/hooks'
-import { Input, Message, Typography } from '@/shared/ui'
+import { Input, Message, ScrollArea, Typography } from '@/shared/ui'
 
 import s from './Chat.module.scss'
 
@@ -18,25 +19,61 @@ type Props = {
 export const Chat = ({ avatarUrl, currentUserId, userName }: Props) => {
   const { text } = useTranslation()
   const t = text.pages.messenger.chat
+  const chatRef = useRef<HTMLDivElement | null>(null)
   const [newMsg, setNewMsg] = useState('')
   const [messages, setMessages] = useState<MessageViewModel[]>([])
+  const [currentMessageId, setCurrentMessageId] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   const onNewMsgChange = (text: string) => {
     setNewMsg(text)
   }
-  const { data: currentMessages } = useGetMessagesByUserQuery({ dialoguePartnerId: currentUserId })
+  const { data: currentMessages } = useGetMessagesByUserQuery(
+    {
+      cursor: currentMessageId,
+      dialoguePartnerId: currentUserId,
+      pageSize: 7,
+    },
+    { skip: currentUserId === 0 }
+  )
   const { message: newMessage } = useConnectSocket()
 
   useEffect(() => {
-    if (currentMessages?.items.length) {
-      const newMessages = [...currentMessages.items].reverse()
+    if (currentMessages && currentMessages?.items.length > 0) {
+      setTotalCount(currentMessages.totalCount)
+      setMessages(prevState => [...prevState, ...currentMessages.items])
+      setLoading(false)
+    }
+  }, [currentMessages])
 
-      setMessages(newMessages)
-    }
+  useEffect(() => {
     if (newMessage) {
-      setMessages(prevState => [...prevState, newMessage])
+      setMessages(prevState => [newMessage, ...prevState])
+      scrollToBottom()
     }
-  }, [currentMessages, newMessage])
+  }, [newMessage])
+
+  const fetchMoreChats = () => {
+    setLoading(true)
+
+    if (messages.length >= totalCount) {
+      return
+    }
+
+    const firstMessageId = messages[0]?.id || 0
+
+    setCurrentMessageId(firstMessageId)
+
+    const chat = chatRef.current
+    const scrollPosition = chat ? chat.scrollHeight - chat.scrollTop : 0
+
+    setTimeout(() => {
+      if (chat) {
+        chat.scrollTop = chat.scrollHeight - scrollPosition
+      }
+    }, 100)
+  }
 
   const sentMessageHandler = () => {
     SocketApi.socket?.emit(SocketEvent.RECEIVE_MESSAGE, {
@@ -45,26 +82,55 @@ export const Chat = ({ avatarUrl, currentUserId, userName }: Props) => {
     })
     setNewMsg('')
   }
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      chatRef.current?.scrollTo({ behavior: 'smooth', top: chatRef.current.scrollHeight })
+    }, 300)
+  }
 
   return (
     <div className={s.chatWrapper}>
-      <div className={s.chat}>
-        {messages && messages.length > 0 ? (
-          messages.map(mes => (
-            <Message
-              avatarUrl={avatarUrl}
-              currentUserId={currentUserId}
-              key={mes.id}
-              message={mes}
-              userName={userName}
-            />
-          ))
-        ) : (
-          <Typography className={s.emptyChat} variant={'mediumText14'}>
-            {t.noChosenChat}
-          </Typography>
-        )}
-      </div>
+      <ScrollArea>
+        <InfiniteScroll
+          dataLength={messages.length}
+          endMessage={
+            <div style={{ margin: '10px 0', textAlign: 'center' }}>
+              <Typography variant={'regularText14'}>{text.pages.messenger.noMoreChats}</Typography>
+            </div>
+          }
+          hasMore={messages.length <= totalCount}
+          key={messages.length}
+          loader={
+            loading && (
+              <div style={{ margin: '10px 0', textAlign: 'center' }}>
+                <Typography variant={'regularText14'}>
+                  {text.pages.messenger.loadingChats}
+                </Typography>
+              </div>
+            )
+          }
+          next={fetchMoreChats}
+        >
+          <div className={s.chat} ref={chatRef}>
+            {messages && messages.length > 0 ? (
+              messages.map(mes => (
+                <Message
+                  avatarUrl={avatarUrl}
+                  currentUserId={currentUserId}
+                  key={mes.id}
+                  message={mes}
+                  userName={userName}
+                />
+              ))
+            ) : (
+              <Typography className={s.emptyChat} variant={'mediumText14'}>
+                {t.noChosenChat}
+              </Typography>
+            )}
+          </div>
+        </InfiniteScroll>
+      </ScrollArea>
+
       <div className={s.inputWrapper}>
         <Input
           disabled={!currentUserId}
